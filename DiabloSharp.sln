@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloSharp", "src\DiabloSharp\DiabloSharp.csproj", "{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloSharp.Tests", "src\DiabloSharp.Tests\DiabloSharp.Tests.csproj", "{9844FDA4-0747-4964-8A3E-F0D45B021F08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9844FDA4-0747-4964-8A3E-F0D45B021F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9844FDA4-0747-4964-8A3E-F0D45B021F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9844FDA4-0747-4964-8A3E-F0D45B021F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9844FDA4-0747-4964-8A3E-F0D45B021F08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74A04AB3-89CB-4F78-AC9A-86FFBDC952F2}
+	EndGlobalSection
+EndGlobal
