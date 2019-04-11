@@ -5,5 +5,7 @@ namespace DiabloSharp
     public interface IDiabloApi
     {
         IAuthenticationScope CreateAuthenticationScope(); 
+
+        ItemTypeEndpoint ItemType { get; }
     }
 }
