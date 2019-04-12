@@ -4,10 +4,12 @@ namespace DiabloSharp
 {
     public interface IDiabloApi
     {
-        IAuthenticationScope CreateAuthenticationScope(); 
+        IAuthenticationScope CreateAuthenticationScope();
 
         ItemTypeEndpoint ItemType { get; }
 
         ItemEndpoint Item { get; }
+
+        ArtisianEndpoint Artisian { get; }
     }
 }
