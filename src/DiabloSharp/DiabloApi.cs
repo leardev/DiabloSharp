@@ -19,6 +19,7 @@ namespace DiabloSharp
             Act = new ActEndpoint();
             Artisan = new ArtisanEndpoint();
             Follower = new FollowerEndpoint();
+            Hero = new HeroEndpoint();
         }
 
         public ItemTypeEndpoint ItemType { get; }
@@ -30,6 +31,8 @@ namespace DiabloSharp
         public ArtisanEndpoint Artisan { get; }
 
         public FollowerEndpoint Follower { get; }
+
+        public HeroEndpoint Hero { get; }
 
         public IAuthenticationScope CreateAuthenticationScope()
         {
