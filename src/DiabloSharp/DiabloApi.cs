@@ -15,9 +15,12 @@ namespace DiabloSharp
             _configuration = configuration;
             _oAuth = new OAuthEndpoint();
             ItemType = new ItemTypeEndpoint();
+            Item = new ItemEndpoint();
         }
 
         public ItemTypeEndpoint ItemType { get; }
+
+        public ItemEndpoint Item { get; }
 
         public IAuthenticationScope CreateAuthenticationScope()
         {
