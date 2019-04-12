@@ -9,5 +9,7 @@ namespace DiabloSharp
         ItemTypeEndpoint ItemType { get; }
 
         ItemEndpoint Item { get; }
+
+        ActEndpoint Act { get; }
     }
 }
