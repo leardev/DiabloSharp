@@ -7,5 +7,7 @@ namespace DiabloSharp
         IAuthenticationScope CreateAuthenticationScope(); 
 
         ItemTypeEndpoint ItemType { get; }
+
+        ItemEndpoint Item { get; }
     }
 }

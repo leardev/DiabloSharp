@@ -24,7 +24,7 @@ namespace DiabloSharp.Tests.Endpoints
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
             
-            var itemTypes = await diabloApi.ItemType.GetItemTypeAsync(authenticationScope, "sword2h");
+            var itemTypes = await diabloApi.ItemType.GetItemTypeAsync(authenticationScope, "item-type/sword2h");
             Assert.IsTrue(itemTypes.Any());
         }
     }
