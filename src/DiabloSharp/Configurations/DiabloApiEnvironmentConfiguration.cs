@@ -1,4 +1,5 @@
-﻿using DiabloSharp.Models;
+﻿using DiabloSharp.Exceptions;
+using DiabloSharp.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 
@@ -24,18 +25,18 @@ namespace DiabloSharp.Configurations
 
             ClientId = configuration["ClientId"];
             if (string.IsNullOrEmpty(ClientId))
-                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(ClientId)}\"!");
+                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(ClientId)}");
 
             ClientSecret = configuration["ClientSecret"];
             if (string.IsNullOrEmpty(ClientSecret))
-                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(ClientSecret)}\"!");
+                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(ClientSecret)}");
 
             if (!Enum.TryParse<Region>(configuration["Region"], out var region))
-                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(Region)}\"!");
+                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(Region)}");
             Region = region;
 
             if (!Enum.TryParse<Localization>(configuration["Localization"], out var localization))
-                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(Localization)}\"!");
+                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(Localization)}");
             Localization = localization;
         }
     }
