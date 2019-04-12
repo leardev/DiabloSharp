@@ -6,6 +6,8 @@ namespace DiabloSharp.Configurations
 {
     public class DiabloApiEnvironmentConfiguration : IDiabloApiConfiguration
     {
+        private const string EnvironmentVariablePrefix = "DiabloSharp";
+
         public string ClientId { get; }
 
         public string ClientSecret { get; }
@@ -16,24 +18,24 @@ namespace DiabloSharp.Configurations
 
         public DiabloApiEnvironmentConfiguration()
         {
-            var builder = new ConfigurationBuilder()
-                .AddEnvironmentVariables("DiabloSharp");
-            var configuration = builder.Build();
+            var builder = new ConfigurationBuilder();
+            var configuration = builder.AddEnvironmentVariables("DiabloSharp")
+                .Build();
 
             ClientId = configuration["ClientId"];
             if (string.IsNullOrEmpty(ClientId))
-                throw new Exception($"Cannot read required {nameof(ClientId)} from environment variables!");
+                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(ClientId)}\"!");
 
             ClientSecret = configuration["ClientSecret"];
             if (string.IsNullOrEmpty(ClientSecret))
-                throw new Exception($"Cannot read required {nameof(ClientSecret)} from environment variables!");
+                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(ClientSecret)}\"!");
 
             if (!Enum.TryParse<Region>(configuration["Region"], out var region))
-                throw new Exception($"Cannot read required {nameof(Region)} from environment variables!");
+                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(Region)}\"!");
             Region = region;
 
             if (!Enum.TryParse<Localization>(configuration["Localization"], out var localization))
-                throw new Exception($"Cannot read required {nameof(Localization)} from environment variables!");
+                throw new Exception($"Cannot read required environment variable \"{EnvironmentVariablePrefix + nameof(Localization)}\"!");
             Localization = localization;
         }
     }
