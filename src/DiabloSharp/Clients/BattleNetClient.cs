@@ -46,7 +46,7 @@ namespace DiabloSharp.Clients
         {
             _authenticationScope.EnsureExpiration();
             request.AddParameter("access_token", _authenticationScope.AccessToken, ParameterType.QueryString);
-            request.AddParameter("locale", _authenticationScope.Localization, ParameterType.QueryString);
+            request.AddParameter("locale", _authenticationScope.Localization.ToDescription(), ParameterType.QueryString);
         }
     }
 }

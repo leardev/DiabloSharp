@@ -16,5 +16,8 @@ namespace DiabloSharp.Models
 
         [DataMember(Name = "icon")]
         public string Icon { get; set; }
+
+        [DataMember(Name = "path")]
+        public string Path { get; set; }
     }
 }

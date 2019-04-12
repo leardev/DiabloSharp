@@ -19,10 +19,10 @@ namespace DiabloSharp.Endpoints
             return response.Data;
         }
 
-        public async Task<IEnumerable<ItemType>> GetItemTypeAsync(IAuthenticationScope authenticationScope, string itemTypeSlug)
+        public async Task<IEnumerable<ItemType>> GetItemTypeAsync(IAuthenticationScope authenticationScope, string itemTypePath)
         {
             var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"d3/data/item-type/{itemTypeSlug}");
+            var request = new RestRequest($"d3/data/{itemTypePath}");
             var response = await client.ExecuteTaskAsync<List<ItemType>>(request);
             response.EnsureSuccess();
 
