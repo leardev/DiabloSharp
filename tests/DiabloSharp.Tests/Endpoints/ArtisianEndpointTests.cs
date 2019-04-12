@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
