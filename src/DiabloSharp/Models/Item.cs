@@ -29,7 +29,7 @@ namespace DiabloSharp.Models
 
         [DataMember(Name = "accountBound")]
         public bool AccountBound { get; set; }
-        
+
         [DataMember(Name = "flavorText")]
         public string FlavorText { get; set; }
 
