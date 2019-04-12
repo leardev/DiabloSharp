@@ -12,8 +12,6 @@ namespace DiabloSharp
 
         ActEndpoint Act { get; }
 
-        ArtisianEndpoint Artisian { get; }
-
-        ActEndpoint Act { get; }
+        ArtisanEndpoint Artisan { get; }
     }
 }

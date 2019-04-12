@@ -6,7 +6,7 @@ using RestSharp;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ArtisianEndpoint
+    public class ArtisanEndpoint
     {
         public async Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, string artisanSlug)
         {
