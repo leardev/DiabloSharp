@@ -13,7 +13,7 @@ namespace DiabloSharp.Tests.Endpoints
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
-            var artisan = await diabloApi.Artisian.GetArtisanAsync(authenticationScope, "blacksmith");
+            var artisan = await diabloApi.Artisan.GetArtisanAsync(authenticationScope, "blacksmith");
             Assert.AreEqual("Blacksmith", artisan.Name);
             Assert.AreEqual("blacksmith", artisan.Slug);
         }
@@ -24,7 +24,7 @@ namespace DiabloSharp.Tests.Endpoints
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
-            var recipe = await diabloApi.Artisian.GetRecipeAsync(authenticationScope, "blacksmith", "apprentice-flamberge");
+            var recipe = await diabloApi.Artisan.GetRecipeAsync(authenticationScope, "blacksmith", "apprentice-flamberge");
             Assert.AreEqual("Sword_2H_003", recipe.Id);
             Assert.AreEqual("Apprentice Flamberge", recipe.Name);
             Assert.AreEqual("apprentice-flamberge", recipe.Slug);
