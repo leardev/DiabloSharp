@@ -13,7 +13,7 @@ namespace DiabloSharp.Tests.Endpoints
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
-            
+
             var item = await diabloApi.Item.GetItemAsync(authenticationScope, "item/corrupted-ashbringer-Unique_Sword_2H_104_x1");
             Assert.IsTrue(item != null);
             Assert.AreEqual("Corrupted Ashbringer", item.Name);
