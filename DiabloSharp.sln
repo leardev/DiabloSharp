@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloSharp", "src\DiabloSharp\DiabloSharp.csproj", "{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloSharp.Tests", "src\DiabloSharp.Tests\DiabloSharp.Tests.csproj", "{9844FDA4-0747-4964-8A3E-F0D45B021F08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloSharp.Tests", "tests\DiabloSharp.Tests\DiabloSharp.Tests.csproj", "{9844FDA4-0747-4964-8A3E-F0D45B021F08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
