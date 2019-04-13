@@ -1,23 +1,23 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
     [DataContract]
     public class SeasonColumn
     {
-        [DataMember(Name ="id")]
+        [DataMember(Name = "id")]
         public string Id { get; set; }
 
-        [DataMember(Name ="hidden")]
+        [DataMember(Name = "hidden")]
         public bool Hidden { get; set; }
 
-        [DataMember(Name ="order")]
+        [DataMember(Name = "order")]
         public long? Order { get; set; }
 
-        [DataMember(Name ="label")]
+        [DataMember(Name = "label")]
         public string Label { get; set; }
 
-        [DataMember(Name ="type")]
+        [DataMember(Name = "type")]
         public string Type { get; set; }
     }
 }

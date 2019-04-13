@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
@@ -6,13 +6,13 @@ namespace DiabloSharp.Models
     [DataContract]
     public class SeasonPlayer
     {
-        [DataMember(Name ="key")]
+        [DataMember(Name = "key")]
         public long Key { get; set; }
 
-        [DataMember(Name ="accountId")]
+        [DataMember(Name = "accountId")]
         public long AccountId { get; set; }
 
-        [DataMember(Name ="data")]
+        [DataMember(Name = "data")]
         public IEnumerable<SeasonPlayerData> Datas { get; set; }
     }
 }
