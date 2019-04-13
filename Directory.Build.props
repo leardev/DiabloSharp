@@ -8,4 +8,17 @@
     <VersionPrefix>0.1</VersionPrefix>
   </PropertyGroup>
 
+  <!-- Customization -->
+  <PropertyGroup>
+    <!--
+      Establish the following kinds of builds:
+        - dev
+        - prerelease
+        - release
+      These types shall be used tweak the build further
+      based on the type of build we are initiating.
+    -->
+    <BuildType>dev</BuildType>
+  </PropertyGroup>
+
 </Project>
