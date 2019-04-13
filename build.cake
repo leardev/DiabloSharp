@@ -4,6 +4,7 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var buildType = Argument("buildtype", "dev");
 var project = new FilePath(@"./src/DiabloSharp/DiabloSharp.csproj");
 var testProject = new FilePath(@"./tests/DiabloSharp.Tests/DiabloSharp.Tests.csproj");
 var artifactsDirectory = new DirectoryPath(@"./artifacts");
@@ -46,8 +47,22 @@ Task("Package")
     DotNetCorePack(project.FullPath, new DotNetCorePackSettings
     {
         Configuration = configuration,
+        ArgumentCustomization = args => args.Append($"/p:BuildType={buildType}"),
         OutputDirectory = artifactsDirectory,
         Verbosity = DotNetCoreVerbosity.Minimal
+    });
+});
+
+Task("NuGetPush")
+.WithCriteria(GitLabCI.IsRunningOnGitLabCI)
+.IsDependentOn("Package")
+.Does(() =>
+{
+    var nugetFile = GetFiles(artifactsDirectory.GetFilePath("*.nupkg").FullPath).First();
+    DotNetCoreNuGetPush(nugetFile.FullPath, new DotNetCoreNuGetPushSettings
+    {
+        Source = "nuget.org",
+        ApiKey = EnvironmentVariable("DiabloSharpNuGetApiKey")
     });
 });
 
@@ -55,5 +70,11 @@ Task("Default")
 .IsDependentOn("Clean")
 .IsDependentOn("Test")
 .IsDependentOn("Package");
+
+Task("Publish")
+.WithCriteria(GitLabCI.IsRunningOnGitLabCI)
+.IsDependentOn("Clean")
+.IsDependentOn("Package")
+.IsDependentOn("NuGetPush");
 
 RunTarget(target);
