@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <Title>DiabloSharp</Title>
+    <Description>.NET Implementation of the Battle.net Diablo API.</Description>
+    <PackageTags>diablo</PackageTags>
+    <Authors>leardev</Authors>
+    <VersionPrefix>0.1</VersionPrefix>
+  </PropertyGroup>
+
+</Project>
