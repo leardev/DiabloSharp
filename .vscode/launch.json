@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cake",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "dotnet-cake",
+            "args": [
+                "${workspaceRoot}/build.cake",
+                "-debug"
+            ],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": true,
+            "externalConsole": false
+        }
+    ]
+}
