@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DiabloSharp.Configurations;
 using DiabloSharp.Endpoints;
 
@@ -22,6 +22,7 @@ namespace DiabloSharp
             Hero = new HeroEndpoint();
             Profile = new ProfileEndpoint();
             Season = new SeasonEndpoint();
+            Era = new EraEndpoint();
         }
 
         public ItemTypeEndpoint ItemType { get; }
@@ -39,6 +40,8 @@ namespace DiabloSharp
         public ProfileEndpoint Profile { get; }
 
         public SeasonEndpoint Season { get; }
+
+        public EraEndpoint Era { get; }
 
         public IAuthenticationScope CreateAuthenticationScope()
         {
