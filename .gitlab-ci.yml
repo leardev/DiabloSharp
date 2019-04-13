@@ -3,7 +3,7 @@ stages:
   - publish
 
 ci:
-  stage: build
+  stage: ci
   image: mcr.microsoft.com/dotnet/core/sdk:2.2
   before_script:
     - dotnet tool install --global Cake.Tool --version 0.33.0
