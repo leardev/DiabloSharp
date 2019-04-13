@@ -21,6 +21,7 @@ namespace DiabloSharp
             Follower = new FollowerEndpoint();
             Hero = new HeroEndpoint();
             Profile = new ProfileEndpoint();
+            Season = new SeasonEndpoint();
             Era = new EraEndpoint();
         }
 
@@ -37,6 +38,8 @@ namespace DiabloSharp
         public HeroEndpoint Hero { get; }
 
         public ProfileEndpoint Profile { get; }
+
+        public SeasonEndpoint Season { get; }
 
         public EraEndpoint Era { get; }
 
