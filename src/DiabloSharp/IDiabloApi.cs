@@ -19,5 +19,7 @@ namespace DiabloSharp
         HeroEndpoint Hero { get; }
 
         ProfileEndpoint Profile { get; }
+
+        SeasonEndpoint Season { get; }
     }
 }

@@ -21,6 +21,7 @@ namespace DiabloSharp
             Follower = new FollowerEndpoint();
             Hero = new HeroEndpoint();
             Profile = new ProfileEndpoint();
+            Season = new SeasonEndpoint();
         }
 
         public ItemTypeEndpoint ItemType { get; }
@@ -36,6 +37,8 @@ namespace DiabloSharp
         public HeroEndpoint Hero { get; }
 
         public ProfileEndpoint Profile { get; }
+
+        public SeasonEndpoint Season { get; }
 
         public IAuthenticationScope CreateAuthenticationScope()
         {
