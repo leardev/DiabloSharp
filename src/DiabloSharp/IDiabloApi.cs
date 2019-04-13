@@ -1,4 +1,4 @@
-﻿using DiabloSharp.Endpoints;
+using DiabloSharp.Endpoints;
 
 namespace DiabloSharp
 {
@@ -19,5 +19,7 @@ namespace DiabloSharp
         HeroEndpoint Hero { get; }
 
         ProfileEndpoint Profile { get; }
+
+        EraEndpoint Era { get; }
     }
 }
