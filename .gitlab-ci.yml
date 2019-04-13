@@ -23,6 +23,8 @@ prerelease:
     - $HOME/.dotnet/tools/dotnet-cake -Target=Publish -BuildType=prerelease
   dependencies:
     - ci
+  environment:
+    name: production
   when: manual
   only:
     - master
@@ -36,6 +38,8 @@ release:
     - $HOME/.dotnet/tools/dotnet-cake -Target=Publish -BuildType=release
   dependencies:
     - ci
+  environment:
+    name: production
   when: manual
   only:
     - master
