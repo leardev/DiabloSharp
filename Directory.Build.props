@@ -3,9 +3,10 @@
   <PropertyGroup>
     <Title>DiabloSharp</Title>
     <Description>.NET Implementation of the Battle.net Diablo API.</Description>
-    <PackageTags>diablo</PackageTags>
+    <PackageTags>diablo;d3;blizzard;activision</PackageTags>
     <Authors>leardev</Authors>
-    <VersionPrefix>0.1</VersionPrefix>
+    <VersionPrefix>0.1.1</VersionPrefix>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://leardev.de/images/diablosharp.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/leardev/DiabloSharp</RepositoryUrl>
   </PropertyGroup>
