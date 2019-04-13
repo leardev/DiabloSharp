@@ -1,20 +1,20 @@
 using System;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class DiabloApiTests
     {
-        [TestMethod]
+        [Test]
         public void CreateAuthenticationScopeTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             Assert.IsTrue(DateTime.Now < authenticationScope.ExpirationDate);
-            Assert.IsFalse(string.IsNullOrEmpty(authenticationScope.AccessToken));
+            Assert.IsNotEmpty(authenticationScope.AccessToken);
             Assert.IsFalse(authenticationScope.IsExpired());
         }
     }

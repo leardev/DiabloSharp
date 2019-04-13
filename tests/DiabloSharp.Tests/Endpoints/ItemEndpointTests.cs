@@ -1,26 +1,26 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class ItemEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetItemTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var item = await diabloApi.Item.GetItemAsync(authenticationScope, "item/corrupted-ashbringer-Unique_Sword_2H_104_x1");
-            Assert.IsTrue(item != null);
+            Assert.NotNull(item);
             Assert.AreEqual("Corrupted Ashbringer", item.Name);
         }
 
-        [TestMethod]
-        public async Task GetInvalidItemsTest()
+        [Test]
+        public void GetInvalidItemsTest()
         {
             var itemPaths = new[]
             {
@@ -41,7 +41,7 @@ namespace DiabloSharp.Tests.Endpoints
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
             foreach (var itemPath in itemPaths)
-                await Assert.ThrowsExceptionAsync<Exception>(async () => await diabloApi.Item.GetItemAsync(authenticationScope, itemPath));
+                Assert.ThrowsAsync<Exception>(async () => await diabloApi.Item.GetItemAsync(authenticationScope, itemPath));
         }
     }
 }

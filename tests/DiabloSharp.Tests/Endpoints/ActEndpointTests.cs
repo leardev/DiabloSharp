@@ -1,24 +1,23 @@
-﻿using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class ActEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetActsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var acts = await diabloApi.Act.GetActs(authenticationScope);
-            Assert.IsTrue(acts.Any());
+            Assert.IsNotEmpty(acts);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetActTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -28,7 +27,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.AreEqual(1, act.Number);
             Assert.AreEqual("act-i", act.Slug);
             Assert.AreEqual("Act I", act.Name);
-            Assert.IsTrue(act.Quests.Any());
+            Assert.IsNotEmpty(act.Quests);
         }
     }
 }

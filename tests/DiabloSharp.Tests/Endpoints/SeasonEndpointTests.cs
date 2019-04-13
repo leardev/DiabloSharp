@@ -1,42 +1,41 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class SeasonEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetSeasonsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var seasons = await diabloApi.Season.GetSeasons(authenticationScope);
-            Assert.IsFalse(string.IsNullOrEmpty(seasons.Links.Self.Href));
-            Assert.IsTrue(seasons.Season.Any());
+            Assert.IsNotEmpty(seasons.Links.Self.Href);
+            Assert.IsNotEmpty(seasons.Season);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetSeasonTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var season = await diabloApi.Season.GetSeason(authenticationScope, 16);
-            Assert.IsTrue(season.Leaderboards.Any());
+            Assert.IsNotEmpty(season.Leaderboards);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetSeasonLeaderboardDetailTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var leaderboardDetail = await diabloApi.Season.GetSeasonLeaderboardDetail(authenticationScope, 1, "achievement-points");
-            Assert.IsTrue(leaderboardDetail.Column.Any());
+            Assert.IsNotEmpty(leaderboardDetail.Column);
         }
     }
 }
