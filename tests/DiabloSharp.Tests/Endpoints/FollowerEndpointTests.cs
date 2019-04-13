@@ -1,14 +1,13 @@
-﻿using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class FollowerEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetFollowerTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -18,7 +17,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.AreEqual("Templar", follower.Name);
             Assert.AreEqual("Kormac", follower.RealName);
             Assert.AreEqual("templar", follower.Slug);
-            Assert.IsTrue(follower.Skills.Any());
+            Assert.IsNotEmpty(follower.Skills);
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class HeroEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetHeroClassTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -17,10 +16,10 @@ namespace DiabloSharp.Tests.Endpoints
             var heroClass = await diabloApi.Hero.GetHeroClassAsync(authenticationScope, "barbarian");
             Assert.AreEqual("Barbarian", heroClass.Name);
             Assert.AreEqual("barbarian", heroClass.Slug);
-            Assert.IsTrue(heroClass.SkillCategories.Any());
+            Assert.IsNotEmpty(heroClass.SkillCategories);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetRunesBySkillTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -29,7 +28,7 @@ namespace DiabloSharp.Tests.Endpoints
             var runesBySkill = await diabloApi.Hero.GetRunesBySkillAsync(authenticationScope, "barbarian", "bash");
             Assert.AreEqual("Bash", runesBySkill.Skill.Name);
             Assert.AreEqual("bash", runesBySkill.Skill.Slug);
-            Assert.IsTrue(runesBySkill.Runes.Any());
+            Assert.IsNotEmpty(runesBySkill.Runes);
         }
     }
 }

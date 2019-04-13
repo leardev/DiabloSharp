@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class ProfileEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetAccountTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -17,7 +17,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.AreEqual("Shanyen#2754", account.BattleTag);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetHeroTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -27,7 +27,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.AreEqual(111833443, hero.Id);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetHeroItemDetailsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -47,7 +47,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.IsNotNull(items.OffHand);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetHeroFollowerItemsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();

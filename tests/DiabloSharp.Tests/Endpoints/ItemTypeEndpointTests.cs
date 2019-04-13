@@ -1,31 +1,30 @@
-﻿using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class ItemTypeEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetItemTypeIndexTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var itemTypeIndices = await diabloApi.ItemType.GetItemTypeIndexAsync(authenticationScope);
-            Assert.IsTrue(itemTypeIndices.Any());
+            Assert.IsNotEmpty(itemTypeIndices);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetItemTypeTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var itemTypes = await diabloApi.ItemType.GetItemTypeAsync(authenticationScope, "item-type/sword2h");
-            Assert.IsTrue(itemTypes.Any());
+            Assert.IsNotEmpty(itemTypes);
         }
     }
 }

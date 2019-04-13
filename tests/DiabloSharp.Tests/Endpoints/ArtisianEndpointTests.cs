@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Endpoints
 {
-    [TestClass]
+    [TestFixture]
     public class ArtisianEndpointTests
     {
-        [TestMethod]
+        [Test]
         public async Task GetArtisanTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
@@ -18,7 +18,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.AreEqual("blacksmith", artisan.Slug);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetRecipeTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
