@@ -5,7 +5,7 @@
     <NoWarn>NU5105;$(NoWarn)</NoWarn>
   </PropertyGroup>
   <Target Name="AttachDevVersionSuffix" Condition="'$(BuildType)' == 'dev'">
-    <CreateProperty Value="$(Version)-dev-$([System.DateTime]::Now.ToString(yyyyMMdd-hhmmss))">
+    <CreateProperty Value="$(Version)-dev-$([System.DateTime]::Now.ToString(yyyyMMdd-HHmmss))">
       <Output TaskParameter="Value" PropertyName="Version" />
       <Output TaskParameter="Value" PropertyName="PackageVersion" />
     </CreateProperty>
