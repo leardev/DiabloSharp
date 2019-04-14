@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using DiabloSharp.Clients;
 using DiabloSharp.Extensions;
 using DiabloSharp.Models;
@@ -18,11 +18,12 @@ namespace DiabloSharp.Endpoints
             return response.Data;
         }
 
-        public async Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, string artisanSlug, string recipeSlug)
+        /* hint useless in theory, Artisan from GetArtisanAsync already contains all recipes */
+        public async Task<ArtisanRecipe> GetRecipeAsync(IAuthenticationScope authenticationScope, string artisanSlug, string recipeSlug)
         {
             var client = new BattleNetClient(authenticationScope);
             var request = new RestRequest($"d3/data/artisan/{artisanSlug}/recipe/{recipeSlug}");
-            var response = await client.ExecuteTaskAsync<Recipe>(request);
+            var response = await client.ExecuteTaskAsync<ArtisanRecipe>(request);
             response.EnsureSuccess();
 
             return response.Data;

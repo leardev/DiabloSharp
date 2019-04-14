@@ -11,29 +11,29 @@ namespace DiabloSharp.Tests.Endpoints
     public class ActEndpointTests
     {
         [Test]
-        public async Task GetActsTest()
+        public async Task GetActIndexTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
-            var acts = await diabloApi.Act.GetActs(authenticationScope);
-            AssertActs(acts.ToList());
+            var acts = await diabloApi.Act.GetActIndexAsync(authenticationScope);
+            AssertActs(acts.Acts.ToList());
         }
 
         [Test]
-        public async Task GetActTest([Range(1, 5)] int actId)
+        public async Task GetActTest([Range(1, 5)] long actId)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
-            var act = await diabloApi.Act.GetAct(authenticationScope, actId);
+            var act = await diabloApi.Act.GetActAsync(authenticationScope, actId);
             Assert.AreEqual(actId, act.Id);
             AssertAct(act);
         }
 
         private void AssertActs(ICollection<Act> acts)
         {
-            Assert.IsNotEmpty(acts);
+            Assert.AreEqual(5, acts.Count);
             foreach (var act in acts)
                 AssertAct(act);
         }
@@ -41,24 +41,19 @@ namespace DiabloSharp.Tests.Endpoints
         private void AssertAct(Act act)
         {
             Assert.NotZero(act.Id);
-            Assert.IsNotEmpty(act.Name);
-            Assert.IsNotEmpty(act.Slug);
-            Assert.IsNotEmpty(act.Quests);
-            AssertQuests(act.Quests.ToList());
-        }
+            Assert.That(act.Name, Is.Not.Null.Or.Empty);
+            Assert.That(act.Slug, Is.Not.Null.Or.Empty);
 
-        private void AssertQuests(ICollection<Quest> quests)
-        {
-            Assert.IsNotEmpty(quests);
-            foreach (var quest in quests)
+            Assert.IsNotEmpty(act.Quests);
+            foreach (var quest in act.Quests)
                 AssertQuest(quest);
         }
 
-        private void AssertQuest(Quest quest)
+        private void AssertQuest(ActQuest quest)
         {
             Assert.NotZero(quest.Id);
-            Assert.IsNotEmpty(quest.Name);
-            Assert.IsNotEmpty(quest.Slug);
+            Assert.That(quest.Name, Is.Not.Null.Or.Empty);
+            Assert.That(quest.Slug, Is.Not.Null.Or.Empty);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
@@ -22,10 +22,10 @@ namespace DiabloSharp.Models
         public string TooltipParams { get; set; }
 
         [DataMember(Name = "requiredLevel")]
-        public int RequiredLevel { get; set; }
+        public long RequiredLevel { get; set; }
 
         [DataMember(Name = "stackSizeMax")]
-        public int StackSizeMax { get; set; }
+        public long StackSizeMax { get; set; }
 
         [DataMember(Name = "accountBound")]
         public bool AccountBound { get; set; }
@@ -76,16 +76,16 @@ namespace DiabloSharp.Models
         public bool IsSeasonRequiredToDrop { get; set; }
 
         [DataMember(Name = "seasonRequiredToDrop")]
-        public int SeasonRequiredToDrop { get; set; }
+        public long SeasonRequiredToDrop { get; set; }
 
         [DataMember(Name = "slots")]
         public IEnumerable<string> Slots { get; set; }
 
         [DataMember(Name = "attributes")]
-        public Attributes Attributes { get; set; }
+        public ItemAttributes Attributes { get; set; }
 
         [DataMember(Name = "randomAffixes")]
-        public IEnumerable<RandomAffix> RandomAffixes { get; set; }
+        public IEnumerable<ItemRandomAffix> RandomAffixes { get; set; }
 
         [DataMember(Name = "setName")]
         public string SetName { get; set; }

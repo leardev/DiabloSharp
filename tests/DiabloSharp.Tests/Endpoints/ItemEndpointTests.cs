@@ -1,5 +1,6 @@
-using System;
+using System.Linq;
 using System.Threading.Tasks;
+using DiabloSharp.Models;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -15,33 +16,65 @@ namespace DiabloSharp.Tests.Endpoints
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             var item = await diabloApi.Item.GetItemAsync(authenticationScope, "item/corrupted-ashbringer-Unique_Sword_2H_104_x1");
-            Assert.NotNull(item);
-            Assert.AreEqual("Corrupted Ashbringer", item.Name);
+            AssertCorruptedAshbringer(item);
         }
 
-        [Test]
-        public void GetInvalidItemsTest()
+        private void AssertCorruptedAshbringer(Item item)
         {
-            var itemPaths = new[]
-            {
-                "item/mysterious-box-The Adventurer's Box",
-                "item/town-portal-stone-TownPortalStone",
-                "item/a-gift-ConsoleFriendGift",
-                "item/1h-mystery-weapon-PH_1HWeapon",
-                "item/2h-mystery-weapon-PH_2HWeapon",
-                "item/gold-Gold4",
-                "item/gold-Gold3",
-                "item/gold-Gold2",
-                "item/gold-Gold1",
-                "item/shard-Shard",
-                "item/debug-transmog-plan-Debug_Transmog_Plan",
-                "item/greater-shard-GreaterShard"
-            };
+            Assert.That(item.FlavorText, Is.Not.Null.Or.Empty);
+            Assert.That(item.FlavorTextHtml, Is.Not.Null.Or.Empty);
+            Assert.That(item.Damage, Is.Not.Null.Or.Empty);
+            Assert.That(item.Dps, Is.Not.Null.Or.Empty);
+            Assert.That(item.DamageHtml, Is.Not.Null.Or.Empty);
+            Assert.AreEqual("Unique_Sword_2H_104_x1", item.Id);
+            Assert.AreEqual("corrupted-ashbringer", item.Slug);
+            Assert.AreEqual("Corrupted Ashbringer", item.Name);
+            Assert.AreEqual("unique_sword_2h_104_x1_demonhunter_male", item.Icon);
+            Assert.AreEqual("/item/corrupted-ashbringer-Unique_Sword_2H_104_x1", item.TooltipParams);
+            Assert.AreEqual("Legendary Two-Handed Sword", item.TypeName);
+            Assert.AreEqual("orange", item.Color);
+            Assert.IsNull(item.Armor);
+            Assert.IsNull(item.ArmorHtml);
+            Assert.IsNull(item.Block);
+            Assert.IsNull(item.BlockHtml);
+            Assert.IsNull(item.Description);
+            Assert.IsNull(item.DescriptionHtml);
+            Assert.IsNull(item.SetName);
+            Assert.IsNull(item.SetNameHtml);
+            Assert.IsNull(item.SetDescription);
+            Assert.IsNull(item.SetDescriptionHtml);
+            Assert.AreEqual(-1, item.SeasonRequiredToDrop);
+            Assert.AreEqual(0, item.StackSizeMax);
+            Assert.AreEqual(70, item.RequiredLevel);
+            Assert.IsTrue(item.AccountBound);
+            Assert.IsFalse(item.IsSeasonRequiredToDrop);
+            Assert.IsEmpty(item.SetItems);
 
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
-            foreach (var itemPath in itemPaths)
-                Assert.ThrowsAsync<Exception>(async () => await diabloApi.Item.GetItemAsync(authenticationScope, itemPath));
+            foreach (var slot in item.Slots)
+                Assert.That(slot, Is.Not.Null.Or.Empty);
+
+            foreach (var attribute in item.Attributes.Primaries)
+                AssertAttribute(attribute);
+
+            foreach (var attribute in item.Attributes.Secondaries)
+                AssertAttribute(attribute);
+
+            foreach (var attribute in item.Attributes.Others)
+                AssertAttribute(attribute);
+
+            AssertItemKind(item.Type);
+        }
+
+        private void AssertItemKind(ItemKind itemKind)
+        {
+            Assert.AreEqual("Sword2H", itemKind.Id);
+            Assert.IsTrue(itemKind.TwoHanded);
+        }
+
+        private void AssertAttribute(ItemHtmlDescription attribute)
+        {
+            Assert.That(attribute.Text, Is.Not.Null.Or.Empty);
+            Assert.That(attribute.TextHtml, Is.Not.Null.Or.Empty);
         }
     }
 }

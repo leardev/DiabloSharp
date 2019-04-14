@@ -8,13 +8,13 @@ namespace DiabloSharp.Models
         public class ProfileSeason
         {
             [DataMember(Name = "eraId")]
-            public int Id { get; set; }
+            public long Id { get; set; }
 
             [DataMember(Name = "paragonLevel")]
-            public int ParagonLevel { get; set; }
+            public long ParagonLevel { get; set; }
 
             [DataMember(Name = "paragonLevelHardcore")]
-            public int ParagonLevelHardcore { get; set; }
+            public long ParagonLevelHardcore { get; set; }
 
             [DataMember(Name = "kills")]
             public AccountKills Kills { get; set; }
@@ -23,7 +23,7 @@ namespace DiabloSharp.Models
             public TimePlayed TimePlayed { get; set; }
 
             [DataMember(Name = "highestHardcoreLevel")]
-            public int HighestHardcoreLevel { get; set; }
+            public long HighestHardcoreLevel { get; set; }
         }
     }
 }

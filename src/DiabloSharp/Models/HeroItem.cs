@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
@@ -21,9 +21,9 @@ namespace DiabloSharp.Models
         public string TooltipParams { get; set; }
 
         [DataMember(Name = "dyeColor")]
-        public HeroItem DyeColor { get; set; }
+        public HeroItemDye DyeColor { get; set; }
 
         [DataMember(Name = "transmogItem")]
-        public HeroItem TransmogItem { get; set; }
+        public HeroItemTransmog TransmogItem { get; set; }
     }
 }

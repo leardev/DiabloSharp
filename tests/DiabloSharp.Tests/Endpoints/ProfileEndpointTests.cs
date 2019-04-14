@@ -28,12 +28,12 @@ namespace DiabloSharp.Tests.Endpoints
         }
 
         [Test]
-        public async Task GetHeroItemDetailsTest()
+        public async Task GetDetailedHeroItemsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
-            var items = await diabloApi.Profile.GetHeroItemDetailsAsync(authenticationScope, "Shanyen-2754", 111833443);
+            var items = await diabloApi.Profile.GetDetailedHeroItemsAsync(authenticationScope, "Shanyen-2754", 111833443);
             Assert.IsNotNull(items.Head);
             Assert.IsNotNull(items.Neck);
             Assert.IsNotNull(items.Torso);
@@ -48,12 +48,12 @@ namespace DiabloSharp.Tests.Endpoints
         }
 
         [Test]
-        public async Task GetHeroFollowerItemsTest()
+        public async Task GetDetailedFollowerItemsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
-            var followerItems = await diabloApi.Profile.GetHeroFollowerItemsAsync(authenticationScope, "Shanyen-2754", 111833443);
+            var followerItems = await diabloApi.Profile.GetDetailedFollowerItemsAsync(authenticationScope, "Shanyen-2754", 111833443);
             Assert.IsNotNull(followerItems.Enchantress);
             Assert.IsNotNull(followerItems.Scoundrel);
             Assert.IsNotNull(followerItems.Templar);

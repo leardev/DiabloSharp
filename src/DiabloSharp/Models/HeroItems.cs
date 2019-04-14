@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
@@ -31,6 +31,12 @@ namespace DiabloSharp.Models
 
         [DataMember(Name = "feet")]
         public HeroItem Feet { get; set; }
+
+        [DataMember(Name = "leftFinger")]
+        public HeroItem LeftFinger { get; set; }
+
+        [DataMember(Name = "rightFinger")]
+        public HeroItem RightFinger { get; set; }
 
         [DataMember(Name = "mainHand")]
         public HeroItem MainHand { get; set; }

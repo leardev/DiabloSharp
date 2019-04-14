@@ -14,7 +14,7 @@ namespace DiabloSharp.Tests
             var authenticationScope = diabloApi.CreateAuthenticationScope();
 
             Assert.IsTrue(DateTime.Now < authenticationScope.ExpirationDate);
-            Assert.IsNotEmpty(authenticationScope.AccessToken);
+            Assert.That(authenticationScope.AccessToken, Is.Not.Null.Or.Empty);
             Assert.IsFalse(authenticationScope.IsExpired());
         }
     }

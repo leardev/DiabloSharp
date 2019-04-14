@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
@@ -24,7 +24,7 @@ namespace DiabloSharp.Models
         public long Level { get; set; }
 
         [DataMember(Name = "kills")]
-        public Kills Kills { get; set; }
+        public AccountHeroKills Kills { get; set; }
 
         [DataMember(Name = "paragonLevel")]
         public long ParagonLevel { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
@@ -9,6 +9,6 @@ namespace DiabloSharp.Models
         public string Slug { get; set; }
 
         [DataMember(Name = "level")]
-        public int Level { get; set; }
+        public long Level { get; set; }
     }
 }

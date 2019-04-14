@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
@@ -15,6 +15,6 @@ namespace DiabloSharp.Models
         public string Portrait { get; set; }
 
         [DataMember(Name = "training")]
-        public Training Training { get; set; }
+        public ArtisanTraining Training { get; set; }
     }
 }
