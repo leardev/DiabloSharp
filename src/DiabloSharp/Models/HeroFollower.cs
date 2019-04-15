@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
@@ -19,6 +19,6 @@ namespace DiabloSharp.Models
         public HeroFollowerStats Stats { get; set; }
 
         [DataMember(Name = "skills")]
-        public List<Skill> Skills { get; set; }
+        public IEnumerable<HeroSkill> Skills { get; set; }
     }
 }

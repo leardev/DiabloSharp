@@ -10,7 +10,7 @@ namespace DiabloSharp.Models
         public EraLinks Links { get; set; }
 
         [DataMember(Name = "row")]
-        public IEnumerable<EraRow> Row { get; set; }
+        public IEnumerable<EraRow> Rows { get; set; }
 
         [DataMember(Name = "key")]
         public string Key { get; set; }
@@ -19,7 +19,7 @@ namespace DiabloSharp.Models
         public string Title { get; set; }
 
         [DataMember(Name = "column")]
-        public IEnumerable<EraColumn> Column { get; set; }
+        public IEnumerable<EraColumn> Columns { get; set; }
 
         [DataMember(Name = "last_update_time")]
         public string LastUpdateTime { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -11,7 +11,7 @@ namespace DiabloSharp.Clients
 
         public NewtonsoftJsonDeserializer()
         {
-            _serializer = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+            _serializer = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore, MissingMemberHandling = MissingMemberHandling.Error };
         }
 
         public T Deserialize<T>(IRestResponse response)

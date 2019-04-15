@@ -16,7 +16,7 @@ namespace DiabloSharp
 
         FollowerEndpoint Follower { get; }
 
-        HeroEndpoint Hero { get; }
+        CharacterEndpoint Character { get; }
 
         ProfileEndpoint Profile { get; }
 

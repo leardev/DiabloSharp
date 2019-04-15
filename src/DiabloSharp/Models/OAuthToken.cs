@@ -12,6 +12,6 @@ namespace DiabloSharp.Models
         public string Type { get; set; }
 
         [DataMember(Name = "expires_in")]
-        public int SecondsUntilExpiration { get; set; }
+        public long SecondsUntilExpiration { get; set; }
     }
 }

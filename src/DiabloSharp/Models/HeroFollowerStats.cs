@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
@@ -9,9 +9,9 @@ namespace DiabloSharp.Models
         public double GoldFind { get; set; }
 
         [DataMember(Name = "magicFind")]
-        public long MagicFind { get; set; }
+        public double MagicFind { get; set; }
 
         [DataMember(Name = "experienceBonus")]
-        public long ExperienceBonus { get; set; }
+        public double ExperienceBonus { get; set; }
     }
 }

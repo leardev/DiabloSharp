@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
@@ -10,7 +10,7 @@ namespace DiabloSharp.Models
         public SeasonLinks Links { get; set; }
 
         [DataMember(Name = "row")]
-        public IEnumerable<SeasonRow> Row { get; set; }
+        public IEnumerable<SeasonRow> Rows { get; set; }
 
         [DataMember(Name = "key")]
         public string Key { get; set; }
@@ -19,7 +19,7 @@ namespace DiabloSharp.Models
         public string Title { get; set; }
 
         [DataMember(Name = "column")]
-        public IEnumerable<SeasonColumn> Column { get; set; }
+        public IEnumerable<SeasonColumn> Columns { get; set; }
 
         [DataMember(Name = "last_update_time")]
         public string LastUpdateTime { get; set; }

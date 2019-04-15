@@ -19,7 +19,7 @@ namespace DiabloSharp
             Act = new ActEndpoint();
             Artisan = new ArtisanEndpoint();
             Follower = new FollowerEndpoint();
-            Hero = new HeroEndpoint();
+            Character = new CharacterEndpoint();
             Profile = new ProfileEndpoint();
             Season = new SeasonEndpoint();
             Era = new EraEndpoint();
@@ -35,7 +35,7 @@ namespace DiabloSharp
 
         public FollowerEndpoint Follower { get; }
 
-        public HeroEndpoint Hero { get; }
+        public CharacterEndpoint Character { get; }
 
         public ProfileEndpoint Profile { get; }
 

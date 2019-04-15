@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
@@ -7,7 +7,7 @@ namespace DiabloSharp.Models
     public class SeasonRow
     {
         [DataMember(Name = "player")]
-        public IEnumerable<SeasonPlayer> Player { get; set; }
+        public IEnumerable<SeasonPlayer> Players { get; set; }
 
         [DataMember(Name = "order")]
         public long Order { get; set; }

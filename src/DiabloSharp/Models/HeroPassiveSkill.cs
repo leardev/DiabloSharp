@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
 {
@@ -6,6 +6,6 @@ namespace DiabloSharp.Models
     public class HeroPassiveSkill
     {
         [DataMember(Name = "skill")]
-        public Skill Skill { get; set; }
+        public HeroSkill Skill { get; set; }
     }
 }

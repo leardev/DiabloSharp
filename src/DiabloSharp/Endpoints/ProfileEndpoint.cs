@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using DiabloSharp.Clients;
 using DiabloSharp.Extensions;
 using DiabloSharp.Models;
@@ -28,21 +28,21 @@ namespace DiabloSharp.Endpoints
             return response.Data;
         }
 
-        public async Task<HeroItemDetails> GetHeroItemDetailsAsync(IAuthenticationScope authenticationScope, string battleTag, long heroId)
+        public async Task<DetailedHeroItems> GetDetailedHeroItemsAsync(IAuthenticationScope authenticationScope, string battleTag, long heroId)
         {
             var client = new BattleNetClient(authenticationScope);
             var request = new RestRequest($"/d3/profile/{battleTag}/hero/{heroId}/items");
-            var response = await client.ExecuteTaskAsync<HeroItemDetails>(request);
+            var response = await client.ExecuteTaskAsync<DetailedHeroItems>(request);
             response.EnsureSuccess();
 
             return response.Data;
         }
 
-        public async Task<HeroFollowersDetails> GetHeroFollowerItemsAsync(IAuthenticationScope authenticationScope, string battleTag, long heroId)
+        public async Task<DetailedFollowers> GetDetailedFollowerItemsAsync(IAuthenticationScope authenticationScope, string battleTag, long heroId)
         {
             var client = new BattleNetClient(authenticationScope);
             var request = new RestRequest($"/d3/profile/{battleTag}/hero/{heroId}/follower-items");
-            var response = await client.ExecuteTaskAsync<HeroFollowersDetails>(request);
+            var response = await client.ExecuteTaskAsync<DetailedFollowers>(request);
             response.EnsureSuccess();
 
             return response.Data;

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
@@ -10,6 +10,6 @@ namespace DiabloSharp.Models
         public bool Completed { get; set; }
 
         [DataMember(Name = "completedQuests")]
-        public IEnumerable<object> CompletedQuests { get; set; }
+        public IEnumerable<HeroCompletedQuest> CompletedQuests { get; set; }
     }
 }

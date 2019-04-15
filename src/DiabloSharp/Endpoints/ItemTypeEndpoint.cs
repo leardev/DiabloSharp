@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
 using DiabloSharp.Extensions;
@@ -19,10 +19,10 @@ namespace DiabloSharp.Endpoints
             return response.Data;
         }
 
-        public async Task<IEnumerable<ItemType>> GetItemTypeAsync(IAuthenticationScope authenticationScope, string itemTypePath)
+        public async Task<IEnumerable<ItemType>> GetItemTypeAsync(IAuthenticationScope authenticationScope, string itemTypeIndexPath)
         {
             var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"d3/data/{itemTypePath}");
+            var request = new RestRequest($"d3/data/{itemTypeIndexPath}");
             var response = await client.ExecuteTaskAsync<List<ItemType>>(request);
             response.EnsureSuccess();
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DiabloSharp.Models
@@ -10,16 +10,16 @@ namespace DiabloSharp.Models
         public string BattleTag { get; set; }
 
         [DataMember(Name = "paragonLevel")]
-        public int ParagonLevel { get; set; }
+        public long ParagonLevel { get; set; }
 
         [DataMember(Name = "paragonLevelHardcore")]
-        public int ParagonLevelHardcore { get; set; }
+        public long ParagonLevelHardcore { get; set; }
 
         [DataMember(Name = "paragonLevelSeason")]
-        public int ParagonLevelSeason { get; set; }
+        public long ParagonLevelSeason { get; set; }
 
         [DataMember(Name = "paragonLevelSeasonHardcore")]
-        public int ParagonLevelSeasonHardcore { get; set; }
+        public long ParagonLevelSeasonHardcore { get; set; }
 
         [DataMember(Name = "guildName")]
         public string GuildName { get; set; }
@@ -28,28 +28,28 @@ namespace DiabloSharp.Models
         public IEnumerable<AccountHero> Heroes { get; set; }
 
         [DataMember(Name = "lastHeroPlayed")]
-        public int LastHeroPlayed { get; set; }
+        public long LastHeroPlayed { get; set; }
 
         [DataMember(Name = "lastUpdated")]
-        public int LastUpdated { get; set; }
+        public long LastUpdated { get; set; }
 
         [DataMember(Name = "kills")]
         public AccountKills Kills { get; set; }
 
         [DataMember(Name = "highestHardcoreLevel")]
-        public int HighestHardcoreLevel { get; set; }
+        public long HighestHardcoreLevel { get; set; }
 
         [DataMember(Name = "timePlayed")]
-        public TimePlayed TimePlayed { get; set; }
+        public AccountTimePlayed TimePlayed { get; set; }
 
         [DataMember(Name = "progression")]
-        public Progression Progression { get; set; }
+        public AccountProgression Progression { get; set; }
 
         [DataMember(Name = "fallenHeroes")]
-        public IEnumerable<FallenHero> FallenHeroes { get; set; }
+        public IEnumerable<AccountFallenHero> FallenHeroes { get; set; }
 
         [DataMember(Name = "seasonalProfiles")]
-        public SeasonalProfiles SeasonalProfiles { get; set; }
+        public AccountSeasonProfiles SeasonalProfiles { get; set; }
 
         [DataMember(Name = "blacksmith")]
         public AccountArtisan Blacksmith { get; set; }
