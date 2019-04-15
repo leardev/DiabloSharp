@@ -27,6 +27,7 @@ namespace DiabloSharp.Tests.Integrations
         [TestCase("necromancer")]
         [TestCase("witch-doctor")]
         [TestCase("wizard")]
+        [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest(string classSlug)
         {
             var skillsTasks = GetSkillsFromCharacterClassAsync(classSlug);

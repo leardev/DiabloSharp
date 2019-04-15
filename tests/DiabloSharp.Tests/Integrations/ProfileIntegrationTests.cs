@@ -21,6 +21,7 @@ namespace DiabloSharp.Tests.Integrations
         }
 
         [Test]
+        [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
