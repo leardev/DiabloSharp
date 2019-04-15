@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Models;
 using DiabloSharp.Tests.Infrastructure;

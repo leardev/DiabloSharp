@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using DiabloSharp.Models;
 using DiabloSharp.Tests.Infrastructure;
@@ -41,8 +40,6 @@ namespace DiabloSharp.Tests.Integrations
         [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest()
         {
-            ServicePointManager.DefaultConnectionLimit = 50;
-
             var diabloApi = DiabloApiFactory.CreateApi();
             var itemTypeIndices = await diabloApi.ItemType.GetItemTypeIndexAsync(_authenticationScope);
 

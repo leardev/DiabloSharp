@@ -60,6 +60,9 @@ namespace DiabloSharp.Models
         [DataMember(Name = "slots")]
         public string Slots { get; set; }
 
+        [DataMember(Name = "augmentation")]
+        public string Augmentation { get; set; }
+
         [DataMember(Name = "attributes")]
         public DetailedHeroItemAttributes Attributes { get; set; }
 
