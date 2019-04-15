@@ -21,7 +21,7 @@ namespace DiabloSharp.Tests.Endpoints
         }
 
         [Test]
-        public async Task GetActTest([Range(1, 5)] long actId)
+        public async Task GetActTest([Range(1L, 5L)] long actId)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = diabloApi.CreateAuthenticationScope();
