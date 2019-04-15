@@ -25,6 +25,10 @@ prerelease:
     - ci
   environment:
     name: production
+  artifacts:
+    paths:
+        - artifacts/
+    expire_in: 60 min
   when: manual
   only:
     - master
@@ -40,6 +44,10 @@ release:
     - ci
   environment:
     name: production
+  artifacts:
+    paths:
+        - artifacts/
+    expire_in: 60 min
   when: manual
   only:
     - master

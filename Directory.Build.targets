@@ -21,10 +21,20 @@
     </CreateProperty>
   </Target>
 
+  <Target Name="AttachReleaseVersionSuffix" Condition="'$(BuildType)' == 'release'">
+    <Exec Command="git rev-parse HEAD" EchoOff="true" ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="CurrentHEAD" />
+    </Exec>
+    <CreateProperty Value="$(Version)-$(CurrentHEAD)">
+      <Output TaskParameter="Value" PropertyName="Version" />
+    </CreateProperty>
+  </Target>
+
   <PropertyGroup>
     <InitializeDependsOn>
       AttachDevVersionSuffix;
-      AttachPrereleaseVersionSuffix
+      AttachPrereleaseVersionSuffix;
+      AttachReleaseVersionSuffix
     </InitializeDependsOn>
   </PropertyGroup>
   <Target Name="Initialize" DependsOnTargets="$(InitializeDependsOn)" />
