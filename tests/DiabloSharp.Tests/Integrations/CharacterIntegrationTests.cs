@@ -34,9 +34,17 @@ namespace DiabloSharp.Tests.Integrations
             var nestedSkills = await Task.WhenAll(skillsTasks);
             var skills = nestedSkills.SelectMany(skill => skill);
 
-            /* todo call mal richtig */
-            foreach (var skill in skills)
-                Assert.That(skill.Slug, Is.Not.Null.Or.Empty);
+            var apiSkillsTasks = skills.Select(characterSkill => ProcessSkill(classSlug, characterSkill));
+            var apiSkills = await Task.WhenAll(apiSkillsTasks);
+
+            foreach (var apiSkill in apiSkills)
+                Assert.That(apiSkill.Skill.Slug, Is.Not.Null.Or.Empty);
+        }
+
+        private async Task<CharacterApiSkill> ProcessSkill(string classSlug, CharacterSkill skill)
+        {
+            var diabloApi = DiabloApiFactory.CreateApi();
+            return await diabloApi.Character.GetApiSkillAsync(_authenticationScope, classSlug, skill.Slug);
         }
 
         private async Task<IEnumerable<CharacterSkill>> GetSkillsFromCharacterClassAsync(string classSlug)

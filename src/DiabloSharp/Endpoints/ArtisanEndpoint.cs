@@ -18,7 +18,6 @@ namespace DiabloSharp.Endpoints
             return response.Data;
         }
 
-        /* hint useless in theory, Artisan from GetArtisanAsync already contains all recipes */
         public async Task<ArtisanRecipe> GetRecipeAsync(IAuthenticationScope authenticationScope, string artisanSlug, string recipeSlug)
         {
             var client = new BattleNetClient(authenticationScope);

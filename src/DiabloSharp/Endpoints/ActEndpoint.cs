@@ -18,7 +18,6 @@ namespace DiabloSharp.Endpoints
             return response.Data;
         }
 
-        /* hint useless in theory, Acts from GetActs already contains all infos */
         public async Task<Act> GetActAsync(IAuthenticationScope authenticationScope, long actId)
         {
             var client = new BattleNetClient(authenticationScope);
