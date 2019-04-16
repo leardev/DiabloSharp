@@ -1,5 +1,5 @@
-﻿using DiabloSharp;
-using DiabloSharp.Configurations;
+﻿using DiabloSharp.Configurations;
+using DiabloSharp.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -18,16 +18,14 @@ namespace DiabloSharp.Sample
 
         static async Task DiabloSharpDemo()
         {
-            /*
-             * var configuration = new DiabloApiConfiguration {
-             *   ClientId = myBattleNetApiId,
-             *   ClientSecret = myBattleNetApiSecret,
-             *   Region = Region.Europe,
-             *   Localization = Localization.EnglishUs
-             * };
-             */
+            var configuration = new DiabloApiConfiguration
+            {
+                ClientId = "YOUR_BATTLE_NET_CLIENT_ID",
+                ClientSecret = "YOUR_BATTLE_NET_CLIENT_SECRET",
+                Region = Region.Europe,
+                Localization = Localization.EnglishUs
+            };
 
-            var configuration = new DiabloApiEnvironmentConfiguration();
             var api = new DiabloApi(configuration);
             var scope = api.CreateAuthenticationScope();
             var account = await api.Profile.GetAccountAsync(scope, "leehmanǃ-2543");
