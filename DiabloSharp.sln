@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloSharp", "src\DiabloSharp\DiabloSharp.csproj", "{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloSharp", "src\DiabloSharp\DiabloSharp.csproj", "{CF4DC822-81CE-4965-B3E6-A8267ED1F5A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloSharp.Tests", "tests\DiabloSharp.Tests\DiabloSharp.Tests.csproj", "{9844FDA4-0747-4964-8A3E-F0D45B021F08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloSharp.Tests", "tests\DiabloSharp.Tests\DiabloSharp.Tests.csproj", "{9844FDA4-0747-4964-8A3E-F0D45B021F08}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloSharp.Sample", "samples\DiabloSharp.Sample\DiabloSharp.Sample.csproj", "{5123E4AB-62A0-4E95-950D-46B4A321BF33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9844FDA4-0747-4964-8A3E-F0D45B021F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9844FDA4-0747-4964-8A3E-F0D45B021F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9844FDA4-0747-4964-8A3E-F0D45B021F08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5123E4AB-62A0-4E95-950D-46B4A321BF33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5123E4AB-62A0-4E95-950D-46B4A321BF33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5123E4AB-62A0-4E95-950D-46B4A321BF33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5123E4AB-62A0-4E95-950D-46B4A321BF33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
