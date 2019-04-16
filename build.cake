@@ -7,6 +7,7 @@ var configuration = Argument("configuration", "Release");
 var buildType = Argument("buildtype", "dev");
 var project = new FilePath(@"./src/DiabloSharp/DiabloSharp.csproj");
 var testProject = new FilePath(@"./tests/DiabloSharp.Tests/DiabloSharp.Tests.csproj");
+var sampleProject = new FilePath(@"./samples/DiabloSharp.Sample/DiabloSharp.Sample.csproj");
 var artifactsDirectory = new DirectoryPath(@"./artifacts");
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -29,12 +30,25 @@ Task("Clean")
 
     Information($"Cleaning {testProject}");
     DotNetCoreClean(testProject.FullPath, cleanSettings);
+
+    Information($"Cleaning {sampleProject}");
+    DotNetCoreClean(sampleProject.FullPath, cleanSettings);
 });
 
 Task("Test")
 .Does(() =>
 {
     DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
+    {
+        Configuration = configuration,
+        Verbosity = DotNetCoreVerbosity.Minimal
+    });
+});
+
+Task("Sample")
+.Does(() =>
+{
+    DotNetCoreBuild(sampleProject.FullPath, new DotNetCoreBuildSettings
     {
         Configuration = configuration,
         Verbosity = DotNetCoreVerbosity.Minimal
@@ -69,6 +83,7 @@ Task("NuGetPush")
 Task("Default")
 .IsDependentOn("Clean")
 .IsDependentOn("Test")
+.IsDependentOn("Sample")
 .IsDependentOn("Package");
 
 Task("Publish")
