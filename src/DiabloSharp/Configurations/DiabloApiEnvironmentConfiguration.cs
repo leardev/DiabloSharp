@@ -1,13 +1,35 @@
-﻿using DiabloSharp.Exceptions;
-using DiabloSharp.Models;
-using Microsoft.Extensions.Configuration;
 using System;
+using DiabloSharp.Exceptions;
+using DiabloSharp.Models;
 
 namespace DiabloSharp.Configurations
 {
     public class DiabloApiEnvironmentConfiguration : IDiabloApiConfiguration
     {
-        private const string EnvironmentVariablePrefix = "DiabloSharp";
+        private const string ClientIdEnvironmentKey = "DiabloSharpClientId";
+
+        private const string ClientSecretEnvironmentKey = "DiabloSharpClientSecret";
+
+        private const string RegionEnvironmentKey = "DiabloSharpRegion";
+
+        private const string LocalizationEnvironmentKey = "DiabloSharpLocalization";
+
+        public DiabloApiEnvironmentConfiguration()
+        {
+            ClientId = GetEnvironmentVariableThrowIfMissing(ClientIdEnvironmentKey);
+            ClientSecret = GetEnvironmentVariableThrowIfMissing(ClientSecretEnvironmentKey);
+            var regionValue = GetEnvironmentVariableThrowIfMissing(RegionEnvironmentKey);
+            var localizationValue = GetEnvironmentVariableThrowIfMissing(LocalizationEnvironmentKey);
+
+            if (!Enum.TryParse<Region>(regionValue, out var region))
+                throw new DiabloApiException($"Unable to cast value of environment variable \"{RegionEnvironmentKey}\" to {typeof(Region).Name}.");
+
+            if (!Enum.TryParse<Localization>(localizationValue, out var localization))
+                throw new DiabloApiException($"Unable to cast value of environment variable \"{LocalizationEnvironmentKey}\" to {typeof(Localization).Name}.");
+
+            Region = region;
+            Localization = localization;
+        }
 
         public string ClientId { get; }
 
@@ -17,27 +39,12 @@ namespace DiabloSharp.Configurations
 
         public Localization Localization { get; }
 
-        public DiabloApiEnvironmentConfiguration()
+        private string GetEnvironmentVariableThrowIfMissing(string variable)
         {
-            var builder = new ConfigurationBuilder();
-            var configuration = builder.AddEnvironmentVariables("DiabloSharp")
-                .Build();
-
-            ClientId = configuration["ClientId"];
-            if (string.IsNullOrEmpty(ClientId))
-                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(ClientId)}");
-
-            ClientSecret = configuration["ClientSecret"];
-            if (string.IsNullOrEmpty(ClientSecret))
-                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(ClientSecret)}");
-
-            if (!Enum.TryParse<Region>(configuration["Region"], out var region))
-                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(Region)}");
-            Region = region;
-
-            if (!Enum.TryParse<Localization>(configuration["Localization"], out var localization))
-                throw new EnvironmentVariableNotFoundException($"{EnvironmentVariablePrefix}{nameof(Localization)}");
-            Localization = localization;
+            var value = Environment.GetEnvironmentVariable(variable);
+            if (string.IsNullOrEmpty(value))
+                throw new DiabloApiException($"Cannot find environment variable \"{variable}\".");
+            return value;
         }
     }
 }
