@@ -18,7 +18,7 @@ Install-Package DiabloSharp -pre
 
 ## Example
 
-You can find more sample project under `.\samples`.
+You can find more samples under `.\samples`.
 
 ```c#
 var configuration = new DiabloApiConfiguration
