@@ -18,35 +18,18 @@ Install-Package DiabloSharp -pre
 
 ## Example
 
-You can find a sample project under `.\samples`.
+You can find more samples under `.\samples`.
 
 ```c#
-using DiabloSharp;
-using DiabloSharp.Configurations;
-using System;
-using System.Threading.Tasks;
-
-namespace DiabloSharpSample
+var configuration = new DiabloApiConfiguration
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("DiabloSharp Demo");
-            Console.WriteLine();
-            DiabloSharpDemo().GetAwaiter().GetResult();
-            Console.ReadKey();
-        }
+    ClientId = "YOUR_BATTLE_NET_CLIENT_ID",
+    ClientSecret = "YOUR_BATTLE_NET_CLIENT_SECRET",
+    Region = Region.Europe,
+    Localization = Localization.EnglishUs
+};
 
-        static async Task DiabloSharpDemo()
-        {
-            var configuration = new DiabloApiEnvironmentConfiguration();
-            var api = new DiabloApi(configuration);
-            var scope = api.CreateAuthenticationScope();
-            var account = await api.Profile.GetAccountAsync(scope, "leehmanǃ-2543");
-
-            Console.WriteLine($"Queried account information for BattleTag {account.BattleTag}");
-        }
-    }
-}
+var api = new DiabloApi(configuration);
+var scope = api.CreateAuthenticationScope();
+var account = await api.Profile.GetAccountAsync(scope, "BATTLE_TAG_TO_QUERY");
 ```

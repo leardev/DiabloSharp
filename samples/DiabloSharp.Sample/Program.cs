@@ -1,23 +1,25 @@
-﻿using DiabloSharp.Configurations;
+using DiabloSharp.Configurations;
 using DiabloSharp.Models;
 using System;
 using System.Threading.Tasks;
 
 namespace DiabloSharp.Sample
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static async Task Main()
         {
             Console.WriteLine("DiabloSharp Demo");
             Console.WriteLine();
-            DiabloSharpDemo().GetAwaiter().GetResult();
+            await QueryHeroesFromBattleTagExampleAsync();
             Console.WriteLine();
+            Console.WriteLine("Press any key to exit ...");
             Console.ReadKey();
         }
 
-        static async Task DiabloSharpDemo()
+        private static async Task QueryHeroesFromBattleTagExampleAsync()
         {
+            const string battleTag = "leehmanǃ-2543";
             var configuration = new DiabloApiConfiguration
             {
                 ClientId = "YOUR_BATTLE_NET_CLIENT_ID",
@@ -28,7 +30,7 @@ namespace DiabloSharp.Sample
 
             var api = new DiabloApi(configuration);
             var scope = api.CreateAuthenticationScope();
-            var account = await api.Profile.GetAccountAsync(scope, "leehmanǃ-2543");
+            var account = await api.Profile.GetAccountAsync(scope, battleTag);
 
             Console.WriteLine($"Queried account for BattleTag {account.BattleTag}");
             foreach (var hero in account.Heroes)
