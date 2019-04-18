@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using DiabloSharp.Configurations;
 using DiabloSharp.Endpoints;
 
@@ -43,9 +44,9 @@ namespace DiabloSharp
 
         public EraEndpoint Era { get; }
 
-        public IAuthenticationScope CreateAuthenticationScope()
+        public async Task<IAuthenticationScope> CreateAuthenticationScopeAsync()
         {
-            var authToken = _oAuth.GetToken(_configuration.ClientId, _configuration.ClientSecret, _configuration.Region);
+            var authToken = await _oAuth.GetTokenAsync(_configuration.ClientId, _configuration.ClientSecret, _configuration.Region);
             var expirationDate = DateTime.Now.AddSeconds(authToken.SecondsUntilExpiration);
 
             return new AuthenticationScope

@@ -17,7 +17,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetArtisanTest(string artisanSlug)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var artisan = await diabloApi.Artisan.GetArtisanAsync(authenticationScope, artisanSlug);
             Assert.AreEqual(artisanSlug, artisan.Slug);
@@ -28,7 +28,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetRecipeTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var recipe = await diabloApi.Artisan.GetRecipeAsync(authenticationScope, "blacksmith", "apprentice-flamberge");
             AssertRecipe(recipe);

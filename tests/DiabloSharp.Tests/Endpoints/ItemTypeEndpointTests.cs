@@ -12,7 +12,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetItemTypeIndexTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var itemTypeIndices = await diabloApi.ItemType.GetItemTypeIndexAsync(authenticationScope);
             foreach (var itemTypeIndex in itemTypeIndices)
@@ -23,7 +23,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetItemTypeTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var itemTypes = await diabloApi.ItemType.GetItemTypeAsync(authenticationScope, "item-type/sword2h");
             foreach (var itemType in itemTypes)

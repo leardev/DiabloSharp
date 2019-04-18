@@ -29,7 +29,7 @@ namespace DiabloSharp.Sample
             };
 
             var api = new DiabloApi(configuration);
-            var scope = api.CreateAuthenticationScope();
+            var scope = await api.CreateAuthenticationScopeAsync();
             var account = await api.Profile.GetAccountAsync(scope, battleTag);
 
             Console.WriteLine($"Queried account for BattleTag {account.BattleTag}");

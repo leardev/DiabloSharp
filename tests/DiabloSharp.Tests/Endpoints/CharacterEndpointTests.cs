@@ -19,7 +19,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetCharacterClassTest(string classSlug)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var characterClass = await diabloApi.Character.GetCharacterClassAsync(authenticationScope, classSlug);
             AssertCharacterClass(characterClass);
@@ -29,7 +29,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetApiSkillTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var apiSkill = await diabloApi.Character.GetApiSkillAsync(authenticationScope, "barbarian", "bash");
 

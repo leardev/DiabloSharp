@@ -2,12 +2,13 @@
 using DiabloSharp.Extensions;
 using DiabloSharp.Models;
 using RestSharp;
+using System.Threading.Tasks;
 
 namespace DiabloSharp.Endpoints
 {
     internal class OAuthEndpoint
     {
-        public OAuthToken GetToken(string clientId, string clientSecret, Region region)
+        public async Task<OAuthToken> GetTokenAsync(string clientId, string clientSecret, Region region)
         {
             var client = new OAuthClient(clientId, clientSecret, region);
             var request = new RestRequest("oauth/token", Method.POST);

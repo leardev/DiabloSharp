@@ -15,7 +15,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetFollowerTest(string followerSlug)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var follower = await diabloApi.Follower.GetFollowerAsync(authenticationScope, followerSlug);
             Assert.AreEqual(followerSlug, follower.Slug);

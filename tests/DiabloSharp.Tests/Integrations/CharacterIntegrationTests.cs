@@ -13,10 +13,10 @@ namespace DiabloSharp.Tests.Integrations
         private IAuthenticationScope _authenticationScope;
 
         [OneTimeSetUp]
-        public void Setup()
+        public async Task Setup()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            _authenticationScope = diabloApi.CreateAuthenticationScope();
+            _authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
         }
 
         [Test]
