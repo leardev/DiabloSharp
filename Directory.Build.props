@@ -4,6 +4,7 @@
     <Title>DiabloSharp</Title>
     <Description>.NET Implementation of the Battle.net Diablo API.</Description>
     <PackageTags>diablo;diablo3;d3;blizzard;activision</PackageTags>
+    <LangVersion>7.3</LangVersion>
     <Authors>leardev</Authors>
     <VersionPrefix>0.1.2</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
