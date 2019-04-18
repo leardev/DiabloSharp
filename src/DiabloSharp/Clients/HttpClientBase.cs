@@ -3,8 +3,10 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DiabloSharp.Clients
@@ -13,7 +15,7 @@ namespace DiabloSharp.Clients
     {
         protected readonly HttpClient _httpClient = new HttpClient();
 
-        private Dictionary<string, string> _parameters = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _parameters = new Dictionary<string, string>();
 
         private bool disposedValue = false;
 
@@ -33,29 +35,55 @@ namespace DiabloSharp.Clients
             _parameters.Add(key, value);
         }
 
-        public async Task<T> GetAsync<T>(string requestUri)
+        public virtual async Task<T> GetAsync<T>(string requestUri)
         {
-            // todo
-            await _httpClient.GetAsync(requestUri);
-            return default;
-        }
-
-        public async Task<T> PostAsync<T>(string requestUri)
-        {
-            var httpContent = new FormUrlEncodedContent(_parameters);
-            using (var response = await _httpClient.PostAsync(requestUri, httpContent))
+            var uriWithParameters = requestUri + BuildUrlParameters();
+            using (var response = await _httpClient.GetAsync(uriWithParameters))
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 if (response.IsSuccessStatusCode)
                     return await DeserializeJsonFromStreamAsync<T>(stream);
 
                 var content = await StreamToStringAsync(stream);
-                throw new DiabloApiHttpException($"An error occured while posting to {requestUri}.")
+                throw new DiabloApiHttpException($"An error occured on HTTP GET {requestUri}.")
                 {
                     StatusCode = (int)response.StatusCode,
                     Content = content
                 };
             }
+        }
+
+        public virtual async Task<T> PostAsync<T>(string requestUri)
+        {
+            var body = new FormUrlEncodedContent(_parameters);
+            using (var response = await _httpClient.PostAsync(requestUri, body))
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                if (response.IsSuccessStatusCode)
+                    return await DeserializeJsonFromStreamAsync<T>(stream);
+
+                var content = await StreamToStringAsync(stream);
+                throw new DiabloApiHttpException($"An error occured on HTTP POST {requestUri}.")
+                {
+                    StatusCode = (int)response.StatusCode,
+                    Content = content
+                };
+            }
+        }
+
+        private string BuildUrlParameters()
+        {
+            if (!_parameters.Any())
+                return string.Empty;
+
+            var urlBuilder = new StringBuilder();
+            var firstParameter = _parameters.First();
+            urlBuilder.Append($"?{firstParameter.Key}={firstParameter.Value}");
+
+            foreach (var parameter in _parameters.Skip(1))
+                urlBuilder.Append($"&{parameter.Key}={parameter.Value}");
+
+            return urlBuilder.ToString();
         }
 
         private async Task<T> DeserializeJsonFromStreamAsync<T>(Stream stream)
