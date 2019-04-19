@@ -8,8 +8,6 @@ namespace DiabloSharp
     {
         Task<AuthenticationScope> CreateAuthenticationScopeAsync();
 
-        ItemTypeEndpoint ItemType { get; }
-
         ItemEndpoint Item { get; }
 
         ActEndpoint Act { get; }

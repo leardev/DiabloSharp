@@ -16,7 +16,6 @@ namespace DiabloSharp
         {
             _configuration = configuration;
             _oAuth = new OAuthEndpoint();
-            ItemType = new ItemTypeEndpoint();
             Item = new ItemEndpoint();
             Act = new ActEndpoint();
             Artisan = new ArtisanEndpoint();
@@ -26,8 +25,6 @@ namespace DiabloSharp
             Season = new SeasonEndpoint();
             Era = new EraEndpoint();
         }
-
-        public ItemTypeEndpoint ItemType { get; }
 
         public ItemEndpoint Item { get; }
 
