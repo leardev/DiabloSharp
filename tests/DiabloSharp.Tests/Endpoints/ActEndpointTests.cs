@@ -14,7 +14,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetActIndexTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var acts = await diabloApi.Act.GetActIndexAsync(authenticationScope);
             AssertActs(acts.Acts.ToList());
@@ -24,7 +24,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetActTest([Range(1L, 5L)] long actId)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var act = await diabloApi.Act.GetActAsync(authenticationScope, actId);
             Assert.AreEqual(actId, act.Id);

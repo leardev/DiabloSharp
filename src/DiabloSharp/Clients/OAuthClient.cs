@@ -1,16 +1,18 @@
-﻿using DiabloSharp.Extensions;
+using System;
+using System.Net.Http.Headers;
+using System.Text;
+using DiabloSharp.Extensions;
 using DiabloSharp.Models;
-using RestSharp;
-using RestSharp.Authenticators;
 
 namespace DiabloSharp.Clients
 {
-    internal class OAuthClient : RestClient
+    internal class OAuthClient : HttpClientBase
     {
         public OAuthClient(string clientId, string clientSecret, Region region) : base($"https://{region.ToDescription()}.battle.net")
         {
-            Authenticator = new HttpBasicAuthenticator(clientId, clientSecret);
-            AddHandler("application/json", () => new NewtonsoftJsonDeserializer());
+            var credentials = Encoding.ASCII.GetBytes($"{clientId}:{clientSecret}");
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(credentials));
+            AddParameter("grant_type", "client_credentials");
         }
     }
 }

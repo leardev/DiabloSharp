@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Extensions;
-using RestSharp;
 
 namespace DiabloSharp.Endpoints
 {
@@ -11,22 +9,14 @@ namespace DiabloSharp.Endpoints
     {
         public async Task<IEnumerable<ItemTypeIndexDto>> GetItemTypeIndexAsync(IAuthenticationScope authenticationScope)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest("d3/data/item-type");
-            var response = await client.ExecuteTaskAsync<List<ItemTypeIndexDto>>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<List<ItemTypeIndexDto>>("d3/data/item-type");
         }
 
         public async Task<IEnumerable<ItemTypeDto>> GetItemTypeAsync(IAuthenticationScope authenticationScope, string itemTypeIndexPath)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"d3/data/{itemTypeIndexPath}");
-            var response = await client.ExecuteTaskAsync<List<ItemTypeDto>>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<List<ItemTypeDto>>($"d3/data/{itemTypeIndexPath}");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetAccountTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var account = await diabloApi.Profile.GetAccountAsync(authenticationScope, BattleTag);
             Assert.That(account.BattleTag, Is.Not.Null.Or.Empty);
@@ -25,7 +25,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetHeroTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var hero = await diabloApi.Profile.GetHeroAsync(authenticationScope, BattleTag, HeroId);
             Assert.AreEqual(HeroId, hero.Id);
@@ -35,7 +35,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetDetailedHeroItemsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var items = await diabloApi.Profile.GetDetailedHeroItemsAsync(authenticationScope, BattleTag, HeroId);
             Assert.IsNotNull(items.Head);
@@ -55,7 +55,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetDetailedFollowerItemsTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var followerItems = await diabloApi.Profile.GetDetailedFollowerItemsAsync(authenticationScope, BattleTag, HeroId);
             Assert.IsNotNull(followerItems.Enchantress);

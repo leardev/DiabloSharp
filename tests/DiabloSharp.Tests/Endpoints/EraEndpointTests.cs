@@ -11,7 +11,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetEraIndexTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var seasons = await diabloApi.Era.GetEraIndexAsync(authenticationScope);
             Assert.That(seasons.Links.Self.Href, Is.Not.Null.Or.Empty);
@@ -22,7 +22,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetEraTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var season = await diabloApi.Era.GetEraAsync(authenticationScope, 1);
             Assert.IsNotEmpty(season.Leaderboards);
@@ -32,7 +32,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetEraLeaderboardTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var leaderboardDetail = await diabloApi.Era.GetEraLeaderboardAsync(authenticationScope, 1, "rift-barbarian");
             Assert.IsNotEmpty(leaderboardDetail.Columns);

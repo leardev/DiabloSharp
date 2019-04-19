@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -8,10 +9,10 @@ namespace DiabloSharp.Tests
     public class DiabloApiTests
     {
         [Test]
-        public void CreateAuthenticationScopeTest()
+        public async Task CreateAuthenticationScopeAsyncTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             Assert.IsTrue(DateTime.Now < authenticationScope.ExpirationDate);
             Assert.That(authenticationScope.AccessToken, Is.Not.Null.Or.Empty);

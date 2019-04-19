@@ -1,8 +1,6 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Extensions;
-using RestSharp;
 
 namespace DiabloSharp.Endpoints
 {
@@ -10,42 +8,26 @@ namespace DiabloSharp.Endpoints
     {
         public async Task<AccountDto> GetAccountAsync(IAuthenticationScope authenticationScope, string battleTag)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"d3/profile/{battleTag}/");
-            var response = await client.ExecuteTaskAsync<AccountDto>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<AccountDto>($"d3/profile/{battleTag}/");
         }
 
         public async Task<HeroDto> GetHeroAsync(IAuthenticationScope authenticationScope, string battleTag, long heroId)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"d3/profile/{battleTag}/hero/{heroId}");
-            var response = await client.ExecuteTaskAsync<HeroDto>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<HeroDto>($"d3/profile/{battleTag}/hero/{heroId}");
         }
 
         public async Task<DetailedHeroItemsDto> GetDetailedHeroItemsAsync(IAuthenticationScope authenticationScope, string battleTag, long heroId)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"/d3/profile/{battleTag}/hero/{heroId}/items");
-            var response = await client.ExecuteTaskAsync<DetailedHeroItemsDto>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<DetailedHeroItemsDto>($"/d3/profile/{battleTag}/hero/{heroId}/items");
         }
 
         public async Task<DetailedFollowersDto> GetDetailedFollowerItemsAsync(IAuthenticationScope authenticationScope, string battleTag, long heroId)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"/d3/profile/{battleTag}/hero/{heroId}/follower-items");
-            var response = await client.ExecuteTaskAsync<DetailedFollowersDto>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<DetailedFollowersDto>($"/d3/profile/{battleTag}/hero/{heroId}/follower-items");
         }
     }
 }

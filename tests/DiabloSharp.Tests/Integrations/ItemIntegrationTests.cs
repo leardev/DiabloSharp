@@ -15,10 +15,10 @@ namespace DiabloSharp.Tests.Integrations
         private List<string> _blacklist;
 
         [OneTimeSetUp]
-        public void SetupFixture()
+        public async Task SetupFixture()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            _authenticationScope = diabloApi.CreateAuthenticationScope();
+            _authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
             _blacklist = new List<string>
             {
                 "item/mysterious-box-The Adventurer's Box",

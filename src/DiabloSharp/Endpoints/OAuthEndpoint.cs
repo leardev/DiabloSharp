@@ -1,22 +1,16 @@
+using System.Threading.Tasks;
 using DiabloSharp.Clients;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Extensions;
 using DiabloSharp.Models;
-using RestSharp;
 
 namespace DiabloSharp.Endpoints
 {
     internal class OAuthEndpoint
     {
-        public OAuthTokenDto GetToken(string clientId, string clientSecret, Region region)
+        public async Task<OAuthTokenDto> GetTokenAsync(string clientId, string clientSecret, Region region)
         {
-            var client = new OAuthClient(clientId, clientSecret, region);
-            var request = new RestRequest("oauth/token", Method.POST);
-            request.AddParameter("grant_type", "client_credentials");
-
-            var response = client.Execute<OAuthTokenDto>(request);
-            response.EnsureSuccess();
-            return response.Data;
+            using (var client = new OAuthClient(clientId, clientSecret, region))
+                return await client.PostAsync<OAuthTokenDto>("oauth/token");
         }
     }
 }

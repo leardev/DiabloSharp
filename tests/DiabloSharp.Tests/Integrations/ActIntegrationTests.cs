@@ -12,7 +12,7 @@ namespace DiabloSharp.Tests.Integrations
         public async Task IntegrationTest()
         {
             var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = diabloApi.CreateAuthenticationScope();
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
 
             var actIndex = await diabloApi.Act.GetActIndexAsync(authenticationScope);
             foreach (var act in actIndex.Acts)
