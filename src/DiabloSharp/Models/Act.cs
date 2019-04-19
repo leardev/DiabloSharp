@@ -2,17 +2,14 @@ using System.Collections.Generic;
 
 namespace DiabloSharp.Models
 {
-    public class Act
+    public class Act : ModelBase<ActIdentifier>
     {
-        public Act(ActIdentifier id, string slug, string name, IEnumerable<Quest> quests)
+        public Act(ActIdentifier id, string slug, string name, IEnumerable<Quest> quests) : base(id)
         {
-            Id = id;
             Slug = slug;
             Name = name;
             Quests = quests;
         }
-
-        public ActIdentifier Id { get; }
 
         public string Slug { get; }
 

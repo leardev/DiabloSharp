@@ -1,15 +1,12 @@
 namespace DiabloSharp.Models
 {
-    public class Quest
+    public class Quest : ModelBase<long>
     {
-        public Quest(long id, string name, string slug)
+        public Quest(long id, string name, string slug) : base(id)
         {
-            Id = id;
             Name = name;
             Slug = slug;
         }
-
-        public long Id { get; }
 
         public string Name { get; }
 
