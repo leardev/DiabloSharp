@@ -7,17 +7,19 @@ namespace DiabloSharp.Converters
 {
     internal class CharacterConverter
     {
-        public CharacterClass CharacterToModel(CharacterClassIdentifier characterClassId, CharacterClassDto characterClass, IEnumerable<CharacterApiSkillDto> activeSkills)
+        public CharacterClass CharacterToModel(CharacterClassIdentifier characterClassId, CharacterClassDto characterClass, IEnumerable<CharacterApiSkillDto> activeCharacterSkills)
         {
             var namesByGender = NamesToModel(characterClass);
-            var skills = SkillsToModel(characterClass, activeSkills);
+            var activeSkills = activeCharacterSkills.Select(ActiveSkillToModel);
+            var passiveSkills = characterClass.Skills.Passives.Select(PassiveSkillToModel);
 
             return new CharacterClass
             {
                 Id = characterClassId,
                 Name = characterClass.Name,
                 IconUrl = characterClass.Icon,
-                Skills = skills,
+                ActiveSkills = activeSkills,
+                PassiveSkills = passiveSkills,
                 NamesByGender = namesByGender
             };
         }
@@ -31,21 +33,13 @@ namespace DiabloSharp.Converters
             };
         }
 
-        private IEnumerable<Skill> SkillsToModel(CharacterClassDto characterClass, IEnumerable<CharacterApiSkillDto> activeCharacterSkills)
-        {
-            var skills = new List<Skill>();
-
-            var passiveSkills = characterClass.Skills.Passives.Select(dto => SkillToModel(SkillCategory.Passive, dto, new List<SkillRune>()));
-            var activeSkills = activeCharacterSkills.Select(ActiveSkillToModel);
-            skills.AddRange(passiveSkills);
-            skills.AddRange(activeSkills);
-            return skills;
-        }
-
-        private Skill ActiveSkillToModel(CharacterApiSkillDto characterApiSkillDto)
+        private SkillCharacterActive ActiveSkillToModel(CharacterApiSkillDto characterApiSkillDto)
         {
             var runes = characterApiSkillDto.Runes.Select(RuneToModel);
-            return SkillToModel(SkillCategory.Active, characterApiSkillDto.Skill, runes);
+            var skill = SkillToModel<SkillCharacterActive>(characterApiSkillDto.Skill);
+            skill.Runes = runes;
+            skill.Category = SkillCategory.Active;
+            return skill;
         }
 
         private SkillRune RuneToModel(CharacterRuneDto characterRuneDto)
@@ -65,7 +59,14 @@ namespace DiabloSharp.Converters
             };
         }
 
-        private Skill SkillToModel(SkillCategory skillCategory, CharacterSkillDto characterSkillDto, IEnumerable<SkillRune> runes)
+        private SkillCharacterPassive PassiveSkillToModel(CharacterSkillDto characterSkillDto)
+        {
+            var skill = SkillToModel<SkillCharacterPassive>(characterSkillDto);
+            skill.Category = SkillCategory.Passive;
+            return skill;
+        }
+
+        private T SkillToModel<T>(CharacterSkillDto characterSkillDto) where T: SkillBase, new()
         {
             var tooltip = new Tooltip
             {
@@ -76,14 +77,12 @@ namespace DiabloSharp.Converters
                 IconUrl = characterSkillDto.Icon
             };
 
-            return new Skill
+            return new T
             {
                 Id = characterSkillDto.Slug,
                 Name = characterSkillDto.Name,
                 Level = characterSkillDto.Level,
-                Category = skillCategory,
-                Tooltip = tooltip,
-                Runes = runes
+                Tooltip = tooltip
             };
         }
     }
