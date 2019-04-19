@@ -1,20 +1,20 @@
 using System.Threading.Tasks;
-using DiabloSharp.Clients;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Models;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ArtisanEndpoint
+    public class ArtisanEndpoint : EndpointBase
     {
-        public async Task<ArtisanDto> GetArtisanAsync(IAuthenticationScope authenticationScope, string artisanSlug)
+        public async Task<ArtisanDto> GetArtisanAsync(AuthenticationScope authenticationScope, string artisanSlug)
         {
-            using (var client = new BattleNetClient(authenticationScope))
+            using (var client = CreateClient(authenticationScope))
                 return await client.GetAsync<ArtisanDto>($"d3/data/artisan/{artisanSlug}");
         }
 
-        public async Task<ArtisanRecipeDto> GetRecipeAsync(IAuthenticationScope authenticationScope, string artisanSlug, string recipeSlug)
+        public async Task<ArtisanRecipeDto> GetRecipeAsync(AuthenticationScope authenticationScope, string artisanSlug, string recipeSlug)
         {
-            using (var client = new BattleNetClient(authenticationScope))
+            using (var client = CreateClient(authenticationScope))
                 return await client.GetAsync<ArtisanRecipeDto>($"d3/data/artisan/{artisanSlug}/recipe/{recipeSlug}");
         }
     }

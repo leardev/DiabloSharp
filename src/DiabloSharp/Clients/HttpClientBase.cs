@@ -40,7 +40,7 @@ namespace DiabloSharp.Clients
             _parameters.Add(key, value);
         }
 
-        public virtual async Task<T> GetAsync<T>(string requestUri)
+        public async Task<T> GetAsync<T>(string requestUri)
         {
             var uriWithParameters = requestUri + BuildUrlParameters();
             using (var response = await Client.GetAsync(uriWithParameters))
@@ -54,7 +54,7 @@ namespace DiabloSharp.Clients
             }
         }
 
-        public virtual async Task<T> PostAsync<T>(string requestUri)
+        public async Task<T> PostAsync<T>(string requestUri)
         {
             var body = new FormUrlEncodedContent(_parameters);
             using (var response = await Client.PostAsync(requestUri, body))

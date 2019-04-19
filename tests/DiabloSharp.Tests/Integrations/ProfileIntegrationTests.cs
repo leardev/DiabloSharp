@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Models;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -11,7 +12,7 @@ namespace DiabloSharp.Tests.Integrations
     {
         private const string BattleTag = "Shanyen-2754";
 
-        private IAuthenticationScope _authenticationScope;
+        private AuthenticationScope _authenticationScope;
 
         [OneTimeSetUp]
         public async Task SetupFixture()

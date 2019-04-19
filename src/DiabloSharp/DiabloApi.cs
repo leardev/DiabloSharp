@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using DiabloSharp.Configurations;
 using DiabloSharp.Endpoints;
+using DiabloSharp.Models;
 
 namespace DiabloSharp
 {
@@ -44,18 +45,13 @@ namespace DiabloSharp
 
         public EraEndpoint Era { get; }
 
-        public async Task<IAuthenticationScope> CreateAuthenticationScopeAsync()
+        public async Task<AuthenticationScope> CreateAuthenticationScopeAsync()
         {
             var authToken = await _oAuth.GetTokenAsync(_configuration.ClientId, _configuration.ClientSecret, _configuration.Region);
             var expirationDate = DateTime.Now.AddSeconds(authToken.SecondsUntilExpiration);
 
-            return new AuthenticationScope
-            {
-                AccessToken = authToken.AccessToken,
-                ExpirationDate = expirationDate,
-                Localization = _configuration.Localization,
-                Region = _configuration.Region
-            };
+            return new AuthenticationScope(authToken.AccessToken, _configuration.Localization, _configuration.Region,
+                expirationDate);
         }
     }
 }

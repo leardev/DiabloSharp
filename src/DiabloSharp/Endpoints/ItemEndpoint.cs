@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
-using DiabloSharp.Clients;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Models;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ItemEndpoint
+    public class ItemEndpoint : EndpointBase
     {
-        public async Task<ItemDto> GetItemAsync(IAuthenticationScope authenticationScope, string itemTypePath)
+        public async Task<ItemDto> GetItemAsync(AuthenticationScope authenticationScope, string itemTypePath)
         {
-            using (var client = new BattleNetClient(authenticationScope))
+            using (var client = CreateClient(authenticationScope))
                 return await client.GetAsync<ItemDto>($"d3/data/{itemTypePath}");
         }
     }
