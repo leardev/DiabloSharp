@@ -1,8 +1,6 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
-using DiabloSharp.Extensions;
 using DiabloSharp.Models;
-using RestSharp;
 
 namespace DiabloSharp.Endpoints
 {
@@ -10,12 +8,8 @@ namespace DiabloSharp.Endpoints
     {
         public async Task<Item> GetItemAsync(IAuthenticationScope authenticationScope, string itemTypePath)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"d3/data/{itemTypePath}");
-            var response = await client.ExecuteTaskAsync<Item>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<Item>($"d3/data/{itemTypePath}");
         }
     }
 }

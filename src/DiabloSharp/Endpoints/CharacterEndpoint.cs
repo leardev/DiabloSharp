@@ -1,8 +1,6 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
-using DiabloSharp.Extensions;
 using DiabloSharp.Models;
-using RestSharp;
 
 namespace DiabloSharp.Endpoints
 {
@@ -10,22 +8,14 @@ namespace DiabloSharp.Endpoints
     {
         public async Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, string classSlug)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"/d3/data/hero/{classSlug}");
-            var response = await client.ExecuteTaskAsync<CharacterClass>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<CharacterClass>($"/d3/data/hero/{classSlug}");
         }
 
         public async Task<CharacterApiSkill> GetApiSkillAsync(IAuthenticationScope authenticationScope, string classSlug, string skillSlug)
         {
-            var client = new BattleNetClient(authenticationScope);
-            var request = new RestRequest($"/d3/data/hero/{classSlug}/skill/{skillSlug}");
-            var response = await client.ExecuteTaskAsync<CharacterApiSkill>(request);
-            response.EnsureSuccess();
-
-            return response.Data;
+            using (var client = new BattleNetClient(authenticationScope))
+                return await client.GetAsync<CharacterApiSkill>($"/d3/data/hero/{classSlug}/skill/{skillSlug}");
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using DiabloSharp.Clients;
-using DiabloSharp.Extensions;
+using DiabloSharp.Clients;
 using DiabloSharp.Models;
-using RestSharp;
 using System.Threading.Tasks;
 
 namespace DiabloSharp.Endpoints
@@ -10,13 +8,8 @@ namespace DiabloSharp.Endpoints
     {
         public async Task<OAuthToken> GetTokenAsync(string clientId, string clientSecret, Region region)
         {
-            var client = new OAuthClient(clientId, clientSecret, region);
-            var request = new RestRequest("oauth/token", Method.POST);
-            request.AddParameter("grant_type", "client_credentials");
-
-            var response = client.Execute<OAuthToken>(request);
-            response.EnsureSuccess();
-            return response.Data;
+            using (var client = new OAuthClient(clientId, clientSecret, region))
+                return await client.PostAsync<OAuthToken>("oauth/token");
         }
     }
 }
