@@ -33,7 +33,7 @@ namespace DiabloSharp.Converters
             {
                 Id = questDto.Id,
                 Slug = questDto.Slug,
-                Name = questDto.Name,
+                Name = questDto.Name
             };
         }
     }

@@ -10,7 +10,7 @@ namespace DiabloSharp.Converters
     {
         public Artisan ArtisanToModel(ArtisanDto artisanDto)
         {
-            Enum.TryParse<ArtisanIdentifier>(artisanDto.Slug, true, out var artisanId);
+            var artisanId = (ArtisanIdentifier) Enum.Parse(typeof(ArtisanIdentifier), artisanDto.Slug, true);
             var recipes = TrainingToModel(artisanDto.Training);
 
             return new Artisan
