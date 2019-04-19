@@ -1,20 +1,16 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class ItemEndpointTests
+    internal class ItemClientTests : ClientTestsBase
     {
         [Test]
         public async Task GetItemTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var item = await diabloApi.Item.GetItemAsync(authenticationScope, "item/corrupted-ashbringer-Unique_Sword_2H_104_x1");
+            var item = await Client.GetItemAsync("item/corrupted-ashbringer-Unique_Sword_2H_104_x1");
             AssertCorruptedAshbringer(item);
         }
 

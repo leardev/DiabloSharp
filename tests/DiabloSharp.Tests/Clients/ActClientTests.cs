@@ -2,31 +2,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class ActEndpointTests
+    internal class ActClientTests : ClientTestsBase
     {
         [Test]
         public async Task GetActIndexTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var acts = await diabloApi.Act.GetActIndexAsync(authenticationScope);
+            var acts = await Client.GetActIndexAsync();
             AssertActs(acts.Acts.ToList());
         }
 
         [Test]
         public async Task GetActTest([Range(1L, 5L)] long actId)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var act = await diabloApi.Act.GetActAsync(authenticationScope, actId);
+            var act = await Client.GetActAsync(actId);
             Assert.AreEqual(actId, act.Id);
             AssertAct(act);
         }

@@ -2,24 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Models;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Integrations
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class ArtisanIntegrationTests
+    internal class ArtisanIntegrationTests : ClientTestsBase
     {
-        private AuthenticationScope _authenticationScope;
-
-        [OneTimeSetUp]
-        public async Task Setup()
-        {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            _authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-        }
-
         [Test]
         [TestCase("blacksmith")]
         [TestCase("jeweler")]
@@ -38,8 +27,7 @@ namespace DiabloSharp.Tests.Integrations
 
         private async Task<IEnumerable<ArtisanRecipeDto>> GetRecipesFromArtisanAsync(string artisanSlug)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var artisan = await diabloApi.Artisan.GetArtisanAsync(_authenticationScope, artisanSlug);
+            var artisan = await Client.GetArtisanAsync(artisanSlug);
 
             var trainedRecipes = artisan.Training.Tiers.SelectMany(tier => tier.TrainedRecipes);
             var taughtRecipes = artisan.Training.Tiers.SelectMany(tier => tier.TaughtRecipes);
@@ -48,8 +36,7 @@ namespace DiabloSharp.Tests.Integrations
 
         private async Task<ArtisanRecipeDto> ProcessArtisanRecipe(string artisanSlug, ArtisanRecipeDto recipe)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            return await diabloApi.Artisan.GetRecipeAsync(_authenticationScope, artisanSlug, recipe.Slug);
+            return await Client.GetRecipeAsync(artisanSlug, recipe.Slug);
         }
     }
 }

@@ -1,12 +1,11 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class FollowerEndpointTests
+    internal class FollowerClientTests : ClientTestsBase
     {
         [Test]
         [TestCase("templar")]
@@ -14,10 +13,7 @@ namespace DiabloSharp.Tests.Endpoints
         [TestCase("enchantress")]
         public async Task GetFollowerTest(string followerSlug)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var follower = await diabloApi.Follower.GetFollowerAsync(authenticationScope, followerSlug);
+            var follower = await Client.GetFollowerAsync(followerSlug);
             Assert.AreEqual(followerSlug, follower.Slug);
             AssertFollower(follower);
         }

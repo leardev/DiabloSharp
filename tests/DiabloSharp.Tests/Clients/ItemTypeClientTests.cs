@@ -1,20 +1,16 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class ItemTypeEndpointTests
+    internal class ItemTypeClientTests : ClientTestsBase
     {
         [Test]
         public async Task GetItemTypeIndexTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var itemTypeIndices = await diabloApi.ItemType.GetItemTypeIndexAsync(authenticationScope);
+            var itemTypeIndices = await Client.GetItemTypeIndexAsync();
             foreach (var itemTypeIndex in itemTypeIndices)
                 AssertItemTypeIndex(itemTypeIndex);
         }
@@ -22,10 +18,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetItemTypeTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var itemTypes = await diabloApi.ItemType.GetItemTypeAsync(authenticationScope, "item-type/sword2h");
+            var itemTypes = await Client.GetItemTypeAsync("item-type/sword2h");
             foreach (var itemType in itemTypes)
                 AssertItemType(itemType);
         }

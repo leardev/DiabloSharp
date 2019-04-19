@@ -2,24 +2,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Models;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Integrations
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class ItemIntegrationTests
+    internal class ItemIntegrationTests : ClientTestsBase
     {
-        private AuthenticationScope _authenticationScope;
-
         private List<string> _blacklist;
 
         [OneTimeSetUp]
-        public async Task SetupFixture()
+        public void SetupFixture()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            _authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
             _blacklist = new List<string>
             {
                 "item/mysterious-box-The Adventurer's Box",
@@ -41,8 +35,7 @@ namespace DiabloSharp.Tests.Integrations
         [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var itemTypeIndices = await diabloApi.ItemType.GetItemTypeIndexAsync(_authenticationScope);
+            var itemTypeIndices = await Client.GetItemTypeIndexAsync();
 
             var processIndexToTypeTasks = itemTypeIndices.Select(ProcessIndexToType);
             var nestedItemTypes = await Task.WhenAll(processIndexToTypeTasks);
@@ -60,15 +53,13 @@ namespace DiabloSharp.Tests.Integrations
 
         private async Task<IEnumerable<ItemTypeDto>> ProcessIndexToType(ItemTypeIndexDto itemTypeIndex)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var itemTypes = await diabloApi.ItemType.GetItemTypeAsync(_authenticationScope, itemTypeIndex.Path);
+            var itemTypes = await Client.GetItemTypeAsync(itemTypeIndex.Path);
             return itemTypes;
         }
 
         private async Task<ItemDto> ProcessTypeToItem(ItemTypeDto itemType)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var item = await diabloApi.Item.GetItemAsync(_authenticationScope, itemType.Path);
+            var item = await Client.GetItemAsync(itemType.Path);
             return item;
         }
     }
