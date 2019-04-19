@@ -17,12 +17,24 @@ namespace DiabloSharp.Converters
         {
             var quests = actDto.Quests.Select(QuestToModel);
             var actId = (ActIdentifier) actDto.Id;
-            return new Act(actId, actDto.Slug, actDto.Name, quests);
+
+            return new Act
+            {
+                Id = actId,
+                Slug = actDto.Slug,
+                Name = actDto.Name,
+                Quests = quests
+            };
         }
 
         private Quest QuestToModel(ActQuestDto questDto)
         {
-            return new Quest(questDto.Id, questDto.Name, questDto.Slug);
+            return new Quest
+            {
+                Id = questDto.Id,
+                Slug = questDto.Slug,
+                Name = questDto.Name,
+            };
         }
     }
 }

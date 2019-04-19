@@ -12,14 +12,29 @@ namespace DiabloSharp.Converters
         {
             Enum.TryParse<ArtisanIdentifier>(artisanDto.Slug, true, out var artisanId);
             var recipes = TrainingToModel(artisanDto.Training);
-            return new Artisan(artisanId, artisanDto.Name, artisanDto.Portrait, recipes);
+
+            return new Artisan
+            {
+                Id = artisanId,
+                Name = artisanDto.Name,
+                Portrait = artisanDto.Portrait,
+                Recipes = recipes
+            };
         }
 
         public Recipe RecipeToModel(ArtisanRecipeDto recipeDto)
         {
             var craftedItemId = ItemToModel(recipeDto.ItemProduced);
             var reagents = recipeDto.Reagents.Select(ReagentToModel);
-            return new Recipe(recipeDto.Id, recipeDto.Slug, recipeDto.Name, recipeDto.Cost, craftedItemId, reagents);
+
+            return new Recipe
+            {
+                Id = new ItemIdentifier(recipeDto.Id, recipeDto.Slug),
+                Name = recipeDto.Name,
+                Cost = recipeDto.Cost,
+                Reagents = reagents,
+                CraftedItemId = craftedItemId
+            };
         }
 
         private IEnumerable<RecipeArtisan> TrainingToModel(ArtisanTrainingDto artisanTrainingDto)
@@ -41,7 +56,17 @@ namespace DiabloSharp.Converters
         {
             var craftedItemId = ItemToModel(recipeDto.ItemProduced);
             var reagents = recipeDto.Reagents.Select(ReagentToModel);
-            return new RecipeArtisan(recipeDto.Id, recipeDto.Slug, recipeDto.Name, recipeDto.Cost, craftedItemId, reagents, recipeRank, source);
+
+            return new RecipeArtisan
+            {
+                Id = new ItemIdentifier(recipeDto.Id, recipeDto.Slug),
+                Name = recipeDto.Name,
+                Cost = recipeDto.Cost,
+                Reagents = reagents,
+                CraftedItemId = craftedItemId,
+                Rank = recipeRank,
+                Source = source
+            };
         }
 
         private ItemIdentifier ItemToModel(ArtisanItemTypeDto itemDto)
@@ -51,8 +76,11 @@ namespace DiabloSharp.Converters
 
         private RecipeReagent ReagentToModel(ArtisanReagentDto artisanRecipeDto)
         {
-            var itemId = new ItemIdentifier(artisanRecipeDto.Item.Id, artisanRecipeDto.Item.Slug);
-            return new RecipeReagent(itemId, artisanRecipeDto.Quantity);
+            return new RecipeReagent
+            {
+                Quantity = artisanRecipeDto.Quantity,
+                ItemId = new ItemIdentifier(artisanRecipeDto.Item.Id, artisanRecipeDto.Item.Slug)
+            };
         }
     }
 }

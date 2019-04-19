@@ -4,21 +4,12 @@ namespace DiabloSharp.Models
 {
     public class Recipe : ModelBase<ItemIdentifier>
     {
-        public Recipe(string id, string slug, string name, long cost, ItemIdentifier craftedItemId, IEnumerable<RecipeReagent> reagents) :
-            base(new ItemIdentifier(id, slug))
-        {
-            Name = name;
-            Cost = cost;
-            CraftedItemId = craftedItemId;
-            Reagents = reagents;
-        }
+        public string Name { get; internal set; }
 
-        public string Name { get; }
+        public long Cost { get; internal set; }
 
-        public long Cost { get; }
+        public IEnumerable<RecipeReagent> Reagents { get; internal set; }
 
-        public IEnumerable<RecipeReagent> Reagents { get; }
-
-        public ItemIdentifier CraftedItemId { get; }
+        public ItemIdentifier CraftedItemId { get; internal set; }
     }
 }
