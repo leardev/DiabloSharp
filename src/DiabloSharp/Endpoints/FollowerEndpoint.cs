@@ -1,15 +1,27 @@
 using System.Threading.Tasks;
-using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Converters;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Endpoints
 {
     public class FollowerEndpoint : EndpointBase
     {
-        public async Task<FollowerDto> GetFollowerAsync(AuthenticationScope authenticationScope, string followerSlug)
+        private readonly FollowerConverter _followerConverter;
+
+        public FollowerEndpoint()
         {
+            _followerConverter = new FollowerConverter();
+        }
+
+        public async Task<Follower> GetFollowerAsync(AuthenticationScope authenticationScope, FollowerIdentifier followerId)
+        {
+            var followerSlug = followerId.ToString().ToLower();
+
             using (var client = CreateClient(authenticationScope))
-                return await client.GetFollowerAsync(followerSlug);
+            {
+                var follower = await client.GetFollowerAsync(followerSlug);
+                return _followerConverter.FollowerToModel(follower);
+            }
         }
     }
 }
