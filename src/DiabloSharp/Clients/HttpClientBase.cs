@@ -1,33 +1,38 @@
-using DiabloSharp.Exceptions;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using DiabloSharp.Exceptions;
+using Newtonsoft.Json;
 
 namespace DiabloSharp.Clients
 {
     internal class HttpClientBase : IDisposable
     {
-        protected readonly HttpClient _httpClient = new HttpClient();
+        private readonly Dictionary<string, string> _parameters;
 
-        private readonly Dictionary<string, string> _parameters = new Dictionary<string, string>();
-
-        private bool disposedValue = false;
+        private bool _disposedValue;
 
         public HttpClientBase(string baseAddress)
         {
-            _httpClient.BaseAddress = new Uri(baseAddress);
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Client = new HttpClient
+            {
+                BaseAddress = new Uri(baseAddress)
+            };
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            _parameters = new Dictionary<string, string>();
         }
 
-        public async Task AddParameterAsync(string key, string value)
+        protected HttpClient Client { get; }
+
+        public void Dispose()
         {
-            await Task.Run(() => AddParameter(key, value));
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public void AddParameter(string key, string value)
@@ -38,50 +43,47 @@ namespace DiabloSharp.Clients
         public virtual async Task<T> GetAsync<T>(string requestUri)
         {
             var uriWithParameters = requestUri + BuildUrlParameters();
-            using (var response = await _httpClient.GetAsync(uriWithParameters))
+            using (var response = await Client.GetAsync(uriWithParameters))
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 if (response.IsSuccessStatusCode)
                     return await DeserializeJsonFromStreamAsync<T>(stream);
 
                 var content = await StreamToStringAsync(stream);
-                throw new DiabloApiHttpException($"An error occured on HTTP GET {requestUri}.")
-                {
-                    StatusCode = (int)response.StatusCode,
-                    Content = content
-                };
+                throw new DiabloApiHttpException(requestUri, response.StatusCode, content);
             }
         }
 
         public virtual async Task<T> PostAsync<T>(string requestUri)
         {
             var body = new FormUrlEncodedContent(_parameters);
-            using (var response = await _httpClient.PostAsync(requestUri, body))
+            using (var response = await Client.PostAsync(requestUri, body))
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 if (response.IsSuccessStatusCode)
                     return await DeserializeJsonFromStreamAsync<T>(stream);
 
                 var content = await StreamToStringAsync(stream);
-                throw new DiabloApiHttpException($"An error occured on HTTP POST {requestUri}.")
-                {
-                    StatusCode = (int)response.StatusCode,
-                    Content = content
-                };
+                throw new DiabloApiHttpException(requestUri, response.StatusCode, content);
             }
         }
 
         private string BuildUrlParameters()
         {
-            if (!_parameters.Any())
-                return string.Empty;
-
             var urlBuilder = new StringBuilder();
-            var firstParameter = _parameters.First();
-            urlBuilder.Append($"?{firstParameter.Key}={firstParameter.Value}");
 
-            foreach (var parameter in _parameters.Skip(1))
-                urlBuilder.Append($"&{parameter.Key}={parameter.Value}");
+            var first = true;
+            foreach (var parameter in _parameters)
+            {
+                var separator = "&";
+                if (first)
+                {
+                    separator = "?";
+                    first = false;
+                }
+
+                urlBuilder.Append($"{separator}{parameter.Key}={parameter.Value}");
+            }
 
             return urlBuilder.ToString();
         }
@@ -104,29 +106,26 @@ namespace DiabloSharp.Clients
 
         private async Task<string> StreamToStringAsync(Stream stream)
         {
-            string content = string.Empty;
-
-            if (stream != null)
-                using (var streamReader = new StreamReader(stream))
-                    content = await streamReader.ReadToEndAsync();
-
-            return content;
+            if (stream == null)
+                return string.Empty;
+            using (var streamReader = new StreamReader(stream))
+                return await streamReader.ReadToEndAsync();
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
-            {
-                if (disposing)
-                    _httpClient.Dispose();
+            if (_disposedValue)
+                return;
 
-                disposedValue = true;
-            }
+            if (disposing)
+                Client.Dispose();
+
+            _disposedValue = true;
         }
 
-        public void Dispose()
+        ~HttpClientBase()
         {
-            Dispose(true);
+            Dispose(false);
         }
     }
 }

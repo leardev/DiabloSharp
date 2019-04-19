@@ -14,10 +14,10 @@ namespace DiabloSharp.Clients
             AddParameter("locale", _authenticationScope.Localization.ToDescription());
         }
 
-        public override async Task<T> GetAsync<T>(string requestUri)
+        public override Task<T> GetAsync<T>(string requestUri)
         {
             _authenticationScope.EnsureExpiration();
-            return await base.GetAsync<T>(requestUri);
+            return base.GetAsync<T>(requestUri);
         }
     }
 }
