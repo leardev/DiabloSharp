@@ -19,9 +19,9 @@ namespace DiabloSharp.Clients
 
         private bool disposedValue = false;
 
-        public HttpClientBase(Uri baseAddress)
+        public HttpClientBase(string baseAddress)
         {
-            _httpClient.BaseAddress = baseAddress;
+            _httpClient.BaseAddress = new Uri(baseAddress);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
