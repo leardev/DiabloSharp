@@ -1,21 +1,38 @@
 using System.Threading.Tasks;
-using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Converters;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Endpoints
 {
     public class ArtisanEndpoint : EndpointBase
     {
-        public async Task<ArtisanDto> GetArtisanAsync(AuthenticationScope authenticationScope, string artisanSlug)
+        private readonly ArtisanConverter _artisanConverter;
+
+        public ArtisanEndpoint()
         {
-            using (var client = CreateClient(authenticationScope))
-                return await client.GetArtisanAsync(artisanSlug);
+            _artisanConverter = new ArtisanConverter();
         }
 
-        public async Task<ArtisanRecipeDto> GetRecipeAsync(AuthenticationScope authenticationScope, string artisanSlug, string recipeSlug)
+        public async Task<Artisan> GetArtisanAsync(AuthenticationScope authenticationScope, ArtisanIdentifier artisanId)
         {
+            var artisanSlug = artisanId.ToString().ToLower();
+
             using (var client = CreateClient(authenticationScope))
-                return await client.GetRecipeAsync(artisanSlug, recipeSlug);
+            {
+                var artisan = await client.GetArtisanAsync(artisanSlug);
+                return _artisanConverter.ArtisanToModel(artisan);
+            }
+        }
+
+        public async Task<Recipe> GetRecipeAsync(AuthenticationScope authenticationScope, ArtisanIdentifier artisanId, string recipeSlug)
+        {
+            var artisanSlug = artisanId.ToString().ToLower();
+
+            using (var client = CreateClient(authenticationScope))
+            {
+                var recipe = await client.GetRecipeAsync(artisanSlug, recipeSlug);
+                return _artisanConverter.RecipeToModel(recipe);
+            }
         }
     }
 }
