@@ -1,27 +1,27 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 
 namespace DiabloSharp.Endpoints
 {
     public class EraEndpoint
     {
-        public async Task<EraIndex> GetEraIndexAsync(IAuthenticationScope authenticationScope)
+        public async Task<EraIndexDto> GetEraIndexAsync(IAuthenticationScope authenticationScope)
         {
             using (var client = new BattleNetClient(authenticationScope))
-                return await client.GetAsync<EraIndex>("/data/d3/era/");
+                return await client.GetAsync<EraIndexDto>("/data/d3/era/");
         }
 
-        public async Task<Era> GetEraAsync(IAuthenticationScope authenticationScope, long eraId)
+        public async Task<EraDto> GetEraAsync(IAuthenticationScope authenticationScope, long eraId)
         {
             using (var client = new BattleNetClient(authenticationScope))
-                return await client.GetAsync<Era>($"/data/d3/era/{eraId}");
+                return await client.GetAsync<EraDto>($"/data/d3/era/{eraId}");
         }
 
-        public async Task<EraLeaderboardDetail> GetEraLeaderboardAsync(IAuthenticationScope authenticationScope, long eraId, string leaderboardId)
+        public async Task<EraLeaderboardDetailDto> GetEraLeaderboardAsync(IAuthenticationScope authenticationScope, long eraId, string leaderboardId)
         {
             using (var client = new BattleNetClient(authenticationScope))
-                return await client.GetAsync<EraLeaderboardDetail>($"/data/d3/era/{eraId}/leaderboard/{leaderboardId}");
+                return await client.GetAsync<EraLeaderboardDetailDto>($"/data/d3/era/{eraId}/leaderboard/{leaderboardId}");
         }
     }
 }

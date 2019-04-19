@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 
 namespace DiabloSharp.Endpoints
 {
     public class FollowerEndpoint
     {
-        public async Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, string followerSlug)
+        public async Task<FollowerDto> GetFollowerAsync(IAuthenticationScope authenticationScope, string followerSlug)
         {
             using (var client = new BattleNetClient(authenticationScope))
-                return await client.GetAsync<Follower>($"/d3/data/follower/{followerSlug}");
+                return await client.GetAsync<FollowerDto>($"/d3/data/follower/{followerSlug}");
         }
     }
 }

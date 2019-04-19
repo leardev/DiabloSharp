@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -18,7 +18,7 @@ namespace DiabloSharp.Tests.Endpoints
             AssertCorruptedAshbringer(item);
         }
 
-        private void AssertCorruptedAshbringer(Item item)
+        private void AssertCorruptedAshbringer(ItemDto item)
         {
             Assert.That(item.FlavorText, Is.Not.Null.Or.Empty);
             Assert.That(item.FlavorTextHtml, Is.Not.Null.Or.Empty);
@@ -64,13 +64,13 @@ namespace DiabloSharp.Tests.Endpoints
             AssertItemKind(item.Type);
         }
 
-        private void AssertItemKind(ItemKind itemKind)
+        private void AssertItemKind(ItemKindDto itemKind)
         {
             Assert.AreEqual("Sword2H", itemKind.Id);
             Assert.IsTrue(itemKind.TwoHanded);
         }
 
-        private void AssertAttribute(ItemHtmlDescription attribute)
+        private void AssertAttribute(ItemHtmlDescriptionDto attribute)
         {
             Assert.That(attribute.Text, Is.Not.Null.Or.Empty);
             Assert.That(attribute.TextHtml, Is.Not.Null.Or.Empty);

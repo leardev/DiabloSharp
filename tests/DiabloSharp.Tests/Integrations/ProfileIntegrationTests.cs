@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -40,19 +40,19 @@ namespace DiabloSharp.Tests.Integrations
             Assert.IsNotEmpty(heroes);
         }
 
-        private async Task<DetailedHeroItems> ProcessHeroToItems(string battleTag, AccountHero accountHero)
+        private async Task<DetailedHeroItemsDto> ProcessHeroToItems(string battleTag, AccountHeroDto accountHero)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             return await diabloApi.Profile.GetDetailedHeroItemsAsync(_authenticationScope, battleTag, accountHero.Id);
         }
 
-        private async Task<DetailedFollowers> ProcessHeroToFollowerItems(string battleTag, AccountHero accountHero)
+        private async Task<DetailedFollowersDto> ProcessHeroToFollowerItems(string battleTag, AccountHeroDto accountHero)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             return await diabloApi.Profile.GetDetailedFollowerItemsAsync(_authenticationScope, battleTag, accountHero.Id);
         }
 
-        private async Task<Hero> ProcessHero(string battleTag, AccountHero accountHero)
+        private async Task<HeroDto> ProcessHero(string battleTag, AccountHeroDto accountHero)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             return await diabloApi.Profile.GetHeroAsync(_authenticationScope, battleTag, accountHero.Id);

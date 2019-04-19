@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -31,14 +31,14 @@ namespace DiabloSharp.Tests.Endpoints
             AssertAct(act);
         }
 
-        private void AssertActs(ICollection<Act> acts)
+        private void AssertActs(ICollection<ActDto> acts)
         {
             Assert.AreEqual(5, acts.Count);
             foreach (var act in acts)
                 AssertAct(act);
         }
 
-        private void AssertAct(Act act)
+        private void AssertAct(ActDto act)
         {
             Assert.NotZero(act.Id);
             Assert.That(act.Name, Is.Not.Null.Or.Empty);
@@ -49,7 +49,7 @@ namespace DiabloSharp.Tests.Endpoints
                 AssertQuest(quest);
         }
 
-        private void AssertQuest(ActQuest quest)
+        private void AssertQuest(ActQuestDto quest)
         {
             Assert.NotZero(quest.Id);
             Assert.That(quest.Name, Is.Not.Null.Or.Empty);

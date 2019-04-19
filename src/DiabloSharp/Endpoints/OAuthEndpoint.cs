@@ -1,15 +1,16 @@
-using DiabloSharp.Clients;
-using DiabloSharp.Models;
 using System.Threading.Tasks;
+using DiabloSharp.Clients;
+using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Models;
 
 namespace DiabloSharp.Endpoints
 {
     internal class OAuthEndpoint
     {
-        public async Task<OAuthToken> GetTokenAsync(string clientId, string clientSecret, Region region)
+        public async Task<OAuthTokenDto> GetTokenAsync(string clientId, string clientSecret, Region region)
         {
             using (var client = new OAuthClient(clientId, clientSecret, region))
-                return await client.PostAsync<OAuthToken>("oauth/token");
+                return await client.PostAsync<OAuthTokenDto>("oauth/token");
         }
     }
 }

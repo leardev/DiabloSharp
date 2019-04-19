@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -57,14 +57,14 @@ namespace DiabloSharp.Tests.Integrations
                 Assert.That(item.Id, Is.Not.Null.Or.Empty);
         }
 
-        private async Task<IEnumerable<ItemType>> ProcessIndexToType(ItemTypeIndex itemTypeIndex)
+        private async Task<IEnumerable<ItemTypeDto>> ProcessIndexToType(ItemTypeIndexDto itemTypeIndex)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var itemTypes = await diabloApi.ItemType.GetItemTypeAsync(_authenticationScope, itemTypeIndex.Path);
             return itemTypes;
         }
 
-        private async Task<Item> ProcessTypeToItem(ItemType itemType)
+        private async Task<ItemDto> ProcessTypeToItem(ItemTypeDto itemType)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var item = await diabloApi.Item.GetItemAsync(_authenticationScope, itemType.Path);

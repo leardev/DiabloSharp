@@ -1,21 +1,21 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 
 namespace DiabloSharp.Endpoints
 {
     public class ActEndpoint
     {
-        public async Task<ActIndex> GetActIndexAsync(IAuthenticationScope authenticationScope)
+        public async Task<ActIndexDto> GetActIndexAsync(IAuthenticationScope authenticationScope)
         {
             using (var client = new BattleNetClient(authenticationScope))
-                return await client.GetAsync<ActIndex>("/d3/data/act");
+                return await client.GetAsync<ActIndexDto>("/d3/data/act");
         }
 
-        public async Task<Act> GetActAsync(IAuthenticationScope authenticationScope, long actId)
+        public async Task<ActDto> GetActAsync(IAuthenticationScope authenticationScope, long actId)
         {
             using (var client = new BattleNetClient(authenticationScope))
-                return await client.GetAsync<Act>($"/d3/data/act/{actId}");
+                return await client.GetAsync<ActDto>($"/d3/data/act/{actId}");
         }
     }
 }
