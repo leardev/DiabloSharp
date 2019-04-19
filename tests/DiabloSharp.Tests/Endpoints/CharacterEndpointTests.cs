@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -38,7 +38,7 @@ namespace DiabloSharp.Tests.Endpoints
                 AssertRune(rune);
         }
 
-        private void AssertCharacterClass(CharacterClass characterClass)
+        private void AssertCharacterClass(CharacterClassDto characterClass)
         {
             Assert.That(characterClass.Name, Is.Not.Null.Or.Empty);
             Assert.That(characterClass.FemaleName, Is.Not.Null.Or.Empty);
@@ -56,13 +56,13 @@ namespace DiabloSharp.Tests.Endpoints
                 AssertSkill(passiveSkill);
         }
 
-        private void AssertSkillCategories(CharacterSkillCategory skillCategory)
+        private void AssertSkillCategories(CharacterSkillCategoryDto skillCategory)
         {
             Assert.That(skillCategory.Name, Is.Not.Null.Or.Empty);
             Assert.That(skillCategory.Slug, Is.Not.Null.Or.Empty);
         }
 
-        private void AssertSkill(CharacterSkill skill)
+        private void AssertSkill(CharacterSkillDto skill)
         {
             Assert.That(skill.Name, Is.Not.Null.Or.Empty);
             Assert.That(skill.Description, Is.Not.Null.Or.Empty);
@@ -74,7 +74,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.NotZero(skill.Level);
         }
 
-        private void AssertRune(CharacterRune rune)
+        private void AssertRune(CharacterRuneDto rune)
         {
             Assert.That(rune.Name, Is.Not.Null.Or.Empty);
             Assert.That(rune.Description, Is.Not.Null.Or.Empty);

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -30,7 +30,7 @@ namespace DiabloSharp.Tests.Endpoints
                 AssertItemType(itemType);
         }
 
-        private void AssertItemType(ItemType itemType)
+        private void AssertItemType(ItemTypeDto itemType)
         {
             Assert.That(itemType.Id, Is.Not.Null.Or.Empty);
             Assert.That(itemType.Icon, Is.Not.Null.Or.Empty);
@@ -39,7 +39,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.That(itemType.Slug, Is.Not.Null.Or.Empty);
         }
 
-        private void AssertItemTypeIndex(ItemTypeIndex itemTypeIndex)
+        private void AssertItemTypeIndex(ItemTypeIndexDto itemTypeIndex)
         {
             Assert.That(itemTypeIndex.Id, Is.Not.Null.Or.Empty);
             Assert.That(itemTypeIndex.Name, Is.Not.Null.Or.Empty);

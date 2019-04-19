@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -22,7 +22,7 @@ namespace DiabloSharp.Tests.Endpoints
             AssertFollower(follower);
         }
 
-        private void AssertFollower(Follower follower)
+        private void AssertFollower(FollowerDto follower)
         {
             Assert.That(follower.Name, Is.Not.Null.Or.Empty);
             Assert.That(follower.Portrait, Is.Not.Null.Or.Empty);
@@ -34,7 +34,7 @@ namespace DiabloSharp.Tests.Endpoints
                 AssertSkill(skill);
         }
 
-        private void AssertSkill(FollowerSkill skill)
+        private void AssertSkill(FollowerSkillDto skill)
         {
             Assert.That(skill.Slug, Is.Not.Null.Or.Empty);
             Assert.That(skill.Slug, Is.Not.Null.Or.Empty);

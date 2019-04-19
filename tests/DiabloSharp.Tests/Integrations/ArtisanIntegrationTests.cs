@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -35,7 +35,7 @@ namespace DiabloSharp.Tests.Integrations
                 Assert.That(recipe.Id, Is.Not.Null.Or.Empty);
         }
 
-        private async Task<IEnumerable<ArtisanRecipe>> GetRecipesFromArtisanAsync(string artisanSlug)
+        private async Task<IEnumerable<ArtisanRecipeDto>> GetRecipesFromArtisanAsync(string artisanSlug)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var artisan = await diabloApi.Artisan.GetArtisanAsync(_authenticationScope, artisanSlug);
@@ -45,7 +45,7 @@ namespace DiabloSharp.Tests.Integrations
             return trainedRecipes.Concat(taughtRecipes);
         }
 
-        private async Task<ArtisanRecipe> ProcessArtisanRecipe(string artisanSlug, ArtisanRecipe recipe)
+        private async Task<ArtisanRecipeDto> ProcessArtisanRecipe(string artisanSlug, ArtisanRecipeDto recipe)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             return await diabloApi.Artisan.GetRecipeAsync(_authenticationScope, artisanSlug, recipe.Slug);
