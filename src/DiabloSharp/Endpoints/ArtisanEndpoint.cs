@@ -20,7 +20,7 @@ namespace DiabloSharp.Endpoints
             using (var client = CreateClient(authenticationScope))
             {
                 var artisan = await client.GetArtisanAsync(artisanSlug);
-                return _artisanConverter.ArtisanToModel(artisan);
+                return _artisanConverter.ArtisanToModel(artisanId, artisan);
             }
         }
 

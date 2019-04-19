@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
@@ -8,14 +7,13 @@ namespace DiabloSharp.Converters
 {
     internal class ArtisanConverter
     {
-        public Artisan ArtisanToModel(ArtisanDto artisanDto)
+        public Artisan ArtisanToModel(ArtisanIdentifier artisanIdentifier, ArtisanDto artisanDto)
         {
-            var artisanId = (ArtisanIdentifier) Enum.Parse(typeof(ArtisanIdentifier), artisanDto.Slug, true);
             var recipes = TrainingToModel(artisanDto.Training);
 
             return new Artisan
             {
-                Id = artisanId,
+                Id = artisanIdentifier,
                 Name = artisanDto.Name,
                 Portrait = artisanDto.Portrait,
                 Recipes = recipes
