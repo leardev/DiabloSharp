@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -34,7 +34,7 @@ namespace DiabloSharp.Tests.Endpoints
             AssertRecipe(recipe);
         }
 
-        private void AssertArtisan(Artisan artisan)
+        private void AssertArtisan(ArtisanDto artisan)
         {
             Assert.That(artisan.Name, Is.Not.Null.Or.Empty);
             Assert.That(artisan.Portrait, Is.Not.Null.Or.Empty);
@@ -43,14 +43,14 @@ namespace DiabloSharp.Tests.Endpoints
             AssertTiers(artisan.Training.Tiers.ToList());
         }
 
-        private void AssertTiers(ICollection<ArtisanTier> tiers)
+        private void AssertTiers(ICollection<ArtisanTierDto> tiers)
         {
             Assert.IsNotEmpty(tiers);
             foreach (var tier in tiers)
                 AssertTier(tier);
         }
 
-        private void AssertTier(ArtisanTier tier)
+        private void AssertTier(ArtisanTierDto tier)
         {
             Assert.NotZero(tier.Index);
             foreach (var recipe in tier.TrainedRecipes)
@@ -59,7 +59,7 @@ namespace DiabloSharp.Tests.Endpoints
                 AssertRecipe(recipe);
         }
 
-        private void AssertRecipe(ArtisanRecipe recipe)
+        private void AssertRecipe(ArtisanRecipeDto recipe)
         {
             Assert.That(recipe.Name, Is.Not.Null.Or.Empty);
             Assert.That(recipe.Id, Is.Not.Null.Or.Empty);
@@ -71,7 +71,7 @@ namespace DiabloSharp.Tests.Endpoints
                 AssertReagent(reagent);
         }
 
-        private void AssertItemType(ArtisanItemType itemType)
+        private void AssertItemType(ArtisanItemTypeDto itemType)
         {
             Assert.That(itemType.Name, Is.Not.Null.Or.Empty);
             Assert.That(itemType.Icon, Is.Not.Null.Or.Empty);
@@ -80,7 +80,7 @@ namespace DiabloSharp.Tests.Endpoints
             Assert.That(itemType.Slug, Is.Not.Null.Or.Empty);
         }
 
-        private void AssertReagent(ArtisanReagent reagent)
+        private void AssertReagent(ArtisanReagentDto reagent)
         {
             Assert.NotZero(reagent.Quantity);
             AssertItemType(reagent.Item);

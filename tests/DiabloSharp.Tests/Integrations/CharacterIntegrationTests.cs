@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Models;
+using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
@@ -41,13 +41,13 @@ namespace DiabloSharp.Tests.Integrations
                 Assert.That(apiSkill.Skill.Slug, Is.Not.Null.Or.Empty);
         }
 
-        private async Task<CharacterApiSkill> ProcessSkill(string classSlug, CharacterSkill skill)
+        private async Task<CharacterApiSkillDto> ProcessSkill(string classSlug, CharacterSkillDto skill)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             return await diabloApi.Character.GetApiSkillAsync(_authenticationScope, classSlug, skill.Slug);
         }
 
-        private async Task<IEnumerable<CharacterSkill>> GetSkillsFromCharacterClassAsync(string classSlug)
+        private async Task<IEnumerable<CharacterSkillDto>> GetSkillsFromCharacterClassAsync(string classSlug)
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var characterClass = await diabloApi.Character.GetCharacterClassAsync(_authenticationScope, classSlug);
