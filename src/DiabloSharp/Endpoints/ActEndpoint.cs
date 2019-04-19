@@ -1,21 +1,37 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Converters;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Endpoints
 {
     public class ActEndpoint : EndpointBase
     {
-        public async Task<ActIndexDto> GetActIndexAsync(AuthenticationScope authenticationScope)
+        private readonly ActConverter _actConverter;
+
+        public ActEndpoint()
         {
-            using (var client = CreateClient(authenticationScope))
-                return await client.GetActIndexAsync();
+            _actConverter = new ActConverter();
         }
 
-        public async Task<ActDto> GetActAsync(AuthenticationScope authenticationScope, long actId)
+        public async Task<IEnumerable<Act>> GetActsAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetActAsync(actId);
+            {
+                var actIndex = await client.GetActIndexAsync();
+                return _actConverter.ActIndexToModel(actIndex);
+            }
+        }
+
+        public async Task<Act> GetActAsync(AuthenticationScope authenticationScope, ActIdentifier actId)
+        {
+            var actIdIndex = (byte) actId;
+
+            using (var client = CreateClient(authenticationScope))
+            {
+                var act = await client.GetActAsync(actIdIndex);
+                return _actConverter.ActToModel(act);
+            }
         }
     }
 }
