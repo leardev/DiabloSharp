@@ -1,12 +1,11 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class CharacterEndpointTests
+    internal class CharacterClientTests : ClientTestsBase
     {
         [Test]
         [TestCase("barbarian")]
@@ -18,20 +17,14 @@ namespace DiabloSharp.Tests.Endpoints
         [TestCase("wizard")]
         public async Task GetCharacterClassTest(string classSlug)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var characterClass = await diabloApi.Character.GetCharacterClassAsync(authenticationScope, classSlug);
+            var characterClass = await Client.GetCharacterClassAsync(classSlug);
             AssertCharacterClass(characterClass);
         }
 
         [Test]
         public async Task GetApiSkillTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var apiSkill = await diabloApi.Character.GetApiSkillAsync(authenticationScope, "barbarian", "bash");
+            var apiSkill = await Client.GetApiSkillAsync("barbarian", "bash");
 
             AssertSkill(apiSkill.Skill);
             foreach (var rune in apiSkill.Runes)

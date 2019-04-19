@@ -2,24 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Models;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Integrations
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class CharacterIntegrationTests
+    internal class CharacterIntegrationTests : ClientTestsBase
     {
-        private AuthenticationScope _authenticationScope;
-
-        [OneTimeSetUp]
-        public async Task Setup()
-        {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            _authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-        }
-
         [Test]
         [TestCase("barbarian")]
         [TestCase("crusader")]
@@ -44,14 +33,12 @@ namespace DiabloSharp.Tests.Integrations
 
         private async Task<CharacterApiSkillDto> ProcessSkill(string classSlug, CharacterSkillDto skill)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            return await diabloApi.Character.GetApiSkillAsync(_authenticationScope, classSlug, skill.Slug);
+            return await Client.GetApiSkillAsync(classSlug, skill.Slug);
         }
 
         private async Task<IEnumerable<CharacterSkillDto>> GetSkillsFromCharacterClassAsync(string classSlug)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var characterClass = await diabloApi.Character.GetCharacterClassAsync(_authenticationScope, classSlug);
+            var characterClass = await Client.GetCharacterClassAsync(classSlug);
             var activeSkills = characterClass.Skills.Actives.ToList();
             var passiveSkills = characterClass.Skills.Passives;
             return activeSkills.Concat(passiveSkills);

@@ -9,19 +9,19 @@ namespace DiabloSharp.Endpoints
         public async Task<EraIndexDto> GetEraIndexAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<EraIndexDto>("/data/d3/era/");
+                return await client.GetEraIndexAsync();
         }
 
         public async Task<EraDto> GetEraAsync(AuthenticationScope authenticationScope, long eraId)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<EraDto>($"/data/d3/era/{eraId}");
+                return await client.GetEraAsync(eraId);
         }
 
         public async Task<EraLeaderboardDetailDto> GetEraLeaderboardAsync(AuthenticationScope authenticationScope, long eraId, string leaderboardId)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<EraLeaderboardDetailDto>($"/data/d3/era/{eraId}/leaderboard/{leaderboardId}");
+                return await client.GetEraLeaderboardAsync(eraId, leaderboardId);
         }
     }
 }

@@ -9,19 +9,19 @@ namespace DiabloSharp.Endpoints
         public async Task<SeasonIndexDto> GetSeasonIndexAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<SeasonIndexDto>("/data/d3/season/");
+                return await client.GetSeasonIndexAsync();
         }
 
         public async Task<SeasonDto> GetSeasonAsync(AuthenticationScope authenticationScope, long seasonId)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<SeasonDto>($"/data/d3/season/{seasonId}");
+                return await client.GetSeasonAsync(seasonId);
         }
 
         public async Task<SeasonLeaderboardDetailDto> GetSeasonLeaderboardAsync(AuthenticationScope authenticationScope, long seasonId, string leaderboardId)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<SeasonLeaderboardDetailDto>($"/data/d3/season/{seasonId}/leaderboard/{leaderboardId}");
+                return await client.GetSeasonLeaderboardAsync(seasonId, leaderboardId);
         }
     }
 }

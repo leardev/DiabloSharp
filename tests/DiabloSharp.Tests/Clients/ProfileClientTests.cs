@@ -2,10 +2,10 @@ using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class ProfileEndpointTests
+    internal class ProfileClientTests : ClientTestsBase
     {
         private const string BattleTag = "Shanyen-2754";
 
@@ -14,20 +14,14 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetAccountTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var account = await diabloApi.Profile.GetAccountAsync(authenticationScope, BattleTag);
+            var account = await Client.GetAccountAsync(BattleTag);
             Assert.That(account.BattleTag, Is.Not.Null.Or.Empty);
         }
 
         [Test]
         public async Task GetHeroTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var hero = await diabloApi.Profile.GetHeroAsync(authenticationScope, BattleTag, HeroId);
+            var hero = await Client.GetHeroAsync(BattleTag, HeroId);
             Assert.AreEqual(HeroId, hero.Id);
         }
 

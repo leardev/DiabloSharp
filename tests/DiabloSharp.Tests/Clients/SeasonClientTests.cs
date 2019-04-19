@@ -2,18 +2,15 @@ using System.Threading.Tasks;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class SeasonEndpointTests
+    internal class SeasonClientTests : ClientTestsBase
     {
         [Test]
         public async Task GetSeasonIndexTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var seasons = await diabloApi.Season.GetSeasonIndexAsync(authenticationScope);
+            var seasons = await Client.GetSeasonIndexAsync();
             Assert.That(seasons.Links.Self.Href, Is.Not.Null.Or.Empty);
             Assert.IsNotEmpty(seasons.Seasons);
         }
@@ -21,10 +18,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetSeasonTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var season = await diabloApi.Season.GetSeasonAsync(authenticationScope, 16);
+            var season = await Client.GetSeasonAsync(16);
             Assert.IsNotEmpty(season.Leaderboards);
         }
 

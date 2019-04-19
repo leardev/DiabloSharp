@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
-namespace DiabloSharp.Tests.Endpoints
+namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
-    public class ArtisanEndpointTests
+    internal class ArtisanClientTests : ClientTestsBase
     {
         [Test]
         [TestCase("blacksmith")]
@@ -16,10 +15,7 @@ namespace DiabloSharp.Tests.Endpoints
         [TestCase("mystic")]
         public async Task GetArtisanTest(string artisanSlug)
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var artisan = await diabloApi.Artisan.GetArtisanAsync(authenticationScope, artisanSlug);
+            var artisan = await Client.GetArtisanAsync(artisanSlug);
             Assert.AreEqual(artisanSlug, artisan.Slug);
             AssertArtisan(artisan);
         }
@@ -27,10 +23,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetRecipeTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var recipe = await diabloApi.Artisan.GetRecipeAsync(authenticationScope, "blacksmith", "apprentice-flamberge");
+            var recipe = await Client.GetRecipeAsync("blacksmith", "apprentice-flamberge");
             AssertRecipe(recipe);
         }
 
