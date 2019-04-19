@@ -9,7 +9,7 @@ namespace DiabloSharp.Endpoints
         public async Task<ItemDto> GetItemAsync(AuthenticationScope authenticationScope, string itemTypePath)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<ItemDto>($"d3/data/{itemTypePath}");
+                return await client.GetItemAsync(itemTypePath);
         }
     }
 }

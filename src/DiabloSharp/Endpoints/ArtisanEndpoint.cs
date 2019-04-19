@@ -9,13 +9,13 @@ namespace DiabloSharp.Endpoints
         public async Task<ArtisanDto> GetArtisanAsync(AuthenticationScope authenticationScope, string artisanSlug)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<ArtisanDto>($"d3/data/artisan/{artisanSlug}");
+                return await client.GetArtisanAsync(artisanSlug);
         }
 
         public async Task<ArtisanRecipeDto> GetRecipeAsync(AuthenticationScope authenticationScope, string artisanSlug, string recipeSlug)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<ArtisanRecipeDto>($"d3/data/artisan/{artisanSlug}/recipe/{recipeSlug}");
+                return await client.GetRecipeAsync(artisanSlug, recipeSlug);
         }
     }
 }

@@ -9,25 +9,25 @@ namespace DiabloSharp.Endpoints
         public async Task<AccountDto> GetAccountAsync(AuthenticationScope authenticationScope, string battleTag)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<AccountDto>($"d3/profile/{battleTag}/");
+                return await client.GetAccountAsync(battleTag);
         }
 
         public async Task<HeroDto> GetHeroAsync(AuthenticationScope authenticationScope, string battleTag, long heroId)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<HeroDto>($"d3/profile/{battleTag}/hero/{heroId}");
+                return await client.GetHeroAsync(battleTag, heroId);
         }
 
         public async Task<DetailedHeroItemsDto> GetDetailedHeroItemsAsync(AuthenticationScope authenticationScope, string battleTag, long heroId)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<DetailedHeroItemsDto>($"/d3/profile/{battleTag}/hero/{heroId}/items");
+                return await client.GetDetailedHeroItemsAsync(battleTag, heroId);
         }
 
         public async Task<DetailedFollowersDto> GetDetailedFollowerItemsAsync(AuthenticationScope authenticationScope, string battleTag, long heroId)
         {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAsync<DetailedFollowersDto>($"/d3/profile/{battleTag}/hero/{heroId}/follower-items");
+                return await client.GetDetailedFollowerItemsAsync(battleTag, heroId);
         }
     }
 }
