@@ -1,11 +1,12 @@
 using DiabloSharp.Endpoints;
 using System.Threading.Tasks;
+using DiabloSharp.Models;
 
 namespace DiabloSharp
 {
     public interface IDiabloApi
     {
-        Task<IAuthenticationScope> CreateAuthenticationScopeAsync();
+        Task<AuthenticationScope> CreateAuthenticationScopeAsync();
 
         ItemTypeEndpoint ItemType { get; }
 
