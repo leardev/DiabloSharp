@@ -6,7 +6,7 @@
     <PackageTags>diablo;diablo3;d3;blizzard;activision</PackageTags>
     <LangVersion>7.3</LangVersion>
     <Authors>leardev</Authors>
-    <VersionPrefix>0.1.2</VersionPrefix>
+    <VersionPrefix>0.2.0</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://raw.githubusercontent.com/leardev/DiabloSharp/master/resources/DiabloSharp.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/leardev/DiabloSharp.git</RepositoryUrl>
