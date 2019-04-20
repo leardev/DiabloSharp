@@ -273,7 +273,59 @@ namespace DiabloSharp.Converters
                 item.AddFeature(itemArmorFeature);
             }
 
+            if (itemDto.Attributes != null)
+            {
+                var itemAttributesFeature = AttributesToModel(itemDto.Attributes);
+                item.AddFeature(itemAttributesFeature);
+            }
+
+            if (itemDto.RandomAffixes != null)
+            {
+                var itemAffixesFeature = AffixesToModel(itemDto.RandomAffixes);
+                item.AddFeature(itemAffixesFeature);
+            }
+
             return item;
+        }
+
+        private ItemAffixesFeature AffixesToModel(IEnumerable<ItemRandomAffixDto> itemRandomAffixesDto)
+        {
+            var affixes = new List<ItemAffix>();
+            foreach (var itemRandomAffixDto in itemRandomAffixesDto)
+            {
+                var oneOf = itemRandomAffixDto.OneOfs.Select(AttributeToModel);
+
+                affixes.Add(new ItemAffix
+                {
+                    OneOf = oneOf
+                });
+            }
+
+            return new ItemAffixesFeature
+            {
+                Affixes = affixes
+            };
+        }
+
+        private ItemAttributesFeature AttributesToModel(ItemAttributesDto itemAttributesDto)
+        {
+            var primary = itemAttributesDto.Primaries.Select(AttributeToModel);
+            var secondary = itemAttributesDto.Secondaries.Select(AttributeToModel);
+
+            return new ItemAttributesFeature
+            {
+                Primary = primary,
+                Secondary = secondary
+            };
+        }
+
+        private ItemAttribute AttributeToModel(ItemHtmlDescriptionDto itemHtmlDescriptionDto)
+        {
+            return new ItemAttribute
+            {
+                Text = itemHtmlDescriptionDto.Text,
+                TextHtml = itemHtmlDescriptionDto.TextHtml
+            };
         }
 
         private ItemArmorFeature ArmorToModel(ItemDto itemDto)
