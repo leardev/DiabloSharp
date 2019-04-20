@@ -18,7 +18,6 @@ namespace DiabloSharp.Endpoints
         {
             _itemConverter = new ItemConverter();
 
-            /* todo fehlen die generics? */
             _itemIndices = new List<string>
             {
                 "item-type/amulet",
@@ -53,6 +52,8 @@ namespace DiabloSharp.Endpoints
                 "item-type/flail1h",
                 "item-type/flail2h",
                 "item-type/genericbelt",
+                "item-type/genericchestarmor",
+                "item-type/generichelm",
                 "item-type/gloves",
                 "item-type/glovesbarbarian",
                 "item-type/glovescrusader",
@@ -106,7 +107,7 @@ namespace DiabloSharp.Endpoints
                 "item-type/sword2h",
                 "item-type/voodoomask",
                 "item-type/wand",
-                "item-type/wizardhat",
+                "item-type/wizardhat"
             };
         }
 
