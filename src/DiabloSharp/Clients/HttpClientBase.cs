@@ -44,7 +44,6 @@ namespace DiabloSharp.Clients
             _parameters.Add(key, value);
         }
 
-        {
         public Task<T> GetAsync<T>(string requestUri)
         {
             return _rateLimiter.Perform(() => GetAsyncInternal<T>(requestUri));
