@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using DiabloSharp.Features;
 
 namespace DiabloSharp.Models
 {
@@ -11,6 +9,12 @@ namespace DiabloSharp.Models
         public Tooltip Tooltip { get; internal set; }
 
         public long RequiredLevel { get; internal set; }
+
+        public bool AccountBound { get; internal set; }
+
+        public bool IsSeasonRequiredToDrop { get; internal set; }
+
+        public long SeasonRequiredToDrop { get; internal set; }
 
         public ItemKind Kind { get; internal set; }
 

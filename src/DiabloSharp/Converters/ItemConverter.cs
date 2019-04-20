@@ -52,6 +52,9 @@ namespace DiabloSharp.Converters
                 { "FistWeapon", ItemKind.FistWeapon },
                 { "Flail1H", ItemKind.Flail },
                 { "Flail2H", ItemKind.Flail },
+                { "GenericBelt", ItemKind.Belt },
+                { "GenericChestArmor", ItemKind.ChestArmor },
+                { "GenericHelm", ItemKind.Helm },
                 { "Gloves", ItemKind.Gloves },
                 { "Gloves_Barbarian", ItemKind.Gloves },
                 { "Gloves_Crusader", ItemKind.Gloves },
@@ -149,6 +152,9 @@ namespace DiabloSharp.Converters
                 { "FistWeapon", new[] { CharacterClassIdentifier.Monk } },
                 { "Flail1H", new[] { CharacterClassIdentifier.Crusader } },
                 { "Flail2H", new[] { CharacterClassIdentifier.Crusader } },
+                { "GenericBelt", characterClasses },
+                { "GenericChestArmor", characterClasses },
+                { "GenericHelm", characterClasses },
                 { "Gloves", characterClasses },
                 { "Gloves_Barbarian", new[] { CharacterClassIdentifier.Barbarian } },
                 { "Gloves_Crusader", new[] { CharacterClassIdentifier.Crusader } },
@@ -241,6 +247,9 @@ namespace DiabloSharp.Converters
                 Tooltip = tooltip,
                 Slots = slots,
                 RequiredLevel = itemDto.RequiredLevel,
+                AccountBound = itemDto.AccountBound,
+                IsSeasonRequiredToDrop = itemDto.IsSeasonRequiredToDrop,
+                SeasonRequiredToDrop = itemDto.SeasonRequiredToDrop,
                 Quality = _qualityByText[itemDto.Color],
                 Classes = _classesByText[itemDto.Type.Id],
                 Kind = _kindByText[itemDto.Type.Id]
@@ -251,7 +260,42 @@ namespace DiabloSharp.Converters
                 var itemSetFeature = SetToModel(itemDto);
                 item.AddFeature(itemSetFeature);
             }
+
+            if (!string.IsNullOrEmpty(itemDto.Dps))
+            {
+                var itemWeaponFeature = WeaponToModel(itemDto);
+                item.AddFeature(itemWeaponFeature);
+            }
+
+            if (!string.IsNullOrEmpty(itemDto.Armor))
+            {
+                var itemArmorFeature = ArmorToModel(itemDto);
+                item.AddFeature(itemArmorFeature);
+            }
+
             return item;
+        }
+
+        private ItemArmorFeature ArmorToModel(ItemDto itemDto)
+        {
+            return new ItemArmorFeature
+            {
+                Armor = itemDto.Armor,
+                ArmorHtml = itemDto.ArmorHtml,
+                Block = itemDto.Block,
+                BlockHtml = itemDto.BlockHtml
+            };
+        }
+
+        private ItemWeaponFeature WeaponToModel(ItemDto itemDto)
+        {
+            return new ItemWeaponFeature
+            {
+                Damage = itemDto.Damage,
+                DamageHtml = itemDto.DamageHtml,
+                Dps = itemDto.Dps,
+                TwoHanded = itemDto.Type.TwoHanded
+            };
         }
 
         private ItemSetFeature SetToModel(ItemDto itemDto)
@@ -261,13 +305,29 @@ namespace DiabloSharp.Converters
                 Description = itemDto.SetDescription,
                 DescriptionHtml = itemDto.SetDescriptionHtml
             };
+
             return new ItemSetFeature
             {
                 Id = itemDto.SetName,
                 NameHtml = itemDto.SetNameHtml,
                 Tooltip = tooltip,
-                ItemIds = itemDto.SetItems
+                ItemIds = ItemPathToModel(itemDto.SetItems)
             };
+        }
+
+        private IEnumerable<ItemIdentifier> ItemPathToModel(IEnumerable<string> itemPaths)
+        {
+            var setItemIds = new List<ItemIdentifier>();
+            foreach (var itemPath in itemPaths)
+            {
+                var pathIndex = itemPath.IndexOf("/", StringComparison.Ordinal);
+                var slugIndex = itemPath.LastIndexOf("-", StringComparison.Ordinal);
+                var slug = itemPath.Substring(pathIndex + 1, slugIndex - pathIndex - 1);
+                var id = itemPath.Substring(slugIndex + 1, itemPath.Length - slugIndex - 1);
+                setItemIds.Add(new ItemIdentifier(id, slug));
+            }
+
+            return setItemIds;
         }
 
         private IEnumerable<ItemSlot> SlotsToModel(ItemDto itemDto)
