@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using DiabloSharp.Exceptions;
+using DiabloSharp.RateLimit;
 using Newtonsoft.Json;
 
 namespace DiabloSharp.Clients
@@ -13,6 +14,8 @@ namespace DiabloSharp.Clients
     internal class HttpClientBase : IDisposable
     {
         private readonly Dictionary<string, string> _parameters;
+
+        private readonly RateLimiter _rateLimiter;
 
         private bool _disposedValue;
 
@@ -25,6 +28,7 @@ namespace DiabloSharp.Clients
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             _parameters = new Dictionary<string, string>();
+            _rateLimiter = new RateLimiter(125, TimeSpan.FromSeconds(1));
         }
 
         protected HttpClient Client { get; }
@@ -40,7 +44,18 @@ namespace DiabloSharp.Clients
             _parameters.Add(key, value);
         }
 
-        public async Task<T> GetAsync<T>(string requestUri)
+        {
+        public Task<T> GetAsync<T>(string requestUri)
+        {
+            return _rateLimiter.Perform(() => GetAsyncInternal<T>(requestUri));
+        }
+
+        public Task<T> PostAsync<T>(string requestUri)
+        {
+            return _rateLimiter.Perform(() => PostAsyncInternal<T>(requestUri));
+        }
+
+        private async Task<T> GetAsyncInternal<T>(string requestUri)
         {
             var uriWithParameters = requestUri + BuildUrlParameters();
             using (var response = await Client.GetAsync(uriWithParameters))
@@ -54,7 +69,7 @@ namespace DiabloSharp.Clients
             }
         }
 
-        public async Task<T> PostAsync<T>(string requestUri)
+        private async Task<T> PostAsyncInternal<T>(string requestUri)
         {
             var body = new FormUrlEncodedContent(_parameters);
             using (var response = await Client.PostAsync(requestUri, body))
@@ -112,13 +127,16 @@ namespace DiabloSharp.Clients
                 return await streamReader.ReadToEndAsync();
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (_disposedValue)
                 return;
 
             if (disposing)
+            {
                 Client.Dispose();
+                _rateLimiter.Dispose();
+            }
 
             _disposedValue = true;
         }
