@@ -37,13 +37,13 @@ namespace DiabloSharp.RateLimiters
             {
                 var tokenCountToRefill = _refillStrategy.Refill();
 
-                /* ensure that the refill count is not negativ */
+                /* ensure that the refill count is positiv */
                 tokenCountToRefill = Math.Max(0, tokenCountToRefill);
 
-                /* ensure that the refill count does exceed the capacity limit */
+                /* ensure that the refill count does not exceed the capacity limit */
                 tokenCountToRefill = Math.Min(_capacity, tokenCountToRefill);
 
-                /* ensure that the refilled remaining token count does exceed the capacity limit */
+                /* ensure that the refilled remaining token count does not exceed the capacity limit */
                 Remaining = Math.Min(Remaining + tokenCountToRefill, _capacity);
 
 
