@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Clients
@@ -28,10 +27,7 @@ namespace DiabloSharp.Tests.Clients
         [Test]
         public async Task GetDetailedHeroItemsTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var items = await diabloApi.Profile.GetDetailedHeroItemsAsync(authenticationScope, BattleTag, HeroId);
+            var items = await Client.GetDetailedHeroItemsAsync(BattleTag, HeroId);
             Assert.IsNotNull(items.Head);
             Assert.IsNotNull(items.Neck);
             Assert.IsNotNull(items.Torso);
@@ -48,10 +44,7 @@ namespace DiabloSharp.Tests.Clients
         [Test]
         public async Task GetDetailedFollowerItemsTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var followerItems = await diabloApi.Profile.GetDetailedFollowerItemsAsync(authenticationScope, BattleTag, HeroId);
+            var followerItems = await Client.GetDetailedFollowerItemsAsync(BattleTag, HeroId);
             Assert.IsNotNull(followerItems.Enchantress);
             Assert.IsNotNull(followerItems.Scoundrel);
             Assert.IsNotNull(followerItems.Templar);
