@@ -8,5 +8,7 @@ namespace DiabloSharp.Features
         public IEnumerable<ItemAttribute> Primary { get; internal set; }
 
         public IEnumerable<ItemAttribute> Secondary { get; internal set; }
+
+        public IEnumerable<ItemAttribute> Other { get; internal set; }
     }
 }

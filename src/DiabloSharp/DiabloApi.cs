@@ -17,6 +17,7 @@ namespace DiabloSharp
             _configuration = configuration;
             _oAuth = new OAuthEndpoint();
             Item = new ItemEndpoint();
+            Gem = new GemEndpoint();
             Act = new ActEndpoint();
             Artisan = new ArtisanEndpoint();
             Follower = new FollowerEndpoint();
@@ -27,6 +28,8 @@ namespace DiabloSharp
         }
 
         public ItemEndpoint Item { get; }
+
+        public GemEndpoint Gem { get; }
 
         public ActEndpoint Act { get; }
 

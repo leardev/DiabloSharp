@@ -311,11 +311,13 @@ namespace DiabloSharp.Converters
         {
             var primary = itemAttributesDto.Primaries.Select(AttributeToModel);
             var secondary = itemAttributesDto.Secondaries.Select(AttributeToModel);
+            var other = itemAttributesDto.Others.Select(AttributeToModel);
 
             return new ItemAttributesFeature
             {
                 Primary = primary,
-                Secondary = secondary
+                Secondary = secondary,
+                Other = other
             };
         }
 
