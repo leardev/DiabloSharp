@@ -1,27 +1,32 @@
-using System.Collections.Generic;
-
 namespace DiabloSharp.Models
 {
-    public class Item : ModelFeatureBase<ItemIdentifier>
+    public class Item : ModelBase<ItemIdentifier>
     {
-        public string Name { get; internal set; }
+        public string Name { get; set; }
 
-        public Tooltip Tooltip { get; internal set; }
+        public string IconUrl { get; set; }
 
-        public long RequiredLevel { get; internal set; }
+        public string TooltipUrl { get; set; }
 
-        public bool AccountBound { get; internal set; }
+        public long RequiredLevel { get; set; }
 
-        public bool IsSeasonRequiredToDrop { get; internal set; }
+        public long StackSize { get; set; }
 
-        public long SeasonRequiredToDrop { get; internal set; }
+        public bool AccountBound { get; set; }
 
-        public ItemKind Kind { get; internal set; }
+        public ItemCategory Category { get; set; }
 
-        public ItemQuality Quality { get; internal set; }
+        public ItemQuality Quality { get; set; }
 
-        public IEnumerable<ItemSlot> Slots { get; internal set; }
-
-        public IEnumerable<CharacterClassIdentifier> Classes { get; internal set; }
+        /*
+         * has not use
+         * public string TypeName { get; set; }
+         *
+         * deprecated since S4, always false
+         * public bool IsSeasonRequiredToDrop { get; set; }
+         *
+         * deprecated since S4, used by some items (values: 1-4)
+         * public bool SeasonRequiredToDrop { get; set; }
+        */
     }
 }

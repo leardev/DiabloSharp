@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public enum ItemKind
+    public enum ItemEquipmentKind
     {
         Axe,
         Bow,
@@ -29,16 +29,13 @@ namespace DiabloSharp.Models
         ChestArmor,
         Cloak,
         CrusaderShield,
-        EnchantressFocus,
         Gloves,
         Helm,
         MightyBelt,
         Pants,
-        ScoundrelToken,
         Shield,
         Shoulders,
         SpiritStone,
-        TemplarRelic,
         VoodooMask,
         WizardHat,
         Amulet,

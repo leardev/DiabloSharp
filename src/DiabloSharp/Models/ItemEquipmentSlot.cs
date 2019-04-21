@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public enum ItemSlot
+    public enum ItemEquipmentSlot
     {
         Head,
         Shoulders,

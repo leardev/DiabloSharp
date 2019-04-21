@@ -2,7 +2,7 @@ namespace DiabloSharp.Models
 {
     public enum ItemQuality
     {
-        Common,
+        Normal,
         Magic,
         Rare,
         Legendary,
