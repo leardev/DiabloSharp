@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
@@ -32,9 +33,9 @@ namespace DiabloSharp.Tests.Clients
         }
 
         [Test]
-        [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest()
         {
+            var sw = Stopwatch.StartNew();
             var itemTypeIndices = await Client.GetItemTypeIndexAsync();
 
             var processIndexToTypeTasks = itemTypeIndices.Select(ProcessIndexToType);
@@ -46,7 +47,7 @@ namespace DiabloSharp.Tests.Clients
 
             var processTypeToItemTasks = itemTypes.Select(ProcessTypeToItem);
             var items = await Task.WhenAll(processTypeToItemTasks);
-
+            sw.Stop();
             foreach (var item in items)
                 Assert.That(item.Id, Is.Not.Null.Or.Empty);
         }
