@@ -6,6 +6,8 @@ namespace DiabloSharp.Models
 
         public long Level { get; internal set; }
 
-        public Tooltip Tooltip { get; internal set; }
+        public string TooltipUrl { get; internal set; }
+
+        public string IconUrl { get; set; }
     }
 }

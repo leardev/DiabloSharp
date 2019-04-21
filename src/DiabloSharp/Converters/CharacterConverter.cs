@@ -44,18 +44,11 @@ namespace DiabloSharp.Converters
 
         private SkillRune RuneToModel(CharacterRuneDto characterRuneDto)
         {
-            var tooltip = new Tooltip
-            {
-                Description = characterRuneDto.Description,
-                DescriptionHtml = characterRuneDto.DescriptionHtml
-            };
-
             return new SkillRune
             {
                 Id = characterRuneDto.Slug,
                 Name = characterRuneDto.Name,
-                Level = characterRuneDto.Level,
-                Tooltip = tooltip
+                Level = characterRuneDto.Level
             };
         }
 
@@ -68,21 +61,13 @@ namespace DiabloSharp.Converters
 
         private T SkillToModel<T>(CharacterSkillDto characterSkillDto) where T: SkillBase, new()
         {
-            var tooltip = new Tooltip
-            {
-                Description = characterSkillDto.Description,
-                DescriptionHtml = characterSkillDto.DescriptionHtml,
-                FlavorText = characterSkillDto.FlavorText,
-                Url = characterSkillDto.TooltipUrl,
-                IconUrl = characterSkillDto.Icon
-            };
-
             return new T
             {
                 Id = characterSkillDto.Slug,
                 Name = characterSkillDto.Name,
                 Level = characterSkillDto.Level,
-                Tooltip = tooltip
+                TooltipUrl = characterSkillDto.TooltipUrl,
+                IconUrl = characterSkillDto.Icon
             };
         }
     }
