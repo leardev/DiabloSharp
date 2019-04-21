@@ -35,7 +35,6 @@ namespace DiabloSharp.Tests.Clients
         [Test]
         public async Task IntegrationTest()
         {
-            var sw = Stopwatch.StartNew();
             var itemTypeIndices = await Client.GetItemTypeIndexAsync();
 
             var processIndexToTypeTasks = itemTypeIndices.Select(ProcessIndexToType);
@@ -47,7 +46,7 @@ namespace DiabloSharp.Tests.Clients
 
             var processTypeToItemTasks = itemTypes.Select(ProcessTypeToItem);
             var items = await Task.WhenAll(processTypeToItemTasks);
-            sw.Stop();
+
             foreach (var item in items)
                 Assert.That(item.Id, Is.Not.Null.Or.Empty);
         }
