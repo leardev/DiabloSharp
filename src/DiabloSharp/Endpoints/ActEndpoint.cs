@@ -1,11 +1,16 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
     public class ActEndpoint : EndpointBase
     {
+        public ActEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        {
+        }
+
         public async Task<ActIndexDto> GetActIndexAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))

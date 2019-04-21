@@ -1,11 +1,16 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
     public class CharacterEndpoint : EndpointBase
     {
+        public CharacterEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        {
+        }
+
         public async Task<CharacterClassDto> GetCharacterClassAsync(AuthenticationScope authenticationScope, string classSlug)
         {
             using (var client = CreateClient(authenticationScope))
