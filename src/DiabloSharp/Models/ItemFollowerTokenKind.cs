@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public enum ItemFollowerKind
+    public enum ItemFollowerTokenKind
     {
         EnchantressFocus,
         ScoundrelToken,

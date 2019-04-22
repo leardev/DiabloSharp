@@ -3,7 +3,7 @@ namespace DiabloSharp.Models
     public enum ItemCategory
     {
         Equipment,
-        Follower,
+        FollowerToken,
         Gem,
         LegendaryGem,
         LegendaryPotion

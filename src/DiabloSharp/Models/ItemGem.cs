@@ -1,7 +1,6 @@
 namespace DiabloSharp.Models
 {
-    internal class ItemGem : Item
+    public class ItemGem : Item
     {
-
     }
 }
