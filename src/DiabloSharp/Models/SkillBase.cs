@@ -8,6 +8,6 @@ namespace DiabloSharp.Models
 
         public string TooltipUrl { get; internal set; }
 
-        public string IconUrl { get; set; }
+        public string IconUrl { get; internal set; }
     }
 }
