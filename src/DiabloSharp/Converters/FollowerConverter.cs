@@ -22,20 +22,13 @@ namespace DiabloSharp.Converters
 
         private SkillFollower SkillToDto(FollowerSkillDto followerSkillDto)
         {
-            var tooltip = new Tooltip
-            {
-                Url = followerSkillDto.TooltipUrl,
-                Description = followerSkillDto.Description,
-                DescriptionHtml = followerSkillDto.DescriptionHtml,
-                IconUrl = followerSkillDto.Icon
-            };
-
             return new SkillFollower
             {
                 Id = followerSkillDto.Slug,
                 Name = followerSkillDto.Name,
                 Level = followerSkillDto.Level,
-                Tooltip = tooltip
+                IconUrl = followerSkillDto.Icon,
+                TooltipUrl = followerSkillDto.TooltipUrl
             };
         }
     }
