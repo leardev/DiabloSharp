@@ -10,8 +10,6 @@ namespace DiabloSharp
 
         ItemEndpoint Item { get; }
 
-        GemEndpoint Gem { get; }
-
         ActEndpoint Act { get; }
 
         ArtisanEndpoint Artisan { get; }
