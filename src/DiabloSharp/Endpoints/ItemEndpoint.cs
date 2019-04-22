@@ -10,13 +10,15 @@ namespace DiabloSharp.Endpoints
 {
     public class ItemEndpoint : EndpointBase
     {
-        private readonly ItemConverter _itemConverter;
+        private readonly ItemEquipmentConverter _itemEquipmentConverter;
 
         private readonly List<string> _itemIndices;
 
         public ItemEndpoint()
         {
-            _itemConverter = new ItemConverter();
+            _itemEquipmentConverter = new ItemEquipmentConverter();
+
+            #region itemIndices
 
             _itemIndices = new List<string>
             {
@@ -109,18 +111,20 @@ namespace DiabloSharp.Endpoints
                 "item-type/wand",
                 "item-type/wizardhat"
             };
+
+        #endregion
         }
 
-        public async Task<Item> GetItemAsync(AuthenticationScope authenticationScope, ItemIdentifier itemId)
+        public async Task<ItemEquipment> GetEquipmentAsync(AuthenticationScope authenticationScope, ItemIdentifier itemId)
         {
             using (var client = CreateClient(authenticationScope))
             {
                 var item = await client.GetItemAsync($"item/{itemId}");
-                return _itemConverter.ItemToModel(item);
+                return _itemEquipmentConverter.ItemToModel(item);
             }
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(AuthenticationScope authenticationScope)
+        public async Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))
             {
@@ -136,25 +140,26 @@ namespace DiabloSharp.Endpoints
                     items.Add(item);
                 }
 
-                /*
-                var processTypeToItemTasks = itemTypes.Select(dto => ProcessTypeToItem(client, dto));
-                var items = await Task.WhenAll(processTypeToItemTasks);
-                */
-                return _itemConverter.ItemsToModel(items)
-                    .ToList();
+                return _itemEquipmentConverter.ItemsToModel(items);
             }
+        }
+
+        public async Task<ItemGem> GetGemAsync(AuthenticationScope authenticationScope, ItemIdentifier itemId)
+        {
+
+        }
+
+        }
+
+        public async Task<ItemGem> GetFollowerTokensAsync(AuthenticationScope authenticationScope)
+        {
+
         }
 
         private async Task<IEnumerable<ItemTypeDto>> ProcessIndexToType(BattleNetClient client, string itemType)
         {
             var itemTypes = await client.GetItemTypeAsync(itemType);
             return itemTypes;
-        }
-
-        private async Task<ItemDto> ProcessTypeToItem(BattleNetClient client, ItemTypeDto itemType)
-        {
-            var item = await client.GetItemAsync(itemType.Path);
-            return item;
         }
     }
 }

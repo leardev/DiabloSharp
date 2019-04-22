@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Models;
 using NUnit.Framework;
@@ -9,19 +8,17 @@ namespace DiabloSharp.Tests.Endpoints
     public class ItemEndpointTests : EndpointTestsBase
     {
         [Test]
-        public async Task GetItemTest()
+        public async Task GetItemEquipmentTest()
         {
-            var itemId = new ItemIdentifier("Unique_Sword_2H_104_x1", "corrupted-ashbringer");
-
-            var item = await DiabloApi.Item.GetItemAsync(AuthenticationScope, itemId);
+            var itemIdentifier = new ItemIdentifier("Unique_Sword_2H_104_x1", "corrupted-ashbringer");
+            var item = await DiabloApi.Item.GetEquipmentAsync(AuthenticationScope, itemIdentifier);
             Assert.IsNotNull(item);
         }
 
         [Test]
-        public async Task GetItemsTest()
+        public async Task GetItemEquipmentsTest()
         {
-            var items = await DiabloApi.Item.GetItemsAsync(AuthenticationScope);
-            var hqItems = items.Where(item => item.Quality == ItemQuality.Legendary || item.Quality == ItemQuality.Set).ToList();
+            var items = await DiabloApi.Item.GetEquipmentsAsync(AuthenticationScope);
             Assert.IsNotEmpty(items);
         }
     }
