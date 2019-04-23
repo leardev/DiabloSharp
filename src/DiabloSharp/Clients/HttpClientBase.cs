@@ -6,18 +6,22 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using DiabloSharp.Exceptions;
+using DiabloSharp.RateLimiters;
 using Newtonsoft.Json;
 
 namespace DiabloSharp.Clients
 {
     internal class HttpClientBase : IDisposable
     {
+        private readonly ITokenBucket _tokenBucket;
+
         private readonly Dictionary<string, string> _parameters;
 
         private bool _disposedValue;
 
-        public HttpClientBase(string baseAddress)
+        public HttpClientBase(string baseAddress, ITokenBucket tokenBucket)
         {
+            _tokenBucket = tokenBucket;
             Client = new HttpClient
             {
                 BaseAddress = new Uri(baseAddress)
@@ -42,6 +46,8 @@ namespace DiabloSharp.Clients
 
         public async Task<T> GetAsync<T>(string requestUri)
         {
+            await _tokenBucket.ConsumeAsync();
+
             var uriWithParameters = requestUri + BuildUrlParameters();
             using (var response = await Client.GetAsync(uriWithParameters))
             {
@@ -56,6 +62,8 @@ namespace DiabloSharp.Clients
 
         public async Task<T> PostAsync<T>(string requestUri)
         {
+            await _tokenBucket.ConsumeAsync();
+
             var body = new FormUrlEncodedContent(_parameters);
             using (var response = await Client.PostAsync(requestUri, body))
             {

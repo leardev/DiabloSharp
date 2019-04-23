@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Clients
 {
     internal class BattleNetClient : HttpClientBase
     {
-        public BattleNetClient(string accessToken, string region, string localization) : base($"https://{region}.api.blizzard.com")
+        public BattleNetClient(string accessToken, string region, string localization, ITokenBucket tokenBucket) : base($"https://{region}.api.blizzard.com", tokenBucket)
         {
             AddParameter("access_token", accessToken);
             AddParameter("locale", localization);
