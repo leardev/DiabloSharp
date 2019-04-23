@@ -32,6 +32,7 @@ namespace DiabloSharp.Tests.Clients
         }
 
         [Test]
+        [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest()
         {
             var itemTypeIndices = await Client.GetItemTypeIndexAsync();
