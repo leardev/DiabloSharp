@@ -7,7 +7,6 @@ namespace DiabloSharp.Tests.Clients
     internal class ActIntegrationTests : ClientTestsBase
     {
         [Test]
-        [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest()
         {
             var actIndex = await Client.GetActIndexAsync();

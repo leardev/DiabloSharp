@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using DiabloSharp.Clients;
 using DiabloSharp.Configurations;
 using DiabloSharp.Extensions;
+using DiabloSharp.RateLimiters;
 using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Clients
@@ -13,7 +14,7 @@ namespace DiabloSharp.Tests.Clients
         public async Task GetTokenAsyncTest()
         {
             var configuration = new DiabloApiEnvironmentConfiguration();
-            using (var client = new OAuthClient(configuration.ClientId, configuration.ClientSecret, configuration.Region.ToDescription()))
+            using (var client = new OAuthClient(configuration.ClientId, configuration.ClientSecret, configuration.Region.ToDescription(), new DefaultTokenBucket()))
             {
                 var token = await client.GetTokenAsync();
                 Assert.That(token.AccessToken, Is.Not.Null.Or.Empty);

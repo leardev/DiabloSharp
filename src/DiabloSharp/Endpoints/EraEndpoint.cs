@@ -1,11 +1,16 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
     public class EraEndpoint : EndpointBase
     {
+        public EraEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        {
+        }
+
         public async Task<EraIndexDto> GetEraIndexAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))

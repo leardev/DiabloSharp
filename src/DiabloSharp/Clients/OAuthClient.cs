@@ -3,12 +3,13 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Clients
 {
     internal class OAuthClient : HttpClientBase
     {
-        public OAuthClient(string clientId, string clientSecret, string region) : base($"https://{region}.battle.net")
+        public OAuthClient(string clientId, string clientSecret, string region, ITokenBucket tokenBucket) : base($"https://{region}.battle.net", tokenBucket)
         {
             var credentials = Encoding.ASCII.GetBytes($"{clientId}:{clientSecret}");
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(credentials));

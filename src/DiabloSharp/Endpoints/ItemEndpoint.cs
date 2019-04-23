@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Converters;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
@@ -12,7 +13,7 @@ namespace DiabloSharp.Endpoints
 
         private readonly string[] _followerTokenIndices;
 
-        public ItemEndpoint()
+        public ItemEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
             #region equipmentIndices
 

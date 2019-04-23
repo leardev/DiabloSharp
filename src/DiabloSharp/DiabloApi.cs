@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DiabloSharp.Configurations;
 using DiabloSharp.Endpoints;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp
 {
@@ -15,15 +16,17 @@ namespace DiabloSharp
         public DiabloApi(IDiabloApiConfiguration configuration)
         {
             _configuration = configuration;
-            _oAuth = new OAuthEndpoint();
-            Item = new ItemEndpoint();
-            Act = new ActEndpoint();
-            Artisan = new ArtisanEndpoint();
-            Follower = new FollowerEndpoint();
-            Character = new CharacterEndpoint();
-            Profile = new ProfileEndpoint();
-            Season = new SeasonEndpoint();
-            Era = new EraEndpoint();
+
+            var tokenBucket = new DefaultTokenBucket();
+            _oAuth = new OAuthEndpoint(tokenBucket);
+            Item = new ItemEndpoint(tokenBucket);
+            Act = new ActEndpoint(tokenBucket);
+            Artisan = new ArtisanEndpoint(tokenBucket);
+            Follower = new FollowerEndpoint(tokenBucket);
+            Character = new CharacterEndpoint(tokenBucket);
+            Profile = new ProfileEndpoint(tokenBucket);
+            Season = new SeasonEndpoint(tokenBucket);
+            Era = new EraEndpoint(tokenBucket);
         }
 
         public ItemEndpoint Item { get; }

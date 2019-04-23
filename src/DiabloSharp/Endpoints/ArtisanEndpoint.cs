@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using DiabloSharp.Converters;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
@@ -8,7 +9,7 @@ namespace DiabloSharp.Endpoints
     {
         private readonly ArtisanConverter _artisanConverter;
 
-        public ArtisanEndpoint()
+        public ArtisanEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
             _artisanConverter = new ArtisanConverter();
         }

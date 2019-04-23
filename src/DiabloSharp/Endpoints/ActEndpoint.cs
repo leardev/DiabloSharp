@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloSharp.Converters;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
@@ -9,7 +10,7 @@ namespace DiabloSharp.Endpoints
     {
         private readonly ActConverter _actConverter;
 
-        public ActEndpoint()
+        public ActEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
             _actConverter = new ActConverter();
         }

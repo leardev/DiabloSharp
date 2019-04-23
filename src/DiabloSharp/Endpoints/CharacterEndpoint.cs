@@ -4,6 +4,7 @@ using DiabloSharp.Converters;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Extensions;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
@@ -11,7 +12,7 @@ namespace DiabloSharp.Endpoints
     {
         private readonly CharacterConverter _characterConverter;
 
-        public CharacterEndpoint()
+        public CharacterEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
             _characterConverter = new CharacterConverter();
         }

@@ -11,7 +11,6 @@ namespace DiabloSharp.Tests.Clients
         private const string BattleTag = "Shanyen-2754";
 
         [Test]
-        [Ignore("Disabled until rate limiting (100 requests per second | 36,000 requests per hour) is implemented.")]
         public async Task IntegrationTest()
         {
             var account = await Client.GetAccountAsync(BattleTag);

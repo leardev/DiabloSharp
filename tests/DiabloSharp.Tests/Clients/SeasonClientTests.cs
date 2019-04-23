@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 
 namespace DiabloSharp.Tests.Clients
@@ -25,10 +24,7 @@ namespace DiabloSharp.Tests.Clients
         [Test]
         public async Task GetSeasonLeaderboardTest()
         {
-            var diabloApi = DiabloApiFactory.CreateApi();
-            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-
-            var leaderboardDetail = await diabloApi.Season.GetSeasonLeaderboardAsync(authenticationScope, 1, "achievement-points");
+            var leaderboardDetail = await Client.GetSeasonLeaderboardAsync(1, "achievement-points");
             Assert.IsNotEmpty(leaderboardDetail.Columns);
         }
     }

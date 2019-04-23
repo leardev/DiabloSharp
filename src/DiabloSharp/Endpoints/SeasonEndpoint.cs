@@ -1,11 +1,16 @@
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
     public class SeasonEndpoint : EndpointBase
     {
+        public SeasonEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        {
+        }
+
         public async Task<SeasonIndexDto> GetSeasonIndexAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))

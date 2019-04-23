@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using DiabloSharp.Converters;
 using DiabloSharp.Models;
+using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
@@ -8,7 +9,7 @@ namespace DiabloSharp.Endpoints
     {
         private readonly FollowerConverter _followerConverter;
 
-        public FollowerEndpoint()
+        public FollowerEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
             _followerConverter = new FollowerConverter();
         }
