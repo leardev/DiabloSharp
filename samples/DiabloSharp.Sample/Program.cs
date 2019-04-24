@@ -27,7 +27,7 @@ namespace DiabloSharp.Sample
                 Region = Region.Europe,
                 Localization = Localization.EnglishUs
             };
-
+            /* Todo fix
             var api = new DiabloApi(configuration);
             var scope = await api.CreateAuthenticationScopeAsync();
             var account = await api.Profile.GetAccountAsync(scope, battleTag);
@@ -41,6 +41,7 @@ namespace DiabloSharp.Sample
                 Console.WriteLine($"The {seasonal} hero {hero.Name} ({gender} {hero.Class}) " +
                     $"has {hero.Kills.Elites} elite kills on {hardcore}.");
             }
+            */
         }
     }
 }
