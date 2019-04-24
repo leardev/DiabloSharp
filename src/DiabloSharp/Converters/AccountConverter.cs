@@ -26,7 +26,6 @@ namespace DiabloSharp.Converters
         {
             var paragonLevelsByGameMode = ParagonsToModel(account);
             var fallenHeroes = FallenHeroesToModel(account);
-            var artisanLevels = ArtisanLevelsToModel(account);
 
             var heroIds = HerosToModel(account)
                 .ToList();
@@ -38,30 +37,9 @@ namespace DiabloSharp.Converters
                 Clan = account.GuildName,
                 LastHeroId = lastHeroId,
                 FallenHeroes = fallenHeroes,
-                ArtisanLevels = artisanLevels,
                 HeroIds = heroIds,
                 ParagonLevelsByGameMode = paragonLevelsByGameMode
             };
-        }
-
-        private IEnumerable<AccountArtisanLevel> ArtisanLevelsToModel(AccountDto account)
-        {
-            var artisanLevels = new List<AccountArtisanLevel>
-            {
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Blacksmith, GameMode = GameModeIdentifier.EraSoftcore, Level = account.Blacksmith.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Blacksmith, GameMode = GameModeIdentifier.EraHardcore, Level = account.BlacksmithHardcore.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Blacksmith, GameMode = GameModeIdentifier.SeasonSoftcore, Level = account.BlacksmithSeason.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Blacksmith, GameMode = GameModeIdentifier.SeasonHardcore, Level = account.BlacksmithSeasonHardcore.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Jeweler, GameMode = GameModeIdentifier.EraSoftcore, Level = account.Jeweler.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Jeweler, GameMode = GameModeIdentifier.EraHardcore, Level = account.JewelerHardcore.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Jeweler, GameMode = GameModeIdentifier.SeasonSoftcore, Level = account.JewelerSeason.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Jeweler, GameMode = GameModeIdentifier.SeasonHardcore, Level = account.JewelerSeasonHardcore.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Mystic, GameMode = GameModeIdentifier.EraSoftcore, Level = account.Mystic.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Mystic, GameMode = GameModeIdentifier.EraHardcore, Level = account.MysticHardcore.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Mystic, GameMode = GameModeIdentifier.SeasonSoftcore, Level = account.MysticSeason.Level },
-                new AccountArtisanLevel { Id = ArtisanIdentifier.Mystic, GameMode = GameModeIdentifier.SeasonHardcore, Level = account.MysticSeasonHardcore.Level },
-            };
-            return artisanLevels;
         }
 
         private IEnumerable<HeroFallen> FallenHeroesToModel(AccountDto accountDto)
