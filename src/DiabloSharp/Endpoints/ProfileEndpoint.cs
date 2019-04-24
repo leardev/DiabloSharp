@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using DiabloSharp.Converters;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
@@ -11,10 +12,14 @@ namespace DiabloSharp.Endpoints
         {
         }
 
-        public async Task<AccountDto> GetAccountAsync(AuthenticationScope authenticationScope, string battleTag)
+        public async Task<Account> GetAccountAsync(AuthenticationScope authenticationScope, BattleTagIdentifier battleTagId)
         {
+            var converter = new AccountConverter();
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAccountAsync(battleTag);
+            {
+                var account = await client.GetAccountAsync($"{battleTagId.Name}-{battleTagId.Index}");
+                return converter.AccountToModel(account);
+            }
         }
 
         public async Task<HeroDto> GetHeroAsync(AuthenticationScope authenticationScope, string battleTag, long heroId)
