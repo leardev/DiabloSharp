@@ -27,7 +27,7 @@ namespace DiabloSharp.Converters
 
             return new Recipe
             {
-                Id = new ItemIdentifier(recipeDto.Id, recipeDto.Slug),
+                Id = new ItemIdentifier(recipeDto.Slug, recipeDto.Id),
                 Name = recipeDto.Name,
                 Cost = recipeDto.Cost,
                 Reagents = reagents,
@@ -58,7 +58,7 @@ namespace DiabloSharp.Converters
 
             return new RecipeArtisan
             {
-                Id = new ItemIdentifier(recipeDto.Id, recipeDto.Slug),
+                Id = new ItemIdentifier(recipeDto.Slug, recipeDto.Id),
                 Name = recipeDto.Name,
                 Cost = recipeDto.Cost,
                 Reagents = reagents,
@@ -70,7 +70,7 @@ namespace DiabloSharp.Converters
 
         private ItemIdentifier ItemToModel(ArtisanItemTypeDto itemDto)
         {
-            return new ItemIdentifier(itemDto.Id, itemDto.Slug);
+            return new ItemIdentifier(itemDto.Slug, itemDto.Id);
         }
 
         private RecipeReagent ReagentToModel(ArtisanReagentDto artisanRecipeDto)
@@ -78,7 +78,7 @@ namespace DiabloSharp.Converters
             return new RecipeReagent
             {
                 Quantity = artisanRecipeDto.Quantity,
-                ItemId = new ItemIdentifier(artisanRecipeDto.Item.Id, artisanRecipeDto.Item.Slug)
+                ItemId = new ItemIdentifier(artisanRecipeDto.Item.Slug, artisanRecipeDto.Item.Id)
             };
         }
     }
