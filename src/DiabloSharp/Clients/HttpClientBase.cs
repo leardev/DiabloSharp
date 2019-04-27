@@ -13,9 +13,9 @@ namespace DiabloSharp.Clients
 {
     internal class HttpClientBase : IDisposable
     {
-        private readonly ITokenBucket _tokenBucket;
-
         private readonly Dictionary<string, string> _parameters;
+
+        private readonly ITokenBucket _tokenBucket;
 
         private bool _disposedValue;
 

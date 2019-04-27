@@ -1,6 +1,7 @@
 using DiabloSharp.Configurations;
 using DiabloSharp.Models;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DiabloSharp.Sample
@@ -19,7 +20,7 @@ namespace DiabloSharp.Sample
 
         private static async Task QueryHeroesFromBattleTagExampleAsync()
         {
-            const string battleTag = "leehmanǃ-2543";
+            var battleTagId = new BattleTagIdentifier("leehmanǃ#2543");
             var configuration = new DiabloApiConfiguration
             {
                 ClientId = "YOUR_BATTLE_NET_CLIENT_ID",
@@ -28,18 +29,21 @@ namespace DiabloSharp.Sample
                 Localization = Localization.EnglishUs
             };
 
-            var api = new DiabloApi(configuration);
-            var scope = await api.CreateAuthenticationScopeAsync();
-            var account = await api.Profile.GetAccountAsync(scope, battleTag);
+            var diabloApi = new DiabloApi(configuration);
+            var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
+            var account = await diabloApi.Profile.GetAccountAsync(authenticationScope, battleTagId);
 
-            Console.WriteLine($"Queried account for BattleTag {account.BattleTag}");
-            foreach (var hero in account.Heroes)
+            Console.WriteLine($"Queried account for BattleTag {account.Id}");
+            foreach (var heroId in account.HeroIds)
             {
-                var gender = hero.Gender == 1 ? "female" : "male";
-                var seasonal = hero.Seasonal ? "seasonal" : "non season";
-                var hardcore = hero.Hardcore ? "hardcore" : "softcore";
-                Console.WriteLine($"The {seasonal} hero {hero.Name} ({gender} {hero.Class}) " +
-                    $"has {hero.Kills.Elites} elite kills on {hardcore}.");
+                var hero = await diabloApi.Profile.GetHeroAsync(authenticationScope, heroId);
+                var stats = hero.Stats
+                    .OrderByDescending(stat => stat.Value)
+                    .Take(5);
+
+                Console.WriteLine($"{hero.Name} ({hero.Gender} {hero.Class})");
+                foreach (var stat in stats)
+                    Console.WriteLine($"\t{stat.Id}");
             }
         }
     }

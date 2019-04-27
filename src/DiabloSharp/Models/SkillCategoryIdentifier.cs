@@ -1,0 +1,31 @@
+namespace DiabloSharp.Models
+{
+    public enum SkillCategoryIdentifier
+    {
+        Primary,
+        Secondary,
+        Defensive,
+        Might,
+        Tactics,
+        Rage,
+        Utility,
+        Laws,
+        Conviction,
+        Hunting,
+        Devices,
+        Archery,
+        Techniques,
+        Focus,
+        Mantras,
+        Corpses,
+        Reanimation,
+        Curses,
+        BloodAndBone,
+        Terror,
+        Decay,
+        Voodoo,
+        Force,
+        Conjuration,
+        Mastery
+    }
+}

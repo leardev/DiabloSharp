@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using DiabloSharp.Converters;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Extensions;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -7,20 +10,30 @@ namespace DiabloSharp.Endpoints
 {
     public class CharacterEndpoint : EndpointBase
     {
+        private readonly CharacterConverter _characterConverter;
+
         public CharacterEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
+            _characterConverter = new CharacterConverter();
         }
 
-        public async Task<CharacterClassDto> GetCharacterClassAsync(AuthenticationScope authenticationScope, string classSlug)
+        public async Task<CharacterClass> GetCharacterClassAsync(AuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
         {
-            using (var client = CreateClient(authenticationScope))
-                return await client.GetCharacterClassAsync(classSlug);
-        }
+            var artisanSlug = characterClassId.ToDescription();
 
-        public async Task<CharacterApiSkillDto> GetApiSkillAsync(AuthenticationScope authenticationScope, string classSlug, string skillSlug)
-        {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetApiSkillAsync(classSlug, skillSlug);
+            {
+                var characterClass = await client.GetCharacterClassAsync(artisanSlug);
+
+                var activeApiSkills = new List<CharacterApiSkillDto>();
+                foreach (var skill in characterClass.Skills.Actives)
+                {
+                    var apiSkill = await client.GetApiSkillAsync(artisanSlug, skill.Slug);
+                    activeApiSkills.Add(apiSkill);
+                }
+
+                return _characterConverter.CharacterToModel(characterClassId, characterClass, activeApiSkills);
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Converters;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -11,28 +11,28 @@ namespace DiabloSharp.Endpoints
         {
         }
 
-        public async Task<AccountDto> GetAccountAsync(AuthenticationScope authenticationScope, string battleTag)
+        public async Task<Account> GetAccountAsync(AuthenticationScope authenticationScope, BattleTagIdentifier battleTagId)
         {
+            var converter = new AccountConverter();
+            var battleTag = $"{battleTagId.Name}-{battleTagId.Index}";
+
             using (var client = CreateClient(authenticationScope))
-                return await client.GetAccountAsync(battleTag);
+            {
+                var account = await client.GetAccountAsync(battleTag);
+                return converter.AccountToModel(account);
+            }
         }
 
-        public async Task<HeroDto> GetHeroAsync(AuthenticationScope authenticationScope, string battleTag, long heroId)
+        public async Task<Hero> GetHeroAsync(AuthenticationScope authenticationScope, HeroIdentifier heroId)
         {
-            using (var client = CreateClient(authenticationScope))
-                return await client.GetHeroAsync(battleTag, heroId);
-        }
+            var converter = new HeroConverter();
+            var battleTag = $"{heroId.BattleTag.Name}-{heroId.BattleTag.Index}";
 
-        public async Task<DetailedHeroItemsDto> GetDetailedHeroItemsAsync(AuthenticationScope authenticationScope, string battleTag, long heroId)
-        {
             using (var client = CreateClient(authenticationScope))
-                return await client.GetDetailedHeroItemsAsync(battleTag, heroId);
-        }
-
-        public async Task<DetailedFollowersDto> GetDetailedFollowerItemsAsync(AuthenticationScope authenticationScope, string battleTag, long heroId)
-        {
-            using (var client = CreateClient(authenticationScope))
-                return await client.GetDetailedFollowerItemsAsync(battleTag, heroId);
+            {
+                var hero = await client.GetHeroAsync(battleTag, heroId.Id);
+                return converter.HeroToModel(heroId, hero);
+            }
         }
     }
 }

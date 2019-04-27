@@ -19,7 +19,6 @@ namespace DiabloSharp
 
             var tokenBucket = new DefaultTokenBucket();
             _oAuth = new OAuthEndpoint(tokenBucket);
-            ItemType = new ItemTypeEndpoint(tokenBucket);
             Item = new ItemEndpoint(tokenBucket);
             Act = new ActEndpoint(tokenBucket);
             Artisan = new ArtisanEndpoint(tokenBucket);
@@ -29,8 +28,6 @@ namespace DiabloSharp
             Season = new SeasonEndpoint(tokenBucket);
             Era = new EraEndpoint(tokenBucket);
         }
-
-        public ItemTypeEndpoint ItemType { get; }
 
         public ItemEndpoint Item { get; }
 
