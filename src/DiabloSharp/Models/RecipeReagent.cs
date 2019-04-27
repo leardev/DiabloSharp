@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public class RecipeReagent
+    public class RecipeReagent : ModelBase
     {
         public long Quantity { get; internal set; }
 

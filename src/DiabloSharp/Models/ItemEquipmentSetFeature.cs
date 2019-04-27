@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace DiabloSharp.Models
 {
-    public class ItemEquipmentSet
+    public class ItemEquipmentSet : ModelBase
     {
         public string Name { get; internal set; }
 
