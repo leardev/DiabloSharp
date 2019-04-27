@@ -11,7 +11,7 @@ namespace DiabloSharp
     {
         private readonly IDiabloApiConfiguration _configuration;
 
-        private readonly OAuthEndpoint _oAuth;
+        private readonly IOAuthEndpoint _oAuth;
 
         public DiabloApi(IDiabloApiConfiguration configuration)
         {
