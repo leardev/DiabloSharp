@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloSharp.Converters;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Extensions;
+using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -20,7 +20,7 @@ namespace DiabloSharp.Endpoints
 
         public async Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
         {
-            var artisanSlug = characterClassId.ToDescription();
+            var artisanSlug = EnumConversionHelper.CharacterClassIdentifierToSlug(characterClassId);
 
             using (var client = CreateClient(authenticationScope))
             {

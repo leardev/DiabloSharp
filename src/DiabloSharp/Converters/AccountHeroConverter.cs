@@ -1,27 +1,12 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Extensions;
+using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Converters
 {
     internal class AccountHeroConverter
     {
-        private readonly Dictionary<string, CharacterClassIdentifier> _classIdentifierByClassId;
-
-        public AccountHeroConverter()
-        {
-            var characterClasses = Enum.GetValues(typeof(CharacterClassIdentifier))
-                .Cast<CharacterClassIdentifier>()
-                .ToList();
-            _classIdentifierByClassId = new Dictionary<string, CharacterClassIdentifier>();
-
-            foreach (var characterClass in characterClasses)
-                _classIdentifierByClassId.Add(characterClass.ToDescription(), characterClass);
-        }
-
         public List<HeroFallen> FallenHeroesToModel(AccountDto accountDto)
         {
             var fallenHeroes = new List<HeroFallen>();
@@ -34,7 +19,7 @@ namespace DiabloSharp.Converters
                     Name = fallenHeroDto.Name,
                     Level = fallenHeroDto.Level,
                     Gender = (Gender) fallenHeroDto.Gender,
-                    Class = _classIdentifierByClassId[fallenHeroDto.Class],
+                    Class = EnumConversionHelper.CharacterClassIdentifierFromSlug(fallenHeroDto.Class),
                     IsDead = true
                 };
                 fallenHeroes.Add(fallenHero);

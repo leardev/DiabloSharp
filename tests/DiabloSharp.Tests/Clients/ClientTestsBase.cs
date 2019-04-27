@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
-using DiabloSharp.Extensions;
+using DiabloSharp.Helpers;
 using DiabloSharp.RateLimiters;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
@@ -16,7 +16,11 @@ namespace DiabloSharp.Tests.Clients
         {
             var diabloApi = DiabloApiFactory.CreateApi();
             var authenticationScope = await diabloApi.CreateAuthenticationScopeAsync();
-            Client = new BattleNetClient(authenticationScope.AccessToken, authenticationScope.Region.ToDescription(), authenticationScope.Localization.ToDescription(), new DefaultTokenBucket());
+
+            var regionString = EnumConversionHelper.RegionToString(authenticationScope.Region);
+            var localizationString = EnumConversionHelper.LocalizationToString(authenticationScope.Localization);
+
+            Client = new BattleNetClient(authenticationScope.AccessToken, regionString, localizationString, new DefaultTokenBucket());
         }
 
         [OneTimeTearDown]
