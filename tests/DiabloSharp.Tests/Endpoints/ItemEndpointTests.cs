@@ -10,7 +10,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetItemEquipmentTest()
         {
-            var itemIdentifier = new ItemIdentifier("Unique_Sword_2H_104_x1", "corrupted-ashbringer");
+            var itemIdentifier = new ItemIdentifier("corrupted-ashbringer", "Unique_Sword_2H_104_x1");
             var item = await DiabloApi.Item.GetEquipmentAsync(AuthenticationScope, itemIdentifier);
             Assert.IsNotNull(item);
         }
@@ -25,7 +25,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetGemTest()
         {
-            var itemIdentifier = new ItemIdentifier("x1_Emerald_05", "star-emerald");
+            var itemIdentifier = new ItemIdentifier("star-emerald", "x1_Emerald_05");
             var item = await DiabloApi.Item.GetGemAsync(AuthenticationScope, itemIdentifier);
             Assert.IsNotNull(item);
         }
@@ -40,7 +40,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetLegendaryGemTest()
         {
-            var itemIdentifier = new ItemIdentifier("Unique_Gem_004_x1", "wreath-of-lightning");
+            var itemIdentifier = new ItemIdentifier("wreath-of-lightning", "Unique_Gem_004_x1");
             var item = await DiabloApi.Item.GetLegendaryGemAsync(AuthenticationScope, itemIdentifier);
             Assert.IsNotNull(item);
         }
@@ -55,7 +55,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetLegendaryPotionTest()
         {
-            var itemIdentifier = new ItemIdentifier("HealthPotionLegendary_01", "bottomless-potion-of-the-tower");
+            var itemIdentifier = new ItemIdentifier("bottomless-potion-of-the-tower", "HealthPotionLegendary_01");
             var item = await DiabloApi.Item.GetLegendaryPotionAsync(AuthenticationScope, itemIdentifier);
             Assert.IsNotNull(item);
         }
@@ -70,7 +70,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetFollowerTokenTest()
         {
-            var itemIdentifier = new ItemIdentifier("x1_FollowerItem_Templar_Legendary_01", "enchanting-favor");
+            var itemIdentifier = new ItemIdentifier("enchanting-favor", "x1_FollowerItem_Templar_Legendary_01");
             var item = await DiabloApi.Item.GetFollowerTokenAsync(AuthenticationScope, itemIdentifier);
             Assert.IsNotNull(item);
         }

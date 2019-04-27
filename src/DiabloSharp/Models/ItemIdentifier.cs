@@ -5,10 +5,10 @@ namespace DiabloSharp.Models
 {
     public class ItemIdentifier : ValueObject
     {
-        public ItemIdentifier(string id, string slug)
+        public ItemIdentifier(string slug, string id)
         {
-            Id = id;
             Slug = slug;
+            Id = id;
         }
 
         public string Id { get; }

@@ -27,7 +27,7 @@ namespace DiabloSharp.Converters
         {
             return new T
             {
-                Id = new ItemIdentifier(itemDto.Id, itemDto.Slug),
+                Id = new ItemIdentifier(itemDto.Slug, itemDto.Id),
                 Name = itemDto.Name,
                 IconUrl = itemDto.Icon,
                 TooltipUrl = itemDto.TooltipParams,
