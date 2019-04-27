@@ -1,3 +1,6 @@
+using System.Text;
+using DiabloSharp.Extensions;
+
 namespace DiabloSharp.Models
 {
     public class Item : ModelBase<ItemIdentifier>
@@ -17,5 +20,13 @@ namespace DiabloSharp.Models
         public ItemCategory Category { get; internal set; }
 
         public ItemQuality Quality { get; internal set; }
+
+        protected override StringBuilder ToBuilder()
+        {
+            var builder = base.ToBuilder();
+            builder.AppendProperty(nameof(Id), Id.ToString());
+            builder.AppendProperty(Name, Name);
+            return builder;
+        }
     }
 }

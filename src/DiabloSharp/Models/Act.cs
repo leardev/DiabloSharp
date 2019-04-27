@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Text;
+using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
@@ -9,5 +11,14 @@ namespace DiabloSharp.Models
         public string Name { get; internal set; }
 
         public IEnumerable<Quest> Quests { get; internal set; }
+
+        protected override StringBuilder ToBuilder()
+        {
+            var builder = base.ToBuilder();
+            builder.AppendProperty(nameof(Id), Id.ToString());
+            builder.AppendProperty(nameof(Slug), Slug);
+            builder.AppendProperty(nameof(Name), Name);
+            return builder;
+        }
     }
 }
