@@ -11,10 +11,14 @@ namespace DiabloSharp.Converters
         {
             var names = NamesToModel(characterClass);
             var activeSkills = activeCharacterSkills
-                .Select(dto => ActiveSkillToModel(characterClassId, dto));
+                .Select(dto => ActiveSkillToModel(characterClassId, dto))
+                .ToList();
 
             var passiveSkills = characterClass.Skills.Passives
-                .Select(dto => PassiveSkillToModel(characterClassId, dto));
+                .Select(dto => PassiveSkillToModel(characterClassId, dto))
+                .ToList();
+
+            var skills = activeSkills.Cast<SkillCharacter>().Concat(passiveSkills);
 
             return new CharacterClass
             {
@@ -23,6 +27,7 @@ namespace DiabloSharp.Converters
                 IconUrl = characterClass.Icon,
                 ActiveSkills = activeSkills,
                 PassiveSkills = passiveSkills,
+                Skills = skills,
                 Names = names
             };
         }

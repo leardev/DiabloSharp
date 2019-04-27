@@ -8,7 +8,6 @@ namespace DiabloSharp.Models
     {
         public BattleTagIdentifier(string battleTag)
         {
-            /* todo find a better way */
             var parts = battleTag.Split('#');
 
             if (parts.Length != 2)

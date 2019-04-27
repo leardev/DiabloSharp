@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DiabloSharp.Models
 {
@@ -15,6 +14,6 @@ namespace DiabloSharp.Models
 
         public IEnumerable<SkillCharacterPassive> PassiveSkills { get; internal set; }
 
-        public IEnumerable<SkillCharacter> Skills => ActiveSkills.Cast<SkillCharacter>().Concat(PassiveSkills);
+        public IEnumerable<SkillCharacter> Skills { get; internal set; }
     }
 }
