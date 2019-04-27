@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Converters
@@ -8,19 +9,9 @@ namespace DiabloSharp.Converters
     {
         private readonly ItemCategory _itemCategory;
 
-        private readonly Dictionary<string, ItemQuality> _qualityByText;
-
         protected ItemConverter(ItemCategory itemCategory)
         {
             _itemCategory = itemCategory;
-            _qualityByText = new Dictionary<string, ItemQuality>
-            {
-                { "white", ItemQuality.Normal },
-                { "blue", ItemQuality.Magic },
-                { "yellow", ItemQuality.Rare },
-                { "orange", ItemQuality.Legendary },
-                { "green", ItemQuality.Set }
-            };
         }
 
         public virtual T ItemToModel(ItemDto itemDto)
@@ -35,7 +26,7 @@ namespace DiabloSharp.Converters
                 StackSize = itemDto.StackSizeMax,
                 AccountBound = itemDto.AccountBound,
                 Category = _itemCategory,
-                Quality = _qualityByText[itemDto.Color]
+                Quality = EnumConversionHelper.ItemQualityFromString(itemDto.Color)
             };
         }
 

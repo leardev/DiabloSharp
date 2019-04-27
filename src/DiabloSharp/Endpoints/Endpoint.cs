@@ -1,5 +1,6 @@
 using DiabloSharp.Clients;
 using DiabloSharp.Extensions;
+using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -17,8 +18,10 @@ namespace DiabloSharp.Endpoints
         internal BattleNetClient CreateClient(IAuthenticationScope authenticationScope)
         {
             authenticationScope.EnsureExpiration();
-            return new BattleNetClient(authenticationScope.AccessToken, authenticationScope.Region.ToDescription(),
-                authenticationScope.Localization.ToDescription(), _tokenBucket);
+            var regionString = EnumConversionHelper.RegionToString(authenticationScope.Region);
+            var localizationString = EnumConversionHelper.LocalizationToString(authenticationScope.Localization);
+
+            return new BattleNetClient(authenticationScope.AccessToken, regionString, localizationString, _tokenBucket);
         }
     }
 }

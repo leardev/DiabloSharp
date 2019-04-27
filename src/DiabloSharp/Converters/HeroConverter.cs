@@ -1,40 +1,18 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Extensions;
+using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Converters
 {
     internal class HeroConverter
     {
-        private readonly Dictionary<string, CharacterClassIdentifier> _classIdentifierByClassId;
-
-        private readonly Dictionary<string, HeroStatIdentifier> _statByStatId;
-
-        public HeroConverter()
-        {
-            _classIdentifierByClassId = new Dictionary<string, CharacterClassIdentifier>();
-            _statByStatId = new Dictionary<string, HeroStatIdentifier>();
-
-            var characterClasses = Enum.GetValues(typeof(CharacterClassIdentifier))
-                .Cast<CharacterClassIdentifier>()
-                .ToList();
-            foreach (var characterClass in characterClasses)
-                _classIdentifierByClassId.Add(characterClass.ToDescription(), characterClass);
-
-            var stats = Enum.GetValues(typeof(HeroStatIdentifier))
-                .Cast<HeroStatIdentifier>()
-                .ToList();
-            foreach (var stat in stats)
-                _statByStatId.Add(stat.ToDescription(), stat);
-        }
-
         public Hero HeroToModel(HeroIdentifier heroIdentifier, HeroDto heroDto)
         {
             var gameMode = GameModeToModel(heroDto);
-            var characterClass = _classIdentifierByClassId[heroDto.Class];
+            var characterClass = EnumConversionHelper.CharacterClassIdentifierFromSlug(heroDto.Class);
             var passives = PassivesToModel(characterClass, heroDto);
             var actives = ActivesToModel(characterClass, heroDto);
             var items = ItemsToModel(heroDto);
@@ -69,7 +47,7 @@ namespace DiabloSharp.Converters
             {
                 var stat = new HeroStat
                 {
-                    Id = _statByStatId[heroStatDto.Key],
+                    Id = EnumConversionHelper.HeroStatIdentifierFromString(heroStatDto.Key),
                     Value = heroStatDto.Value
                 };
                 stats.Add(stat);
