@@ -5,7 +5,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class FollowerEndpoint : EndpointBase
+    internal class FollowerEndpoint : Endpoint,
+                                      IFollowerEndpoint
     {
         private readonly FollowerConverter _followerConverter;
 

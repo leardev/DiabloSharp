@@ -5,7 +5,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ArtisanEndpoint : EndpointBase
+    internal class ArtisanEndpoint : Endpoint,
+                                     IArtisanEndpoint
     {
         private readonly ArtisanConverter _artisanConverter;
 

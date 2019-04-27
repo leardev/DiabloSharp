@@ -7,7 +7,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ItemEndpoint : EndpointBase
+    internal class ItemEndpoint : Endpoint,
+                                  IItemEndpoint
     {
         private readonly string[] _equipmentIndices;
 
@@ -129,7 +130,7 @@ namespace DiabloSharp.Endpoints
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<List<ItemEquipment>> GetEquipmentsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(AuthenticationScope authenticationScope)
         {
             var converter = new ItemEquipmentConverter();
             return GetItems(authenticationScope, converter, _equipmentIndices);
@@ -141,7 +142,7 @@ namespace DiabloSharp.Endpoints
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<List<ItemGem>> GetGemsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemGem>> GetGemsAsync(AuthenticationScope authenticationScope)
         {
             var converter = new ItemGemConverter();
             return GetItems(authenticationScope, converter, "item-type/gem");
@@ -153,7 +154,7 @@ namespace DiabloSharp.Endpoints
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<List<ItemLegendaryGem>> GetLegendaryGemsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemLegendaryGem>> GetLegendaryGemsAsync(AuthenticationScope authenticationScope)
         {
             var converter = new ItemLegendaryGemConverter();
             return GetItems(authenticationScope, converter, "item-type/upgradeablejewel");
@@ -165,7 +166,7 @@ namespace DiabloSharp.Endpoints
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<List<ItemLegendaryPotion>> GetLegendaryPotionsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemLegendaryPotion>> GetLegendaryPotionsAsync(AuthenticationScope authenticationScope)
         {
             var converter = new ItemLegendaryPotionConverter();
             return GetItems(authenticationScope, converter, "item-type/healthpotion");
@@ -177,7 +178,7 @@ namespace DiabloSharp.Endpoints
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<List<ItemFollowerToken>> GetFollowerTokensAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemFollowerToken>> GetFollowerTokensAsync(AuthenticationScope authenticationScope)
         {
             var converter = new ItemFollowerTokenConverter();
             return GetItems(authenticationScope, converter, _followerTokenIndices);
@@ -192,7 +193,7 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        private async Task<List<T>> GetItems<T>(AuthenticationScope authenticationScope, ItemConverter<T> converter, params string[] itemTypeIndices) where T : Item, new()
+        private async Task<IEnumerable<T>> GetItems<T>(AuthenticationScope authenticationScope, ItemConverter<T> converter, params string[] itemTypeIndices) where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {

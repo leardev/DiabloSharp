@@ -5,11 +5,11 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public abstract class EndpointBase
+    internal abstract class Endpoint : IEndpoint
     {
         private readonly ITokenBucket _tokenBucket;
 
-        protected EndpointBase(ITokenBucket tokenBucket)
+        protected Endpoint(ITokenBucket tokenBucket)
         {
             _tokenBucket = tokenBucket;
         }

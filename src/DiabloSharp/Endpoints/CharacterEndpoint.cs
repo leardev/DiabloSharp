@@ -8,7 +8,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class CharacterEndpoint : EndpointBase
+    internal class CharacterEndpoint : Endpoint,
+                                       ICharacterEndpoint
     {
         private readonly CharacterConverter _characterConverter;
 

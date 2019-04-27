@@ -6,7 +6,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ActEndpoint : EndpointBase
+    internal class ActEndpoint : Endpoint,
+                                 IActEndpoint
     {
         private readonly ActConverter _actConverter;
 
@@ -15,7 +16,7 @@ namespace DiabloSharp.Endpoints
             _actConverter = new ActConverter();
         }
 
-        public async Task<List<Act>> GetActsAsync(AuthenticationScope authenticationScope)
+        public async Task<IEnumerable<Act>> GetActsAsync(AuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))
             {

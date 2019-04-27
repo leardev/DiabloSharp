@@ -7,7 +7,7 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    internal class OAuthEndpoint
+    internal class OAuthEndpoint : IOAuthEndpoint
     {
         private readonly ITokenBucket _tokenBucket;
 

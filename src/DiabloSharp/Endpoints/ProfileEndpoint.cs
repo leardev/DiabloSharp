@@ -5,7 +5,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ProfileEndpoint : EndpointBase
+    internal class ProfileEndpoint : Endpoint,
+                                     IProfileEndpoint
     {
         public ProfileEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {

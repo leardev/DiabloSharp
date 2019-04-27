@@ -25,25 +25,19 @@ namespace DiabloSharp
             Follower = new FollowerEndpoint(tokenBucket);
             Character = new CharacterEndpoint(tokenBucket);
             Profile = new ProfileEndpoint(tokenBucket);
-            Season = new SeasonEndpoint(tokenBucket);
-            Era = new EraEndpoint(tokenBucket);
         }
 
-        public ItemEndpoint Item { get; }
+        public IItemEndpoint Item { get; }
 
-        public ActEndpoint Act { get; }
+        public IActEndpoint Act { get; }
 
-        public ArtisanEndpoint Artisan { get; }
+        public IArtisanEndpoint Artisan { get; }
 
-        public FollowerEndpoint Follower { get; }
+        public IFollowerEndpoint Follower { get; }
 
-        public CharacterEndpoint Character { get; }
+        public ICharacterEndpoint Character { get; }
 
-        public ProfileEndpoint Profile { get; }
-
-        public SeasonEndpoint Season { get; }
-
-        public EraEndpoint Era { get; }
+        public IProfileEndpoint Profile { get; }
 
         public async Task<AuthenticationScope> CreateAuthenticationScopeAsync()
         {

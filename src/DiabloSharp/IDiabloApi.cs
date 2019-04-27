@@ -6,17 +6,17 @@ namespace DiabloSharp
 {
     public interface IDiabloApi
     {
-        ItemEndpoint Item { get; }
+        IItemEndpoint Item { get; }
 
-        ActEndpoint Act { get; }
+        IActEndpoint Act { get; }
 
-        ArtisanEndpoint Artisan { get; }
+        IArtisanEndpoint Artisan { get; }
 
-        FollowerEndpoint Follower { get; }
+        IFollowerEndpoint Follower { get; }
 
-        CharacterEndpoint Character { get; }
+        ICharacterEndpoint Character { get; }
 
-        ProfileEndpoint Profile { get; }
+        IProfileEndpoint Profile { get; }
 
         Task<AuthenticationScope> CreateAuthenticationScopeAsync();
     }
