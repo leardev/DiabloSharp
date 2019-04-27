@@ -9,7 +9,7 @@ namespace DiabloSharp.Models
 
         public string IconUrl { get; internal set; }
 
-        public IDictionary<Gender, string> NamesByGender { get; internal set; }
+        public IEnumerable<CharacterName> Names { get; internal set; }
 
         public IEnumerable<SkillCharacterActive> ActiveSkills { get; internal set; }
 

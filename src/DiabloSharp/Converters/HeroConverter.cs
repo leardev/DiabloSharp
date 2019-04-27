@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
@@ -101,6 +101,7 @@ namespace DiabloSharp.Converters
                 };
                 actives.Add(skill);
             }
+
             return actives;
         }
 
@@ -115,6 +116,7 @@ namespace DiabloSharp.Converters
                 var passive = new HeroSkillPassive { Id = new SkillIdentifier(characterClass, passiveDto.Slug) };
                 passives.Add(passive);
             }
+
             return passives;
         }
 
@@ -223,6 +225,7 @@ namespace DiabloSharp.Converters
                 var cubeItem = new HeroItemCube { Id = legendaryPowerDto.TooltipParams.ToItemIdentifier() };
                 cubeItems.Add(cubeItem);
             }
+
             return cubeItems;
         }
     }

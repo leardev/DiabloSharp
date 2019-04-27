@@ -9,9 +9,12 @@ namespace DiabloSharp.Converters
     {
         public CharacterClass CharacterToModel(CharacterClassIdentifier characterClassId, CharacterClassDto characterClass, IEnumerable<CharacterApiSkillDto> activeCharacterSkills)
         {
-            var namesByGender = NamesToModel(characterClass);
-            var activeSkills = activeCharacterSkills.Select(dto => ActiveSkillToModel(characterClassId, dto));
-            var passiveSkills = characterClass.Skills.Passives.Select(dto => PassiveSkillToModel(characterClassId, dto));
+            var names = NamesToModel(characterClass);
+            var activeSkills = activeCharacterSkills
+                .Select(dto => ActiveSkillToModel(characterClassId, dto));
+
+            var passiveSkills = characterClass.Skills.Passives
+                .Select(dto => PassiveSkillToModel(characterClassId, dto));
 
             return new CharacterClass
             {
@@ -20,16 +23,16 @@ namespace DiabloSharp.Converters
                 IconUrl = characterClass.Icon,
                 ActiveSkills = activeSkills,
                 PassiveSkills = passiveSkills,
-                NamesByGender = namesByGender
+                Names = names
             };
         }
 
-        private IDictionary<Gender, string> NamesToModel(CharacterClassDto characterClass)
+        private IEnumerable<CharacterName> NamesToModel(CharacterClassDto characterClass)
         {
-            return new Dictionary<Gender, string>
+            return new[]
             {
-                { Gender.Male, characterClass.MaleName },
-                { Gender.Female, characterClass.FemaleName }
+                new CharacterName { Id = Gender.Male, Name = characterClass.MaleName },
+                new CharacterName { Id = Gender.Female, Name = characterClass.FemaleName }
             };
         }
 
@@ -59,7 +62,7 @@ namespace DiabloSharp.Converters
             return skill;
         }
 
-        private T SkillToModel<T>(CharacterClassIdentifier characterClass, CharacterSkillDto characterSkillDto) where T: SkillCharacter, new()
+        private T SkillToModel<T>(CharacterClassIdentifier characterClass, CharacterSkillDto characterSkillDto) where T : SkillCharacter, new()
         {
             return new T
             {

@@ -14,7 +14,7 @@ namespace DiabloSharp.Converters
             {
                 { "EnchantressSpecial", ItemFollowerTokenKind.EnchantressFocus },
                 { "ScoundrelSpecial", ItemFollowerTokenKind.ScoundrelToken },
-                { "TemplarSpecial", ItemFollowerTokenKind.TemplarRelic },
+                { "TemplarSpecial", ItemFollowerTokenKind.TemplarRelic }
             };
         }
 

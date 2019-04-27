@@ -5,15 +5,15 @@ namespace DiabloSharp.Models
 {
     public class ItemIdentifier : ValueObject
     {
-        public string Id { get; }
-
-        public string Slug { get; }
-
         public ItemIdentifier(string id, string slug)
         {
             Id = id;
             Slug = slug;
         }
+
+        public string Id { get; }
+
+        public string Slug { get; }
 
         protected override IEnumerable<object> GetAtomicValues()
         {

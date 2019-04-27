@@ -6,18 +6,16 @@ namespace DiabloSharp.Converters
 {
     internal class AccountSeasonConverter
     {
-
-
         public PeriodEra EraToModel(AccountDto accountDto)
         {
             var eraDto = accountDto.SeasonalProfiles.Season0;
             return new PeriodEra
             {
                 Id = AccountPeriodIdentifier.Era,
-                ParagonLevelsByGameMode = new Dictionary<GameModeIdentifier, long>
+                Paragons = new[]
                 {
-                    { GameModeIdentifier.SeasonSoftcore, eraDto.ParagonLevel },
-                    { GameModeIdentifier.SeasonHardcore, eraDto.ParagonLevelHardcore }
+                    new PeriodParagon { Id = GameModeIdentifier.EraSoftcore, Value = eraDto.ParagonLevel },
+                    new PeriodParagon { Id = GameModeIdentifier.EraHardcore, Value = eraDto.ParagonLevelHardcore }
                 },
                 ArtisanLevels = new[]
                 {
@@ -26,7 +24,7 @@ namespace DiabloSharp.Converters
                     new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, Artisan = ArtisanIdentifier.Jeweler, Level = accountDto.Jeweler.Level },
                     new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, Artisan = ArtisanIdentifier.Jeweler, Level = accountDto.JewelerHardcore.Level },
                     new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, Artisan = ArtisanIdentifier.Mystic, Level = accountDto.Mystic.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, Artisan = ArtisanIdentifier.Mystic, Level = accountDto.MysticHardcore.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, Artisan = ArtisanIdentifier.Mystic, Level = accountDto.MysticHardcore.Level }
                 }
             };
         }
@@ -54,11 +52,11 @@ namespace DiabloSharp.Converters
             {
                 var season = new PeriodSeason
                 {
-                    Id = (AccountPeriodIdentifier)seasonDto.Id,
-                    ParagonLevelsByGameMode = new Dictionary<GameModeIdentifier, long>
+                    Id = (AccountPeriodIdentifier) seasonDto.Id,
+                    Paragons = new[]
                     {
-                        { GameModeIdentifier.SeasonSoftcore, seasonDto.ParagonLevel },
-                        { GameModeIdentifier.SeasonHardcore, seasonDto.ParagonLevelHardcore }
+                        new PeriodParagon { Id = GameModeIdentifier.SeasonSoftcore, Value = seasonDto.ParagonLevel },
+                        new PeriodParagon { Id = GameModeIdentifier.SeasonHardcore, Value = seasonDto.ParagonLevelHardcore }
                     }
                 };
                 seasons.Add(season);
@@ -72,12 +70,12 @@ namespace DiabloSharp.Converters
             var seasonDto = accountDto.SeasonalProfiles.Season16;
             return new PeriodActiveSeason
             {
-                Id = (AccountPeriodIdentifier)seasonDto.Id,
+                Id = (AccountPeriodIdentifier) seasonDto.Id,
                 IsActive = true,
-                ParagonLevelsByGameMode = new Dictionary<GameModeIdentifier, long>
+                Paragons = new[]
                 {
-                    {GameModeIdentifier.SeasonSoftcore, seasonDto.ParagonLevel},
-                    {GameModeIdentifier.SeasonHardcore, seasonDto.ParagonLevelHardcore}
+                    new PeriodParagon { Id = GameModeIdentifier.SeasonSoftcore, Value = seasonDto.ParagonLevel },
+                    new PeriodParagon { Id = GameModeIdentifier.SeasonHardcore, Value = seasonDto.ParagonLevelHardcore }
                 },
                 ArtisanLevels = new[]
                 {
@@ -86,7 +84,7 @@ namespace DiabloSharp.Converters
                     new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, Artisan = ArtisanIdentifier.Jeweler, Level = accountDto.JewelerSeason.Level },
                     new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, Artisan = ArtisanIdentifier.Jeweler, Level = accountDto.JewelerSeasonHardcore.Level },
                     new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, Artisan = ArtisanIdentifier.Mystic, Level = accountDto.MysticSeason.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, Artisan = ArtisanIdentifier.Mystic, Level = accountDto.MysticSeasonHardcore.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, Artisan = ArtisanIdentifier.Mystic, Level = accountDto.MysticSeasonHardcore.Level }
                 }
             };
         }

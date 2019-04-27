@@ -6,11 +6,11 @@ namespace DiabloSharp.RateLimiters
 {
     internal class TokenBucket : ITokenBucket
     {
+        private readonly long _capacity;
+
         private readonly RefillStrategy _refillStrategy;
 
         private readonly object _syncRoot;
-
-        private readonly long _capacity;
 
         public TokenBucket(long capacity, long refillCount, TimeSpan refillPeriod, IDateTime dateTime)
         {

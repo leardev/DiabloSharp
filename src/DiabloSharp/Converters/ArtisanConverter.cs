@@ -47,6 +47,7 @@ namespace DiabloSharp.Converters
                 var taughtRecipes = artisanTierDto.TaughtRecipes.Select(dto => ArtisanRecipeToModel(dto, recipeRank, RecipeSource.Taught));
                 recipes.AddRange(taughtRecipes);
             }
+
             return recipes;
         }
 

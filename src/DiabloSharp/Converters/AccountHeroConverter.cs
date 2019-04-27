@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
@@ -33,7 +33,7 @@ namespace DiabloSharp.Converters
                     Id = new HeroIdentifier(accountDto.BattleTag, fallenHeroDto.HeroId),
                     Name = fallenHeroDto.Name,
                     Level = fallenHeroDto.Level,
-                    Gender = (Gender)fallenHeroDto.Gender,
+                    Gender = (Gender) fallenHeroDto.Gender,
                     Class = _classIdentifierByClassId[fallenHeroDto.Class],
                     IsDead = true
                 };

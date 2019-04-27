@@ -17,7 +17,7 @@ namespace DiabloSharp.Endpoints
         {
             #region equipmentIndices
 
-            _equipmentIndices = new []
+            _equipmentIndices = new[]
             {
                 "item-type/amulet",
                 "item-type/axe",
@@ -113,7 +113,7 @@ namespace DiabloSharp.Endpoints
 
             #region followerTokenIndices
 
-            _followerTokenIndices = new []
+            _followerTokenIndices = new[]
             {
                 "item-type/scoundrelspecial",
                 "item-type/templarspecial",

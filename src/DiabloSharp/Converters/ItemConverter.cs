@@ -35,7 +35,7 @@ namespace DiabloSharp.Converters
                 StackSize = itemDto.StackSizeMax,
                 AccountBound = itemDto.AccountBound,
                 Category = _itemCategory,
-                Quality = _qualityByText[itemDto.Color],
+                Quality = _qualityByText[itemDto.Color]
             };
         }
 
@@ -47,6 +47,7 @@ namespace DiabloSharp.Converters
                 var item = ItemToModel(itemDto);
                 items.Add(item);
             }
+
             return items;
         }
     }

@@ -6,9 +6,9 @@ namespace DiabloSharp.Converters
 {
     internal class AccountConverter
     {
-        private readonly AccountSeasonConverter _seasonConverter;
-
         private readonly AccountHeroConverter _heroConverter;
+
+        private readonly AccountSeasonConverter _seasonConverter;
 
         public AccountConverter()
         {

@@ -20,5 +20,4 @@ namespace DiabloSharp.DataTransferObjects
         [DataMember(Name = "act5")]
         public bool Act5 { get; set; }
     }
-
 }

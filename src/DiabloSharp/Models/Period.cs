@@ -4,6 +4,6 @@ namespace DiabloSharp.Models
 {
     public abstract class Period : ModelBase<AccountPeriodIdentifier>
     {
-        public IDictionary<GameModeIdentifier, long> ParagonLevelsByGameMode { get; internal set; }
+        public IEnumerable<PeriodParagon> Paragons { get; internal set; }
     }
 }

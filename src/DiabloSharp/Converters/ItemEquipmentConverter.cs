@@ -9,9 +9,9 @@ namespace DiabloSharp.Converters
 {
     internal class ItemEquipmentConverter : ItemConverter<ItemEquipment>
     {
-        private readonly Dictionary<string, ItemEquipmentKind> _itemEquipmentKindByTypeId;
-
         private readonly Dictionary<string, IEnumerable<CharacterClassIdentifier>> _classIdentifiersByTypeId;
+
+        private readonly Dictionary<string, ItemEquipmentKind> _itemEquipmentKindByTypeId;
 
         public ItemEquipmentConverter() : base(ItemCategory.Equipment)
         {
@@ -122,7 +122,7 @@ namespace DiabloSharp.Converters
                 { "Amulet", characterClasses },
                 { "Axe", characterClasses },
                 { "Axe2H", new[] { CharacterClassIdentifier.Barbarian, CharacterClassIdentifier.Crusader, CharacterClassIdentifier.Monk, CharacterClassIdentifier.Necromancer, CharacterClassIdentifier.WitchDoctor, CharacterClassIdentifier.Wizard } },
-                { "Belt_Barbarian", new[] { CharacterClassIdentifier.Barbarian} },
+                { "Belt_Barbarian", new[] { CharacterClassIdentifier.Barbarian } },
                 { "Boots", characterClasses },
                 { "Boots_Barbarian", new[] { CharacterClassIdentifier.Barbarian } },
                 { "Boots_Crusader", new[] { CharacterClassIdentifier.Crusader } },
@@ -161,7 +161,7 @@ namespace DiabloSharp.Converters
                 { "Gloves_Necromancer", new[] { CharacterClassIdentifier.Necromancer } },
                 { "Gloves_WitchDoctor", new[] { CharacterClassIdentifier.WitchDoctor } },
                 { "Gloves_Wizard", new[] { CharacterClassIdentifier.Wizard } },
-                { "HandXbow", new []{ CharacterClassIdentifier.DemonHunter } },
+                { "HandXbow", new[] { CharacterClassIdentifier.DemonHunter } },
                 { "Helm", characterClasses },
                 { "Helm_Barbarian", new[] { CharacterClassIdentifier.Barbarian } },
                 { "Helm_Crusader", new[] { CharacterClassIdentifier.Crusader } },

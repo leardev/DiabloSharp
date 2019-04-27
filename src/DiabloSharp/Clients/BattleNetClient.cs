@@ -13,6 +13,24 @@ namespace DiabloSharp.Clients
             AddParameter("locale", localization);
         }
 
+        #region Follower
+
+        public Task<FollowerDto> GetFollowerAsync(string followerSlug)
+        {
+            return GetAsync<FollowerDto>($"/d3/data/follower/{followerSlug}");
+        }
+
+        #endregion
+
+        #region Item
+
+        public Task<ItemDto> GetItemAsync(string itemTypePath)
+        {
+            return GetAsync<ItemDto>($"d3/data/{itemTypePath}");
+        }
+
+        #endregion
+
         #region Act
 
         public Task<ActIndexDto> GetActIndexAsync()
@@ -70,24 +88,6 @@ namespace DiabloSharp.Clients
         public Task<EraLeaderboardDetailDto> GetEraLeaderboardAsync(long eraId, string leaderboardId)
         {
             return GetAsync<EraLeaderboardDetailDto>($"/data/d3/era/{eraId}/leaderboard/{leaderboardId}");
-        }
-
-        #endregion
-
-        #region Follower
-
-        public Task<FollowerDto> GetFollowerAsync(string followerSlug)
-        {
-            return GetAsync<FollowerDto>($"/d3/data/follower/{followerSlug}");
-        }
-
-        #endregion
-
-        #region Item
-
-        public Task<ItemDto> GetItemAsync(string itemTypePath)
-        {
-            return GetAsync<ItemDto>($"d3/data/{itemTypePath}");
         }
 
         #endregion
