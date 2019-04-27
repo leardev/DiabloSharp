@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public class SkillBase : ModelBase<string>
+    public class SkillBase<T> : ModelBase<T>
     {
         public string Name { get; internal set; }
 

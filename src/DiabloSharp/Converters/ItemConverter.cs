@@ -39,7 +39,7 @@ namespace DiabloSharp.Converters
             };
         }
 
-        public IEnumerable<T> ItemsToModel(IEnumerable<ItemDto> itemDtos)
+        public List<T> ItemsToModel(IEnumerable<ItemDto> itemDtos)
         {
             var items = new List<T>();
             foreach (var itemDto in itemDtos)

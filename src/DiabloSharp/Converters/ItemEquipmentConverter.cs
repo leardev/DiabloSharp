@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Extensions;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Converters
@@ -231,21 +232,15 @@ namespace DiabloSharp.Converters
             };
         }
 
-        private IEnumerable<ItemIdentifier> ItemPathToModel(IEnumerable<string> itemPathes)
+        private List<ItemIdentifier> ItemPathToModel(IEnumerable<string> itemPathes)
         {
             var itemIdentifiers = new List<ItemIdentifier>();
             foreach (var itemPath in itemPathes)
-            {
-                var pathIndex = itemPath.IndexOf("/", StringComparison.Ordinal);
-                var slugIndex = itemPath.LastIndexOf("-", StringComparison.Ordinal);
-                var slug = itemPath.Substring(pathIndex + 1, slugIndex - pathIndex - 1);
-                var id = itemPath.Substring(slugIndex + 1, itemPath.Length - slugIndex - 1);
-                itemIdentifiers.Add(new ItemIdentifier(id, slug));
-            }
+                itemIdentifiers.Add(itemPath.ToItemIdentifier());
             return itemIdentifiers;
         }
 
-        private IEnumerable<ItemEquipmentSlot> SlotsToModel(ItemDto itemDto)
+        private List<ItemEquipmentSlot> SlotsToModel(ItemDto itemDto)
         {
             var slots = new List<ItemEquipmentSlot>();
 

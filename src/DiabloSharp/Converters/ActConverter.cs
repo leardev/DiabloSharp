@@ -7,10 +7,11 @@ namespace DiabloSharp.Converters
 {
     internal class ActConverter
     {
-        public IEnumerable<Act> ActIndexToModel(ActIndexDto actIndexDto)
+        public List<Act> ActIndexToModel(ActIndexDto actIndexDto)
         {
             return actIndexDto.Acts
-                .Select(ActToModel);
+                .Select(ActToModel)
+                .ToList();
         }
 
         public Act ActToModel(ActDto actDto)

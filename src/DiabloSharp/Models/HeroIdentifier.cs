@@ -5,36 +5,25 @@ namespace DiabloSharp.Models
 {
     public class HeroIdentifier : ValueObject
     {
-        #region lookup-table
-
-        public static HeroIdentifier Empty { get; }
-
-        static HeroIdentifier()
+        public HeroIdentifier(string battleTag, long id)
         {
-            Empty = new HeroIdentifier(-1, string.Empty);
-        }
-
-        #endregion
-
-        public HeroIdentifier(long id, string name)
-        {
+            BattleTag = new BattleTagIdentifier(battleTag);
             Id = id;
-            Name = name;
         }
+
+        public BattleTagIdentifier BattleTag { get; }
 
         public long Id { get; }
 
-        public string Name { get; }
-
         protected override IEnumerable<object> GetAtomicValues()
         {
+            yield return BattleTag;
             yield return Id;
-            yield return Name;
         }
 
         public override string ToString()
         {
-            return $"{nameof(Id)} = {Id}, {nameof(Name)} = {Name}";
+            return $"{nameof(BattleTag)} = {BattleTag}, {nameof(Id)} = {Id}";
         }
     }
 }

@@ -35,7 +35,7 @@ namespace DiabloSharp.Converters
             };
         }
 
-        private IEnumerable<RecipeArtisan> TrainingToModel(ArtisanTrainingDto artisanTrainingDto)
+        private List<RecipeArtisan> TrainingToModel(ArtisanTrainingDto artisanTrainingDto)
         {
             var recipes = new List<RecipeArtisan>();
             foreach (var artisanTierDto in artisanTrainingDto.Tiers)

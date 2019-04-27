@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public class SkillCharacter : SkillBase
+    public class SkillCharacter : SkillBase<SkillIdentifier>
     {
         public SkillCategory Category { get; internal set; }
     }

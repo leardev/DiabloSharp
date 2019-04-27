@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public class SkillRune : ModelBase<string>
+    public class SkillRune : ModelBase<SkillIdentifier>
     {
         public string Name { get; internal set; }
 

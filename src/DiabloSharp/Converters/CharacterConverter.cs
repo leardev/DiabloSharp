@@ -10,8 +10,8 @@ namespace DiabloSharp.Converters
         public CharacterClass CharacterToModel(CharacterClassIdentifier characterClassId, CharacterClassDto characterClass, IEnumerable<CharacterApiSkillDto> activeCharacterSkills)
         {
             var namesByGender = NamesToModel(characterClass);
-            var activeSkills = activeCharacterSkills.Select(ActiveSkillToModel);
-            var passiveSkills = characterClass.Skills.Passives.Select(PassiveSkillToModel);
+            var activeSkills = activeCharacterSkills.Select(dto => ActiveSkillToModel(characterClassId, dto));
+            var passiveSkills = characterClass.Skills.Passives.Select(dto => PassiveSkillToModel(characterClassId, dto));
 
             return new CharacterClass
             {
@@ -33,37 +33,37 @@ namespace DiabloSharp.Converters
             };
         }
 
-        private SkillCharacterActive ActiveSkillToModel(CharacterApiSkillDto characterApiSkillDto)
+        private SkillCharacterActive ActiveSkillToModel(CharacterClassIdentifier characterClass, CharacterApiSkillDto characterApiSkillDto)
         {
-            var runes = characterApiSkillDto.Runes.Select(RuneToModel);
-            var skill = SkillToModel<SkillCharacterActive>(characterApiSkillDto.Skill);
+            var runes = characterApiSkillDto.Runes.Select(dto => RuneToModel(characterClass, dto));
+            var skill = SkillToModel<SkillCharacterActive>(characterClass, characterApiSkillDto.Skill);
             skill.Runes = runes;
             skill.Category = SkillCategory.Active;
             return skill;
         }
 
-        private SkillRune RuneToModel(CharacterRuneDto characterRuneDto)
+        private SkillRune RuneToModel(CharacterClassIdentifier characterClass, CharacterRuneDto characterRuneDto)
         {
             return new SkillRune
             {
-                Id = characterRuneDto.Slug,
+                Id = new SkillIdentifier(characterClass, characterRuneDto.Slug),
                 Name = characterRuneDto.Name,
                 Level = characterRuneDto.Level
             };
         }
 
-        private SkillCharacterPassive PassiveSkillToModel(CharacterSkillDto characterSkillDto)
+        private SkillCharacterPassive PassiveSkillToModel(CharacterClassIdentifier characterClass, CharacterSkillDto characterSkillDto)
         {
-            var skill = SkillToModel<SkillCharacterPassive>(characterSkillDto);
+            var skill = SkillToModel<SkillCharacterPassive>(characterClass, characterSkillDto);
             skill.Category = SkillCategory.Passive;
             return skill;
         }
 
-        private T SkillToModel<T>(CharacterSkillDto characterSkillDto) where T: SkillBase, new()
+        private T SkillToModel<T>(CharacterClassIdentifier characterClass, CharacterSkillDto characterSkillDto) where T: SkillCharacter, new()
         {
             return new T
             {
-                Id = characterSkillDto.Slug,
+                Id = new SkillIdentifier(characterClass, characterSkillDto.Slug),
                 Name = characterSkillDto.Name,
                 Level = characterSkillDto.Level,
                 TooltipUrl = characterSkillDto.TooltipUrl,
