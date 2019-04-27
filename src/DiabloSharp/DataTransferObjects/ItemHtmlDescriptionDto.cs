@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class ItemHtmlDescriptionDto
+    internal class ItemHtmlDescriptionDto
     {
         [DataMember(Name = "textHtml")]
         public string TextHtml { get; set; }

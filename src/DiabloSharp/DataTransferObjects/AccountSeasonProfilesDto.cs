@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class AccountSeasonProfilesDto
+    internal class AccountSeasonProfilesDto
     {
         [DataMember(Name = "season16")]
         public AccountSeasonProfileDto Season16 { get; set; }

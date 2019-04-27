@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class CharacterSkillCategoryDto
+    internal class CharacterSkillCategoryDto
     {
         [DataMember(Name = "slug")]
         public string Slug { get; set; }

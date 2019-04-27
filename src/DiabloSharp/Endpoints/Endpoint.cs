@@ -5,16 +5,16 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public abstract class EndpointBase
+    internal abstract class Endpoint : IEndpoint
     {
         private readonly ITokenBucket _tokenBucket;
 
-        protected EndpointBase(ITokenBucket tokenBucket)
+        protected Endpoint(ITokenBucket tokenBucket)
         {
             _tokenBucket = tokenBucket;
         }
 
-        internal BattleNetClient CreateClient(AuthenticationScope authenticationScope)
+        internal BattleNetClient CreateClient(IAuthenticationScope authenticationScope)
         {
             authenticationScope.EnsureExpiration();
             return new BattleNetClient(authenticationScope.AccessToken, authenticationScope.Region.ToDescription(),

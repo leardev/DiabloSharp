@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public class ArtisanLevel
+    public class ArtisanLevel : ModelBase
     {
         public ArtisanIdentifier Artisan { get; internal set; }
 

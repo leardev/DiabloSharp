@@ -8,7 +8,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class CharacterEndpoint : EndpointBase
+    internal class CharacterEndpoint : Endpoint,
+                                       ICharacterEndpoint
     {
         private readonly CharacterConverter _characterConverter;
 
@@ -17,7 +18,7 @@ namespace DiabloSharp.Endpoints
             _characterConverter = new CharacterConverter();
         }
 
-        public async Task<CharacterClass> GetCharacterClassAsync(AuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
+        public async Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
         {
             var artisanSlug = characterClassId.ToDescription();
 

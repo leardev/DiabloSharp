@@ -5,13 +5,14 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ProfileEndpoint : EndpointBase
+    internal class ProfileEndpoint : Endpoint,
+                                     IProfileEndpoint
     {
         public ProfileEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
         }
 
-        public async Task<Account> GetAccountAsync(AuthenticationScope authenticationScope, BattleTagIdentifier battleTagId)
+        public async Task<Account> GetAccountAsync(IAuthenticationScope authenticationScope, BattleTagIdentifier battleTagId)
         {
             var converter = new AccountConverter();
             var battleTag = $"{battleTagId.Name}-{battleTagId.Index}";
@@ -23,7 +24,7 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        public async Task<Hero> GetHeroAsync(AuthenticationScope authenticationScope, HeroIdentifier heroId)
+        public async Task<Hero> GetHeroAsync(IAuthenticationScope authenticationScope, HeroIdentifier heroId)
         {
             var converter = new HeroConverter();
             var battleTag = $"{heroId.BattleTag.Name}-{heroId.BattleTag.Index}";

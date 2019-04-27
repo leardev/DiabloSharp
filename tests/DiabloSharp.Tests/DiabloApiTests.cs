@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using DiabloSharp.Extensions;
 using DiabloSharp.Tests.Infrastructure;
 using NUnit.Framework;
 

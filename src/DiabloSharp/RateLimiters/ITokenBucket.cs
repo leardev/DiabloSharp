@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace DiabloSharp.RateLimiters
 {
-    public interface ITokenBucket
+    internal interface ITokenBucket
     {
         Task ConsumeAsync();
     }

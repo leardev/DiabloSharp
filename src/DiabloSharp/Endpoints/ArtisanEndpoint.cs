@@ -5,7 +5,8 @@ using DiabloSharp.RateLimiters;
 
 namespace DiabloSharp.Endpoints
 {
-    public class ArtisanEndpoint : EndpointBase
+    internal class ArtisanEndpoint : Endpoint,
+                                     IArtisanEndpoint
     {
         private readonly ArtisanConverter _artisanConverter;
 
@@ -14,7 +15,7 @@ namespace DiabloSharp.Endpoints
             _artisanConverter = new ArtisanConverter();
         }
 
-        public async Task<Artisan> GetArtisanAsync(AuthenticationScope authenticationScope, ArtisanIdentifier artisanId)
+        public async Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId)
         {
             var artisanSlug = artisanId.ToString().ToLower();
 
@@ -25,7 +26,7 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        public async Task<Recipe> GetRecipeAsync(AuthenticationScope authenticationScope, ArtisanIdentifier artisanId, string recipeSlug)
+        public async Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId, string recipeSlug)
         {
             var artisanSlug = artisanId.ToString().ToLower();
 

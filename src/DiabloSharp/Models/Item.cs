@@ -17,16 +17,5 @@ namespace DiabloSharp.Models
         public ItemCategory Category { get; internal set; }
 
         public ItemQuality Quality { get; internal set; }
-
-        /*
-         * has not use
-         * public string TypeName { get; internal set; }
-         *
-         * deprecated since S4, always false
-         * public bool IsSeasonRequiredToDrop { get; internal set; }
-         *
-         * deprecated since S4, used by some items (values: 1-4)
-         * public bool SeasonRequiredToDrop { get; internal set; }
-        */
     }
 }
