@@ -18,10 +18,6 @@ namespace DiabloSharp
 
         ProfileEndpoint Profile { get; }
 
-        SeasonEndpoint Season { get; }
-
-        EraEndpoint Era { get; }
-
         Task<AuthenticationScope> CreateAuthenticationScopeAsync();
     }
 }
