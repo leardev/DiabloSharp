@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using DiabloSharp.Clients;
-using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Extensions;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
@@ -16,10 +15,17 @@ namespace DiabloSharp.Endpoints
             _tokenBucket = tokenBucket;
         }
 
-        public async Task<OAuthTokenDto> GetTokenAsync(string clientId, string clientSecret, Region region)
+        public async Task<OAuthToken> GetTokenAsync(string clientId, string clientSecret, Region region)
         {
             using (var client = new OAuthClient(clientId, clientSecret, region.ToDescription(), _tokenBucket))
-                return await client.GetTokenAsync();
+            {
+                var token = await client.GetTokenAsync();
+                return new OAuthToken
+                {
+                    AccessToken = token.AccessToken,
+                    SecondsUntilExpiration = token.SecondsUntilExpiration
+                };
+            }
         }
     }
 }

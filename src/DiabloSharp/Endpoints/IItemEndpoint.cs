@@ -6,24 +6,24 @@ namespace DiabloSharp.Endpoints
 {
     public interface IItemEndpoint : IEndpoint
     {
-        Task<ItemEquipment> GetEquipmentAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
+        Task<ItemEquipment> GetEquipmentAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
 
-        Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(AuthenticationScope authenticationScope);
+        Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(IAuthenticationScope authenticationScope);
 
-        Task<ItemGem> GetGemAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
+        Task<ItemGem> GetGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
 
-        Task<IEnumerable<ItemGem>> GetGemsAsync(AuthenticationScope authenticationScope);
+        Task<IEnumerable<ItemGem>> GetGemsAsync(IAuthenticationScope authenticationScope);
 
-        Task<ItemLegendaryGem> GetLegendaryGemAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
+        Task<ItemLegendaryGem> GetLegendaryGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
 
-        Task<IEnumerable<ItemLegendaryGem>> GetLegendaryGemsAsync(AuthenticationScope authenticationScope);
+        Task<IEnumerable<ItemLegendaryGem>> GetLegendaryGemsAsync(IAuthenticationScope authenticationScope);
 
-        Task<ItemLegendaryPotion> GetLegendaryPotionAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
+        Task<ItemLegendaryPotion> GetLegendaryPotionAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
 
-        Task<IEnumerable<ItemLegendaryPotion>> GetLegendaryPotionsAsync(AuthenticationScope authenticationScope);
+        Task<IEnumerable<ItemLegendaryPotion>> GetLegendaryPotionsAsync(IAuthenticationScope authenticationScope);
 
-        Task<ItemFollowerToken> GetFollowerTokenAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
+        Task<ItemFollowerToken> GetFollowerTokenAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier);
 
-        Task<IEnumerable<ItemFollowerToken>> GetFollowerTokensAsync(AuthenticationScope authenticationScope);
+        Task<IEnumerable<ItemFollowerToken>> GetFollowerTokensAsync(IAuthenticationScope authenticationScope);
     }
 }

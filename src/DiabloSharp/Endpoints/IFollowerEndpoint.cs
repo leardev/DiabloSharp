@@ -5,6 +5,6 @@ namespace DiabloSharp.Endpoints
 {
     public interface IFollowerEndpoint : IEndpoint
     {
-        Task<Follower> GetFollowerAsync(AuthenticationScope authenticationScope, FollowerIdentifier followerId);
+        Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, FollowerIdentifier followerId);
     }
 }

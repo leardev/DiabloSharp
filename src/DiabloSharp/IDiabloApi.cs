@@ -18,6 +18,6 @@ namespace DiabloSharp
 
         IProfileEndpoint Profile { get; }
 
-        Task<AuthenticationScope> CreateAuthenticationScopeAsync();
+        Task<IAuthenticationScope> CreateAuthenticationScopeAsync();
     }
 }

@@ -39,13 +39,18 @@ namespace DiabloSharp
 
         public IProfileEndpoint Profile { get; }
 
-        public async Task<AuthenticationScope> CreateAuthenticationScopeAsync()
+        public async Task<IAuthenticationScope> CreateAuthenticationScopeAsync()
         {
             var authToken = await _oAuth.GetTokenAsync(_configuration.ClientId, _configuration.ClientSecret, _configuration.Region);
             var expirationDate = DateTime.Now.AddSeconds(authToken.SecondsUntilExpiration);
 
-            return new AuthenticationScope(authToken.AccessToken, _configuration.Localization, _configuration.Region,
-                expirationDate);
+            return new AuthenticationScope
+            {
+                AccessToken = authToken.AccessToken,
+                Localization = _configuration.Localization,
+                Region = _configuration.Region,
+                ExpirationDate = expirationDate
+            };
         }
     }
 }

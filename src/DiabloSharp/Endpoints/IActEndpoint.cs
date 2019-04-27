@@ -6,8 +6,8 @@ namespace DiabloSharp.Endpoints
 {
     public interface IActEndpoint : IEndpoint
     {
-        Task<IEnumerable<Act>> GetActsAsync(AuthenticationScope authenticationScope);
+        Task<IEnumerable<Act>> GetActsAsync(IAuthenticationScope authenticationScope);
 
-        Task<Act> GetActAsync(AuthenticationScope authenticationScope, ActIdentifier actId);
+        Task<Act> GetActAsync(IAuthenticationScope authenticationScope, ActIdentifier actId);
     }
 }

@@ -14,7 +14,7 @@ namespace DiabloSharp.Endpoints
             _tokenBucket = tokenBucket;
         }
 
-        internal BattleNetClient CreateClient(AuthenticationScope authenticationScope)
+        internal BattleNetClient CreateClient(IAuthenticationScope authenticationScope)
         {
             authenticationScope.EnsureExpiration();
             return new BattleNetClient(authenticationScope.AccessToken, authenticationScope.Region.ToDescription(),

@@ -15,7 +15,7 @@ namespace DiabloSharp.Endpoints
             _followerConverter = new FollowerConverter();
         }
 
-        public async Task<Follower> GetFollowerAsync(AuthenticationScope authenticationScope, FollowerIdentifier followerId)
+        public async Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, FollowerIdentifier followerId)
         {
             var followerSlug = followerId.ToString().ToLower();
 

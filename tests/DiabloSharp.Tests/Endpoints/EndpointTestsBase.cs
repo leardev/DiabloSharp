@@ -9,7 +9,7 @@ namespace DiabloSharp.Tests.Endpoints
     {
         protected IDiabloApi DiabloApi { get; private set; }
 
-        protected AuthenticationScope AuthenticationScope { get; private set; }
+        protected IAuthenticationScope AuthenticationScope { get; private set; }
 
         [OneTimeSetUp]
         public async Task SetupAsync()

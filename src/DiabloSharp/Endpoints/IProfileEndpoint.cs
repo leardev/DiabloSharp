@@ -5,8 +5,8 @@ namespace DiabloSharp.Endpoints
 {
     public interface IProfileEndpoint : IEndpoint
     {
-        Task<Account> GetAccountAsync(AuthenticationScope authenticationScope, BattleTagIdentifier battleTagId);
+        Task<Account> GetAccountAsync(IAuthenticationScope authenticationScope, BattleTagIdentifier battleTagId);
 
-        Task<Hero> GetHeroAsync(AuthenticationScope authenticationScope, HeroIdentifier heroId);
+        Task<Hero> GetHeroAsync(IAuthenticationScope authenticationScope, HeroIdentifier heroId);
     }
 }

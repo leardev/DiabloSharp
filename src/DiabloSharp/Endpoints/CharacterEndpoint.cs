@@ -18,7 +18,7 @@ namespace DiabloSharp.Endpoints
             _characterConverter = new CharacterConverter();
         }
 
-        public async Task<CharacterClass> GetCharacterClassAsync(AuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
+        public async Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
         {
             var artisanSlug = characterClassId.ToDescription();
 

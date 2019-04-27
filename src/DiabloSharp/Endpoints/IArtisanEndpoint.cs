@@ -5,8 +5,8 @@ namespace DiabloSharp.Endpoints
 {
     public interface IArtisanEndpoint : IEndpoint
     {
-        Task<Artisan> GetArtisanAsync(AuthenticationScope authenticationScope, ArtisanIdentifier artisanId);
+        Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId);
 
-        Task<Recipe> GetRecipeAsync(AuthenticationScope authenticationScope, ArtisanIdentifier artisanId, string recipeSlug);
+        Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId, string recipeSlug);
     }
 }

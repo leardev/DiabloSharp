@@ -124,67 +124,67 @@ namespace DiabloSharp.Endpoints
             #endregion
         }
 
-        public Task<ItemEquipment> GetEquipmentAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemEquipment> GetEquipmentAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
         {
             var converter = new ItemEquipmentConverter();
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(IAuthenticationScope authenticationScope)
         {
             var converter = new ItemEquipmentConverter();
             return GetItems(authenticationScope, converter, _equipmentIndices);
         }
 
-        public Task<ItemGem> GetGemAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemGem> GetGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
         {
             var converter = new ItemGemConverter();
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<IEnumerable<ItemGem>> GetGemsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemGem>> GetGemsAsync(IAuthenticationScope authenticationScope)
         {
             var converter = new ItemGemConverter();
             return GetItems(authenticationScope, converter, "item-type/gem");
         }
 
-        public Task<ItemLegendaryGem> GetLegendaryGemAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemLegendaryGem> GetLegendaryGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
         {
             var converter = new ItemLegendaryGemConverter();
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<IEnumerable<ItemLegendaryGem>> GetLegendaryGemsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemLegendaryGem>> GetLegendaryGemsAsync(IAuthenticationScope authenticationScope)
         {
             var converter = new ItemLegendaryGemConverter();
             return GetItems(authenticationScope, converter, "item-type/upgradeablejewel");
         }
 
-        public Task<ItemLegendaryPotion> GetLegendaryPotionAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemLegendaryPotion> GetLegendaryPotionAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
         {
             var converter = new ItemLegendaryPotionConverter();
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<IEnumerable<ItemLegendaryPotion>> GetLegendaryPotionsAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemLegendaryPotion>> GetLegendaryPotionsAsync(IAuthenticationScope authenticationScope)
         {
             var converter = new ItemLegendaryPotionConverter();
             return GetItems(authenticationScope, converter, "item-type/healthpotion");
         }
 
-        public Task<ItemFollowerToken> GetFollowerTokenAsync(AuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemFollowerToken> GetFollowerTokenAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
         {
             var converter = new ItemFollowerTokenConverter();
             return GetItem(authenticationScope, converter, itemIdentifier);
         }
 
-        public Task<IEnumerable<ItemFollowerToken>> GetFollowerTokensAsync(AuthenticationScope authenticationScope)
+        public Task<IEnumerable<ItemFollowerToken>> GetFollowerTokensAsync(IAuthenticationScope authenticationScope)
         {
             var converter = new ItemFollowerTokenConverter();
             return GetItems(authenticationScope, converter, _followerTokenIndices);
         }
 
-        private async Task<T> GetItem<T>(AuthenticationScope authenticationScope, ItemConverter<T> converter, ItemIdentifier itemIdentifier) where T : Item, new()
+        private async Task<T> GetItem<T>(IAuthenticationScope authenticationScope, ItemConverter<T> converter, ItemIdentifier itemIdentifier) where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {
@@ -193,7 +193,7 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        private async Task<IEnumerable<T>> GetItems<T>(AuthenticationScope authenticationScope, ItemConverter<T> converter, params string[] itemTypeIndices) where T : Item, new()
+        private async Task<IEnumerable<T>> GetItems<T>(IAuthenticationScope authenticationScope, ItemConverter<T> converter, params string[] itemTypeIndices) where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {

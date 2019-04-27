@@ -16,7 +16,7 @@ namespace DiabloSharp.Endpoints
             _actConverter = new ActConverter();
         }
 
-        public async Task<IEnumerable<Act>> GetActsAsync(AuthenticationScope authenticationScope)
+        public async Task<IEnumerable<Act>> GetActsAsync(IAuthenticationScope authenticationScope)
         {
             using (var client = CreateClient(authenticationScope))
             {
@@ -25,7 +25,7 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        public async Task<Act> GetActAsync(AuthenticationScope authenticationScope, ActIdentifier actId)
+        public async Task<Act> GetActAsync(IAuthenticationScope authenticationScope, ActIdentifier actId)
         {
             var actIdIndex = (byte) actId;
 

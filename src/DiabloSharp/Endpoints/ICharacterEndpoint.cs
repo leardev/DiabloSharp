@@ -5,6 +5,6 @@ namespace DiabloSharp.Endpoints
 {
     public interface ICharacterEndpoint : IEndpoint
     {
-        Task<CharacterClass> GetCharacterClassAsync(AuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId);
+        Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId);
     }
 }
