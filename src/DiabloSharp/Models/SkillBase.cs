@@ -1,3 +1,6 @@
+using System.Text;
+using DiabloSharp.Extensions;
+
 namespace DiabloSharp.Models
 {
     public class SkillBase<T> : ModelBase<T>
@@ -9,5 +12,13 @@ namespace DiabloSharp.Models
         public string TooltipUrl { get; internal set; }
 
         public string IconUrl { get; internal set; }
+
+        protected override StringBuilder ToBuilder()
+        {
+            var builder = base.ToBuilder();
+            builder.AppendProperty(nameof(Id), Id.ToString());
+            builder.AppendProperty(nameof(Name), Name);
+            return builder;
+        }
     }
 }
