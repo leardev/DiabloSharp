@@ -18,7 +18,7 @@ namespace DiabloSharp.Converters
             var item = base.ItemToModel(itemDto);
             item.Kind = EnumConversionHelper.ItemEquipmentKindFromString(itemDto.Type.Id);
             item.Slots = SlotsToModel(itemDto);
-            item.Classes = EnumConversionHelper.CharacterClassIdentifiersFromItemTypeId(itemDto.Type.Id);
+            item.Classes = EnumConversionHelper.CharacterClassIdentifiersFromString(itemDto.Type.Id);
             item.IsTwoHanded = itemDto.Type.TwoHanded;
             item.Set = SetToModel(itemDto);
             return item;

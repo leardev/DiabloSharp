@@ -339,7 +339,7 @@ namespace DiabloSharp.Helpers
             }
         }
 
-        public static CharacterClassIdentifier CharacterClassIdentifierFromSlug(string value)
+        public static CharacterClassIdentifier CharacterClassIdentifierFromString(string value)
         {
             switch (value)
             {
@@ -362,7 +362,7 @@ namespace DiabloSharp.Helpers
             }
         }
 
-        public static string CharacterClassIdentifierToSlug(CharacterClassIdentifier value)
+        public static string CharacterClassIdentifierToString(CharacterClassIdentifier value)
         {
             switch (value)
             {
@@ -385,7 +385,7 @@ namespace DiabloSharp.Helpers
             }
         }
 
-        public static IEnumerable<CharacterClassIdentifier> CharacterClassIdentifiersFromItemTypeId(string value)
+        public static IEnumerable<CharacterClassIdentifier> CharacterClassIdentifiersFromString(string value)
         {
             var identifiers = new List<CharacterClassIdentifier>();
             switch (value)

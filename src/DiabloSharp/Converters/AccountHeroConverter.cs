@@ -19,7 +19,7 @@ namespace DiabloSharp.Converters
                     Name = fallenHeroDto.Name,
                     Level = fallenHeroDto.Level,
                     Gender = (Gender) fallenHeroDto.Gender,
-                    Class = EnumConversionHelper.CharacterClassIdentifierFromSlug(fallenHeroDto.Class),
+                    Class = EnumConversionHelper.CharacterClassIdentifierFromString(fallenHeroDto.Class),
                     IsDead = true
                 };
                 fallenHeroes.Add(fallenHero);

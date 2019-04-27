@@ -20,7 +20,7 @@ namespace DiabloSharp.Endpoints
 
         public async Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
         {
-            var artisanSlug = EnumConversionHelper.CharacterClassIdentifierToSlug(characterClassId);
+            var artisanSlug = EnumConversionHelper.CharacterClassIdentifierToString(characterClassId);
 
             using (var client = CreateClient(authenticationScope))
             {

@@ -12,7 +12,7 @@ namespace DiabloSharp.Converters
         public Hero HeroToModel(HeroIdentifier heroIdentifier, HeroDto heroDto)
         {
             var gameMode = GameModeToModel(heroDto);
-            var characterClass = EnumConversionHelper.CharacterClassIdentifierFromSlug(heroDto.Class);
+            var characterClass = EnumConversionHelper.CharacterClassIdentifierFromString(heroDto.Class);
             var passives = PassivesToModel(characterClass, heroDto);
             var actives = ActivesToModel(characterClass, heroDto);
             var items = ItemsToModel(heroDto);
