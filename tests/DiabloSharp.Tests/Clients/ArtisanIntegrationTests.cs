@@ -33,7 +33,7 @@ namespace DiabloSharp.Tests.Clients
             return trainedRecipes.Concat(taughtRecipes);
         }
 
-        private async Task<ArtisanRecipeDto> ProcessArtisanRecipe(string artisanSlug, ArtisanRecipeDto recipe)
+        private async Task<RecipeDto> ProcessArtisanRecipe(string artisanSlug, ArtisanRecipeDto recipe)
         {
             return await Client.GetRecipeAsync(artisanSlug, recipe.Slug);
         }

@@ -120,6 +120,22 @@ namespace DiabloSharp.Helpers
             }
         }
 
+        public static ArtisanIdentifier ArtisanIdentifierFromString(string value)
+        {
+            switch (value)
+            {
+                case "blacksmith":
+                    return ArtisanIdentifier.Blacksmith;
+                case "jeweler":
+                    return ArtisanIdentifier.Jeweler;
+                case "mystic":
+                    return ArtisanIdentifier.Mystic;
+
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
         public static ItemQuality ItemQualityFromString(string value)
         {
             switch (value)
@@ -588,6 +604,47 @@ namespace DiabloSharp.Helpers
                     return HeroStatIdentifier.PrimaryResource;
                 case "secondaryResource":
                     return HeroStatIdentifier.SecondaryResource;
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
+        public static ItemEquipmentSlot? ItemEquipmentSlotFromString(string value)
+        {
+            switch (value)
+            {
+                case "neck":
+                    return ItemEquipmentSlot.Neck;
+                case "right-hand":
+                    return ItemEquipmentSlot.Offhand;
+                case "left-hand":
+                    return ItemEquipmentSlot.Mainhand;
+                case "waist":
+                    return ItemEquipmentSlot.Waist;
+                case "feet":
+                    return ItemEquipmentSlot.Feet;
+                case "bracers":
+                    return ItemEquipmentSlot.Wrists;
+                case "torso":
+                    return ItemEquipmentSlot.Torso;
+                case "hands":
+                    return ItemEquipmentSlot.Hands;
+                case "head":
+                    return ItemEquipmentSlot.Head;
+                case "legs":
+                    return ItemEquipmentSlot.Legs;
+                case "left-finger":
+                    return ItemEquipmentSlot.LeftFinger;
+                case "right-finger":
+                    return ItemEquipmentSlot.RightFinger;
+                case "shoulders":
+                    return ItemEquipmentSlot.Shoulders;
+                case "follower-left-finger":
+                case "follower-right-finger":
+                case "follower-right-hand":
+                case "follower-left-hand":
+                case "follower-neck":
+                    return null;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }

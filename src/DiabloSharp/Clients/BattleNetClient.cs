@@ -52,9 +52,9 @@ namespace DiabloSharp.Clients
             return GetAsync<ArtisanDto>($"d3/data/artisan/{artisanSlug}");
         }
 
-        public Task<ArtisanRecipeDto> GetRecipeAsync(string artisanSlug, string recipeSlug)
+        public Task<RecipeDto> GetRecipeAsync(string artisanSlug, string recipeSlug)
         {
-            return GetAsync<ArtisanRecipeDto>($"d3/data/artisan/{artisanSlug}/recipe/{recipeSlug}");
+            return GetAsync<RecipeDto>($"d3/data/artisan/{artisanSlug}/recipe/{recipeSlug}");
         }
 
         #endregion

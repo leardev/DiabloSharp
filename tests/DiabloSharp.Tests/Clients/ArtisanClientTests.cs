@@ -24,7 +24,7 @@ namespace DiabloSharp.Tests.Clients
         public async Task GetRecipeTest()
         {
             var recipe = await Client.GetRecipeAsync("blacksmith", "apprentice-flamberge");
-            AssertRecipe(recipe);
+            Assert.IsNotNull(recipe);
         }
 
         private void AssertArtisan(ArtisanDto artisan)

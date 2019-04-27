@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DiabloSharp.Converters;
+using DiabloSharp.Mappers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -8,21 +8,19 @@ namespace DiabloSharp.Endpoints
     internal class FollowerEndpoint : Endpoint,
                                       IFollowerEndpoint
     {
-        private readonly FollowerConverter _followerConverter;
-
         public FollowerEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
-            _followerConverter = new FollowerConverter();
         }
 
         public async Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, FollowerIdentifier followerId)
         {
+            var mapper = new FollowerMapper();
             var followerSlug = followerId.ToString().ToLower();
 
             using (var client = CreateClient(authenticationScope))
             {
                 var follower = await client.GetFollowerAsync(followerSlug);
-                return _followerConverter.FollowerToModel(follower);
+                return mapper.Map(follower);
             }
         }
     }
