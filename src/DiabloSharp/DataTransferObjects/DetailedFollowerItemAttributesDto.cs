@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class DetailedFollowerItemAttributesDto
+    internal class DetailedFollowerItemAttributesDto
     {
         [DataMember(Name = "primary")]
         public IEnumerable<string> Primaries { get; set; }

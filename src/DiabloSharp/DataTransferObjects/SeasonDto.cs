@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class SeasonDto
+    internal class SeasonDto
     {
         [DataMember(Name = "_links")]
         public SeasonLinksDto Links { get; set; }

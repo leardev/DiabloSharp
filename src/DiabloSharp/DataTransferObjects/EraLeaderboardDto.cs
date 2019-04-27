@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class EraLeaderboardDto
+    internal class EraLeaderboardDto
     {
         [DataMember(Name = "ladder")]
         public EraSelfDto Ladder { get; set; }

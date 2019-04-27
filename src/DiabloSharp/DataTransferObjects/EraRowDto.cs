@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class EraRowDto
+    internal class EraRowDto
     {
         [DataMember(Name = "player")]
         public IEnumerable<EraPlayerDto> Players { get; set; }

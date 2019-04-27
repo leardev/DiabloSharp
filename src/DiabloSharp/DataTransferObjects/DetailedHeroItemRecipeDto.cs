@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class DetailedHeroItemRecipeDto
+    internal class DetailedHeroItemRecipeDto
     {
         [DataMember(Name = "id")]
         public string Id { get; set; }

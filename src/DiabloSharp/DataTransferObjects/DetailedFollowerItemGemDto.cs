@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class DetailedFollowerItemGemDto
+    internal class DetailedFollowerItemGemDto
     {
         [DataMember(Name = "item")]
         public DetailedFollowerItemTypeDto Item { get; set; }

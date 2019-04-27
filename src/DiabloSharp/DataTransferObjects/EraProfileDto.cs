@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class EraProfileDto
+    internal class EraProfileDto
     {
         [DataMember(Name = "eraId")]
         public long Id { get; set; }

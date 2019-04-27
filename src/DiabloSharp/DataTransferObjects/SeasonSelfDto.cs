@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    public class SeasonSelfDto
+    internal class SeasonSelfDto
     {
         [DataMember(Name = "href")]
         public string Href { get; set; }
