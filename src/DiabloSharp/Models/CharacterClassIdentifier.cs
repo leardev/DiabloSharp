@@ -1,22 +1,22 @@
-using System.ComponentModel;
+using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
     public enum CharacterClassIdentifier
     {
-        [Description("barbarian")]
+        [LocalizationEnUs("Barbarian")]
         Barbarian,
-        [Description("crusader")]
+        [LocalizationEnUs("Crusader")]
         Crusader,
-        [Description("demon-hunter")]
+        [LocalizationEnUs("Demon Hunter")]
         DemonHunter,
-        [Description("monk")]
+        [LocalizationEnUs("Monk")]
         Monk,
-        [Description("necromancer")]
+        [LocalizationEnUs("Necromancer")]
         Necromancer,
-        [Description("witch-doctor")]
+        [LocalizationEnUs("Witch Doctor")]
         WitchDoctor,
-        [Description("wizard")]
+        [LocalizationEnUs("Wizard")]
         Wizard
     }
 }

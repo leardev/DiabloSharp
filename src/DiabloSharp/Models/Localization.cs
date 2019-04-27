@@ -1,26 +1,26 @@
-﻿using System.ComponentModel;
+using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
     public enum Localization
     {
-        [Description("en_US")]
+        [LocalizationEnUs("EnglishUs")]
         EnglishUs,
-        [Description("en_GB")]
+        [LocalizationEnUs("EnglishGb")]
         EnglishGb,
-        [Description("de_DE")]
+        [LocalizationEnUs("German")]
         German,
-        [Description("es_ES")]
+        [LocalizationEnUs("Spanish")]
         Spanish,
-        [Description("fr_FR")]
+        [LocalizationEnUs("French")]
         French,
-        [Description("it_IT")]
+        [LocalizationEnUs("Italian")]
         Italian,
-        [Description("pl_PL")]
+        [LocalizationEnUs("Polish")]
         Polish,
-        [Description("pt_PT")]
+        [LocalizationEnUs("Portuguese")]
         Portuguese,
-        [Description("ru_RU")]
+        [LocalizationEnUs("Russian")]
         Russian
     }
 }

@@ -1,16 +1,16 @@
-﻿using System.ComponentModel;
+using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
     public enum Region
     {
-        [Description("eu")]
+        [LocalizationEnUs("Europe")]
         Europe,
-        [Description("kr")]
-        Korean,
-        [Description("tw")]
+        [LocalizationEnUs("Korea")]
+        Korea,
+        [LocalizationEnUs("Taiwan")]
         Taiwan,
-        [Description("us")]
+        [LocalizationEnUs("United States")]
         UnitedStates
     }
 }

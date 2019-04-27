@@ -1,62 +1,62 @@
-﻿using System.ComponentModel;
+using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
     public enum HeroStatIdentifier
     {
-        [Description("life")]
+        [LocalizationEnUs("Life")]
         Life,
-        [Description("damage")]
+        [LocalizationEnUs("Damage")]
         Damage,
-        [Description("toughness")]
+        [LocalizationEnUs("Toughness")]
         Toughness,
-        [Description("healing")]
+        [LocalizationEnUs("Healing")]
         Healing,
-        [Description("attackSpeed")]
+        [LocalizationEnUs("Attack Speed")]
         AttackSpeed,
-        [Description("armor")]
+        [LocalizationEnUs("Armor")]
         Armor,
-        [Description("strength")]
+        [LocalizationEnUs("Strength")]
         Strength,
-        [Description("dexterity")]
+        [LocalizationEnUs("Dexterity")]
         Dexterity,
-        [Description("vitality")]
+        [LocalizationEnUs("Vitality")]
         Vitality,
-        [Description("intelligence")]
+        [LocalizationEnUs("Intelligence")]
         Intelligence,
-        [Description("physicalResist")]
-        PhysicalResist,
-        [Description("fireResist")]
-        FireResist,
-        [Description("coldResist")]
-        ColdResist,
-        [Description("lightningResist")]
-        LightningResist,
-        [Description("poisonResist")]
-        PoisonResist,
-        [Description("arcaneResist")]
-        ArcaneResist,
-        [Description("blockChance")]
+        [LocalizationEnUs("Physical Resistance")]
+        PhysicalResistance,
+        [LocalizationEnUs("Fire Resistance")]
+        FireResistance,
+        [LocalizationEnUs("Cold Resistance")]
+        ColdResistance,
+        [LocalizationEnUs("Lightning Resistance")]
+        LightningResistance,
+        [LocalizationEnUs("Poison Resistance")]
+        PoisonResistance,
+        [LocalizationEnUs("Arcane Resistance")]
+        ArcaneResistance,
+        [LocalizationEnUs("Block Chance")]
         BlockChance,
-        [Description("blockAmountMin")]
-        BlockAmountMin,
-        [Description("blockAmountMax")]
-        BlockAmountMax,
-        [Description("goldFind")]
+        [LocalizationEnUs("Block Amount Minimum")]
+        BlockAmountMinimum,
+        [LocalizationEnUs("Block Amount Maximum")]
+        BlockAmountMaximum,
+        [LocalizationEnUs("Gold Find")]
         GoldFind,
-        [Description("critChance")]
-        CritChance,
-        [Description("thorns")]
+        [LocalizationEnUs("Critical Hit Chance")]
+        CriticalHitChance,
+        [LocalizationEnUs("Thorns")]
         Thorns,
-        [Description("lifeSteal")]
+        [LocalizationEnUs("Life Steal")]
         LifeSteal,
-        [Description("lifePerKill")]
+        [LocalizationEnUs("Life per Kill")]
         LifePerKill,
-        [Description("lifeOnHit")]
-        LifeOnHit,
-        [Description("primaryResource")]
+        [LocalizationEnUs("Life per Hit")]
+        LifePerHit,
+        [LocalizationEnUs("Primary Resource")]
         PrimaryResource,
-        [Description("secondaryResource")]
+        [LocalizationEnUs("Secondary Resource")]
         SecondaryResource
     }
 }
