@@ -1,19 +1,19 @@
-﻿using System.ComponentModel;
-using System.Linq;
+﻿using System.Linq;
+using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Extensions
 {
-    internal static class EnumExtensions
+    public static class EnumExtensions
     {
-        public static string ToDescription<TEnum>(this TEnum value) where TEnum : struct
+        public static string ToLocalizationEnUs<TEnum>(this TEnum value) where TEnum : struct
         {
             var type = value.GetType();
             var fieldInfo = type.GetField(value.ToString());
-            var attributes = fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false)
-                .Cast<DescriptionAttribute>()
+            var attributes = fieldInfo.GetCustomAttributes(typeof(LocalizationEnUsAttribute), false)
+                .Cast<LocalizationEnUsAttribute>()
                 .ToList();
 
-            return attributes.Any() ? attributes[0].Description : value.ToString();
+            return attributes.Any() ? attributes[0].Text : value.ToString();
         }
     }
 }
