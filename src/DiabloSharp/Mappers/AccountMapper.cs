@@ -62,12 +62,12 @@ namespace DiabloSharp.Mappers
                 },
                 ArtisanLevels = new[]
                 {
-                    new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, Artisan = ArtisanIdentifier.Blacksmith, Level = input.Blacksmith.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, Artisan = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithHardcore.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, Artisan = ArtisanIdentifier.Jeweler, Level = input.Jeweler.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, Artisan = ArtisanIdentifier.Jeweler, Level = input.JewelerHardcore.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, Artisan = ArtisanIdentifier.Mystic, Level = input.Mystic.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, Artisan = ArtisanIdentifier.Mystic, Level = input.MysticHardcore.Level }
+                    new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.Blacksmith.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithHardcore.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.Jeweler.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.JewelerHardcore.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.Mystic.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.MysticHardcore.Level }
                 }
             };
         }
@@ -93,12 +93,12 @@ namespace DiabloSharp.Mappers
                 },
                 ArtisanLevels = new[]
                 {
-                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, Artisan = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithSeason.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, Artisan = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithSeasonHardcore.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, Artisan = ArtisanIdentifier.Jeweler, Level = input.JewelerSeason.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, Artisan = ArtisanIdentifier.Jeweler, Level = input.JewelerSeasonHardcore.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, Artisan = ArtisanIdentifier.Mystic, Level = input.MysticSeason.Level },
-                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, Artisan = ArtisanIdentifier.Mystic, Level = input.MysticSeasonHardcore.Level }
+                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithSeason.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithSeasonHardcore.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.JewelerSeason.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.JewelerSeasonHardcore.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.MysticSeason.Level },
+                    new ArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.MysticSeasonHardcore.Level }
                 }
             };
         }
