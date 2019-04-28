@@ -20,7 +20,7 @@ namespace DiabloSharp.Sample
 
         private static async Task QueryHeroesFromBattleTagExampleAsync()
         {
-            var battleTagId = new BattleTagIdentifier("leehmanǃ#2543");
+            var battleTagId = new BattleTagId("leehmanǃ#2543");
             var configuration = new DiabloApiConfiguration
             {
                 ClientId = "YOUR_BATTLE_NET_CLIENT_ID",

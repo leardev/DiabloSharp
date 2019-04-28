@@ -4,7 +4,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Act : ModelBase<ActIdentifier>
+    public class Act : ModelBase<ActId>
     {
         public string Slug { get; internal set; }
 

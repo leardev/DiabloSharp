@@ -3,9 +3,9 @@ using DiabloSharp.Infrastructure;
 
 namespace DiabloSharp.Models
 {
-    public class ItemIdentifier : ValueObject
+    public class ItemId : ValueObject
     {
-        public ItemIdentifier(string slug, string id)
+        public ItemId(string slug, string id)
         {
             Slug = slug;
             Id = id;

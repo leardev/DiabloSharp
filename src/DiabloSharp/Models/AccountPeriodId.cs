@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum AccountPeriodIdentifier
+    public enum AccountPeriodId
     {
         [LocalizationEnUs("Era")]
         Era = 0,

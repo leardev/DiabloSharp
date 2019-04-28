@@ -4,7 +4,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Account : ModelBase<BattleTagIdentifier>
+    public class Account : ModelBase<BattleTagId>
     {
         public string Clan { get; internal set; }
 
@@ -14,7 +14,7 @@ namespace DiabloSharp.Models
 
         public IEnumerable<AccountPeriodSeason> Seasons { get; internal set; }
 
-        public IEnumerable<HeroIdentifier> HeroIds { get; internal set; }
+        public IEnumerable<HeroId> HeroIds { get; internal set; }
 
         public IEnumerable<AccountFallenHero> FallenHeros { get; internal set; }
 

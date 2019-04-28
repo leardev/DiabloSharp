@@ -1,14 +1,14 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Hero : ModelBase<HeroIdentifier>
+    public class Hero : ModelBase<HeroId>
     {
         public string Name { get; internal set; }
 
-        public CharacterIdentifier Character { get; internal set; }
+        public CharacterId Character { get; internal set; }
 
         public HeroGender Gender { get; internal set; }
 
@@ -16,7 +16,7 @@ namespace DiabloSharp.Models
 
         public bool IsDead { get; internal set; }
 
-        public GameModeIdentifier GameMode { get; internal set; }
+        public GameModeId GameMode { get; internal set; }
 
         public long HighestSoloRift { get; internal set; }
 

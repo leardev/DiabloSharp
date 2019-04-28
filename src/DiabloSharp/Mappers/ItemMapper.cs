@@ -15,7 +15,7 @@ namespace DiabloSharp.Mappers
 
         protected override void Map(ItemDto input, TOut output)
         {
-            output.Id = new ItemIdentifier(input.Slug, input.Id);
+            output.Id = new ItemId(input.Slug, input.Id);
             output.Name = input.Name;
             output.IconUrl = input.Icon;
             output.TooltipUrl = input.TooltipParams;

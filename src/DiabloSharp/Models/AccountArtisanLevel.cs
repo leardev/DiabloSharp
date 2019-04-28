@@ -5,9 +5,9 @@ namespace DiabloSharp.Models
 {
     public class AccountArtisanLevel : ModelBase
     {
-        public ArtisanIdentifier ArtisanId { get; internal set; }
+        public ArtisanId ArtisanId { get; internal set; }
 
-        public GameModeIdentifier GameMode { get; internal set; }
+        public GameModeId GameMode { get; internal set; }
 
         public long Level { get; internal set; }
 

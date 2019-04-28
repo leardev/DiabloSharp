@@ -4,7 +4,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Character : ModelBase<CharacterIdentifier>
+    public class Character : ModelBase<CharacterId>
     {
         public string Name { get; internal set; }
 

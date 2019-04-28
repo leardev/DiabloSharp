@@ -26,7 +26,7 @@ namespace DiabloSharp.Mappers
             output.Recipes = recipes;
         }
 
-        private IEnumerable<ArtisanRecipe> MapRecipes(ArtisanIdentifier artisanId, ArtisanRecipeRank rank, ArtisanRecipeSource source, IEnumerable<ArtisanRecipeDto> inputs)
+        private IEnumerable<ArtisanRecipe> MapRecipes(ArtisanId artisanId, ArtisanRecipeRank rank, ArtisanRecipeSource source, IEnumerable<ArtisanRecipeDto> inputs)
         {
             var outputs = new List<ArtisanRecipe>();
             foreach (var input in inputs)
@@ -37,19 +37,19 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private ArtisanRecipe MapRecipe(ArtisanIdentifier artisanId, ArtisanRecipeRank rank, ArtisanRecipeSource source, ArtisanRecipeDto input)
+        private ArtisanRecipe MapRecipe(ArtisanId artisanId, ArtisanRecipeRank rank, ArtisanRecipeSource source, ArtisanRecipeDto input)
         {
             var reagents = MapReagents(input.Reagents);
 
             return new ArtisanRecipe
             {
-                Id = new RecipeIdentifier(artisanId, input.Slug),
+                Id = new RecipeId(artisanId, input.Slug),
                 Name = input.Name,
                 Cost = input.Cost,
                 Rank = rank,
                 Source = source,
                 Reagents = reagents,
-                CraftedItemId = new ItemIdentifier(input.ItemProduced.Slug, input.ItemProduced.Id)
+                CraftedItemId = new ItemId(input.ItemProduced.Slug, input.ItemProduced.Id)
             };
         }
 
@@ -70,7 +70,7 @@ namespace DiabloSharp.Mappers
             return new RecipeReagent
             {
                 Quantity = input.Quantity,
-                Id = new ItemIdentifier(input.Item.Slug, input.Item.Id)
+                Id = new ItemId(input.Item.Slug, input.Item.Id)
             };
         }
     }

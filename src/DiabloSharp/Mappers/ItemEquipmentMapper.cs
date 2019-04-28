@@ -44,9 +44,9 @@ namespace DiabloSharp.Mappers
             };
         }
 
-        private IEnumerable<ItemIdentifier> MapItemPaths(IEnumerable<string> inputs)
+        private IEnumerable<ItemId> MapItemPaths(IEnumerable<string> inputs)
         {
-            var outputs = new List<ItemIdentifier>();
+            var outputs = new List<ItemId>();
             foreach (var input in inputs)
             {
                 var output = ItemIdentifierHelper.FromString(input);

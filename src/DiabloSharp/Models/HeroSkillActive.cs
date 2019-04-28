@@ -1,7 +1,7 @@
-namespace DiabloSharp.Models
+﻿namespace DiabloSharp.Models
 {
     public class HeroSkillActive : HeroSkill
     {
-        public CharacterSkillIdentifier Rune { get; internal set; }
+        public CharacterSkillId Rune { get; internal set; }
     }
 }

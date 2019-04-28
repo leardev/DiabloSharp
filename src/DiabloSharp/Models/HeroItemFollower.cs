@@ -2,6 +2,6 @@
 {
     public class HeroItemFollower : HeroItemEquipment
     {
-        public FollowerIdentifier Follower { get; internal set; }
+        public FollowerId Follower { get; internal set; }
     }
 }

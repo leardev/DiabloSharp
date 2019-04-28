@@ -6,10 +6,10 @@ namespace DiabloSharp.Endpoints
 {
     public interface IArtisanEndpoint : IEndpoint
     {
-        Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId);
+        Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanId artisanId);
 
         Task<IEnumerable<Artisan>> GetArtisansAsync(IAuthenticationScope authenticationScope);
 
-        Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, RecipeIdentifier recipeId);
+        Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, RecipeId recipeId);
     }
 }

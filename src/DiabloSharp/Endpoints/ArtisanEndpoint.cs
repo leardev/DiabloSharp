@@ -16,7 +16,7 @@ namespace DiabloSharp.Endpoints
         {
         }
 
-        public async Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId)
+        public async Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanId artisanId)
         {
             var mapper = new ArtisanMapper();
             var artisanSlug = artisanId.ToString().ToLower();
@@ -30,8 +30,8 @@ namespace DiabloSharp.Endpoints
 
         public async Task<IEnumerable<Artisan>> GetArtisansAsync(IAuthenticationScope authenticationScope)
         {
-            var artisanIds = Enum.GetValues(typeof(ArtisanIdentifier))
-                .Cast<ArtisanIdentifier>()
+            var artisanIds = Enum.GetValues(typeof(ArtisanId))
+                .Cast<ArtisanId>()
                 .ToList();
 
             var artisanTasks = artisanIds.Select(id => GetArtisanAsync(authenticationScope, id));
@@ -39,7 +39,7 @@ namespace DiabloSharp.Endpoints
             return artisans;
         }
 
-        public async Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, RecipeIdentifier recipeId)
+        public async Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, RecipeId recipeId)
         {
             var mapper = new RecipeMapper(recipeId.Id);
             var artisanSlug = EnumConversionHelper.ArtisanIdentifierToString(recipeId.Id);

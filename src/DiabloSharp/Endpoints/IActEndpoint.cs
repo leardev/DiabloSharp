@@ -8,6 +8,6 @@ namespace DiabloSharp.Endpoints
     {
         Task<IEnumerable<Act>> GetActsAsync(IAuthenticationScope authenticationScope);
 
-        Task<Act> GetActAsync(IAuthenticationScope authenticationScope, ActIdentifier actId);
+        Task<Act> GetActAsync(IAuthenticationScope authenticationScope, ActId actId);
     }
 }

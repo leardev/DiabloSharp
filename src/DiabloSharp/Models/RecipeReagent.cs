@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class RecipeReagent : ModelBase<ItemIdentifier>
+    public class RecipeReagent : ModelBase<ItemId>
     {
         public long Quantity { get; internal set; }
 

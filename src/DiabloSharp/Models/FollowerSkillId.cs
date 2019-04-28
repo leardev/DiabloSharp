@@ -3,15 +3,15 @@ using DiabloSharp.Infrastructure;
 
 namespace DiabloSharp.Models
 {
-    public class CharacterSkillIdentifier : ValueObject
+    public class FollowerSkillId : ValueObject
     {
-        public CharacterSkillIdentifier(CharacterIdentifier characterId, string slug)
+        public FollowerSkillId(FollowerId id, string slug)
         {
-            Id = characterId;
+            Id = id;
             Slug = slug;
         }
 
-        public CharacterIdentifier Id { get; }
+        public FollowerId Id { get; }
 
         public string Slug { get; }
 

@@ -6,9 +6,9 @@ namespace DiabloSharp.Mappers
 {
     internal class RecipeMapper : Mapper<RecipeDto, Recipe>
     {
-        private readonly ArtisanIdentifier _artisanId;
+        private readonly ArtisanId _artisanId;
 
-        public RecipeMapper(ArtisanIdentifier artisanId)
+        public RecipeMapper(ArtisanId artisanId)
         {
             _artisanId = artisanId;
         }
@@ -17,11 +17,11 @@ namespace DiabloSharp.Mappers
         {
             var reagents = MapReagents(input.Reagents);
 
-            output.Id = new RecipeIdentifier(_artisanId, input.Slug);
+            output.Id = new RecipeId(_artisanId, input.Slug);
             output.Name = input.Name;
             output.Cost = input.Cost;
             output.Reagents = reagents;
-            output.CraftedItemId = new ItemIdentifier(input.ItemProduced.Slug, input.ItemProduced.Id);
+            output.CraftedItemId = new ItemId(input.ItemProduced.Slug, input.ItemProduced.Id);
         }
 
         private IEnumerable<RecipeReagent> MapReagents(IEnumerable<ReagentDto> inputs)
@@ -41,7 +41,7 @@ namespace DiabloSharp.Mappers
             return new RecipeReagent
             {
                 Quantity = input.Quantity,
-                Id = new ItemIdentifier(input.Item.Slug, input.Item.Id)
+                Id = new ItemId(input.Item.Slug, input.Item.Id)
             };
         }
     }

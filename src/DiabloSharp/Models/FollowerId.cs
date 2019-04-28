@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum FollowerIdentifier
+    public enum FollowerId
     {
         [LocalizationEnUs("Templar")]
         Templar,

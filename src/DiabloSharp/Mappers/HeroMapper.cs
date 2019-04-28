@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
 using DiabloSharp.Models;
@@ -7,7 +7,7 @@ namespace DiabloSharp.Mappers
 {
     internal class HeroMapper : Mapper<HeroDto, Hero>
     {
-        public HeroIdentifier HeroId { get; set; }
+        public HeroId HeroId { get; set; }
 
         protected override void Map(HeroDto input, Hero output)
         {
@@ -37,14 +37,14 @@ namespace DiabloSharp.Mappers
 
         }
 
-        private GameModeIdentifier MapGameMode(HeroDto input)
+        private GameModeId MapGameMode(HeroDto input)
         {
             if (input.Seasonal)
-                return input.Hardcore ? GameModeIdentifier.SeasonHardcore : GameModeIdentifier.SeasonSoftcore;
-            return input.Hardcore ? GameModeIdentifier.EraHardcore : GameModeIdentifier.EraSoftcore;
+                return input.Hardcore ? GameModeId.SeasonHardcore : GameModeId.SeasonSoftcore;
+            return input.Hardcore ? GameModeId.EraHardcore : GameModeId.EraSoftcore;
         }
 
-        private IEnumerable<HeroSkillActive> MapActives(CharacterIdentifier characterId, IEnumerable<HeroActiveSkillDto> inputs)
+        private IEnumerable<HeroSkillActive> MapActives(CharacterId characterId, IEnumerable<HeroActiveSkillDto> inputs)
         {
             var outputs = new List<HeroSkillActive>();
             foreach (var input in inputs)
@@ -55,20 +55,20 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private HeroSkillActive MapActive(CharacterIdentifier characterId, HeroActiveSkillDto input)
+        private HeroSkillActive MapActive(CharacterId characterId, HeroActiveSkillDto input)
         {
-            var runeId = default(CharacterSkillIdentifier);
+            var runeId = default(CharacterSkillId);
             if (input.Rune != null)
-                runeId = new CharacterSkillIdentifier(characterId, input.Rune.Slug);
+                runeId = new CharacterSkillId(characterId, input.Rune.Slug);
 
             return new HeroSkillActive
             {
-                Id = new CharacterSkillIdentifier(characterId, input.Skill.Slug),
+                Id = new CharacterSkillId(characterId, input.Skill.Slug),
                 Rune = runeId
             };
         }
 
-        private IEnumerable<HeroSkillPassive> MapPassives(CharacterIdentifier characterId, IEnumerable<HeroPassiveSkillDto> inputs)
+        private IEnumerable<HeroSkillPassive> MapPassives(CharacterId characterId, IEnumerable<HeroPassiveSkillDto> inputs)
         {
             var outputs = new List<HeroSkillPassive>();
             foreach (var input in inputs)
@@ -79,9 +79,9 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private HeroSkillPassive MapPassive(CharacterIdentifier characterId, HeroPassiveSkillDto input)
+        private HeroSkillPassive MapPassive(CharacterId characterId, HeroPassiveSkillDto input)
         {
-            return new HeroSkillPassive { Id = new CharacterSkillIdentifier(characterId, input.Skill.Slug) };
+            return new HeroSkillPassive { Id = new CharacterSkillId(characterId, input.Skill.Slug) };
         }
 
         private IEnumerable<HeroItemEquipment> MapItems(HeroItemsDto inputs)
@@ -134,41 +134,41 @@ namespace DiabloSharp.Mappers
         {
             var outputs = new List<HeroItemFollower>();
 
-            if (TryMapFollowerItem(FollowerIdentifier.Templar, ItemEquipmentSlot.Neck, input.Templar.Items.Neck, out var output))
+            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.Neck, input.Templar.Items.Neck, out var output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Templar, ItemEquipmentSlot.LeftFinger, input.Templar.Items.LeftFinger, out output))
+            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.LeftFinger, input.Templar.Items.LeftFinger, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Templar, ItemEquipmentSlot.RightFinger, input.Templar.Items.RightFinger, out output))
+            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.RightFinger, input.Templar.Items.RightFinger, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Templar, ItemEquipmentSlot.Mainhand, input.Templar.Items.MainHand, out output))
+            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.Mainhand, input.Templar.Items.MainHand, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Templar, ItemEquipmentSlot.Offhand, input.Templar.Items.OffHand, out output))
+            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.Offhand, input.Templar.Items.OffHand, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Scoundrel, ItemEquipmentSlot.Neck, input.Scoundrel.Items.Neck, out output))
+            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.Neck, input.Scoundrel.Items.Neck, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Scoundrel, ItemEquipmentSlot.LeftFinger, input.Scoundrel.Items.LeftFinger, out output))
+            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.LeftFinger, input.Scoundrel.Items.LeftFinger, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Scoundrel, ItemEquipmentSlot.RightFinger, input.Scoundrel.Items.RightFinger, out output))
+            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.RightFinger, input.Scoundrel.Items.RightFinger, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Scoundrel, ItemEquipmentSlot.Mainhand, input.Scoundrel.Items.MainHand, out output))
+            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.Mainhand, input.Scoundrel.Items.MainHand, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Scoundrel, ItemEquipmentSlot.Offhand, input.Scoundrel.Items.OffHand, out output))
+            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.Offhand, input.Scoundrel.Items.OffHand, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Enchantress, ItemEquipmentSlot.Neck, input.Enchantress.Items.Neck, out output))
+            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.Neck, input.Enchantress.Items.Neck, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Enchantress, ItemEquipmentSlot.LeftFinger, input.Enchantress.Items.LeftFinger, out output))
+            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.LeftFinger, input.Enchantress.Items.LeftFinger, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Enchantress, ItemEquipmentSlot.RightFinger, input.Enchantress.Items.RightFinger, out output))
+            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.RightFinger, input.Enchantress.Items.RightFinger, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Enchantress, ItemEquipmentSlot.Mainhand, input.Enchantress.Items.MainHand, out output))
+            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.Mainhand, input.Enchantress.Items.MainHand, out output))
                 outputs.Add(output);
-            if (TryMapFollowerItem(FollowerIdentifier.Enchantress, ItemEquipmentSlot.Offhand, input.Enchantress.Items.OffHand, out output))
+            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.Offhand, input.Enchantress.Items.OffHand, out output))
                 outputs.Add(output);
 
             return outputs;
         }
 
-        private bool TryMapFollowerItem(FollowerIdentifier follower, ItemEquipmentSlot slot, HeroItemDto input, out HeroItemFollower output)
+        private bool TryMapFollowerItem(FollowerId follower, ItemEquipmentSlot slot, HeroItemDto input, out HeroItemFollower output)
         {
             output = null;
             if (input == null)
@@ -195,7 +195,7 @@ namespace DiabloSharp.Mappers
 
         private HeroItemCube MapCubeItem(HeroItemDto input)
         {
-            /* sometimes not all cube-items are avaible therefore the user has to resolve the ItemIdentifier to determine the cube-slot */
+            /* sometimes not all cube-items are avaible therefore the user has to resolve the ItemId to determine the cube-slot */
             return new HeroItemCube { Id = ItemIdentifierHelper.FromItem(input) };
         }
 

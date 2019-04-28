@@ -5,13 +5,13 @@ using DiabloSharp.Infrastructure;
 
 namespace DiabloSharp.Models
 {
-    public class RecipeIdentifier : ValueObject
+    public class RecipeId : ValueObject
     {
-        public ArtisanIdentifier Id { get; }
+        public ArtisanId Id { get; }
 
         public string Slug { get; }
 
-        public RecipeIdentifier(ArtisanIdentifier id, string slug)
+        public RecipeId(ArtisanId id, string slug)
         {
             Id = id;
             Slug = slug;

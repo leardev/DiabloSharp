@@ -124,10 +124,10 @@ namespace DiabloSharp.Endpoints
             #endregion
         }
 
-        public Task<ItemEquipment> GetEquipmentAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemEquipment> GetEquipmentAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
             var mapper = new ItemEquipmentMapper();
-            return GetItem(authenticationScope, mapper, itemIdentifier);
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(IAuthenticationScope authenticationScope)
@@ -136,10 +136,10 @@ namespace DiabloSharp.Endpoints
             return GetItems(authenticationScope, mapper, _equipmentIndices);
         }
 
-        public Task<ItemGem> GetGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemGem> GetGemAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
             var mapper = new ItemGemMapper();
-            return GetItem(authenticationScope, mapper, itemIdentifier);
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemGem>> GetGemsAsync(IAuthenticationScope authenticationScope)
@@ -148,10 +148,10 @@ namespace DiabloSharp.Endpoints
             return GetItems(authenticationScope, mapper, "item-type/gem");
         }
 
-        public Task<ItemLegendaryGem> GetLegendaryGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemLegendaryGem> GetLegendaryGemAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
             var mapper = new ItemLegendaryGemMapper();
-            return GetItem(authenticationScope, mapper, itemIdentifier);
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemLegendaryGem>> GetLegendaryGemsAsync(IAuthenticationScope authenticationScope)
@@ -160,10 +160,10 @@ namespace DiabloSharp.Endpoints
             return GetItems(authenticationScope, mapper, "item-type/upgradeablejewel");
         }
 
-        public Task<ItemLegendaryPotion> GetLegendaryPotionAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemLegendaryPotion> GetLegendaryPotionAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
             var mapper = new ItemLegendaryPotionMapper();
-            return GetItem(authenticationScope, mapper, itemIdentifier);
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemLegendaryPotion>> GetLegendaryPotionsAsync(IAuthenticationScope authenticationScope)
@@ -172,10 +172,10 @@ namespace DiabloSharp.Endpoints
             return GetItems(authenticationScope, mapper, "item-type/healthpotion");
         }
 
-        public Task<ItemFollowerToken> GetFollowerTokenAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemFollowerToken> GetFollowerTokenAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
             var mapper = new ItemFollowerTokenMapper();
-            return GetItem(authenticationScope, mapper, itemIdentifier);
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemFollowerToken>> GetFollowerTokensAsync(IAuthenticationScope authenticationScope)
@@ -184,11 +184,11 @@ namespace DiabloSharp.Endpoints
             return GetItems(authenticationScope, mapper, _followerTokenIndices);
         }
 
-        private async Task<T> GetItem<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, ItemIdentifier itemIdentifier) where T : Item, new()
+        private async Task<T> GetItem<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, ItemId itemId) where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {
-                var item = await client.GetItemAsync($"item/{itemIdentifier}");
+                var item = await client.GetItemAsync($"item/{itemId}");
                 return mapper.Map(item);
             }
         }

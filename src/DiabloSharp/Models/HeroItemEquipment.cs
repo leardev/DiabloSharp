@@ -4,8 +4,8 @@
     {
         public ItemEquipmentSlot Slot { get; internal set; }
 
-        public ItemIdentifier Transmog { get; internal set; }
+        public ItemId Transmog { get; internal set; }
 
-        public ItemIdentifier Dye { get; internal set; }
+        public ItemId Dye { get; internal set; }
     }
 }

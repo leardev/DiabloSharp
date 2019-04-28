@@ -12,7 +12,7 @@ namespace DiabloSharp.Endpoints
         {
         }
 
-        public async Task<Account> GetAccountAsync(IAuthenticationScope authenticationScope, BattleTagIdentifier battleTagId)
+        public async Task<Account> GetAccountAsync(IAuthenticationScope authenticationScope, BattleTagId battleTagId)
         {
             var mapper = new AccountMapper();
             var battleTag = $"{battleTagId.Name}-{battleTagId.Index}";
@@ -24,7 +24,7 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        public async Task<Hero> GetHeroAsync(IAuthenticationScope authenticationScope, HeroIdentifier heroId)
+        public async Task<Hero> GetHeroAsync(IAuthenticationScope authenticationScope, HeroId heroId)
         {
             var mapper = new HeroMapper { HeroId = heroId };
             var battleTag = $"{heroId.BattleTag.Name}-{heroId.BattleTag.Index}";

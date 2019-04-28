@@ -4,7 +4,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Artisan : ModelBase<ArtisanIdentifier>
+    public class Artisan : ModelBase<ArtisanId>
     {
         public string Name { get; internal set; }
 

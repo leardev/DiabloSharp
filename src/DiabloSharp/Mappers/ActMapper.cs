@@ -10,7 +10,7 @@ namespace DiabloSharp.Mappers
         {
             var quests = MapQuests(input.Quests);
 
-            output.Id = (ActIdentifier)input.Id;
+            output.Id = (ActId)input.Id;
             output.Slug = input.Slug;
             output.Name = input.Name;
             output.Quests = quests;

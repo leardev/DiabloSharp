@@ -1,9 +1,9 @@
-using System.Text;
+﻿using System.Text;
 using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class HeroSkill : ModelBase<CharacterSkillIdentifier>
+    public class HeroSkill : ModelBase<CharacterSkillId>
     {
         protected override StringBuilder ToBuilder()
         {

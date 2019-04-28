@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum ActIdentifier
+    public enum ActId
     {
         [LocalizationEnUs("Act I")]
         Act1 = 1,

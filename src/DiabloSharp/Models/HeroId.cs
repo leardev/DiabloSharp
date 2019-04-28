@@ -3,15 +3,15 @@ using DiabloSharp.Infrastructure;
 
 namespace DiabloSharp.Models
 {
-    public class HeroIdentifier : ValueObject
+    public class HeroId : ValueObject
     {
-        public HeroIdentifier(string battleTag, long id)
+        public HeroId(string battleTag, long id)
         {
-            BattleTag = new BattleTagIdentifier(battleTag);
+            BattleTag = new BattleTagId(battleTag);
             Id = id;
         }
 
-        public BattleTagIdentifier BattleTag { get; }
+        public BattleTagId BattleTag { get; }
 
         public long Id { get; }
 

@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public abstract class HeroItem : ModelBase<ItemIdentifier>
+    public abstract class HeroItem : ModelBase<ItemId>
     {
         protected override StringBuilder ToBuilder()
         {

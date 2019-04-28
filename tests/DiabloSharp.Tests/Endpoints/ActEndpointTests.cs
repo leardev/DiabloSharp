@@ -17,7 +17,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetActAsyncTest()
         {
-            var act = await DiabloApi.Act.GetActAsync(AuthenticationScope, ActIdentifier.Act1);
+            var act = await DiabloApi.Act.GetActAsync(AuthenticationScope, ActId.Act1);
             Assert.IsNotNull(act);
         }
     }

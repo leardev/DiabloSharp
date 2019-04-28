@@ -1,9 +1,9 @@
-using System.Text;
+﻿using System.Text;
 using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class FollowerSkill : ModelBase<FollowerSkillIdentifier>
+    public class FollowerSkill : ModelBase<FollowerSkillId>
     {
         public string Name { get; internal set; }
 

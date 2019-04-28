@@ -16,7 +16,7 @@ namespace DiabloSharp.Mappers
             var seasons = MapSeasons(input).ToList();
             var activeSeason = seasons.Single(season => season.IsActive);
 
-            output.Id = new BattleTagIdentifier(input.BattleTag);
+            output.Id = new BattleTagId(input.BattleTag);
             output.Clan = input.GuildName;
             output.Era = era;
             output.ActiveSeason = activeSeason;
@@ -40,7 +40,7 @@ namespace DiabloSharp.Mappers
         {
             return new AccountFallenHero
             {
-                Id = new HeroIdentifier(battleTag, input.HeroId),
+                Id = new HeroId(battleTag, input.HeroId),
                 Name = input.Name,
                 Level = input.Level,
                 Gender = (HeroGender)input.Gender,
@@ -54,20 +54,20 @@ namespace DiabloSharp.Mappers
             var eraDto = input.SeasonalProfiles.Season0;
             return new AccountPeriodEra
             {
-                Id = AccountPeriodIdentifier.Era,
+                Id = AccountPeriodId.Era,
                 Paragons = new[]
                 {
-                    new AccountPeriodParagon { Id = GameModeIdentifier.EraSoftcore, Value = eraDto.ParagonLevel },
-                    new AccountPeriodParagon { Id = GameModeIdentifier.EraHardcore, Value = eraDto.ParagonLevelHardcore }
+                    new AccountPeriodParagon { Id = GameModeId.EraSoftcore, Value = eraDto.ParagonLevel },
+                    new AccountPeriodParagon { Id = GameModeId.EraHardcore, Value = eraDto.ParagonLevelHardcore }
                 },
                 ArtisanLevels = new[]
                 {
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.Blacksmith.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithHardcore.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.Jeweler.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.JewelerHardcore.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.EraSoftcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.Mystic.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.EraHardcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.MysticHardcore.Level }
+                    new AccountArtisanLevel { GameMode = GameModeId.EraSoftcore, ArtisanId = ArtisanId.Blacksmith, Level = input.Blacksmith.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.EraHardcore, ArtisanId = ArtisanId.Blacksmith, Level = input.BlacksmithHardcore.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.EraSoftcore, ArtisanId = ArtisanId.Jeweler, Level = input.Jeweler.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.EraHardcore, ArtisanId = ArtisanId.Jeweler, Level = input.JewelerHardcore.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.EraSoftcore, ArtisanId = ArtisanId.Mystic, Level = input.Mystic.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.EraHardcore, ArtisanId = ArtisanId.Mystic, Level = input.MysticHardcore.Level }
                 }
             };
         }
@@ -84,21 +84,21 @@ namespace DiabloSharp.Mappers
             var seasonDto = input.SeasonalProfiles.Season16;
             return new AccountPeriodActiveSeason
             {
-                Id = (AccountPeriodIdentifier)seasonDto.Id,
+                Id = (AccountPeriodId)seasonDto.Id,
                 IsActive = true,
                 Paragons = new[]
                 {
-                    new AccountPeriodParagon { Id = GameModeIdentifier.SeasonSoftcore, Value = seasonDto.ParagonLevel },
-                    new AccountPeriodParagon { Id = GameModeIdentifier.SeasonHardcore, Value = seasonDto.ParagonLevelHardcore }
+                    new AccountPeriodParagon { Id = GameModeId.SeasonSoftcore, Value = seasonDto.ParagonLevel },
+                    new AccountPeriodParagon { Id = GameModeId.SeasonHardcore, Value = seasonDto.ParagonLevelHardcore }
                 },
                 ArtisanLevels = new[]
                 {
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithSeason.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, ArtisanId = ArtisanIdentifier.Blacksmith, Level = input.BlacksmithSeasonHardcore.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.JewelerSeason.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, ArtisanId = ArtisanIdentifier.Jeweler, Level = input.JewelerSeasonHardcore.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.SeasonSoftcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.MysticSeason.Level },
-                    new AccountArtisanLevel { GameMode = GameModeIdentifier.SeasonHardcore, ArtisanId = ArtisanIdentifier.Mystic, Level = input.MysticSeasonHardcore.Level }
+                    new AccountArtisanLevel { GameMode = GameModeId.SeasonSoftcore, ArtisanId = ArtisanId.Blacksmith, Level = input.BlacksmithSeason.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.SeasonHardcore, ArtisanId = ArtisanId.Blacksmith, Level = input.BlacksmithSeasonHardcore.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.SeasonSoftcore, ArtisanId = ArtisanId.Jeweler, Level = input.JewelerSeason.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.SeasonHardcore, ArtisanId = ArtisanId.Jeweler, Level = input.JewelerSeasonHardcore.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.SeasonSoftcore, ArtisanId = ArtisanId.Mystic, Level = input.MysticSeason.Level },
+                    new AccountArtisanLevel { GameMode = GameModeId.SeasonHardcore, ArtisanId = ArtisanId.Mystic, Level = input.MysticSeasonHardcore.Level }
                 }
             };
         }
@@ -119,11 +119,11 @@ namespace DiabloSharp.Mappers
             {
                 var season = new AccountPeriodSeason
                 {
-                    Id = (AccountPeriodIdentifier)seasonDto.Id,
+                    Id = (AccountPeriodId)seasonDto.Id,
                     Paragons = new[]
                     {
-                        new AccountPeriodParagon { Id = GameModeIdentifier.SeasonSoftcore, Value = seasonDto.ParagonLevel },
-                        new AccountPeriodParagon { Id = GameModeIdentifier.SeasonHardcore, Value = seasonDto.ParagonLevelHardcore }
+                        new AccountPeriodParagon { Id = GameModeId.SeasonSoftcore, Value = seasonDto.ParagonLevel },
+                        new AccountPeriodParagon { Id = GameModeId.SeasonHardcore, Value = seasonDto.ParagonLevelHardcore }
                     }
                 };
                 seasons.Add(season);
@@ -132,9 +132,9 @@ namespace DiabloSharp.Mappers
             return seasons;
         }
 
-        private IEnumerable<HeroIdentifier> MapHeroes(string battleTag, IEnumerable<AccountHeroDto> inputs)
+        private IEnumerable<HeroId> MapHeroes(string battleTag, IEnumerable<AccountHeroDto> inputs)
         {
-            var outputs = new List<HeroIdentifier>();
+            var outputs = new List<HeroId>();
             foreach (var input in inputs)
             {
                 var output = MapHero(battleTag, input);
@@ -143,9 +143,9 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private HeroIdentifier MapHero(string battleTag, AccountHeroDto input)
+        private HeroId MapHero(string battleTag, AccountHeroDto input)
         {
-            return new HeroIdentifier(battleTag, input.Id);
+            return new HeroId(battleTag, input.Id);
         }
     }
 }

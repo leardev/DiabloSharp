@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum HeroStatIdentifier
+    public enum HeroStatId
     {
         [LocalizationEnUs("Life")]
         Life,

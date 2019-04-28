@@ -4,9 +4,9 @@ using DiabloSharp.Infrastructure;
 
 namespace DiabloSharp.Models
 {
-    public class BattleTagIdentifier : ValueObject
+    public class BattleTagId : ValueObject
     {
-        public BattleTagIdentifier(string battleTag)
+        public BattleTagId(string battleTag)
         {
             var parts = battleTag.Split('#');
 

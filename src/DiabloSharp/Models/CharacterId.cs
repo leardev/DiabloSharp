@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum CharacterIdentifier
+    public enum CharacterId
     {
         [LocalizationEnUs("Barbarian")]
         Barbarian,

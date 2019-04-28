@@ -15,7 +15,7 @@ namespace DiabloSharp.Endpoints
         {
         }
 
-        public async Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, FollowerIdentifier followerId)
+        public async Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, FollowerId followerId)
         {
             var mapper = new FollowerMapper();
             var followerSlug = followerId.ToString().ToLower();
@@ -29,8 +29,8 @@ namespace DiabloSharp.Endpoints
 
         public async Task<IEnumerable<Follower>> GetFollowersAsync(IAuthenticationScope authenticationScope)
         {
-            var followerIds = Enum.GetValues(typeof(FollowerIdentifier))
-                .Cast<FollowerIdentifier>()
+            var followerIds = Enum.GetValues(typeof(FollowerId))
+                .Cast<FollowerId>()
                 .ToList();
 
             var followersTasks = followerIds.Select(id => GetFollowerAsync(authenticationScope, id));
