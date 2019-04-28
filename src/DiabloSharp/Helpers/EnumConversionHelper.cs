@@ -151,6 +151,65 @@ namespace DiabloSharp.Helpers
             }
         }
 
+        public static CharacterSkillCategory CharacterSkillCategoryFromString(string value)
+        {
+            switch (value)
+            {
+                case "primary":
+                    return CharacterSkillCategory.Primary;
+                case "secondary":
+                    return CharacterSkillCategory.Secondary;
+                case "defensive":
+                    return CharacterSkillCategory.Defensive;
+                case "might":
+                    return CharacterSkillCategory.Might;
+                case "tactics":
+                    return CharacterSkillCategory.Tactics;
+                case "rage":
+                    return CharacterSkillCategory.Rage;
+                case "utility":
+                    return CharacterSkillCategory.Utility;
+                case "laws":
+                    return CharacterSkillCategory.Laws;
+                case "conviction":
+                    return CharacterSkillCategory.Conviction;
+                case "hunting":
+                    return CharacterSkillCategory.Hunting;
+                case "devices":
+                    return CharacterSkillCategory.Devices;
+                case "archery":
+                    return CharacterSkillCategory.Archery;
+                case "techniques":
+                    return CharacterSkillCategory.Techniques;
+                case "focus":
+                    return CharacterSkillCategory.Focus;
+                case "mantras":
+                    return CharacterSkillCategory.Mantras;
+                case "corpses":
+                    return CharacterSkillCategory.Corpses;
+                case "reanimation":
+                    return CharacterSkillCategory.Reanimation;
+                case "curses":
+                    return CharacterSkillCategory.Curses;
+                case "blood-Bone":
+                    return CharacterSkillCategory.BloodAndBone;
+                case "terror":
+                    return CharacterSkillCategory.Terror;
+                case "decay":
+                    return CharacterSkillCategory.Decay;
+                case "voodoo":
+                    return CharacterSkillCategory.Voodoo;
+                case "force":
+                    return CharacterSkillCategory.Force;
+                case "conjuration":
+                    return CharacterSkillCategory.Conjuration;
+                case "mastery":
+                    return CharacterSkillCategory.Mastery;
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
         public static ItemQuality ItemQualityFromString(string value)
         {
             switch (value)

@@ -14,8 +14,6 @@ namespace DiabloSharp.Models
 
         public IEnumerable<PeriodSeason> Seasons { get; internal set; }
 
-        public HeroIdentifier LastHeroId { get; internal set; }
-
         public IEnumerable<HeroIdentifier> HeroIds { get; internal set; }
 
         public IEnumerable<HeroFallen> FallenHeros { get; internal set; }

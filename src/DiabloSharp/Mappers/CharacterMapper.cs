@@ -14,6 +14,7 @@ namespace DiabloSharp.Mappers
         {
             var characterId = EnumConversionHelper.CharacterIdentifierFromString(input.Slug);
             var names = MapNames(input);
+            var categories = MapSkillCategories(input.SkillCategories);
 
             var actives = MapActiveSkills(characterId, Actives)
                 .ToList();
@@ -28,6 +29,7 @@ namespace DiabloSharp.Mappers
             output.PassiveSkills = passives;
             output.Skills = skills;
             output.Names = names;
+            output.Categories = categories;
         }
 
         private IEnumerable<CharacterName> MapNames(CharacterClassDto input)
@@ -37,6 +39,17 @@ namespace DiabloSharp.Mappers
                 new CharacterName { Id = Gender.Male, Name = input.MaleName },
                 new CharacterName { Id = Gender.Female, Name = input.FemaleName }
             };
+        }
+
+        private IEnumerable<CharacterSkillCategory> MapSkillCategories(IEnumerable<CharacterSkillCategoryDto> inputs)
+        {
+            var outputs = new List<CharacterSkillCategory>();
+            foreach (var input in inputs)
+            {
+                var output = EnumConversionHelper.CharacterSkillCategoryFromString(input.Slug);
+                outputs.Add(output);
+            }
+            return outputs;
         }
 
         public IEnumerable<CharacterSkillActive> MapActiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterApiSkillDto> inputs)
