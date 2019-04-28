@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public class SkillFollower : SkillBase<string>
+    public class SkillFollower : SkillBase<SkillFollowerIdentifier>
     {
     }
 }

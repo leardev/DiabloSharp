@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Mappers
@@ -8,8 +9,8 @@ namespace DiabloSharp.Mappers
     {
         protected override void Map(FollowerDto input, Follower output)
         {
-            var skills = MapSkills(input.Skills);
             var followerId = EnumConversionHelper.FollowerIdentifierFromString(input.Slug);
+            var skills = MapSkills(followerId, input.Skills);
 
             output.Id = followerId;
             output.Name = input.Name;
@@ -18,22 +19,22 @@ namespace DiabloSharp.Mappers
             output.Skills = skills;
         }
 
-        private IEnumerable<SkillFollower> MapSkills(IEnumerable<FollowerSkillDto> inputs)
+        private IEnumerable<SkillFollower> MapSkills(FollowerIdentifier followerId, IEnumerable<FollowerSkillDto> inputs)
         {
             var outputs = new List<SkillFollower>();
             foreach (var input in inputs)
             {
-                var output = MapSkill(input);
+                var output = MapSkill(followerId, input);
                 outputs.Add(output);
             }
             return outputs;
         }
 
-        private SkillFollower MapSkill(FollowerSkillDto input)
+        private SkillFollower MapSkill(FollowerIdentifier followerId, FollowerSkillDto input)
         {
             return new SkillFollower
             {
-                Id = input.Slug,
+                Id = new SkillFollowerIdentifier(followerId, input.Slug),
                 Name = input.Name,
                 Level = input.Level,
                 IconUrl = input.Icon,

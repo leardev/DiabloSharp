@@ -4,7 +4,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Follower : ModelBase<string>
+    public class Follower : ModelBase<FollowerIdentifier>
     {
         public string Name { get; internal set; }
 
@@ -17,7 +17,7 @@ namespace DiabloSharp.Models
         protected override StringBuilder ToBuilder()
         {
             var builder = base.ToBuilder();
-            builder.AppendProperty(nameof(Id), Id);
+            builder.AppendProperty(nameof(Id), Id.ToString());
             builder.AppendProperty(nameof(Name), Name);
             return builder;
         }

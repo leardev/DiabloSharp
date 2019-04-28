@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
@@ -55,7 +55,7 @@ namespace DiabloSharp.Mappers
             var runes = MapRunes(characterClass, input.Runes);
             return new SkillCharacterActive
             {
-                Id = new SkillIdentifier(characterClass, input.Skill.Slug),
+                Id = new SkillCharacterIdentifier(characterClass, input.Skill.Slug),
                 Name = input.Skill.Name,
                 Level = input.Skill.Level,
                 TooltipUrl = input.Skill.TooltipUrl,
@@ -80,7 +80,7 @@ namespace DiabloSharp.Mappers
         {
             return new SkillRune
             {
-                Id = new SkillIdentifier(characterClass, input.Slug),
+                Id = new SkillCharacterIdentifier(characterClass, input.Slug),
                 Name = input.Name,
                 Level = input.Level
             };
@@ -101,7 +101,7 @@ namespace DiabloSharp.Mappers
         {
             return new SkillCharacterPassive
             {
-                Id = new SkillIdentifier(characterClass, input.Slug),
+                Id = new SkillCharacterIdentifier(characterClass, input.Slug),
                 Name = input.Name,
                 Level = input.Level,
                 TooltipUrl = input.TooltipUrl,

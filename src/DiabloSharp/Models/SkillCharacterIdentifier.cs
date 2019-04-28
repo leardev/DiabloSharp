@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DiabloSharp.Infrastructure;
 
 namespace DiabloSharp.Models
 {
-    public class SkillIdentifier : ValueObject
+    public class SkillCharacterIdentifier : ValueObject
     {
-        public SkillIdentifier(CharacterClassIdentifier characterClass, string slug)
+        public SkillCharacterIdentifier(CharacterClassIdentifier characterClass, string slug)
         {
             Class = characterClass;
             Slug = slug;

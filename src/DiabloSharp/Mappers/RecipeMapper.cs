@@ -34,7 +34,7 @@ namespace DiabloSharp.Mappers
             return new RecipeReagent
             {
                 Quantity = input.Quantity,
-                ItemId = new ItemIdentifier(input.Item.Slug, input.Item.Id)
+                Id = new ItemIdentifier(input.Item.Slug, input.Item.Id)
             };
         }
     }

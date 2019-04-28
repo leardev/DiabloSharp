@@ -18,12 +18,6 @@ namespace DiabloSharp.Models
             Name = parts[0];
         }
 
-        public BattleTagIdentifier(string name, long index)
-        {
-            Index = index;
-            Name = name;
-        }
-
         public string Name { get; }
 
         public long Index { get; }

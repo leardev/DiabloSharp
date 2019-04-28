@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class HeroSkill : ModelBase<SkillIdentifier>
+    public class HeroSkill : ModelBase<SkillCharacterIdentifier>
     {
         protected override StringBuilder ToBuilder()
         {

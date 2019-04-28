@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
 using DiabloSharp.Models;
@@ -57,13 +57,13 @@ namespace DiabloSharp.Mappers
 
         private HeroSkillActive MapActive(CharacterClassIdentifier characterClass, HeroActiveSkillDto input)
         {
-            var runeId = default(SkillIdentifier);
+            var runeId = default(SkillCharacterIdentifier);
             if (input.Rune != null)
-                runeId = new SkillIdentifier(characterClass, input.Rune.Slug);
+                runeId = new SkillCharacterIdentifier(characterClass, input.Rune.Slug);
 
             return new HeroSkillActive
             {
-                Id = new SkillIdentifier(characterClass, input.Skill.Slug),
+                Id = new SkillCharacterIdentifier(characterClass, input.Skill.Slug),
                 Rune = runeId
             };
         }
@@ -81,7 +81,7 @@ namespace DiabloSharp.Mappers
 
         private HeroSkillPassive MapPassive(CharacterClassIdentifier characterClass, HeroPassiveSkillDto input)
         {
-            return new HeroSkillPassive { Id = new SkillIdentifier(characterClass, input.Skill.Slug) };
+            return new HeroSkillPassive { Id = new SkillCharacterIdentifier(characterClass, input.Skill.Slug) };
         }
 
         private IEnumerable<HeroItemEquipment> MapItems(HeroItemsDto inputs)
