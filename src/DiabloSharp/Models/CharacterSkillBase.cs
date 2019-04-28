@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class SkillRune : ModelBase<SkillCharacterIdentifier>
+    public abstract class CharacterSkillBase : ModelBase<CharacterSkillIdentifier>
     {
         public string Name { get; internal set; }
 

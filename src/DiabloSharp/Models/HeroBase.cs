@@ -7,7 +7,7 @@ namespace DiabloSharp.Models
     {
         public string Name { get; internal set; }
 
-        public CharacterIdentifier Class { get; internal set; }
+        public CharacterIdentifier Character { get; internal set; }
 
         public Gender Gender { get; internal set; }
 
@@ -20,7 +20,7 @@ namespace DiabloSharp.Models
             var builder = base.ToBuilder();
             builder.AppendProperty(nameof(Id), Id.ToString());
             builder.AppendProperty(nameof(Name), Name);
-            builder.AppendProperty(nameof(Class), Class.ToString());
+            builder.AppendProperty(nameof(Character), Character.ToString());
             return builder;
         }
     }

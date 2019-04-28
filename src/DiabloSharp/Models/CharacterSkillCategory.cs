@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum SkillCategoryIdentifier
+    public enum CharacterSkillCategory
     {
         [LocalizationEnUs("Primary")]
         Primary,

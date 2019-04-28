@@ -23,7 +23,7 @@ namespace DiabloSharp.Mappers
             output.Id = HeroId;
             output.Level = input.Level;
             output.Gender = (Gender)input.Gender;
-            output.Class = characterId;
+            output.Character = characterId;
             output.Name = input.Name;
             output.IsDead = false;
             output.GameMode = gameMode;

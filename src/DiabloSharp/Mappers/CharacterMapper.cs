@@ -19,7 +19,7 @@ namespace DiabloSharp.Mappers
                 .ToList();
             var passives = MapPassiveSkills(characterId, input.Skills.Passives)
                 .ToList();
-            var skills = actives.Cast<SkillCharacter>().Concat(passives);
+            var skills = actives.Cast<CharacterSkill>().Concat(passives);
 
             output.Id = characterId;
             output.Name = input.Name;
@@ -39,9 +39,9 @@ namespace DiabloSharp.Mappers
             };
         }
 
-        public IEnumerable<SkillCharacterActive> MapActiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterApiSkillDto> inputs)
+        public IEnumerable<CharacterSkillActive> MapActiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterApiSkillDto> inputs)
         {
-            var outputs = new List<SkillCharacterActive>();
+            var outputs = new List<CharacterSkillActive>();
             foreach (var input in inputs)
             {
                 var output = MapActiveSkill(characterId, input);
@@ -50,24 +50,24 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        public SkillCharacterActive MapActiveSkill(CharacterIdentifier characterId, CharacterApiSkillDto input)
+        public CharacterSkillActive MapActiveSkill(CharacterIdentifier characterId, CharacterApiSkillDto input)
         {
             var runes = MapRunes(characterId, input.Runes);
-            return new SkillCharacterActive
+            return new CharacterSkillActive
             {
-                Id = new SkillCharacterIdentifier(characterId, input.Skill.Slug),
+                Id = new CharacterSkillIdentifier(characterId, input.Skill.Slug),
                 Name = input.Skill.Name,
                 Level = input.Skill.Level,
                 TooltipUrl = input.Skill.TooltipUrl,
                 IconUrl = input.Skill.Icon,
-                Category = SkillCategory.Active,
+                Type = CharacterSkillType.Active,
                 Runes = runes
             };
         }
 
-        private IEnumerable<SkillRune> MapRunes(CharacterIdentifier characterId, IEnumerable<CharacterRuneDto> inputs)
+        private IEnumerable<CharacterSkillActiveRune> MapRunes(CharacterIdentifier characterId, IEnumerable<CharacterRuneDto> inputs)
         {
-            var outputs = new List<SkillRune>();
+            var outputs = new List<CharacterSkillActiveRune>();
             foreach (var input in inputs)
             {
                 var output = MapRune(characterId, input);
@@ -76,19 +76,19 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private SkillRune MapRune(CharacterIdentifier characterId, CharacterRuneDto input)
+        private CharacterSkillActiveRune MapRune(CharacterIdentifier characterId, CharacterRuneDto input)
         {
-            return new SkillRune
+            return new CharacterSkillActiveRune
             {
-                Id = new SkillCharacterIdentifier(characterId, input.Slug),
+                Id = new CharacterSkillIdentifier(characterId, input.Slug),
                 Name = input.Name,
                 Level = input.Level
             };
         }
 
-        private IEnumerable<SkillCharacterPassive> MapPassiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterSkillDto> inputs)
+        private IEnumerable<CharacterSkillPassive> MapPassiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterSkillDto> inputs)
         {
-            var outputs = new List<SkillCharacterPassive>();
+            var outputs = new List<CharacterSkillPassive>();
             foreach (var input in inputs)
             {
                 var output = MapPassiveSkill(characterId, input);
@@ -97,16 +97,16 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private SkillCharacterPassive MapPassiveSkill(CharacterIdentifier characterId, CharacterSkillDto input)
+        private CharacterSkillPassive MapPassiveSkill(CharacterIdentifier characterId, CharacterSkillDto input)
         {
-            return new SkillCharacterPassive
+            return new CharacterSkillPassive
             {
-                Id = new SkillCharacterIdentifier(characterId, input.Slug),
+                Id = new CharacterSkillIdentifier(characterId, input.Slug),
                 Name = input.Name,
                 Level = input.Level,
                 TooltipUrl = input.TooltipUrl,
                 IconUrl = input.Icon,
-                Category = SkillCategory.Passive
+                Type = CharacterSkillType.Passive
             };
         }
     }

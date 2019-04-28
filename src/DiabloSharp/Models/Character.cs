@@ -12,11 +12,13 @@ namespace DiabloSharp.Models
 
         public IEnumerable<CharacterName> Names { get; internal set; }
 
-        public IEnumerable<SkillCharacterActive> ActiveSkills { get; internal set; }
+        public IEnumerable<CharacterSkillActive> ActiveSkills { get; internal set; }
 
-        public IEnumerable<SkillCharacterPassive> PassiveSkills { get; internal set; }
+        public IEnumerable<CharacterSkillPassive> PassiveSkills { get; internal set; }
 
-        public IEnumerable<SkillCharacter> Skills { get; internal set; }
+        public IEnumerable<CharacterSkillCategory> Categories { get; internal set; }
+
+        public IEnumerable<CharacterSkill> Skills { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {
