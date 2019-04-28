@@ -16,9 +16,9 @@ namespace DiabloSharp.Mappers
             output.Quests = quests;
         }
 
-        private IEnumerable<Quest> MapQuests(IEnumerable<ActQuestDto> inputs)
+        private IEnumerable<ActQuest> MapQuests(IEnumerable<ActQuestDto> inputs)
         {
-            var outputs = new List<Quest>();
+            var outputs = new List<ActQuest>();
             foreach (var input in inputs)
             {
                 var output = MapQuest(input);
@@ -27,9 +27,9 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private Quest MapQuest(ActQuestDto input)
+        private ActQuest MapQuest(ActQuestDto input)
         {
-            return new Quest
+            return new ActQuest
             {
                 Id = input.Id,
                 Slug = input.Slug,

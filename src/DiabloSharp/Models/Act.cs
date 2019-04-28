@@ -10,7 +10,7 @@ namespace DiabloSharp.Models
 
         public string Name { get; internal set; }
 
-        public IEnumerable<Quest> Quests { get; internal set; }
+        public IEnumerable<ActQuest> Quests { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {

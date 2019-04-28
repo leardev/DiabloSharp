@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Quest : ModelBase<long>
+    public class ActQuest : ModelBase<long>
     {
         public string Name { get; internal set; }
 
