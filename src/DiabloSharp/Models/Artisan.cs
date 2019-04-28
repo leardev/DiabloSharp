@@ -10,7 +10,7 @@ namespace DiabloSharp.Models
 
         public string Portrait { get; internal set; }
 
-        public IEnumerable<RecipeArtisan> Recipes { get; internal set; }
+        public IEnumerable<ArtisanRecipe> Recipes { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {

@@ -9,12 +9,12 @@ namespace DiabloSharp.Mappers
     {
         protected override void Map(ArtisanDto input, Artisan output)
         {
-            var recipes = new List<RecipeArtisan>();
+            var recipes = new List<ArtisanRecipe>();
             foreach (var tier in input.Training.Tiers)
             {
-                var rank = (RecipeRank)tier.Index;
-                var taughtRecipes = MapRecipes(rank, RecipeSource.Taught, tier.TaughtRecipes);
-                var trainedRecipes = MapRecipes(rank, RecipeSource.Trained, tier.TrainedRecipes);
+                var rank = (ArtisanRecipeRank)tier.Index;
+                var taughtRecipes = MapRecipes(rank, ArtisanRecipeSource.Taught, tier.TaughtRecipes);
+                var trainedRecipes = MapRecipes(rank, ArtisanRecipeSource.Trained, tier.TrainedRecipes);
                 recipes.AddRange(taughtRecipes);
                 recipes.AddRange(trainedRecipes);
             }
@@ -25,9 +25,9 @@ namespace DiabloSharp.Mappers
             output.Recipes = recipes;
         }
 
-        private IEnumerable<RecipeArtisan> MapRecipes(RecipeRank rank, RecipeSource source, IEnumerable<ArtisanRecipeDto> inputs)
+        private IEnumerable<ArtisanRecipe> MapRecipes(ArtisanRecipeRank rank, ArtisanRecipeSource source, IEnumerable<ArtisanRecipeDto> inputs)
         {
-            var outputs = new List<RecipeArtisan>();
+            var outputs = new List<ArtisanRecipe>();
             foreach (var input in inputs)
             {
                 var output = MapRecipe(rank, source, input);
@@ -36,11 +36,11 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private RecipeArtisan MapRecipe(RecipeRank rank, RecipeSource source, ArtisanRecipeDto input)
+        private ArtisanRecipe MapRecipe(ArtisanRecipeRank rank, ArtisanRecipeSource source, ArtisanRecipeDto input)
         {
             var reagents = MapReagents(input.Reagents);
 
-            return new RecipeArtisan
+            return new ArtisanRecipe
             {
                 Id = new ItemIdentifier(input.Slug, input.Id),
                 Name = input.Name,

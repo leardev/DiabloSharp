@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum RecipeSource
+    public enum ArtisanRecipeSource
     {
         [LocalizationEnUs("Trained")]
         Trained,

@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum RecipeRank
+    public enum ArtisanRecipeRank
     {
         [LocalizationEnUs("Rank 1")]
         Rank1 = 1,
