@@ -26,6 +26,7 @@ namespace DiabloSharp.Endpoints
             {
                 var characterClass = await client.GetCharacterClassAsync(artisanSlug);
 
+                /* GetApiSkill only extends active skills with runes, all the other properties are already retrieved via GetCharacterClass */
                 var activeApiSkills = new List<CharacterApiSkillDto>();
                 foreach (var skill in characterClass.Skills.Actives)
                 {
