@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
@@ -34,6 +36,17 @@ namespace DiabloSharp.Endpoints
                 mapper.Actives = activeApiSkills;
                 return mapper.Map(characterClass);
             }
+        }
+
+        public async Task<IEnumerable<CharacterClass>> GetCharacterClassesAsync(IAuthenticationScope authenticationScope)
+        {
+            var characterClassIds = Enum.GetValues(typeof(CharacterClassIdentifier))
+                .Cast<CharacterClassIdentifier>()
+                .ToList();
+
+            var characterClassTasks = characterClassIds.Select(id => GetCharacterClassAsync(authenticationScope, id));
+            var characterClasses = await Task.WhenAll(characterClassTasks);
+            return characterClasses;
         }
     }
 }
