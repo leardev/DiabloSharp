@@ -9,40 +9,41 @@ namespace DiabloSharp.Mappers
     {
         protected override void Map(ArtisanDto input, Artisan output)
         {
+            var artisanId = EnumConversionHelper.ArtisanIdentifierFromString(input.Slug);
             var recipes = new List<ArtisanRecipe>();
             foreach (var tier in input.Training.Tiers)
             {
                 var rank = (ArtisanRecipeRank)tier.Index;
-                var taughtRecipes = MapRecipes(rank, ArtisanRecipeSource.Taught, tier.TaughtRecipes);
-                var trainedRecipes = MapRecipes(rank, ArtisanRecipeSource.Trained, tier.TrainedRecipes);
+                var taughtRecipes = MapRecipes(artisanId, rank, ArtisanRecipeSource.Taught, tier.TaughtRecipes);
+                var trainedRecipes = MapRecipes(artisanId, rank, ArtisanRecipeSource.Trained, tier.TrainedRecipes);
                 recipes.AddRange(taughtRecipes);
                 recipes.AddRange(trainedRecipes);
             }
 
-            output.Id = EnumConversionHelper.ArtisanIdentifierFromString(input.Slug);
+            output.Id = artisanId;
             output.Name = input.Name;
             output.Portrait = input.Portrait;
             output.Recipes = recipes;
         }
 
-        private IEnumerable<ArtisanRecipe> MapRecipes(ArtisanRecipeRank rank, ArtisanRecipeSource source, IEnumerable<ArtisanRecipeDto> inputs)
+        private IEnumerable<ArtisanRecipe> MapRecipes(ArtisanIdentifier artisanId, ArtisanRecipeRank rank, ArtisanRecipeSource source, IEnumerable<ArtisanRecipeDto> inputs)
         {
             var outputs = new List<ArtisanRecipe>();
             foreach (var input in inputs)
             {
-                var output = MapRecipe(rank, source, input);
+                var output = MapRecipe(artisanId, rank, source, input);
                 outputs.Add(output);
             }
             return outputs;
         }
 
-        private ArtisanRecipe MapRecipe(ArtisanRecipeRank rank, ArtisanRecipeSource source, ArtisanRecipeDto input)
+        private ArtisanRecipe MapRecipe(ArtisanIdentifier artisanId, ArtisanRecipeRank rank, ArtisanRecipeSource source, ArtisanRecipeDto input)
         {
             var reagents = MapReagents(input.Reagents);
 
             return new ArtisanRecipe
             {
-                Id = new ItemIdentifier(input.Slug, input.Id),
+                Id = new RecipeIdentifier(artisanId, input.Slug),
                 Name = input.Name,
                 Cost = input.Cost,
                 Rank = rank,

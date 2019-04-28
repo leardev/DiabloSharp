@@ -4,7 +4,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Recipe : ModelBase<ItemIdentifier>
+    public class Recipe : ModelBase<RecipeIdentifier>
     {
         public string Name { get; internal set; }
 

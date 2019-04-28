@@ -17,7 +17,8 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetRecipeTest()
         {
-            var recipe = await DiabloApi.Artisan.GetRecipeAsync(AuthenticationScope, ArtisanIdentifier.Blacksmith, "apprentice-flamberge");
+            var recipeId = new RecipeIdentifier(ArtisanIdentifier.Blacksmith, "apprentice-flamberge");
+            var recipe = await DiabloApi.Artisan.GetRecipeAsync(AuthenticationScope, recipeId);
             Assert.IsNotNull(recipe);
         }
     }

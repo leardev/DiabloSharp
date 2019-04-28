@@ -6,11 +6,18 @@ namespace DiabloSharp.Mappers
 {
     internal class RecipeMapper : Mapper<RecipeDto, Recipe>
     {
+        private readonly ArtisanIdentifier _artisanId;
+
+        public RecipeMapper(ArtisanIdentifier artisanId)
+        {
+            _artisanId = artisanId;
+        }
+
         protected override void Map(RecipeDto input, Recipe output)
         {
             var reagents = MapReagents(input.Reagents);
 
-            output.Id = new ItemIdentifier(input.Slug, input.Id);
+            output.Id = new RecipeIdentifier(_artisanId, input.Slug);
             output.Name = input.Name;
             output.Cost = input.Cost;
             output.Reagents = reagents;

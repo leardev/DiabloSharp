@@ -136,6 +136,21 @@ namespace DiabloSharp.Helpers
             }
         }
 
+        public static string ArtisanIdentifierToString(ArtisanIdentifier value)
+        {
+           switch (value)
+           {
+                case ArtisanIdentifier.Blacksmith:
+                    return "blacksmith";
+                case ArtisanIdentifier.Jeweler:
+                    return "jeweler";
+                case ArtisanIdentifier.Mystic:
+                    return "mystic";
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
         public static ItemQuality ItemQualityFromString(string value)
         {
             switch (value)

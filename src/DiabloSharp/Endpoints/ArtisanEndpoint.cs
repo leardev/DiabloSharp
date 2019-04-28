@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using DiabloSharp.Helpers;
 using DiabloSharp.Mappers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
@@ -24,14 +28,25 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        public async Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId, string recipeSlug)
+        public async Task<IEnumerable<Artisan>> GetArtisansAsync(IAuthenticationScope authenticationScope)
         {
-            var mapper = new RecipeMapper();
-            var artisanSlug = artisanId.ToString().ToLower();
+            var artisanIds = Enum.GetValues(typeof(ArtisanIdentifier))
+                .Cast<ArtisanIdentifier>()
+                .ToList();
+
+            var artisanTasks = artisanIds.Select(id => GetArtisanAsync(authenticationScope, id));
+            var artisans = await Task.WhenAll(artisanTasks);
+            return artisans;
+        }
+
+        public async Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, RecipeIdentifier recipeId)
+        {
+            var mapper = new RecipeMapper(recipeId.Id);
+            var artisanSlug = EnumConversionHelper.ArtisanIdentifierToString(recipeId.Id);
 
             using (var client = CreateClient(authenticationScope))
             {
-                var recipe = await client.GetRecipeAsync(artisanSlug, recipeSlug);
+                var recipe = await client.GetRecipeAsync(artisanSlug, recipeId.Slug);
                 return mapper.Map(recipe);
             }
         }
