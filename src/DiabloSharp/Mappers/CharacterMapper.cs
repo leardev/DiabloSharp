@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
@@ -6,22 +6,22 @@ using DiabloSharp.Models;
 
 namespace DiabloSharp.Mappers
 {
-    internal class CharacterClassMapper : Mapper<CharacterClassDto, CharacterClass>
+    internal class CharacterMapper : Mapper<CharacterClassDto, Character>
     {
         public IEnumerable<CharacterApiSkillDto> Actives { get; set; }
 
-        protected override void Map(CharacterClassDto input, CharacterClass output)
+        protected override void Map(CharacterClassDto input, Character output)
         {
-            var characterClass = EnumConversionHelper.CharacterClassIdentifierFromString(input.Slug);
+            var characterId = EnumConversionHelper.CharacterIdentifierFromString(input.Slug);
             var names = MapNames(input);
 
-            var actives = MapActiveSkills(characterClass, Actives)
+            var actives = MapActiveSkills(characterId, Actives)
                 .ToList();
-            var passives = MapPassiveSkills(characterClass, input.Skills.Passives)
+            var passives = MapPassiveSkills(characterId, input.Skills.Passives)
                 .ToList();
             var skills = actives.Cast<SkillCharacter>().Concat(passives);
 
-            output.Id = characterClass;
+            output.Id = characterId;
             output.Name = input.Name;
             output.IconUrl = input.Icon;
             output.ActiveSkills = actives;
@@ -39,23 +39,23 @@ namespace DiabloSharp.Mappers
             };
         }
 
-        public IEnumerable<SkillCharacterActive> MapActiveSkills(CharacterClassIdentifier characterClass, IEnumerable<CharacterApiSkillDto> inputs)
+        public IEnumerable<SkillCharacterActive> MapActiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterApiSkillDto> inputs)
         {
             var outputs = new List<SkillCharacterActive>();
             foreach (var input in inputs)
             {
-                var output = MapActiveSkill(characterClass, input);
+                var output = MapActiveSkill(characterId, input);
                 outputs.Add(output);
             }
             return outputs;
         }
 
-        public SkillCharacterActive MapActiveSkill(CharacterClassIdentifier characterClass, CharacterApiSkillDto input)
+        public SkillCharacterActive MapActiveSkill(CharacterIdentifier characterId, CharacterApiSkillDto input)
         {
-            var runes = MapRunes(characterClass, input.Runes);
+            var runes = MapRunes(characterId, input.Runes);
             return new SkillCharacterActive
             {
-                Id = new SkillCharacterIdentifier(characterClass, input.Skill.Slug),
+                Id = new SkillCharacterIdentifier(characterId, input.Skill.Slug),
                 Name = input.Skill.Name,
                 Level = input.Skill.Level,
                 TooltipUrl = input.Skill.TooltipUrl,
@@ -65,43 +65,43 @@ namespace DiabloSharp.Mappers
             };
         }
 
-        private IEnumerable<SkillRune> MapRunes(CharacterClassIdentifier characterClass, IEnumerable<CharacterRuneDto> inputs)
+        private IEnumerable<SkillRune> MapRunes(CharacterIdentifier characterId, IEnumerable<CharacterRuneDto> inputs)
         {
             var outputs = new List<SkillRune>();
             foreach (var input in inputs)
             {
-                var output = MapRune(characterClass, input);
+                var output = MapRune(characterId, input);
                 outputs.Add(output);
             }
             return outputs;
         }
 
-        private SkillRune MapRune(CharacterClassIdentifier characterClass, CharacterRuneDto input)
+        private SkillRune MapRune(CharacterIdentifier characterId, CharacterRuneDto input)
         {
             return new SkillRune
             {
-                Id = new SkillCharacterIdentifier(characterClass, input.Slug),
+                Id = new SkillCharacterIdentifier(characterId, input.Slug),
                 Name = input.Name,
                 Level = input.Level
             };
         }
 
-        private IEnumerable<SkillCharacterPassive> MapPassiveSkills(CharacterClassIdentifier characterClass, IEnumerable<CharacterSkillDto> inputs)
+        private IEnumerable<SkillCharacterPassive> MapPassiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterSkillDto> inputs)
         {
             var outputs = new List<SkillCharacterPassive>();
             foreach (var input in inputs)
             {
-                var output = MapPassiveSkill(characterClass, input);
+                var output = MapPassiveSkill(characterId, input);
                 outputs.Add(output);
             }
             return outputs;
         }
 
-        private SkillCharacterPassive MapPassiveSkill(CharacterClassIdentifier characterClass, CharacterSkillDto input)
+        private SkillCharacterPassive MapPassiveSkill(CharacterIdentifier characterId, CharacterSkillDto input)
         {
             return new SkillCharacterPassive
             {
-                Id = new SkillCharacterIdentifier(characterClass, input.Slug),
+                Id = new SkillCharacterIdentifier(characterId, input.Slug),
                 Name = input.Name,
                 Level = input.Level,
                 TooltipUrl = input.TooltipUrl,

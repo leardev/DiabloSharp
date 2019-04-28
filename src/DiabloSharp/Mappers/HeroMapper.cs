@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
 using DiabloSharp.Models;
@@ -12,9 +12,9 @@ namespace DiabloSharp.Mappers
         protected override void Map(HeroDto input, Hero output)
         {
             var gameMode = MapGameMode(input);
-            var characterClass = EnumConversionHelper.CharacterClassIdentifierFromString(input.Class);
-            var actives = MapActives(characterClass, input.Skills.Actives);
-            var passives = MapPassives(characterClass, input.Skills.Passives);
+            var characterId = EnumConversionHelper.CharacterIdentifierFromString(input.Class);
+            var actives = MapActives(characterId, input.Skills.Actives);
+            var passives = MapPassives(characterId, input.Skills.Passives);
             var items = MapItems(input.Items);
             var followerItems = MapFollowerItems(input.Followers);
             var cubeItems = MapCubeItems(input.LegendaryPowers);
@@ -23,7 +23,7 @@ namespace DiabloSharp.Mappers
             output.Id = HeroId;
             output.Level = input.Level;
             output.Gender = (Gender)input.Gender;
-            output.Class = characterClass;
+            output.Class = characterId;
             output.Name = input.Name;
             output.IsDead = false;
             output.GameMode = gameMode;
@@ -44,44 +44,44 @@ namespace DiabloSharp.Mappers
             return input.Hardcore ? GameModeIdentifier.EraHardcore : GameModeIdentifier.EraSoftcore;
         }
 
-        private IEnumerable<HeroSkillActive> MapActives(CharacterClassIdentifier characterClass, IEnumerable<HeroActiveSkillDto> inputs)
+        private IEnumerable<HeroSkillActive> MapActives(CharacterIdentifier characterId, IEnumerable<HeroActiveSkillDto> inputs)
         {
             var outputs = new List<HeroSkillActive>();
             foreach (var input in inputs)
             {
-                var output = MapActive(characterClass, input);
+                var output = MapActive(characterId, input);
                 outputs.Add(output);
             }
             return outputs;
         }
 
-        private HeroSkillActive MapActive(CharacterClassIdentifier characterClass, HeroActiveSkillDto input)
+        private HeroSkillActive MapActive(CharacterIdentifier characterId, HeroActiveSkillDto input)
         {
             var runeId = default(SkillCharacterIdentifier);
             if (input.Rune != null)
-                runeId = new SkillCharacterIdentifier(characterClass, input.Rune.Slug);
+                runeId = new SkillCharacterIdentifier(characterId, input.Rune.Slug);
 
             return new HeroSkillActive
             {
-                Id = new SkillCharacterIdentifier(characterClass, input.Skill.Slug),
+                Id = new SkillCharacterIdentifier(characterId, input.Skill.Slug),
                 Rune = runeId
             };
         }
 
-        private IEnumerable<HeroSkillPassive> MapPassives(CharacterClassIdentifier characterClass, IEnumerable<HeroPassiveSkillDto> inputs)
+        private IEnumerable<HeroSkillPassive> MapPassives(CharacterIdentifier characterId, IEnumerable<HeroPassiveSkillDto> inputs)
         {
             var outputs = new List<HeroSkillPassive>();
             foreach (var input in inputs)
             {
-                var output = MapPassive(characterClass, input);
+                var output = MapPassive(characterId, input);
                 outputs.Add(output);
             }
             return outputs;
         }
 
-        private HeroSkillPassive MapPassive(CharacterClassIdentifier characterClass, HeroPassiveSkillDto input)
+        private HeroSkillPassive MapPassive(CharacterIdentifier characterId, HeroPassiveSkillDto input)
         {
-            return new HeroSkillPassive { Id = new SkillCharacterIdentifier(characterClass, input.Skill.Slug) };
+            return new HeroSkillPassive { Id = new SkillCharacterIdentifier(characterId, input.Skill.Slug) };
         }
 
         private IEnumerable<HeroItemEquipment> MapItems(HeroItemsDto inputs)

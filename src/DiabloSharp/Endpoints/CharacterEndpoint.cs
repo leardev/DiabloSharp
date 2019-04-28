@@ -17,10 +17,10 @@ namespace DiabloSharp.Endpoints
         {
         }
 
-        public async Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
+        public async Task<Character> GetCharacterAsync(IAuthenticationScope authenticationScope, CharacterIdentifier characterId)
         {
-            var mapper = new CharacterClassMapper();
-            var artisanSlug = EnumConversionHelper.CharacterClassIdentifierToString(characterClassId);
+            var mapper = new CharacterMapper();
+            var artisanSlug = EnumConversionHelper.CharacterIdentifierToString(characterId);
 
             using (var client = CreateClient(authenticationScope))
             {
@@ -38,15 +38,15 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        public async Task<IEnumerable<CharacterClass>> GetCharacterClassesAsync(IAuthenticationScope authenticationScope)
+        public async Task<IEnumerable<Character>> GetCharactersAsync(IAuthenticationScope authenticationScope)
         {
-            var characterClassIds = Enum.GetValues(typeof(CharacterClassIdentifier))
-                .Cast<CharacterClassIdentifier>()
+            var characterIds = Enum.GetValues(typeof(CharacterIdentifier))
+                .Cast<CharacterIdentifier>()
                 .ToList();
 
-            var characterClassTasks = characterClassIds.Select(id => GetCharacterClassAsync(authenticationScope, id));
-            var characterClasses = await Task.WhenAll(characterClassTasks);
-            return characterClasses;
+            var charactersTasks = characterIds.Select(id => GetCharacterAsync(authenticationScope, id));
+            var characters = await Task.WhenAll(charactersTasks);
+            return characters;
         }
     }
 }

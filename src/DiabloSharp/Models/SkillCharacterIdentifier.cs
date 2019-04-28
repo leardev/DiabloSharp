@@ -5,13 +5,13 @@ namespace DiabloSharp.Models
 {
     public class SkillCharacterIdentifier : ValueObject
     {
-        public SkillCharacterIdentifier(CharacterClassIdentifier characterClass, string slug)
+        public SkillCharacterIdentifier(CharacterIdentifier characterId, string slug)
         {
-            Class = characterClass;
+            Class = characterId;
             Slug = slug;
         }
 
-        public CharacterClassIdentifier Class { get; }
+        public CharacterIdentifier Class { get; }
 
         public string Slug { get; }
 

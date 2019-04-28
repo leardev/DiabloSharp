@@ -16,7 +16,7 @@ namespace DiabloSharp.Mappers
             base.Map(input, output);
             output.Kind = EnumConversionHelper.ItemEquipmentKindFromString(input.Type.Id);
             output.Slots = MapSlots(input);
-            output.Classes = EnumConversionHelper.CharacterClassIdentifiersFromString(input.Type.Id);
+            output.Classes = EnumConversionHelper.CharacterIdentifiersFromString(input.Type.Id);
             output.IsTwoHanded = input.Type.TwoHanded;
             output.Set = MapSet(input);
         }
