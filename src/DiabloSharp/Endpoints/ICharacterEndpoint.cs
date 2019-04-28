@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloSharp.Models;
 
@@ -5,6 +6,8 @@ namespace DiabloSharp.Endpoints
 {
     public interface ICharacterEndpoint : IEndpoint
     {
-        Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId);
+        Task<Character> GetCharacterAsync(IAuthenticationScope authenticationScope, CharacterId characterId);
+
+        Task<IEnumerable<Character>> GetCharactersAsync(IAuthenticationScope authenticationScope);
     }
 }

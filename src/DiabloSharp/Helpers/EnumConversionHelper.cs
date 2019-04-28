@@ -120,6 +120,96 @@ namespace DiabloSharp.Helpers
             }
         }
 
+        public static ArtisanId ArtisanIdentifierFromString(string value)
+        {
+            switch (value)
+            {
+                case "blacksmith":
+                    return ArtisanId.Blacksmith;
+                case "jeweler":
+                    return ArtisanId.Jeweler;
+                case "mystic":
+                    return ArtisanId.Mystic;
+
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
+        public static string ArtisanIdentifierToString(ArtisanId value)
+        {
+           switch (value)
+           {
+                case ArtisanId.Blacksmith:
+                    return "blacksmith";
+                case ArtisanId.Jeweler:
+                    return "jeweler";
+                case ArtisanId.Mystic:
+                    return "mystic";
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
+        public static CharacterSkillCategory CharacterSkillCategoryFromString(string value)
+        {
+            switch (value)
+            {
+                case "primary":
+                    return CharacterSkillCategory.Primary;
+                case "secondary":
+                    return CharacterSkillCategory.Secondary;
+                case "defensive":
+                    return CharacterSkillCategory.Defensive;
+                case "might":
+                    return CharacterSkillCategory.Might;
+                case "tactics":
+                    return CharacterSkillCategory.Tactics;
+                case "rage":
+                    return CharacterSkillCategory.Rage;
+                case "utility":
+                    return CharacterSkillCategory.Utility;
+                case "laws":
+                    return CharacterSkillCategory.Laws;
+                case "conviction":
+                    return CharacterSkillCategory.Conviction;
+                case "hunting":
+                    return CharacterSkillCategory.Hunting;
+                case "devices":
+                    return CharacterSkillCategory.Devices;
+                case "archery":
+                    return CharacterSkillCategory.Archery;
+                case "techniques":
+                    return CharacterSkillCategory.Techniques;
+                case "focus":
+                    return CharacterSkillCategory.Focus;
+                case "mantras":
+                    return CharacterSkillCategory.Mantras;
+                case "corpses":
+                    return CharacterSkillCategory.Corpses;
+                case "reanimation":
+                    return CharacterSkillCategory.Reanimation;
+                case "curses":
+                    return CharacterSkillCategory.Curses;
+                case "blood-Bone":
+                    return CharacterSkillCategory.BloodAndBone;
+                case "terror":
+                    return CharacterSkillCategory.Terror;
+                case "decay":
+                    return CharacterSkillCategory.Decay;
+                case "voodoo":
+                    return CharacterSkillCategory.Voodoo;
+                case "force":
+                    return CharacterSkillCategory.Force;
+                case "conjuration":
+                    return CharacterSkillCategory.Conjuration;
+                case "mastery":
+                    return CharacterSkillCategory.Mastery;
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
         public static ItemQuality ItemQualityFromString(string value)
         {
             switch (value)
@@ -149,6 +239,21 @@ namespace DiabloSharp.Helpers
                     return ItemFollowerTokenKind.ScoundrelToken;
                 case "TemplarSpecial":
                     return ItemFollowerTokenKind.TemplarRelic;
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
+        public static FollowerId FollowerIdentifierFromString(string value)
+        {
+            switch (value)
+            {
+                case "templar":
+                    return FollowerId.Templar;
+                case "scoundrel":
+                    return FollowerId.Scoundrel;
+                case "enchantress":
+                    return FollowerId.Enchantress;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }
@@ -339,55 +444,55 @@ namespace DiabloSharp.Helpers
             }
         }
 
-        public static CharacterClassIdentifier CharacterClassIdentifierFromSlug(string value)
+        public static CharacterId CharacterIdentifierFromString(string value)
         {
             switch (value)
             {
                 case "barbarian":
-                    return CharacterClassIdentifier.Barbarian;
+                    return CharacterId.Barbarian;
                 case "crusader":
-                    return CharacterClassIdentifier.Crusader;
+                    return CharacterId.Crusader;
                 case "demon-hunter":
-                    return CharacterClassIdentifier.DemonHunter;
+                    return CharacterId.DemonHunter;
                 case "monk":
-                    return CharacterClassIdentifier.Monk;
+                    return CharacterId.Monk;
                 case "necromancer":
-                    return CharacterClassIdentifier.Necromancer;
+                    return CharacterId.Necromancer;
                 case "witch-doctor":
-                    return CharacterClassIdentifier.WitchDoctor;
+                    return CharacterId.WitchDoctor;
                 case "wizard":
-                    return CharacterClassIdentifier.Wizard;
+                    return CharacterId.Wizard;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }
         }
 
-        public static string CharacterClassIdentifierToSlug(CharacterClassIdentifier value)
+        public static string CharacterIdentifierToString(CharacterId value)
         {
             switch (value)
             {
-                case CharacterClassIdentifier.Barbarian:
+                case CharacterId.Barbarian:
                     return "barbarian";
-                case CharacterClassIdentifier.Crusader:
+                case CharacterId.Crusader:
                     return "crusader";
-                case CharacterClassIdentifier.DemonHunter:
+                case CharacterId.DemonHunter:
                     return "demon-hunter";
-                case CharacterClassIdentifier.Monk:
+                case CharacterId.Monk:
                     return "monk";
-                case CharacterClassIdentifier.Necromancer:
+                case CharacterId.Necromancer:
                     return "necromancer";
-                case CharacterClassIdentifier.WitchDoctor:
+                case CharacterId.WitchDoctor:
                     return "witch-doctor";
-                case CharacterClassIdentifier.Wizard:
+                case CharacterId.Wizard:
                     return "wizard";
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }
         }
 
-        public static IEnumerable<CharacterClassIdentifier> CharacterClassIdentifiersFromItemTypeId(string value)
+        public static IEnumerable<CharacterId> CharacterIdentifiersFromString(string value)
         {
-            var identifiers = new List<CharacterClassIdentifier>();
+            var identifiers = new List<CharacterId>();
             switch (value)
             {
                 case "Amulet":
@@ -408,13 +513,13 @@ namespace DiabloSharp.Helpers
                 case "Shoulders":
                 case "Spear":
                 case "Sword":
-                    identifiers.Add(CharacterClassIdentifier.Barbarian);
-                    identifiers.Add(CharacterClassIdentifier.Crusader);
-                    identifiers.Add(CharacterClassIdentifier.DemonHunter);
-                    identifiers.Add(CharacterClassIdentifier.Monk);
-                    identifiers.Add(CharacterClassIdentifier.Necromancer);
-                    identifiers.Add(CharacterClassIdentifier.WitchDoctor);
-                    identifiers.Add(CharacterClassIdentifier.Wizard);
+                    identifiers.Add(CharacterId.Barbarian);
+                    identifiers.Add(CharacterId.Crusader);
+                    identifiers.Add(CharacterId.DemonHunter);
+                    identifiers.Add(CharacterId.Monk);
+                    identifiers.Add(CharacterId.Necromancer);
+                    identifiers.Add(CharacterId.WitchDoctor);
+                    identifiers.Add(CharacterId.Wizard);
                     break;
                 case "Belt_Barbarian":
                 case "Boots_Barbarian":
@@ -425,7 +530,7 @@ namespace DiabloSharp.Helpers
                 case "MightyWeapon1H":
                 case "MightyWeapon2H":
                 case "Shoulders_Barbarian":
-                    identifiers.Add(CharacterClassIdentifier.Barbarian);
+                    identifiers.Add(CharacterId.Barbarian);
                     break;
                 case "ChestArmor_Crusader":
                 case "Boots_Crusader":
@@ -436,7 +541,7 @@ namespace DiabloSharp.Helpers
                 case "Helm_Crusader":
                 case "Legs_Crusader":
                 case "Shoulders_Crusader":
-                    identifiers.Add(CharacterClassIdentifier.Crusader);
+                    identifiers.Add(CharacterId.Crusader);
                     break;
                 case "Boots_DemonHunter":
                 case "ChestArmor_DemonHunter":
@@ -447,7 +552,7 @@ namespace DiabloSharp.Helpers
                 case "Legs_DemonHunter":
                 case "Quiver":
                 case "Shoulders_DemonHunter":
-                    identifiers.Add(CharacterClassIdentifier.DemonHunter);
+                    identifiers.Add(CharacterId.DemonHunter);
                     break;
                 case "Boots_Monk":
                 case "ChestArmor_Monk":
@@ -458,7 +563,7 @@ namespace DiabloSharp.Helpers
                 case "Legs_Monk":
                 case "Shoulders_Monk":
                 case "SpiritStone_Monk":
-                    identifiers.Add(CharacterClassIdentifier.Monk);
+                    identifiers.Add(CharacterId.Monk);
                     break;
                 case "Boots_Necromancer":
                 case "ChestArmor_Necromancer":
@@ -469,7 +574,7 @@ namespace DiabloSharp.Helpers
                 case "Scythe1H":
                 case "Scythe2H":
                 case "Shoulders_Necromancer":
-                    identifiers.Add(CharacterClassIdentifier.Necromancer);
+                    identifiers.Add(CharacterId.Necromancer);
                     break;
                 case "Boots_WitchDoctor":
                 case "CeremonialDagger":
@@ -480,7 +585,7 @@ namespace DiabloSharp.Helpers
                 case "Mojo":
                 case "Shoulders_WitchDoctor":
                 case "VoodooMask":
-                    identifiers.Add(CharacterClassIdentifier.WitchDoctor);
+                    identifiers.Add(CharacterId.WitchDoctor);
                     break;
 
                 case "Boots_Wizard":
@@ -492,36 +597,36 @@ namespace DiabloSharp.Helpers
                 case "Shoulders_Wizard":
                 case "Wand":
                 case "WizardHat":
-                    identifiers.Add(CharacterClassIdentifier.Wizard);
+                    identifiers.Add(CharacterId.Wizard);
                     break;
                 case "Axe2H":
                 case "Mace2H":
                 case "Sword2H":
-                    identifiers.Add(CharacterClassIdentifier.Barbarian);
-                    identifiers.Add(CharacterClassIdentifier.Crusader);
-                    identifiers.Add(CharacterClassIdentifier.Monk);
-                    identifiers.Add(CharacterClassIdentifier.Necromancer);
-                    identifiers.Add(CharacterClassIdentifier.WitchDoctor);
-                    identifiers.Add(CharacterClassIdentifier.Wizard);
+                    identifiers.Add(CharacterId.Barbarian);
+                    identifiers.Add(CharacterId.Crusader);
+                    identifiers.Add(CharacterId.Monk);
+                    identifiers.Add(CharacterId.Necromancer);
+                    identifiers.Add(CharacterId.WitchDoctor);
+                    identifiers.Add(CharacterId.Wizard);
                     break;
                 case "Polearm":
-                    identifiers.Add(CharacterClassIdentifier.Barbarian);
-                    identifiers.Add(CharacterClassIdentifier.Crusader);
-                    identifiers.Add(CharacterClassIdentifier.DemonHunter);
-                    identifiers.Add(CharacterClassIdentifier.Monk);
-                    identifiers.Add(CharacterClassIdentifier.WitchDoctor);
+                    identifiers.Add(CharacterId.Barbarian);
+                    identifiers.Add(CharacterId.Crusader);
+                    identifiers.Add(CharacterId.DemonHunter);
+                    identifiers.Add(CharacterId.Monk);
+                    identifiers.Add(CharacterId.WitchDoctor);
                     break;
                 case "Bow":
                 case "Crossbow":
-                    identifiers.Add(CharacterClassIdentifier.DemonHunter);
-                    identifiers.Add(CharacterClassIdentifier.WitchDoctor);
-                    identifiers.Add(CharacterClassIdentifier.Wizard);
+                    identifiers.Add(CharacterId.DemonHunter);
+                    identifiers.Add(CharacterId.WitchDoctor);
+                    identifiers.Add(CharacterId.Wizard);
                     break;
                 case "Staff":
-                    identifiers.Add(CharacterClassIdentifier.Monk);
-                    identifiers.Add(CharacterClassIdentifier.Necromancer);
-                    identifiers.Add(CharacterClassIdentifier.WitchDoctor);
-                    identifiers.Add(CharacterClassIdentifier.Wizard);
+                    identifiers.Add(CharacterId.Monk);
+                    identifiers.Add(CharacterId.Necromancer);
+                    identifiers.Add(CharacterId.WitchDoctor);
+                    identifiers.Add(CharacterId.Wizard);
                     break;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
@@ -530,64 +635,105 @@ namespace DiabloSharp.Helpers
             return identifiers;
         }
 
-        public static HeroStatIdentifier HeroStatIdentifierFromString(string value)
+        public static HeroStatId HeroStatIdentifierFromString(string value)
         {
             switch (value)
             {
                 case "life":
-                    return HeroStatIdentifier.Life;
+                    return HeroStatId.Life;
                 case "damage":
-                    return HeroStatIdentifier.Damage;
+                    return HeroStatId.Damage;
                 case "toughness":
-                    return HeroStatIdentifier.Toughness;
+                    return HeroStatId.Toughness;
                 case "healing":
-                    return HeroStatIdentifier.Healing;
+                    return HeroStatId.Healing;
                 case "attackSpeed":
-                    return HeroStatIdentifier.AttackSpeed;
+                    return HeroStatId.AttackSpeed;
                 case "armor":
-                    return HeroStatIdentifier.Armor;
+                    return HeroStatId.Armor;
                 case "strength":
-                    return HeroStatIdentifier.Strength;
+                    return HeroStatId.Strength;
                 case "dexterity":
-                    return HeroStatIdentifier.Dexterity;
+                    return HeroStatId.Dexterity;
                 case "vitality":
-                    return HeroStatIdentifier.Vitality;
+                    return HeroStatId.Vitality;
                 case "intelligence":
-                    return HeroStatIdentifier.Intelligence;
+                    return HeroStatId.Intelligence;
                 case "physicalResist":
-                    return HeroStatIdentifier.PhysicalResistance;
+                    return HeroStatId.PhysicalResistance;
                 case "fireResist":
-                    return HeroStatIdentifier.FireResistance;
+                    return HeroStatId.FireResistance;
                 case "coldResist":
-                    return HeroStatIdentifier.ColdResistance;
+                    return HeroStatId.ColdResistance;
                 case "lightningResist":
-                    return HeroStatIdentifier.LightningResistance;
+                    return HeroStatId.LightningResistance;
                 case "poisonResist":
-                    return HeroStatIdentifier.PoisonResistance;
+                    return HeroStatId.PoisonResistance;
                 case "arcaneResist":
-                    return HeroStatIdentifier.ArcaneResistance;
+                    return HeroStatId.ArcaneResistance;
                 case "blockChance":
-                    return HeroStatIdentifier.BlockChance;
+                    return HeroStatId.BlockChance;
                 case "blockAmountMin":
-                    return HeroStatIdentifier.BlockAmountMinimum;
+                    return HeroStatId.BlockAmountMinimum;
                 case "blockAmountMax":
-                    return HeroStatIdentifier.BlockAmountMaximum;
+                    return HeroStatId.BlockAmountMaximum;
                 case "goldFind":
-                    return HeroStatIdentifier.GoldFind;
+                    return HeroStatId.GoldFind;
                 case "critChance":
-                    return HeroStatIdentifier.CriticalHitChance;
+                    return HeroStatId.CriticalHitChance;
                 case "thorns":
-                    return HeroStatIdentifier.Thorns;
+                    return HeroStatId.Thorns;
                 case "lifeSteal":
-                    return HeroStatIdentifier.LifeSteal;
+                    return HeroStatId.LifeSteal;
                 case "lifePerKill":
-                    return HeroStatIdentifier.LifePerKill;
+                    return HeroStatId.LifePerKill;
                 case "lifeOnHit":
-                    return HeroStatIdentifier.LifePerHit;
+                    return HeroStatId.LifePerHit;
                 case "primaryResource":
-                    return HeroStatIdentifier.PrimaryResource;
+                    return HeroStatId.PrimaryResource;
                 case "secondaryResource":
-                    return HeroStatIdentifier.SecondaryResource;
+                    return HeroStatId.SecondaryResource;
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
+        public static ItemEquipmentSlot? ItemEquipmentSlotFromString(string value)
+        {
+            switch (value)
+            {
+                case "neck":
+                    return ItemEquipmentSlot.Neck;
+                case "right-hand":
+                    return ItemEquipmentSlot.Offhand;
+                case "left-hand":
+                    return ItemEquipmentSlot.Mainhand;
+                case "waist":
+                    return ItemEquipmentSlot.Waist;
+                case "feet":
+                    return ItemEquipmentSlot.Feet;
+                case "bracers":
+                    return ItemEquipmentSlot.Wrists;
+                case "torso":
+                    return ItemEquipmentSlot.Torso;
+                case "hands":
+                    return ItemEquipmentSlot.Hands;
+                case "head":
+                    return ItemEquipmentSlot.Head;
+                case "legs":
+                    return ItemEquipmentSlot.Legs;
+                case "left-finger":
+                    return ItemEquipmentSlot.LeftFinger;
+                case "right-finger":
+                    return ItemEquipmentSlot.RightFinger;
+                case "shoulders":
+                    return ItemEquipmentSlot.Shoulders;
+                case "follower-left-finger":
+                case "follower-right-finger":
+                case "follower-right-hand":
+                case "follower-left-hand":
+                case "follower-neck":
+                    return null;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }

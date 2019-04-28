@@ -10,7 +10,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetAccountTest()
         {
-            var battleTagId = new BattleTagIdentifier("Shanyen#2754");
+            var battleTagId = new BattleTagId("Shanyen#2754");
             var account = await DiabloApi.Profile.GetAccountAsync(AuthenticationScope, battleTagId);
             Assert.IsNotNull(account);
         }
@@ -18,7 +18,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetHeroTest()
         {
-            var heroId = new HeroIdentifier("Shanyen#2754", 111833443);
+            var heroId = new HeroId("Shanyen#2754", 111833443);
             var hero = await DiabloApi.Profile.GetHeroAsync(AuthenticationScope, heroId);
             Assert.IsNotNull(hero);
         }

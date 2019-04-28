@@ -4,21 +4,19 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Account : ModelBase<BattleTagIdentifier>
+    public class Account : ModelBase<BattleTagId>
     {
         public string Clan { get; internal set; }
 
-        public PeriodEra Era { get; internal set; }
+        public AccountPeriodEra Era { get; internal set; }
 
-        public PeriodSeason ActiveSeason { get; internal set; }
+        public AccountPeriodSeason ActiveSeason { get; internal set; }
 
-        public IEnumerable<PeriodSeason> Seasons { get; internal set; }
+        public IEnumerable<AccountPeriodSeason> Seasons { get; internal set; }
 
-        public HeroIdentifier LastHeroId { get; internal set; }
+        public IEnumerable<HeroId> HeroIds { get; internal set; }
 
-        public IEnumerable<HeroIdentifier> HeroIds { get; internal set; }
-
-        public IEnumerable<HeroFallen> FallenHeros { get; internal set; }
+        public IEnumerable<AccountFallenHero> FallenHeros { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {

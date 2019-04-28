@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Item : ModelBase<ItemIdentifier>
+    public class Item : ModelBase<ItemId>
     {
         public string Name { get; internal set; }
 

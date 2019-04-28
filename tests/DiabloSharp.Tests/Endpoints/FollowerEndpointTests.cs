@@ -10,7 +10,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetFollowerTest()
         {
-            var follower = await DiabloApi.Follower.GetFollowerAsync(AuthenticationScope, FollowerIdentifier.Templar);
+            var follower = await DiabloApi.Follower.GetFollowerAsync(AuthenticationScope, FollowerId.Templar);
             Assert.IsNotNull(follower);
         }
     }
