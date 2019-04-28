@@ -1,6 +1,6 @@
 namespace DiabloSharp.Models
 {
-    public class PeriodSeason : Period
+    public class AccountPeriodSeason : AccountPeriod
     {
         public bool IsActive { get; internal set; }
     }

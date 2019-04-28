@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum Gender
+    public enum HeroGender
     {
         [LocalizationEnUs("Male")]
         Male = 0,

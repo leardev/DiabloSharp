@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class ArtisanLevel : ModelBase
+    public class AccountArtisanLevel : ModelBase
     {
         public ArtisanIdentifier ArtisanId { get; internal set; }
 

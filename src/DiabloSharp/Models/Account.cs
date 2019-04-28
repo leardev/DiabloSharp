@@ -8,11 +8,11 @@ namespace DiabloSharp.Models
     {
         public string Clan { get; internal set; }
 
-        public PeriodEra Era { get; internal set; }
+        public AccountPeriodEra Era { get; internal set; }
 
-        public PeriodSeason ActiveSeason { get; internal set; }
+        public AccountPeriodSeason ActiveSeason { get; internal set; }
 
-        public IEnumerable<PeriodSeason> Seasons { get; internal set; }
+        public IEnumerable<AccountPeriodSeason> Seasons { get; internal set; }
 
         public IEnumerable<HeroIdentifier> HeroIds { get; internal set; }
 

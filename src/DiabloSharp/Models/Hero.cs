@@ -10,7 +10,7 @@ namespace DiabloSharp.Models
 
         public CharacterIdentifier Character { get; internal set; }
 
-        public Gender Gender { get; internal set; }
+        public HeroGender Gender { get; internal set; }
 
         public long Level { get; internal set; }
 

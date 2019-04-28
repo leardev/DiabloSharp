@@ -41,7 +41,7 @@ namespace DiabloSharp.Sample
                     .OrderByDescending(stat => stat.Value)
                     .Take(5);
 
-                Console.WriteLine($"{hero.Name} ({hero.Gender} {hero.Class})");
+                Console.WriteLine($"{hero.Name} ({hero.Gender} {hero.Character})");
                 foreach (var stat in stats)
                     Console.WriteLine($"\t{stat.Id}");
             }

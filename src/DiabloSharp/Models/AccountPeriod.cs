@@ -4,9 +4,9 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public abstract class Period : ModelBase<AccountPeriodIdentifier>
+    public abstract class AccountPeriod : ModelBase<AccountPeriodIdentifier>
     {
-        public IEnumerable<PeriodParagon> Paragons { get; internal set; }
+        public IEnumerable<AccountPeriodParagon> Paragons { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {

@@ -1,9 +1,9 @@
-﻿using System.Text;
+using System.Text;
 using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class PeriodParagon : ModelBase<GameModeIdentifier>
+    public class AccountPeriodParagon : ModelBase<GameModeIdentifier>
     {
         public long Value { get; internal set; }
 

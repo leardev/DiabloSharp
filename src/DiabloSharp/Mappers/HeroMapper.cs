@@ -22,7 +22,7 @@ namespace DiabloSharp.Mappers
 
             output.Id = HeroId;
             output.Level = input.Level;
-            output.Gender = (Gender)input.Gender;
+            output.Gender = (HeroGender)input.Gender;
             output.Character = characterId;
             output.Name = input.Name;
             output.IsDead = false;
@@ -57,13 +57,13 @@ namespace DiabloSharp.Mappers
 
         private HeroSkillActive MapActive(CharacterIdentifier characterId, HeroActiveSkillDto input)
         {
-            var runeId = default(SkillCharacterIdentifier);
+            var runeId = default(CharacterSkillIdentifier);
             if (input.Rune != null)
-                runeId = new SkillCharacterIdentifier(characterId, input.Rune.Slug);
+                runeId = new CharacterSkillIdentifier(characterId, input.Rune.Slug);
 
             return new HeroSkillActive
             {
-                Id = new SkillCharacterIdentifier(characterId, input.Skill.Slug),
+                Id = new CharacterSkillIdentifier(characterId, input.Skill.Slug),
                 Rune = runeId
             };
         }
@@ -81,7 +81,7 @@ namespace DiabloSharp.Mappers
 
         private HeroSkillPassive MapPassive(CharacterIdentifier characterId, HeroPassiveSkillDto input)
         {
-            return new HeroSkillPassive { Id = new SkillCharacterIdentifier(characterId, input.Skill.Slug) };
+            return new HeroSkillPassive { Id = new CharacterSkillIdentifier(characterId, input.Skill.Slug) };
         }
 
         private IEnumerable<HeroItemEquipment> MapItems(HeroItemsDto inputs)

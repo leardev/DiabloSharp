@@ -36,8 +36,8 @@ namespace DiabloSharp.Mappers
         {
             return new[]
             {
-                new CharacterName { Id = Gender.Male, Name = input.MaleName },
-                new CharacterName { Id = Gender.Female, Name = input.FemaleName }
+                new CharacterName { Id = HeroGender.Male, Name = input.MaleName },
+                new CharacterName { Id = HeroGender.Female, Name = input.FemaleName }
             };
         }
 
