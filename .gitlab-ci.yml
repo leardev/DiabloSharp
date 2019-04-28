@@ -10,6 +10,8 @@ ci:
   script:
     - $HOME/.dotnet/tools/dotnet-cake
   artifacts:
+    reports:
+        junit: out/test-results/*.xml
     paths:
         - artifacts/
     expire_in: 60 min
@@ -23,8 +25,6 @@ prerelease:
     - $HOME/.dotnet/tools/dotnet-cake -Target=Publish -BuildType=prerelease
   dependencies:
     - ci
-  environment:
-    name: production
   artifacts:
     paths:
         - artifacts/
@@ -42,8 +42,6 @@ release:
     - $HOME/.dotnet/tools/dotnet-cake -Target=Publish -BuildType=release
   dependencies:
     - ci
-  environment:
-    name: production
   artifacts:
     paths:
         - artifacts/
