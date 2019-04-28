@@ -30,6 +30,7 @@ var configuration = new DiabloApiConfiguration
 };
 
 var api = new DiabloApi(configuration);
-var scope = api.CreateAuthenticationScope();
-var account = await api.Profile.GetAccountAsync(scope, "BATTLE_TAG_TO_QUERY");
+var authenticationScope = await api.CreateAuthenticationScopeAsync();
+var battleTagId = new BattleTagIdentifier("BATTLE_TAG_NAME#BATTLE_TAG_ID");
+var account = await api.Profile.GetAccountAsync(authenticationScope, battleTagId);
 ```
