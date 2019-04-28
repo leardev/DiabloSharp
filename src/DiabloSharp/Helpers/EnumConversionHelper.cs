@@ -170,6 +170,21 @@ namespace DiabloSharp.Helpers
             }
         }
 
+        public static FollowerIdentifier FollowerIdentifierFromString(string value)
+        {
+            switch (value)
+            {
+                case "templar":
+                    return FollowerIdentifier.Templar;
+                case "scoundrel":
+                    return FollowerIdentifier.Scoundrel;
+                case "enchantress":
+                    return FollowerIdentifier.Enchantress;
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+        }
+
         public static ItemEquipmentKind ItemEquipmentKindFromString(string value)
         {
             switch (value)

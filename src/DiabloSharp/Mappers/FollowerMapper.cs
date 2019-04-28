@@ -9,8 +9,9 @@ namespace DiabloSharp.Mappers
         protected override void Map(FollowerDto input, Follower output)
         {
             var skills = MapSkills(input.Skills);
+            var followerId = EnumConversionHelper.FollowerIdentifierFromString(input.Slug);
 
-            output.Id = input.Slug;
+            output.Id = followerId;
             output.Name = input.Name;
             output.RealName = input.RealName;
             output.Portrait = input.Portrait;
