@@ -177,6 +177,7 @@ namespace DiabloSharp.Mappers
             var dyeId = ItemIdentifierHelper.FromItem(input.DyeColor);
             var transmogId = ItemIdentifierHelper.FromItem(input.TransmogItem);
 
+            /* use ItemEquipmentSlot for follower items, because follower-tokens are not available */
             output = new HeroItemFollower { Follower = follower, Id = ItemIdentifierHelper.FromItem(input), Slot = slot, Dye = dyeId, Transmog = transmogId };
             return true;
         }
@@ -194,6 +195,7 @@ namespace DiabloSharp.Mappers
 
         private HeroItemCube MapCubeItem(HeroItemDto input)
         {
+            /* sometimes not all cube-items are avaible therefore the user has to resolve the ItemIdentifier to determine the cube-slot */
             return new HeroItemCube { Id = ItemIdentifierHelper.FromItem(input) };
         }
 

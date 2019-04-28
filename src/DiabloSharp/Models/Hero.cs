@@ -1,9 +1,21 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Text;
+using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Hero : HeroBase
+    public class Hero : ModelBase<HeroIdentifier>
     {
+        public string Name { get; internal set; }
+
+        public CharacterIdentifier Character { get; internal set; }
+
+        public Gender Gender { get; internal set; }
+
+        public long Level { get; internal set; }
+
+        public bool IsDead { get; internal set; }
+
         public GameModeIdentifier GameMode { get; internal set; }
 
         public long HighestSoloRift { get; internal set; }
@@ -19,5 +31,14 @@ namespace DiabloSharp.Models
         public IEnumerable<HeroItemCube> CubeItems { get; internal set; }
 
         public IEnumerable<HeroStat> Stats { get; internal set; }
+
+        protected override StringBuilder ToBuilder()
+        {
+            var builder = base.ToBuilder();
+            builder.AppendProperty(nameof(Id), Id.ToString());
+            builder.AppendProperty(nameof(Name), Name);
+            builder.AppendProperty(nameof(Character), Character.ToString());
+            return builder;
+        }
     }
 }

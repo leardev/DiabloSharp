@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public abstract class HeroBase : ModelBase<HeroIdentifier>
+    public class AccountFallenHero : ModelBase<HeroIdentifier>
     {
         public string Name { get; internal set; }
 

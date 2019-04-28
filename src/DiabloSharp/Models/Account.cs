@@ -16,7 +16,7 @@ namespace DiabloSharp.Models
 
         public IEnumerable<HeroIdentifier> HeroIds { get; internal set; }
 
-        public IEnumerable<HeroFallen> FallenHeros { get; internal set; }
+        public IEnumerable<AccountFallenHero> FallenHeros { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {
