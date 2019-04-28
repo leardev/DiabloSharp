@@ -2,7 +2,7 @@ using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Models
 {
-    public enum CharacterSkillType
+    public enum CharacterSkillKind
     {
         [LocalizationEnUs("Active")]
         Active,

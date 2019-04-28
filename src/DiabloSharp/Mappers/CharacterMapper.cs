@@ -73,7 +73,7 @@ namespace DiabloSharp.Mappers
                 Level = input.Skill.Level,
                 TooltipUrl = input.Skill.TooltipUrl,
                 IconUrl = input.Skill.Icon,
-                Type = CharacterSkillType.Active,
+                Kind = CharacterSkillKind.Active,
                 Runes = runes
             };
         }
@@ -119,7 +119,7 @@ namespace DiabloSharp.Mappers
                 Level = input.Level,
                 TooltipUrl = input.TooltipUrl,
                 IconUrl = input.Icon,
-                Type = CharacterSkillType.Passive
+                Kind = CharacterSkillKind.Passive
             };
         }
     }
