@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace DiabloSharp.Clients
 {
-    internal class HttpClientBase : IDisposable
+    internal abstract class HttpClientBase : IDisposable
     {
         private readonly Dictionary<string, string> _parameters;
 
@@ -19,7 +19,7 @@ namespace DiabloSharp.Clients
 
         private bool _disposedValue;
 
-        public HttpClientBase(string baseAddress, ITokenBucket tokenBucket)
+        protected HttpClientBase(string baseAddress, ITokenBucket tokenBucket)
         {
             _tokenBucket = tokenBucket;
             Client = new HttpClient
@@ -39,12 +39,12 @@ namespace DiabloSharp.Clients
             GC.SuppressFinalize(this);
         }
 
-        public void AddParameter(string key, string value)
+        protected void AddParameter(string key, string value)
         {
             _parameters.Add(key, value);
         }
 
-        public async Task<T> GetAsync<T>(string requestUri)
+        protected async Task<T> GetAsync<T>(string requestUri)
         {
             await _tokenBucket.ConsumeAsync();
 
@@ -60,7 +60,7 @@ namespace DiabloSharp.Clients
             }
         }
 
-        public async Task<T> PostAsync<T>(string requestUri)
+        protected async Task<T> PostAsync<T>(string requestUri)
         {
             await _tokenBucket.ConsumeAsync();
 

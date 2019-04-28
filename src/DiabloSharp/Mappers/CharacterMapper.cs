@@ -52,7 +52,7 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        public IEnumerable<CharacterSkillActive> MapActiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterApiSkillDto> inputs)
+        private IEnumerable<CharacterSkillActive> MapActiveSkills(CharacterIdentifier characterId, IEnumerable<CharacterApiSkillDto> inputs)
         {
             var outputs = new List<CharacterSkillActive>();
             foreach (var input in inputs)
@@ -63,7 +63,7 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        public CharacterSkillActive MapActiveSkill(CharacterIdentifier characterId, CharacterApiSkillDto input)
+        private CharacterSkillActive MapActiveSkill(CharacterIdentifier characterId, CharacterApiSkillDto input)
         {
             var runes = MapRunes(characterId, input.Runes);
             return new CharacterSkillActive

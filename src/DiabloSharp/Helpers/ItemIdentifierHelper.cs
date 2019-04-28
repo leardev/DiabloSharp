@@ -4,7 +4,7 @@ using DiabloSharp.Models;
 
 namespace DiabloSharp.Helpers
 {
-    internal class ItemIdentifierHelper
+    internal static class ItemIdentifierHelper
     {
         public static ItemIdentifier FromItem(HeroItemDto input)
         {
