@@ -31,6 +31,6 @@ var configuration = new DiabloApiConfiguration
 
 var api = new DiabloApi(configuration);
 var authenticationScope = await api.CreateAuthenticationScopeAsync();
-var battleTagId = new BattleTagIdentifier("BATTLE_TAG_NAME#BATTLE_TAG_ID");
+var battleTagId = new BattleTagId("BATTLE_TAG_NAME#BATTLE_TAG_ID");
 var account = await api.Profile.GetAccountAsync(authenticationScope, battleTagId);
 ```
