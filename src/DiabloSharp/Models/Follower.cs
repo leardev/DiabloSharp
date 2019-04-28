@@ -12,7 +12,7 @@ namespace DiabloSharp.Models
 
         public string Portrait { get; internal set; }
 
-        public IEnumerable<SkillFollower> Skills { get; internal set; }
+        public IEnumerable<FollowerSkill> Skills { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {

@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class SkillBase<T> : ModelBase<T>
+    public class FollowerSkill : ModelBase<FollowerSkillIdentifier>
     {
         public string Name { get; internal set; }
 

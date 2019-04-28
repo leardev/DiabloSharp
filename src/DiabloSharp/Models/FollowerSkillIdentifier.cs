@@ -3,27 +3,27 @@ using DiabloSharp.Infrastructure;
 
 namespace DiabloSharp.Models
 {
-    public class SkillFollowerIdentifier : ValueObject
+    public class FollowerSkillIdentifier : ValueObject
     {
-        public SkillFollowerIdentifier(FollowerIdentifier followerId, string slug)
+        public FollowerSkillIdentifier(FollowerIdentifier id, string slug)
         {
-            FollowerId = followerId;
+            Id = id;
             Slug = slug;
         }
 
-        public FollowerIdentifier FollowerId { get; }
+        public FollowerIdentifier Id { get; }
 
         public string Slug { get; }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return FollowerId;
+            yield return Id;
             yield return Slug;
         }
 
         public override string ToString()
         {
-            return $"{nameof(FollowerId)} = {FollowerId}, {nameof(Slug)} = {Slug}";
+            return $"{nameof(Id)} = {Id}, {nameof(Slug)} = {Slug}";
         }
     }
 }

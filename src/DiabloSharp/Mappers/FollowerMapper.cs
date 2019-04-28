@@ -19,9 +19,9 @@ namespace DiabloSharp.Mappers
             output.Skills = skills;
         }
 
-        private IEnumerable<SkillFollower> MapSkills(FollowerIdentifier followerId, IEnumerable<FollowerSkillDto> inputs)
+        private IEnumerable<FollowerSkill> MapSkills(FollowerIdentifier followerId, IEnumerable<FollowerSkillDto> inputs)
         {
-            var outputs = new List<SkillFollower>();
+            var outputs = new List<FollowerSkill>();
             foreach (var input in inputs)
             {
                 var output = MapSkill(followerId, input);
@@ -30,11 +30,11 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private SkillFollower MapSkill(FollowerIdentifier followerId, FollowerSkillDto input)
+        private FollowerSkill MapSkill(FollowerIdentifier followerId, FollowerSkillDto input)
         {
-            return new SkillFollower
+            return new FollowerSkill
             {
-                Id = new SkillFollowerIdentifier(followerId, input.Slug),
+                Id = new FollowerSkillIdentifier(followerId, input.Slug),
                 Name = input.Name,
                 Level = input.Level,
                 IconUrl = input.Icon,
