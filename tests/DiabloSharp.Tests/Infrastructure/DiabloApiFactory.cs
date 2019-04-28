@@ -1,8 +1,8 @@
-﻿using DiabloSharp.Configurations;
+using DiabloSharp.Configurations;
 
 namespace DiabloSharp.Tests.Infrastructure
 {
-    internal class DiabloApiFactory
+    internal static class DiabloApiFactory
     {
         public static IDiabloApi CreateApi()
         {

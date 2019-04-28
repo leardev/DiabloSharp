@@ -8,7 +8,7 @@ namespace DiabloSharp.Models
     {
         public string Name { get; internal set; }
 
-        public IEnumerable<ItemIdentifier> ItemIds { get; internal set; }
+        public IEnumerable<ItemId> ItemIds { get; internal set; }
 
         protected override StringBuilder ToBuilder()
         {

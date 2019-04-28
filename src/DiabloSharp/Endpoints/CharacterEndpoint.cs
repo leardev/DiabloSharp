@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Converters;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
+using DiabloSharp.Mappers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -11,21 +13,20 @@ namespace DiabloSharp.Endpoints
     internal class CharacterEndpoint : Endpoint,
                                        ICharacterEndpoint
     {
-        private readonly CharacterConverter _characterConverter;
-
         public CharacterEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
-            _characterConverter = new CharacterConverter();
         }
 
-        public async Task<CharacterClass> GetCharacterClassAsync(IAuthenticationScope authenticationScope, CharacterClassIdentifier characterClassId)
+        public async Task<Character> GetCharacterAsync(IAuthenticationScope authenticationScope, CharacterId characterId)
         {
-            var artisanSlug = EnumConversionHelper.CharacterClassIdentifierToSlug(characterClassId);
+            var mapper = new CharacterMapper();
+            var artisanSlug = EnumConversionHelper.CharacterIdentifierToString(characterId);
 
             using (var client = CreateClient(authenticationScope))
             {
                 var characterClass = await client.GetCharacterClassAsync(artisanSlug);
 
+                /* GetApiSkill only extends active skills with runes, all the other properties are already retrieved via GetCharacterClass */
                 var activeApiSkills = new List<CharacterApiSkillDto>();
                 foreach (var skill in characterClass.Skills.Actives)
                 {
@@ -33,8 +34,20 @@ namespace DiabloSharp.Endpoints
                     activeApiSkills.Add(apiSkill);
                 }
 
-                return _characterConverter.CharacterToModel(characterClassId, characterClass, activeApiSkills);
+                mapper.Actives = activeApiSkills;
+                return mapper.Map(characterClass);
             }
+        }
+
+        public async Task<IEnumerable<Character>> GetCharactersAsync(IAuthenticationScope authenticationScope)
+        {
+            var characterIds = Enum.GetValues(typeof(CharacterId))
+                .Cast<CharacterId>()
+                .ToList();
+
+            var charactersTasks = characterIds.Select(id => GetCharacterAsync(authenticationScope, id));
+            var characters = await Task.WhenAll(charactersTasks);
+            return characters;
         }
     }
 }

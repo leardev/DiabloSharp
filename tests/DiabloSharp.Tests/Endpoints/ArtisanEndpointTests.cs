@@ -10,14 +10,15 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetArtisanTest()
         {
-            var artisan = await DiabloApi.Artisan.GetArtisanAsync(AuthenticationScope, ArtisanIdentifier.Blacksmith);
+            var artisan = await DiabloApi.Artisan.GetArtisanAsync(AuthenticationScope, ArtisanId.Blacksmith);
             Assert.IsNotNull(artisan);
         }
 
         [Test]
         public async Task GetRecipeTest()
         {
-            var recipe = await DiabloApi.Artisan.GetRecipeAsync(AuthenticationScope, ArtisanIdentifier.Blacksmith, "apprentice-flamberge");
+            var recipeId = new RecipeId(ArtisanId.Blacksmith, "apprentice-flamberge");
+            var recipe = await DiabloApi.Artisan.GetRecipeAsync(AuthenticationScope, recipeId);
             Assert.IsNotNull(recipe);
         }
     }

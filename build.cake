@@ -9,6 +9,14 @@ var project = new FilePath(@"./src/DiabloSharp/DiabloSharp.csproj");
 var testProject = new FilePath(@"./tests/DiabloSharp.Tests/DiabloSharp.Tests.csproj");
 var sampleProject = new FilePath(@"./samples/DiabloSharp.Sample/DiabloSharp.Sample.csproj");
 var artifactsDirectory = new DirectoryPath(@"./artifacts");
+var outDirectory = new DirectoryPath(@"./out");
+var testResultsDirectory = outDirectory.Combine("test-results");
+var defaultMSBuildSettings = new DotNetCoreMSBuildSettings
+{
+    NoLogo = true,
+    MaxCpuCount = 0,
+    TreatAllWarningsAs = MSBuildTreatAllWarningsAs.Error
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS
@@ -19,9 +27,14 @@ Task("Clean")
 {
     Information($"Cleaning {artifactsDirectory}");
     CleanDirectory(artifactsDirectory);
+
+    Information($"Cleaning {outDirectory}");
+    CleanDirectory(outDirectory);
+
     var cleanSettings = new DotNetCoreCleanSettings
     {
         Configuration = configuration,
+        MSBuildSettings = defaultMSBuildSettings,
         Verbosity = DotNetCoreVerbosity.Minimal
     };
 
@@ -41,6 +54,13 @@ Task("Test")
     DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
     {
         Configuration = configuration,
+        Logger = "junit",
+        ArgumentCustomization = args =>
+        {
+            args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
+            return args;
+        },
+        ResultsDirectory = testResultsDirectory,
         Verbosity = DotNetCoreVerbosity.Minimal
     });
 });
@@ -51,6 +71,7 @@ Task("Sample")
     DotNetCoreBuild(sampleProject.FullPath, new DotNetCoreBuildSettings
     {
         Configuration = configuration,
+        MSBuildSettings = defaultMSBuildSettings,
         Verbosity = DotNetCoreVerbosity.Minimal
     });
 });
@@ -62,6 +83,7 @@ Task("Package")
     {
         Configuration = configuration,
         ArgumentCustomization = args => args.Append($"/p:BuildType={buildType}"),
+        MSBuildSettings = defaultMSBuildSettings,
         OutputDirectory = artifactsDirectory,
         Verbosity = DotNetCoreVerbosity.Minimal
     });

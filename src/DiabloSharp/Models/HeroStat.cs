@@ -4,7 +4,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class HeroStat : ModelBase<HeroStatIdentifier>
+    public class HeroStat : ModelBase<HeroStatId>
     {
         public double Value { get; internal set; }
 

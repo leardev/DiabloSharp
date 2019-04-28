@@ -3,7 +3,7 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class CharacterName : ModelBase<Gender>
+    public class CharacterName : ModelBase<HeroGender>
     {
         public string Name { get; internal set; }
 

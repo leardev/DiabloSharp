@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Converters;
+using DiabloSharp.Mappers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -8,22 +11,31 @@ namespace DiabloSharp.Endpoints
     internal class FollowerEndpoint : Endpoint,
                                       IFollowerEndpoint
     {
-        private readonly FollowerConverter _followerConverter;
-
         public FollowerEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
         {
-            _followerConverter = new FollowerConverter();
         }
 
-        public async Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, FollowerIdentifier followerId)
+        public async Task<Follower> GetFollowerAsync(IAuthenticationScope authenticationScope, FollowerId followerId)
         {
+            var mapper = new FollowerMapper();
             var followerSlug = followerId.ToString().ToLower();
 
             using (var client = CreateClient(authenticationScope))
             {
                 var follower = await client.GetFollowerAsync(followerSlug);
-                return _followerConverter.FollowerToModel(follower);
+                return mapper.Map(follower);
             }
+        }
+
+        public async Task<IEnumerable<Follower>> GetFollowersAsync(IAuthenticationScope authenticationScope)
+        {
+            var followerIds = Enum.GetValues(typeof(FollowerId))
+                .Cast<FollowerId>()
+                .ToList();
+
+            var followersTasks = followerIds.Select(id => GetFollowerAsync(authenticationScope, id));
+            var followers = await Task.WhenAll(followersTasks);
+            return followers;
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public class HeroSkillActive : HeroSkill
     {
-        public SkillIdentifier Rune { get; internal set; }
+        public CharacterSkillId Rune { get; internal set; }
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Converters;
+using DiabloSharp.Mappers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
 
@@ -124,76 +124,76 @@ namespace DiabloSharp.Endpoints
             #endregion
         }
 
-        public Task<ItemEquipment> GetEquipmentAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemEquipment> GetEquipmentAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
-            var converter = new ItemEquipmentConverter();
-            return GetItem(authenticationScope, converter, itemIdentifier);
+            var mapper = new ItemEquipmentMapper();
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemEquipment>> GetEquipmentsAsync(IAuthenticationScope authenticationScope)
         {
-            var converter = new ItemEquipmentConverter();
-            return GetItems(authenticationScope, converter, _equipmentIndices);
+            var mapper = new ItemEquipmentMapper();
+            return GetItems(authenticationScope, mapper, _equipmentIndices);
         }
 
-        public Task<ItemGem> GetGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemGem> GetGemAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
-            var converter = new ItemGemConverter();
-            return GetItem(authenticationScope, converter, itemIdentifier);
+            var mapper = new ItemGemMapper();
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemGem>> GetGemsAsync(IAuthenticationScope authenticationScope)
         {
-            var converter = new ItemGemConverter();
-            return GetItems(authenticationScope, converter, "item-type/gem");
+            var mapper = new ItemGemMapper();
+            return GetItems(authenticationScope, mapper, "item-type/gem");
         }
 
-        public Task<ItemLegendaryGem> GetLegendaryGemAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemLegendaryGem> GetLegendaryGemAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
-            var converter = new ItemLegendaryGemConverter();
-            return GetItem(authenticationScope, converter, itemIdentifier);
+            var mapper = new ItemLegendaryGemMapper();
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemLegendaryGem>> GetLegendaryGemsAsync(IAuthenticationScope authenticationScope)
         {
-            var converter = new ItemLegendaryGemConverter();
-            return GetItems(authenticationScope, converter, "item-type/upgradeablejewel");
+            var mapper = new ItemLegendaryGemMapper();
+            return GetItems(authenticationScope, mapper, "item-type/upgradeablejewel");
         }
 
-        public Task<ItemLegendaryPotion> GetLegendaryPotionAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemLegendaryPotion> GetLegendaryPotionAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
-            var converter = new ItemLegendaryPotionConverter();
-            return GetItem(authenticationScope, converter, itemIdentifier);
+            var mapper = new ItemLegendaryPotionMapper();
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemLegendaryPotion>> GetLegendaryPotionsAsync(IAuthenticationScope authenticationScope)
         {
-            var converter = new ItemLegendaryPotionConverter();
-            return GetItems(authenticationScope, converter, "item-type/healthpotion");
+            var mapper = new ItemLegendaryPotionMapper();
+            return GetItems(authenticationScope, mapper, "item-type/healthpotion");
         }
 
-        public Task<ItemFollowerToken> GetFollowerTokenAsync(IAuthenticationScope authenticationScope, ItemIdentifier itemIdentifier)
+        public Task<ItemFollowerToken> GetFollowerTokenAsync(IAuthenticationScope authenticationScope, ItemId itemId)
         {
-            var converter = new ItemFollowerTokenConverter();
-            return GetItem(authenticationScope, converter, itemIdentifier);
+            var mapper = new ItemFollowerTokenMapper();
+            return GetItem(authenticationScope, mapper, itemId);
         }
 
         public Task<IEnumerable<ItemFollowerToken>> GetFollowerTokensAsync(IAuthenticationScope authenticationScope)
         {
-            var converter = new ItemFollowerTokenConverter();
-            return GetItems(authenticationScope, converter, _followerTokenIndices);
+            var mapper = new ItemFollowerTokenMapper();
+            return GetItems(authenticationScope, mapper, _followerTokenIndices);
         }
 
-        private async Task<T> GetItem<T>(IAuthenticationScope authenticationScope, ItemConverter<T> converter, ItemIdentifier itemIdentifier) where T : Item, new()
+        private async Task<T> GetItem<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, ItemId itemId) where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {
-                var item = await client.GetItemAsync($"item/{itemIdentifier}");
-                return converter.ItemToModel(item);
+                var item = await client.GetItemAsync($"item/{itemId}");
+                return mapper.Map(item);
             }
         }
 
-        private async Task<IEnumerable<T>> GetItems<T>(IAuthenticationScope authenticationScope, ItemConverter<T> converter, params string[] itemTypeIndices) where T : Item, new()
+        private async Task<IEnumerable<T>> GetItems<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, params string[] itemTypeIndices) where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {
@@ -206,8 +206,7 @@ namespace DiabloSharp.Endpoints
                     .ToList();
                 var items = await Task.WhenAll(processItemTypesToItemsTasks);
 
-                return converter.ItemsToModel(items)
-                    .ToList();
+                return mapper.Map(items);
             }
         }
     }

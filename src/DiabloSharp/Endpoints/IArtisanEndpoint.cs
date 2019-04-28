@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloSharp.Models;
 
@@ -5,8 +6,10 @@ namespace DiabloSharp.Endpoints
 {
     public interface IArtisanEndpoint : IEndpoint
     {
-        Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId);
+        Task<Artisan> GetArtisanAsync(IAuthenticationScope authenticationScope, ArtisanId artisanId);
 
-        Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, ArtisanIdentifier artisanId, string recipeSlug);
+        Task<IEnumerable<Artisan>> GetArtisansAsync(IAuthenticationScope authenticationScope);
+
+        Task<Recipe> GetRecipeAsync(IAuthenticationScope authenticationScope, RecipeId recipeId);
     }
 }
