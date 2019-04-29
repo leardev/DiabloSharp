@@ -1,4 +1,5 @@
 using System;
+using DiabloSharp.Exceptions;
 using DiabloSharp.Models;
 
 namespace DiabloSharp.Extensions
@@ -13,7 +14,7 @@ namespace DiabloSharp.Extensions
         public static void EnsureExpiration(this IAuthenticationScope authenticationScope)
         {
             if (authenticationScope.IsExpired())
-                throw new Exception("Authentication scope is expired.");
+                throw new DiabloApiAuthenticationExpiredException();
         }
     }
 }
