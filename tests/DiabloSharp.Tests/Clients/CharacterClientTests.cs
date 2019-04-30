@@ -63,7 +63,6 @@ namespace DiabloSharp.Tests.Clients
             Assert.That(skill.Icon, Is.Not.Null.Or.Empty);
             Assert.That(skill.Slug, Is.Not.Null.Or.Empty);
             Assert.That(skill.TooltipUrl, Is.Not.Null.Or.Empty);
-            //Assert.That(skill.FlavorText, Is.Not.Null.Or.Empty); optional
             Assert.NotZero(skill.Level);
         }
 
