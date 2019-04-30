@@ -1,8 +1,8 @@
-using DiabloSharp.Configurations;
-using DiabloSharp.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DiabloSharp.Configurations;
+using DiabloSharp.Models;
 
 namespace DiabloSharp.Sample
 {
