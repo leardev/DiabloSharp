@@ -46,7 +46,6 @@ namespace DiabloSharp.RateLimiters
                 /* ensure that the refilled remaining token count does not exceed the capacity limit */
                 Remaining = Math.Min(Remaining + tokenCountToRefill, _capacity);
 
-
                 if (tokenCount > Remaining)
                     return false;
 
