@@ -5,7 +5,8 @@ namespace DiabloSharp.Extensions
 {
     public static class EnumExtensions
     {
-        public static string ToLocalizationEnUs<TEnum>(this TEnum value) where TEnum : struct
+        public static string ToLocalizationEnUs<TEnum>(this TEnum value)
+            where TEnum : struct
         {
             var type = value.GetType();
             var fieldInfo = type.GetField(value.ToString());
