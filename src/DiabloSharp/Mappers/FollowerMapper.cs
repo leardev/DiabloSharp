@@ -27,6 +27,7 @@ namespace DiabloSharp.Mappers
                 var output = MapSkill(followerId, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 

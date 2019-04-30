@@ -22,6 +22,7 @@ namespace DiabloSharp.Mappers
                 var output = Map(input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
     }

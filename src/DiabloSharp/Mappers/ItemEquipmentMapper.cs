@@ -53,6 +53,7 @@ namespace DiabloSharp.Mappers
                 var output = ItemIdentifierHelper.FromString(input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
     }

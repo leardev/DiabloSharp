@@ -49,6 +49,7 @@ namespace DiabloSharp.Mappers
                 var output = EnumConversionHelper.CharacterSkillCategoryFromString(input.Slug);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
@@ -60,6 +61,7 @@ namespace DiabloSharp.Mappers
                 var output = MapActiveSkill(characterId, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
@@ -86,6 +88,7 @@ namespace DiabloSharp.Mappers
                 var output = MapRune(characterId, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
@@ -107,6 +110,7 @@ namespace DiabloSharp.Mappers
                 var output = MapPassiveSkill(characterId, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 

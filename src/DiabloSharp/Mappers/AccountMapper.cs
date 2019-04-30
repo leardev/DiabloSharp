@@ -33,6 +33,7 @@ namespace DiabloSharp.Mappers
                 var output = MapFallenHero(battleTag, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
@@ -140,6 +141,7 @@ namespace DiabloSharp.Mappers
                 var output = MapHero(battleTag, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
