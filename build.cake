@@ -1,3 +1,6 @@
+#addin nuget:?package=Cake.DependenciesAnalyser&version=2.0.0
+#addin nuget:?package=Cake.MiniCover&version=0.28.1
+
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
@@ -5,11 +8,12 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var buildType = Argument("buildtype", "dev");
-var project = new FilePath(@"./src/DiabloSharp/DiabloSharp.csproj");
-var testProject = new FilePath(@"./tests/DiabloSharp.Tests/DiabloSharp.Tests.csproj");
-var sampleProject = new FilePath(@"./samples/DiabloSharp.Sample/DiabloSharp.Sample.csproj");
-var artifactsDirectory = new DirectoryPath(@"./artifacts");
-var outDirectory = new DirectoryPath(@"./out");
+var repositoryRoot = new DirectoryPath("./").MakeAbsolute(Context.Environment);
+var project = repositoryRoot.CombineWithFilePath("src/DiabloSharp/DiabloSharp.csproj");
+var testProject = repositoryRoot.CombineWithFilePath("tests/DiabloSharp.Tests/DiabloSharp.Tests.csproj");
+var sampleProject = repositoryRoot.CombineWithFilePath("samples/DiabloSharp.Sample/DiabloSharp.Sample.csproj");
+var artifactsDirectory = repositoryRoot.Combine("artifacts");
+var outDirectory = repositoryRoot.Combine("out");
 var testResultsDirectory = outDirectory.Combine("test-results");
 var defaultMSBuildSettings = new DotNetCoreMSBuildSettings
 {
@@ -48,40 +52,71 @@ Task("Clean")
     DotNetCoreClean(sampleProject.FullPath, cleanSettings);
 });
 
-Task("Test")
+Task("Compile")
 .Does(() =>
 {
-    DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
-    {
-        Configuration = configuration,
-        Logger = "junit",
-        ArgumentCustomization = args =>
-        {
-            args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
-            return args;
-        },
-        ResultsDirectory = testResultsDirectory,
-        Verbosity = DotNetCoreVerbosity.Minimal
-    });
-});
-
-Task("Sample")
-.Does(() =>
-{
-    DotNetCoreBuild(sampleProject.FullPath, new DotNetCoreBuildSettings
+    var buildSettings = new DotNetCoreBuildSettings
     {
         Configuration = configuration,
         MSBuildSettings = defaultMSBuildSettings,
         Verbosity = DotNetCoreVerbosity.Minimal
-    });
+    };
+
+    DotNetCoreBuild(project.FullPath, buildSettings);
+    DotNetCoreBuild(testProject.FullPath, buildSettings);
+    DotNetCoreBuild(sampleProject.FullPath, buildSettings);
+});
+
+Task("DependencyAnalysis")
+.Does(() =>
+{
+    var sourceDirectory = new DependenciesAnalyserSettings()
+    {
+        Folder = "./"
+    };
+
+    AnalyseDependencies(sourceDirectory);
+});
+
+Task("Coverage")
+.IsDependentOn("Compile")
+.Does(() =>
+{
+    SetMiniCoverToolsProject(repositoryRoot.CombineWithFilePath("tools/MiniCover/MiniCover.csproj"));
+
+    MiniCover(tool =>
+        tool.DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
+        {
+            Configuration = configuration,
+            Logger = "junit",
+            ArgumentCustomization = args =>
+            {
+                args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
+                return args;
+            },
+            ResultsDirectory = testResultsDirectory,
+            NoRestore = true,
+            NoBuild = true,
+            Verbosity = DotNetCoreVerbosity.Minimal,
+        }),
+        new MiniCoverSettings()
+            .WithMiniCoverWorkingDirectory(repositoryRoot)
+            .WithAssembliesMatching("tests/**/*.dll")
+            .WithSourcesMatching("src/**/*.cs")
+            .WithNonFatalThreshold()
+            .GenerateReport(ReportType.CONSOLE | ReportType.HTML | ReportType.OPENCOVER)
+    );
 });
 
 Task("Package")
+.IsDependentOn("Compile")
 .Does(() =>
 {
     DotNetCorePack(project.FullPath, new DotNetCorePackSettings
     {
         Configuration = configuration,
+        NoBuild = true,
+        NoRestore = true,
         ArgumentCustomization = args => args.Append($"/p:BuildType={buildType}"),
         MSBuildSettings = defaultMSBuildSettings,
         OutputDirectory = artifactsDirectory,
@@ -104,8 +139,8 @@ Task("NuGetPush")
 
 Task("Default")
 .IsDependentOn("Clean")
-.IsDependentOn("Test")
-.IsDependentOn("Sample")
+.IsDependentOn("DependencyAnalysis")
+.IsDependentOn("Coverage")
 .IsDependentOn("Package");
 
 Task("Publish")
