@@ -350,3 +350,7 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/csharp
 
 out/
+!tools/MiniCover/
+!tools/MiniCover/MiniCover.csproj
+coverage*
+opencovercoverage.xml
