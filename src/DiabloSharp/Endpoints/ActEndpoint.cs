@@ -27,7 +27,7 @@ namespace DiabloSharp.Endpoints
         public async Task<Act> GetActAsync(IAuthenticationScope authenticationScope, ActId actId)
         {
             var mapper = new ActMapper();
-            var actIdIndex = (byte) actId;
+            var actIdIndex = (byte)actId;
 
             using (var client = CreateClient(authenticationScope))
             {
