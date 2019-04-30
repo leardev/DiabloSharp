@@ -5,8 +5,6 @@ namespace DiabloSharp.Mappers
     internal abstract class Mapper<TIn, TOut>
         where TOut : new()
     {
-        protected abstract void Map(TIn input, TOut output);
-
         public TOut Map(TIn input)
         {
             var output = new TOut();
@@ -25,5 +23,7 @@ namespace DiabloSharp.Mappers
 
             return outputs;
         }
+
+        protected abstract void Map(TIn input, TOut output);
     }
 }

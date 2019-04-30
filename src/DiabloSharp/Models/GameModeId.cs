@@ -15,12 +15,6 @@ namespace DiabloSharp.Models
 
         public GameMode Mode { get; }
 
-        protected override IEnumerable<object> GetAtomicValues()
-        {
-            yield return Difficulty;
-            yield return Mode;
-        }
-
         public override string ToString()
         {
             return $"{nameof(Mode)} = {Mode}, {nameof(Difficulty)} = {Difficulty}";
@@ -54,5 +48,11 @@ namespace DiabloSharp.Models
         }
 
         #endregion
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return Difficulty;
+            yield return Mode;
+        }
     }
 }
