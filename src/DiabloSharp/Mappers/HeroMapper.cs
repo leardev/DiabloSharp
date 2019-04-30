@@ -34,7 +34,6 @@ namespace DiabloSharp.Mappers
             output.FollowerItems = followerItems;
             output.CubeItems = cubeItems;
             output.Stats = stats;
-
         }
 
         private GameModeId MapGameMode(HeroDto input)
