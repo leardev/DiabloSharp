@@ -18,7 +18,7 @@ namespace DiabloSharp.Models
 
         protected override StringBuilder ToBuilder()
         {
-            var builder =  base.ToBuilder();
+            var builder = base.ToBuilder();
             builder.AppendProperty(nameof(AccessToken), AccessToken);
             builder.AppendProperty(nameof(Region), Region.ToString());
             builder.AppendProperty(nameof(Localization), Localization.ToString());
