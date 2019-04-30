@@ -15,7 +15,7 @@ var defaultMSBuildSettings = new DotNetCoreMSBuildSettings
 {
     NoLogo = true,
     MaxCpuCount = 0,
-    TreatAllWarningsAs = MSBuildTreatAllWarningsAs.Error
+    TreatAllWarningsAs = MSBuildTreatAllWarningsAs.Default
 };
 
 ///////////////////////////////////////////////////////////////////////////////

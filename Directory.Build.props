@@ -5,6 +5,7 @@
     <Description>.NET Implementation of the Battle.net Diablo API.</Description>
     <PackageTags>diablo;diablo3;d3;blizzard;activision</PackageTags>
     <LangVersion>7.3</LangVersion>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)CodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
     <Authors>leardev</Authors>
     <VersionPrefix>0.2.0</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
