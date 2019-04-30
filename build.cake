@@ -104,7 +104,7 @@ Task("Coverage")
             .WithAssembliesMatching("tests/**/*.dll")
             .WithSourcesMatching("src/**/*.cs")
             .WithNonFatalThreshold()
-            .GenerateReport(ReportType.CONSOLE | ReportType.HTML | ReportType.OPENCOVER)
+            .GenerateReport(ReportType.CONSOLE | ReportType.OPENCOVER)
     );
 });
 
