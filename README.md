@@ -4,6 +4,8 @@ Builds: [![Build status](https://ci.appveyor.com/api/projects/status/0m4s09bni1u
 
 NuGet: [![Build status](https://img.shields.io/nuget/v/DiabloSharp.svg)](https://www.nuget.org/packages/DiabloSharp/)
 
+Coverage: [![codecov](https://codecov.io/gh/leardev/DiabloSharp/branch/master/graph/badge.svg)](https://codecov.io/gh/leardev/DiabloSharp)
+
 ## NuGet
 
 You can add the API to your project via nuget-package:
