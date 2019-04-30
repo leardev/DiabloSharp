@@ -14,8 +14,7 @@ var testResultsDirectory = outDirectory.Combine("test-results");
 var defaultMSBuildSettings = new DotNetCoreMSBuildSettings
 {
     NoLogo = true,
-    MaxCpuCount = 0,
-    TreatAllWarningsAs = MSBuildTreatAllWarningsAs.Default
+    MaxCpuCount = 0
 };
 
 ///////////////////////////////////////////////////////////////////////////////
