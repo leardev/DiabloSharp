@@ -9,7 +9,8 @@ namespace DiabloSharp.Endpoints
     internal class ActEndpoint : Endpoint,
                                  IActEndpoint
     {
-        public ActEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public ActEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
         }
 

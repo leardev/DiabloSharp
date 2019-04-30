@@ -14,7 +14,8 @@ namespace DiabloSharp.Endpoints
 
         private readonly string[] _followerTokenIndices;
 
-        public ItemEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public ItemEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
             #region equipmentIndices
 

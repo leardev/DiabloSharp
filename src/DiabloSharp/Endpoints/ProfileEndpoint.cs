@@ -8,7 +8,8 @@ namespace DiabloSharp.Endpoints
     internal class ProfileEndpoint : Endpoint,
                                      IProfileEndpoint
     {
-        public ProfileEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public ProfileEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
         }
 

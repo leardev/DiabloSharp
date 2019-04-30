@@ -12,7 +12,8 @@ namespace DiabloSharp.Endpoints
     internal class ArtisanEndpoint : Endpoint,
                                      IArtisanEndpoint
     {
-        public ArtisanEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public ArtisanEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
         }
 

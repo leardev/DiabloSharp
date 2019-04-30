@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using DiabloSharp.Attributes;
 
 namespace DiabloSharp.Extensions

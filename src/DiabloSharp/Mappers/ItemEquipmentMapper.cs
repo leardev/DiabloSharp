@@ -7,7 +7,8 @@ namespace DiabloSharp.Mappers
 {
     internal class ItemEquipmentMapper : ItemMapper<ItemEquipment>
     {
-        public ItemEquipmentMapper() : base(ItemCategory.Equipment)
+        public ItemEquipmentMapper()
+            : base(ItemCategory.Equipment)
         {
         }
 

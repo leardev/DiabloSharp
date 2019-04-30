@@ -13,7 +13,8 @@ namespace DiabloSharp.Endpoints
     internal class CharacterEndpoint : Endpoint,
                                        ICharacterEndpoint
     {
-        public CharacterEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public CharacterEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
         }
 

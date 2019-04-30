@@ -11,7 +11,8 @@ namespace DiabloSharp.Endpoints
     internal class FollowerEndpoint : Endpoint,
                                       IFollowerEndpoint
     {
-        public FollowerEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public FollowerEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
         }
 
