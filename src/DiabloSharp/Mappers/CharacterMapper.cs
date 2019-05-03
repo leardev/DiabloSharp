@@ -12,18 +12,19 @@ namespace DiabloSharp.Mappers
 
         protected override void Map(CharacterClassDto input, Character output)
         {
-            var characterId = EnumConversionHelper.CharacterIdentifierFromString(input.Slug);
+            var characterKind = EnumConversionHelper.CharacterKindFromString(input.Slug);
             var names = MapNames(input);
             var categories = MapSkillCategories(input.SkillCategories);
 
-            var actives = MapActiveSkills(characterId, Actives)
+            var actives = MapActiveSkills(input.Slug, Actives)
                 .ToList();
-            var passives = MapPassiveSkills(characterId, input.Skills.Passives)
+            var passives = MapPassiveSkills(input.Slug, input.Skills.Passives)
                 .ToList();
             var skills = actives.Cast<CharacterSkill>().Concat(passives);
 
-            output.Id = characterId;
+            output.Id = input.Slug;
             output.Name = input.Name;
+            output.Kind = characterKind;
             output.IconUrl = input.Icon;
             output.ActiveSkills = actives;
             output.PassiveSkills = passives;
@@ -53,7 +54,7 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private IEnumerable<CharacterSkillActive> MapActiveSkills(CharacterId characterId, IEnumerable<CharacterApiSkillDto> inputs)
+        private IEnumerable<CharacterSkillActive> MapActiveSkills(string characterId, IEnumerable<CharacterApiSkillDto> inputs)
         {
             var outputs = new List<CharacterSkillActive>();
             foreach (var input in inputs)
@@ -65,7 +66,7 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private CharacterSkillActive MapActiveSkill(CharacterId characterId, CharacterApiSkillDto input)
+        private CharacterSkillActive MapActiveSkill(string characterId, CharacterApiSkillDto input)
         {
             var runes = MapRunes(characterId, input.Runes);
             return new CharacterSkillActive
@@ -73,6 +74,7 @@ namespace DiabloSharp.Mappers
                 Id = new CharacterSkillId(characterId, input.Skill.Slug),
                 Name = input.Skill.Name,
                 Level = input.Skill.Level,
+                Character = EnumConversionHelper.CharacterKindFromString(characterId),
                 TooltipUrl = input.Skill.TooltipUrl,
                 IconUrl = input.Skill.Icon,
                 Kind = CharacterSkillKind.Active,
@@ -80,7 +82,7 @@ namespace DiabloSharp.Mappers
             };
         }
 
-        private IEnumerable<CharacterSkillActiveRune> MapRunes(CharacterId characterId, IEnumerable<CharacterRuneDto> inputs)
+        private IEnumerable<CharacterSkillActiveRune> MapRunes(string characterId, IEnumerable<CharacterRuneDto> inputs)
         {
             var outputs = new List<CharacterSkillActiveRune>();
             foreach (var input in inputs)
@@ -92,17 +94,18 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private CharacterSkillActiveRune MapRune(CharacterId characterId, CharacterRuneDto input)
+        private CharacterSkillActiveRune MapRune(string characterId, CharacterRuneDto input)
         {
             return new CharacterSkillActiveRune
             {
                 Id = new CharacterSkillId(characterId, input.Slug),
                 Name = input.Name,
-                Level = input.Level
+                Level = input.Level,
+                Character = EnumConversionHelper.CharacterKindFromString(characterId)
             };
         }
 
-        private IEnumerable<CharacterSkillPassive> MapPassiveSkills(CharacterId characterId, IEnumerable<CharacterSkillDto> inputs)
+        private IEnumerable<CharacterSkillPassive> MapPassiveSkills(string characterId, IEnumerable<CharacterSkillDto> inputs)
         {
             var outputs = new List<CharacterSkillPassive>();
             foreach (var input in inputs)
@@ -114,7 +117,7 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private CharacterSkillPassive MapPassiveSkill(CharacterId characterId, CharacterSkillDto input)
+        private CharacterSkillPassive MapPassiveSkill(string characterId, CharacterSkillDto input)
         {
             return new CharacterSkillPassive
             {
@@ -123,7 +126,8 @@ namespace DiabloSharp.Mappers
                 Level = input.Level,
                 TooltipUrl = input.TooltipUrl,
                 IconUrl = input.Icon,
-                Kind = CharacterSkillKind.Passive
+                Kind = CharacterSkillKind.Passive,
+                Character = EnumConversionHelper.CharacterKindFromString(characterId)
             };
         }
     }

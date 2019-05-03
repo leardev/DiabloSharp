@@ -45,7 +45,7 @@ namespace DiabloSharp.Mappers
                 Name = input.Name,
                 Level = input.Level,
                 Gender = (HeroGender)input.Gender,
-                Character = EnumConversionHelper.CharacterIdentifierFromString(input.Class),
+                Character = EnumConversionHelper.CharacterKindFromString(input.Class),
                 IsDead = true
             };
         }

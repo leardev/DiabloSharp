@@ -10,7 +10,7 @@ namespace DiabloSharp.Tests.Endpoints
         [Test]
         public async Task GetCharacterTest()
         {
-            var character = await DiabloApi.Character.GetCharacterAsync(AuthenticationScope, CharacterId.Barbarian);
+            var character = await DiabloApi.Character.GetCharacterAsync(AuthenticationScope, CharacterKind.Barbarian);
             Assert.IsNotNull(character);
         }
     }

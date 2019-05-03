@@ -5,13 +5,13 @@ namespace DiabloSharp.Models
 {
     public class CharacterSkillId : ValueObject
     {
-        public CharacterSkillId(CharacterId characterId, string slug)
+        public CharacterSkillId(string id, string slug)
         {
-            Id = characterId;
+            Id = id;
             Slug = slug;
         }
 
-        public CharacterId Id { get; }
+        public string Id { get; }
 
         public string Slug { get; }
 

@@ -12,9 +12,9 @@ namespace DiabloSharp.Mappers
         protected override void Map(HeroDto input, Hero output)
         {
             var gameMode = MapGameMode(input);
-            var characterId = EnumConversionHelper.CharacterIdentifierFromString(input.Class);
-            var actives = MapActives(characterId, input.Skills.Actives);
-            var passives = MapPassives(characterId, input.Skills.Passives);
+            var characterId = EnumConversionHelper.CharacterKindFromString(input.Class);
+            var actives = MapActives(input.Class, input.Skills.Actives);
+            var passives = MapPassives(input.Class, input.Skills.Passives);
             var items = MapItems(input.Items);
             var followerItems = MapFollowerItems(input.Followers);
             var cubeItems = MapCubeItems(input.LegendaryPowers);
@@ -43,7 +43,7 @@ namespace DiabloSharp.Mappers
             return input.Hardcore ? GameModeId.EraHardcore : GameModeId.EraSoftcore;
         }
 
-        private IEnumerable<HeroSkillActive> MapActives(CharacterId characterId, IEnumerable<HeroActiveSkillDto> inputs)
+        private IEnumerable<HeroSkillActive> MapActives(string characterId, IEnumerable<HeroActiveSkillDto> inputs)
         {
             var outputs = new List<HeroSkillActive>();
             foreach (var input in inputs)
@@ -55,7 +55,7 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private HeroSkillActive MapActive(CharacterId characterId, HeroActiveSkillDto input)
+        private HeroSkillActive MapActive(string characterId, HeroActiveSkillDto input)
         {
             var runeId = default(CharacterSkillId);
             if (input.Rune != null)
@@ -68,7 +68,7 @@ namespace DiabloSharp.Mappers
             };
         }
 
-        private IEnumerable<HeroSkillPassive> MapPassives(CharacterId characterId, IEnumerable<HeroPassiveSkillDto> inputs)
+        private IEnumerable<HeroSkillPassive> MapPassives(string characterId, IEnumerable<HeroPassiveSkillDto> inputs)
         {
             var outputs = new List<HeroSkillPassive>();
             foreach (var input in inputs)
@@ -80,7 +80,7 @@ namespace DiabloSharp.Mappers
             return outputs;
         }
 
-        private HeroSkillPassive MapPassive(CharacterId characterId, HeroPassiveSkillDto input)
+        private HeroSkillPassive MapPassive(string characterId, HeroPassiveSkillDto input)
         {
             return new HeroSkillPassive { Id = new CharacterSkillId(characterId, input.Skill.Slug) };
         }

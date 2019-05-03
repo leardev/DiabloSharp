@@ -444,55 +444,55 @@ namespace DiabloSharp.Helpers
             }
         }
 
-        public static CharacterId CharacterIdentifierFromString(string value)
+        public static CharacterKind CharacterKindFromString(string value)
         {
             switch (value)
             {
                 case "barbarian":
-                    return CharacterId.Barbarian;
+                    return CharacterKind.Barbarian;
                 case "crusader":
-                    return CharacterId.Crusader;
+                    return CharacterKind.Crusader;
                 case "demon-hunter":
-                    return CharacterId.DemonHunter;
+                    return CharacterKind.DemonHunter;
                 case "monk":
-                    return CharacterId.Monk;
+                    return CharacterKind.Monk;
                 case "necromancer":
-                    return CharacterId.Necromancer;
+                    return CharacterKind.Necromancer;
                 case "witch-doctor":
-                    return CharacterId.WitchDoctor;
+                    return CharacterKind.WitchDoctor;
                 case "wizard":
-                    return CharacterId.Wizard;
+                    return CharacterKind.Wizard;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }
         }
 
-        public static string CharacterIdentifierToString(CharacterId value)
+        public static string CharacterIdentifierToString(CharacterKind value)
         {
             switch (value)
             {
-                case CharacterId.Barbarian:
+                case CharacterKind.Barbarian:
                     return "barbarian";
-                case CharacterId.Crusader:
+                case CharacterKind.Crusader:
                     return "crusader";
-                case CharacterId.DemonHunter:
+                case CharacterKind.DemonHunter:
                     return "demon-hunter";
-                case CharacterId.Monk:
+                case CharacterKind.Monk:
                     return "monk";
-                case CharacterId.Necromancer:
+                case CharacterKind.Necromancer:
                     return "necromancer";
-                case CharacterId.WitchDoctor:
+                case CharacterKind.WitchDoctor:
                     return "witch-doctor";
-                case CharacterId.Wizard:
+                case CharacterKind.Wizard:
                     return "wizard";
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }
         }
 
-        public static IEnumerable<CharacterId> CharacterIdentifiersFromString(string value)
+        public static IEnumerable<CharacterKind> CharacterIdentifiersFromString(string value)
         {
-            var identifiers = new List<CharacterId>();
+            var identifiers = new List<CharacterKind>();
             switch (value)
             {
                 case "Amulet":
@@ -513,13 +513,13 @@ namespace DiabloSharp.Helpers
                 case "Shoulders":
                 case "Spear":
                 case "Sword":
-                    identifiers.Add(CharacterId.Barbarian);
-                    identifiers.Add(CharacterId.Crusader);
-                    identifiers.Add(CharacterId.DemonHunter);
-                    identifiers.Add(CharacterId.Monk);
-                    identifiers.Add(CharacterId.Necromancer);
-                    identifiers.Add(CharacterId.WitchDoctor);
-                    identifiers.Add(CharacterId.Wizard);
+                    identifiers.Add(CharacterKind.Barbarian);
+                    identifiers.Add(CharacterKind.Crusader);
+                    identifiers.Add(CharacterKind.DemonHunter);
+                    identifiers.Add(CharacterKind.Monk);
+                    identifiers.Add(CharacterKind.Necromancer);
+                    identifiers.Add(CharacterKind.WitchDoctor);
+                    identifiers.Add(CharacterKind.Wizard);
                     break;
                 case "Belt_Barbarian":
                 case "Boots_Barbarian":
@@ -530,7 +530,7 @@ namespace DiabloSharp.Helpers
                 case "MightyWeapon1H":
                 case "MightyWeapon2H":
                 case "Shoulders_Barbarian":
-                    identifiers.Add(CharacterId.Barbarian);
+                    identifiers.Add(CharacterKind.Barbarian);
                     break;
                 case "ChestArmor_Crusader":
                 case "Boots_Crusader":
@@ -541,7 +541,7 @@ namespace DiabloSharp.Helpers
                 case "Helm_Crusader":
                 case "Legs_Crusader":
                 case "Shoulders_Crusader":
-                    identifiers.Add(CharacterId.Crusader);
+                    identifiers.Add(CharacterKind.Crusader);
                     break;
                 case "Boots_DemonHunter":
                 case "ChestArmor_DemonHunter":
@@ -552,7 +552,7 @@ namespace DiabloSharp.Helpers
                 case "Legs_DemonHunter":
                 case "Quiver":
                 case "Shoulders_DemonHunter":
-                    identifiers.Add(CharacterId.DemonHunter);
+                    identifiers.Add(CharacterKind.DemonHunter);
                     break;
                 case "Boots_Monk":
                 case "ChestArmor_Monk":
@@ -563,7 +563,7 @@ namespace DiabloSharp.Helpers
                 case "Legs_Monk":
                 case "Shoulders_Monk":
                 case "SpiritStone_Monk":
-                    identifiers.Add(CharacterId.Monk);
+                    identifiers.Add(CharacterKind.Monk);
                     break;
                 case "Boots_Necromancer":
                 case "ChestArmor_Necromancer":
@@ -574,7 +574,7 @@ namespace DiabloSharp.Helpers
                 case "Scythe1H":
                 case "Scythe2H":
                 case "Shoulders_Necromancer":
-                    identifiers.Add(CharacterId.Necromancer);
+                    identifiers.Add(CharacterKind.Necromancer);
                     break;
                 case "Boots_WitchDoctor":
                 case "CeremonialDagger":
@@ -585,7 +585,7 @@ namespace DiabloSharp.Helpers
                 case "Mojo":
                 case "Shoulders_WitchDoctor":
                 case "VoodooMask":
-                    identifiers.Add(CharacterId.WitchDoctor);
+                    identifiers.Add(CharacterKind.WitchDoctor);
                     break;
 
                 case "Boots_Wizard":
@@ -597,36 +597,36 @@ namespace DiabloSharp.Helpers
                 case "Shoulders_Wizard":
                 case "Wand":
                 case "WizardHat":
-                    identifiers.Add(CharacterId.Wizard);
+                    identifiers.Add(CharacterKind.Wizard);
                     break;
                 case "Axe2H":
                 case "Mace2H":
                 case "Sword2H":
-                    identifiers.Add(CharacterId.Barbarian);
-                    identifiers.Add(CharacterId.Crusader);
-                    identifiers.Add(CharacterId.Monk);
-                    identifiers.Add(CharacterId.Necromancer);
-                    identifiers.Add(CharacterId.WitchDoctor);
-                    identifiers.Add(CharacterId.Wizard);
+                    identifiers.Add(CharacterKind.Barbarian);
+                    identifiers.Add(CharacterKind.Crusader);
+                    identifiers.Add(CharacterKind.Monk);
+                    identifiers.Add(CharacterKind.Necromancer);
+                    identifiers.Add(CharacterKind.WitchDoctor);
+                    identifiers.Add(CharacterKind.Wizard);
                     break;
                 case "Polearm":
-                    identifiers.Add(CharacterId.Barbarian);
-                    identifiers.Add(CharacterId.Crusader);
-                    identifiers.Add(CharacterId.DemonHunter);
-                    identifiers.Add(CharacterId.Monk);
-                    identifiers.Add(CharacterId.WitchDoctor);
+                    identifiers.Add(CharacterKind.Barbarian);
+                    identifiers.Add(CharacterKind.Crusader);
+                    identifiers.Add(CharacterKind.DemonHunter);
+                    identifiers.Add(CharacterKind.Monk);
+                    identifiers.Add(CharacterKind.WitchDoctor);
                     break;
                 case "Bow":
                 case "Crossbow":
-                    identifiers.Add(CharacterId.DemonHunter);
-                    identifiers.Add(CharacterId.WitchDoctor);
-                    identifiers.Add(CharacterId.Wizard);
+                    identifiers.Add(CharacterKind.DemonHunter);
+                    identifiers.Add(CharacterKind.WitchDoctor);
+                    identifiers.Add(CharacterKind.Wizard);
                     break;
                 case "Staff":
-                    identifiers.Add(CharacterId.Monk);
-                    identifiers.Add(CharacterId.Necromancer);
-                    identifiers.Add(CharacterId.WitchDoctor);
-                    identifiers.Add(CharacterId.Wizard);
+                    identifiers.Add(CharacterKind.Monk);
+                    identifiers.Add(CharacterKind.Necromancer);
+                    identifiers.Add(CharacterKind.WitchDoctor);
+                    identifiers.Add(CharacterKind.Wizard);
                     break;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);

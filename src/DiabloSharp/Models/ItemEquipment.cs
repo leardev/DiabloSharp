@@ -8,7 +8,7 @@ namespace DiabloSharp.Models
 
         public IEnumerable<ItemEquipmentSlot> Slots { get; internal set; }
 
-        public IEnumerable<CharacterId> Characters { get; internal set; }
+        public IEnumerable<CharacterKind> Characters { get; internal set; }
 
         public bool IsTwoHanded { get; internal set; }
 
