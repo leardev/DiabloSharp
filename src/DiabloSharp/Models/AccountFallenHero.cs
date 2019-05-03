@@ -7,7 +7,7 @@ namespace DiabloSharp.Models
     {
         public string Name { get; internal set; }
 
-        public CharacterId Character { get; internal set; }
+        public CharacterKind Character { get; internal set; }
 
         public HeroGender Gender { get; internal set; }
 

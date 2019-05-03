@@ -4,9 +4,11 @@ using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
 {
-    public class Character : ModelBase<CharacterId>
+    public class Character : ModelBase<string>
     {
         public string Name { get; internal set; }
+
+        public CharacterKind Kind { get; internal set; }
 
         public string IconUrl { get; internal set; }
 
@@ -23,7 +25,7 @@ namespace DiabloSharp.Models
         protected override StringBuilder ToBuilder()
         {
             var builder = base.ToBuilder();
-            builder.AppendProperty(nameof(Id), Id.ToString());
+            builder.AppendProperty(nameof(Id), Id);
             builder.AppendProperty(nameof(Name), Name);
             return builder;
         }

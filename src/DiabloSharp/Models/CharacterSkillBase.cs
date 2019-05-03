@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using DiabloSharp.Extensions;
 
 namespace DiabloSharp.Models
@@ -6,6 +6,8 @@ namespace DiabloSharp.Models
     public abstract class CharacterSkillBase : ModelBase<CharacterSkillId>
     {
         public string Name { get; internal set; }
+
+        public CharacterKind Character { get; internal set; }
 
         public long Level { get; internal set; }
 
