@@ -7,7 +7,8 @@ namespace DiabloSharp.Mappers
 {
     internal class ItemEquipmentMapper : ItemMapper<ItemEquipment>
     {
-        public ItemEquipmentMapper() : base(ItemCategory.Equipment)
+        public ItemEquipmentMapper()
+            : base(ItemCategory.Equipment)
         {
         }
 
@@ -52,6 +53,7 @@ namespace DiabloSharp.Mappers
                 var output = ItemIdentifierHelper.FromString(input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
     }

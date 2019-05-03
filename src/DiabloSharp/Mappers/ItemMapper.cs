@@ -4,7 +4,8 @@ using DiabloSharp.Models;
 
 namespace DiabloSharp.Mappers
 {
-    internal abstract class ItemMapper<TOut> : Mapper<ItemDto, TOut> where TOut : Item, new()
+    internal abstract class ItemMapper<TOut> : Mapper<ItemDto, TOut>
+        where TOut : Item, new()
     {
         private readonly ItemCategory _itemCategory;
 

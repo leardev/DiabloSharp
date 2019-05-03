@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 namespace DiabloSharp.Mappers
 {
-    internal abstract class Mapper<TIn, TOut> where TOut: new()
+    internal abstract class Mapper<TIn, TOut>
+        where TOut : new()
     {
-        protected abstract void Map(TIn input, TOut output);
-
         public TOut Map(TIn input)
         {
             var output = new TOut();
@@ -21,7 +20,10 @@ namespace DiabloSharp.Mappers
                 var output = Map(input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
+
+        protected abstract void Map(TIn input, TOut output);
     }
 }

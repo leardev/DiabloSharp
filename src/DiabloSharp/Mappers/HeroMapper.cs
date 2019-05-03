@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DiabloSharp.DataTransferObjects;
 using DiabloSharp.Helpers;
 using DiabloSharp.Models;
@@ -34,7 +34,6 @@ namespace DiabloSharp.Mappers
             output.FollowerItems = followerItems;
             output.CubeItems = cubeItems;
             output.Stats = stats;
-
         }
 
         private GameModeId MapGameMode(HeroDto input)
@@ -52,6 +51,7 @@ namespace DiabloSharp.Mappers
                 var output = MapActive(characterId, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
@@ -76,6 +76,7 @@ namespace DiabloSharp.Mappers
                 var output = MapPassive(characterId, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
@@ -190,6 +191,7 @@ namespace DiabloSharp.Mappers
                 var output = MapCubeItem(input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 
@@ -207,6 +209,7 @@ namespace DiabloSharp.Mappers
                 var output = MapStat(input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 

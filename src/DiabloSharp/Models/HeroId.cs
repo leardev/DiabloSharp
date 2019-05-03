@@ -15,15 +15,15 @@ namespace DiabloSharp.Models
 
         public long Id { get; }
 
+        public override string ToString()
+        {
+            return $"{nameof(BattleTag)} = {BattleTag}, {nameof(Id)} = {Id}";
+        }
+
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return BattleTag;
             yield return Id;
-        }
-
-        public override string ToString()
-        {
-            return $"{nameof(BattleTag)} = {BattleTag}, {nameof(Id)} = {Id}";
         }
     }
 }

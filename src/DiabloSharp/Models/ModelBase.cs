@@ -4,11 +4,6 @@ namespace DiabloSharp.Models
 {
     public abstract class ModelBase
     {
-        protected virtual StringBuilder ToBuilder()
-        {
-            return new StringBuilder();
-        }
-
         public override string ToString()
         {
             var builder = ToBuilder();
@@ -17,6 +12,11 @@ namespace DiabloSharp.Models
                 return base.ToString();
 
             return builder.ToString(0, builder.Length - 2);
+        }
+
+        protected virtual StringBuilder ToBuilder()
+        {
+            return new StringBuilder();
         }
     }
 

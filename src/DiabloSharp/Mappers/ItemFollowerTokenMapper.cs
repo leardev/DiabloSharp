@@ -6,7 +6,8 @@ namespace DiabloSharp.Mappers
 {
     internal class ItemFollowerTokenMapper : ItemMapper<ItemFollowerToken>
     {
-        public ItemFollowerTokenMapper() : base(ItemCategory.FollowerToken)
+        public ItemFollowerTokenMapper()
+            : base(ItemCategory.FollowerToken)
         {
         }
 

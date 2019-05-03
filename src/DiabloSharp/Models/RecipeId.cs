@@ -17,18 +17,18 @@ namespace DiabloSharp.Models
             Slug = slug;
         }
 
-        protected override IEnumerable<object> GetAtomicValues()
-        {
-            yield return Id;
-            yield return Slug;
-        }
-
         public override string ToString()
         {
             var builder = new StringBuilder();
             builder.AppendProperty(nameof(Id), Id.ToString());
             builder.AppendProperty(nameof(Slug), Slug);
             return builder.ToString();
+        }
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return Id;
+            yield return Slug;
         }
     }
 }

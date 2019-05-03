@@ -4,7 +4,8 @@ namespace DiabloSharp.Mappers
 {
     internal class ItemGemMapper : ItemMapper<ItemGem>
     {
-        public ItemGemMapper() : base(ItemCategory.Gem)
+        public ItemGemMapper()
+            : base(ItemCategory.Gem)
         {
         }
     }

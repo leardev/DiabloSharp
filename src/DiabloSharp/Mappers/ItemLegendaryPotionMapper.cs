@@ -4,7 +4,8 @@ namespace DiabloSharp.Mappers
 {
     internal class ItemLegendaryPotionMapper : ItemMapper<ItemLegendaryPotion>
     {
-        public ItemLegendaryPotionMapper() : base(ItemCategory.LegendaryPotion)
+        public ItemLegendaryPotionMapper()
+            : base(ItemCategory.LegendaryPotion)
         {
         }
     }

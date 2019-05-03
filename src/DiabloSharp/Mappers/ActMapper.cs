@@ -24,6 +24,7 @@ namespace DiabloSharp.Mappers
                 var output = MapQuest(input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 

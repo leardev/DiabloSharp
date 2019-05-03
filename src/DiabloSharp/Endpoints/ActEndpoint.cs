@@ -9,7 +9,8 @@ namespace DiabloSharp.Endpoints
     internal class ActEndpoint : Endpoint,
                                  IActEndpoint
     {
-        public ActEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public ActEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
         }
 
@@ -26,7 +27,7 @@ namespace DiabloSharp.Endpoints
         public async Task<Act> GetActAsync(IAuthenticationScope authenticationScope, ActId actId)
         {
             var mapper = new ActMapper();
-            var actIdIndex = (byte) actId;
+            var actIdIndex = (byte)actId;
 
             using (var client = CreateClient(authenticationScope))
             {

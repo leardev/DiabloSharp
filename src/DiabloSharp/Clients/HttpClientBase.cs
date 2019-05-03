@@ -76,6 +76,17 @@ namespace DiabloSharp.Clients
             }
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposedValue)
+                return;
+
+            if (disposing)
+                Client.Dispose();
+
+            _disposedValue = true;
+        }
+
         private string BuildUrlParameters()
         {
             var urlBuilder = new StringBuilder();
@@ -118,17 +129,6 @@ namespace DiabloSharp.Clients
                 return string.Empty;
             using (var streamReader = new StreamReader(stream))
                 return await streamReader.ReadToEndAsync();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposedValue)
-                return;
-
-            if (disposing)
-                Client.Dispose();
-
-            _disposedValue = true;
         }
 
         ~HttpClientBase()

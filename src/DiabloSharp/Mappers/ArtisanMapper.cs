@@ -34,6 +34,7 @@ namespace DiabloSharp.Mappers
                 var output = MapRecipe(artisanId, rank, source, input);
                 outputs.Add(output);
             }
+
             return outputs;
         }
 

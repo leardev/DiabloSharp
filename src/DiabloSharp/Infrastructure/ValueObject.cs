@@ -21,14 +21,12 @@ namespace DiabloSharp.Infrastructure
             return !(left == right);
         }
 
-        protected abstract IEnumerable<object> GetAtomicValues();
-
         public override bool Equals(object obj)
         {
             if (obj == null || obj.GetType() != GetType())
                 return false;
 
-            var other = (ValueObject) obj;
+            var other = (ValueObject)obj;
             using (var thisValues = GetAtomicValues().GetEnumerator())
             using (var otherValues = other.GetAtomicValues().GetEnumerator())
             {
@@ -51,5 +49,7 @@ namespace DiabloSharp.Infrastructure
                 .Select(x => x != null ? x.GetHashCode() : 0)
                 .Aggregate((x, y) => x ^ y);
         }
+
+        protected abstract IEnumerable<object> GetAtomicValues();
     }
 }

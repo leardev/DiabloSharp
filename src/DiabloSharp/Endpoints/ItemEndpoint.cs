@@ -14,7 +14,8 @@ namespace DiabloSharp.Endpoints
 
         private readonly string[] _followerTokenIndices;
 
-        public ItemEndpoint(ITokenBucket tokenBucket) : base(tokenBucket)
+        public ItemEndpoint(ITokenBucket tokenBucket)
+            : base(tokenBucket)
         {
             #region equipmentIndices
 
@@ -184,7 +185,8 @@ namespace DiabloSharp.Endpoints
             return GetItems(authenticationScope, mapper, _followerTokenIndices);
         }
 
-        private async Task<T> GetItem<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, ItemId itemId) where T : Item, new()
+        private async Task<T> GetItem<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, ItemId itemId)
+            where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {
@@ -193,7 +195,8 @@ namespace DiabloSharp.Endpoints
             }
         }
 
-        private async Task<IEnumerable<T>> GetItems<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, params string[] itemTypeIndices) where T : Item, new()
+        private async Task<IEnumerable<T>> GetItems<T>(IAuthenticationScope authenticationScope, ItemMapper<T> mapper, params string[] itemTypeIndices)
+            where T : Item, new()
         {
             using (var client = CreateClient(authenticationScope))
             {

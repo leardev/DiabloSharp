@@ -15,15 +15,15 @@ namespace DiabloSharp.Models
 
         public string Slug { get; }
 
+        public override string ToString()
+        {
+            return $"{Slug}-{Id}";
+        }
+
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return Id;
             yield return Slug;
-        }
-
-        public override string ToString()
-        {
-            return $"{Slug}-{Id}";
         }
     }
 }

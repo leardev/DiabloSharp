@@ -4,7 +4,8 @@ namespace DiabloSharp.Mappers
 {
     internal class ItemLegendaryGemMapper : ItemMapper<ItemLegendaryGem>
     {
-        public ItemLegendaryGemMapper() : base(ItemCategory.LegendaryGem)
+        public ItemLegendaryGemMapper()
+            : base(ItemCategory.LegendaryGem)
         {
         }
     }

@@ -22,15 +22,15 @@ namespace DiabloSharp.Models
 
         public long Index { get; }
 
+        public override string ToString()
+        {
+            return $"{Name}#{Index}";
+        }
+
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return Index;
             yield return Name;
-        }
-
-        public override string ToString()
-        {
-            return $"{Name}#{Index}";
         }
     }
 }
