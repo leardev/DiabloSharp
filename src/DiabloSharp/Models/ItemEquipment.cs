@@ -13,5 +13,7 @@ namespace DiabloSharp.Models
         public bool IsTwoHanded { get; internal set; }
 
         public ItemEquipmentSet Set { get; internal set; }
+
+        public ItemEquipmentCube Cube { get; internal set; }
     }
 }
