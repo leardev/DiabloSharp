@@ -3,10 +3,13 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    internal class DetailedFollowerItemTransmogDto
+    internal class DetailedItemTypeDto
     {
         [DataMember(Name = "id")]
         public string Id { get; set; }
+
+        [DataMember(Name = "slug")]
+        public string Slug { get; set; }
 
         [DataMember(Name = "name")]
         public string Name { get; set; }
@@ -14,10 +17,7 @@ namespace DiabloSharp.DataTransferObjects
         [DataMember(Name = "icon")]
         public string Icon { get; set; }
 
-        [DataMember(Name = "displayColor")]
-        public string DisplayColor { get; set; }
-
-        [DataMember(Name = "tooltipParams")]
-        public string TooltipParams { get; set; }
+        [DataMember(Name = "path")]
+        public string Path { get; set; }
     }
 }

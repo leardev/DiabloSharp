@@ -4,10 +4,10 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    internal class DetailedHeroItemGemDto
+    internal class DetailedItemGemDto
     {
         [DataMember(Name = "item")]
-        public DetailedHeroItemTypeDto Item { get; set; }
+        public DetailedItemTypeDto Item { get; set; }
 
         [DataMember(Name = "attributes")]
         public IEnumerable<string> Attributes { get; set; }

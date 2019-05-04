@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    internal class DetailedHeroItemDto
+    internal class DetailedItemDto
     {
         [DataMember(Name = "id")]
         public string Id { get; set; }
@@ -40,7 +40,7 @@ namespace DiabloSharp.DataTransferObjects
         public string TypeName { get; set; }
 
         [DataMember(Name = "type")]
-        public DetailedHeroItemKindDto Type { get; set; }
+        public DetailedItemKindDto Type { get; set; }
 
         [DataMember(Name = "armor")]
         public double Armor { get; set; }
@@ -64,10 +64,10 @@ namespace DiabloSharp.DataTransferObjects
         public string Augmentation { get; set; }
 
         [DataMember(Name = "attributes")]
-        public DetailedHeroItemAttributesDto Attributes { get; set; }
+        public DetailedItemAttributesDto Attributes { get; set; }
 
         [DataMember(Name = "attributesHtml")]
-        public DetailedHeroItemAttributesDto AttributesHtml { get; set; }
+        public DetailedItemAttributesDto AttributesHtml { get; set; }
 
         [DataMember(Name = "openSockets")]
         public long OpenSockets { get; set; }
@@ -79,16 +79,16 @@ namespace DiabloSharp.DataTransferObjects
         public bool IsSeasonRequiredToDrop { get; set; }
 
         [DataMember(Name = "dye")]
-        public DetailedHeroItemDyeDto Dye { get; set; }
+        public DetailedItemDyeDto Dye { get; set; }
 
         [DataMember(Name = "transmog")]
-        public DetailedHeroItemTransmogDto Transmog { get; set; }
+        public DetailedItemTransmogDto Transmog { get; set; }
 
         [DataMember(Name = "set")]
-        public DetailedHeroItemSetDto Set { get; set; }
+        public DetailedItemSetDto Set { get; set; }
 
         [DataMember(Name = "gems")]
-        public IEnumerable<DetailedHeroItemGemDto> Gems { get; set; }
+        public IEnumerable<DetailedItemGemDto> Gems { get; set; }
 
         [DataMember(Name = "damage")]
         public string Damage { get; set; }
@@ -100,6 +100,6 @@ namespace DiabloSharp.DataTransferObjects
         public string BlockChance { get; set; }
 
         [DataMember(Name = "craftedBy")]
-        public DetailedHeroItemRecipeDto CraftedBy { get; set; }
+        public DetailedItemRecipeDto CraftedBy { get; set; }
     }
 }
