@@ -123,10 +123,8 @@ Task("NuGetPush")
         ApiKey = EnvironmentVariable("DiabloSharpNuGetApiKey")
     };
     var nugetPackage = GetFiles(artifactsDirectory.GetFilePath("*.nupkg").FullPath).First();
-    var symbolsPackage = GetFiles(artifactsDirectory.GetFilePath("*.snupkg").FullPath).First();
 
     DotNetCoreNuGetPush(nugetPackage.FullPath, pushSettings);
-    DotNetCoreNuGetPush(symbolsPackage.FullPath, pushSettings);
 });
 
 Task("Default")
