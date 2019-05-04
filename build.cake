@@ -1,4 +1,3 @@
-#addin nuget:?package=Cake.DependenciesAnalyser&version=2.0.0
 #addin nuget:?package=Cake.MiniCover&version=0.28.1
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -64,17 +63,6 @@ Task("Compile")
     DotNetCoreBuild(project.FullPath, buildSettings);
     DotNetCoreBuild(testProject.FullPath, buildSettings);
     DotNetCoreBuild(sampleProject.FullPath, buildSettings);
-});
-
-Task("DependencyAnalysis")
-.Does(() =>
-{
-    var sourceDirectory = new DependenciesAnalyserSettings()
-    {
-        Folder = "./"
-    };
-
-    AnalyseDependencies(sourceDirectory);
 });
 
 Task("Coverage")
@@ -143,7 +131,6 @@ Task("NuGetPush")
 
 Task("Default")
 .IsDependentOn("Clean")
-.IsDependentOn("DependencyAnalysis")
 .IsDependentOn("Coverage")
 .IsDependentOn("Package");
 
