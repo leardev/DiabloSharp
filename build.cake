@@ -84,7 +84,7 @@ Task("Coverage")
             ResultsDirectory = testResultsDirectory,
             NoRestore = true,
             NoBuild = true,
-            Verbosity = DotNetCoreVerbosity.Minimal,
+            Verbosity = DotNetCoreVerbosity.Normal
         }),
         new MiniCoverSettings()
             .WithMiniCoverWorkingDirectory(repositoryRoot)
