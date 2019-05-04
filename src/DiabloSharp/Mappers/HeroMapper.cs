@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using DiabloSharp.DataTransferObjects;
-using DiabloSharp.Extensions;
 using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 
