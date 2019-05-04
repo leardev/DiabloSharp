@@ -28,12 +28,12 @@ namespace DiabloSharp.Mappers
         private IEnumerable<ItemEquipmentSlot> MapSlots(ItemDto input)
         {
             var outputs = new List<ItemEquipmentSlot>();
-            foreach (var slot in input.Slots)
+            foreach (var inputSlot in input.Slots)
             {
-                var x = EnumConversionHelper.ItemEquipmentSlotFromString(slot);
-                if (!x.HasValue || input.Type.TwoHanded && x == ItemEquipmentSlot.Offhand)
+                if (!EnumConversionHelper.TryItemEquipmentSlotFromString(inputSlot, out var slot) ||
+                    input.Type.TwoHanded && slot == ItemEquipmentSlot.Offhand)
                     continue;
-                outputs.Add(x.Value);
+                outputs.Add(slot);
             }
 
             return outputs;

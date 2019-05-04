@@ -698,42 +698,90 @@ namespace DiabloSharp.Helpers
             }
         }
 
-        public static ItemEquipmentSlot? ItemEquipmentSlotFromString(string value)
+        public static bool TryItemEquipmentSlotFromString(string value, out ItemEquipmentSlot slot)
         {
             switch (value)
             {
                 case "neck":
-                    return ItemEquipmentSlot.Neck;
+                    slot = ItemEquipmentSlot.Neck;
+                    break;
                 case "right-hand":
-                    return ItemEquipmentSlot.Offhand;
+                case "offHand": // detailed-hero-items
+                    slot = ItemEquipmentSlot.Offhand;
+                    break;
                 case "left-hand":
-                    return ItemEquipmentSlot.Mainhand;
+                case "mainHand": // detailed-hero-items
+                    slot = ItemEquipmentSlot.Mainhand;
+                    break;
                 case "waist":
-                    return ItemEquipmentSlot.Waist;
+                    slot = ItemEquipmentSlot.Waist;
+                    break;
                 case "feet":
-                    return ItemEquipmentSlot.Feet;
+                    slot = ItemEquipmentSlot.Feet;
+                    break;
                 case "bracers":
-                    return ItemEquipmentSlot.Wrists;
+                    slot = ItemEquipmentSlot.Wrists;
+                    break;
                 case "torso":
-                    return ItemEquipmentSlot.Torso;
+                    slot = ItemEquipmentSlot.Torso;
+                    break;
                 case "hands":
-                    return ItemEquipmentSlot.Hands;
+                    slot = ItemEquipmentSlot.Hands;
+                    break;
                 case "head":
-                    return ItemEquipmentSlot.Head;
+                    slot = ItemEquipmentSlot.Head;
+                    break;
                 case "legs":
-                    return ItemEquipmentSlot.Legs;
+                    slot = ItemEquipmentSlot.Legs;
+                    break;
                 case "left-finger":
-                    return ItemEquipmentSlot.LeftFinger;
+                case "leftFinger": // detailed-hero-items
+                    slot = ItemEquipmentSlot.LeftFinger;
+                    break;
                 case "right-finger":
-                    return ItemEquipmentSlot.RightFinger;
+                case "rightFinger": // detailed-hero-items
+                    slot = ItemEquipmentSlot.RightFinger;
+                    break;
                 case "shoulders":
-                    return ItemEquipmentSlot.Shoulders;
+                    slot = ItemEquipmentSlot.Shoulders;
+                    break;
                 case "follower-left-finger":
                 case "follower-right-finger":
                 case "follower-right-hand":
                 case "follower-left-hand":
                 case "follower-neck":
-                    return null;
+                    slot = default;
+                    return false;
+                default:
+                    throw new DiabloApiEnumConversionException(nameof(value), value);
+            }
+
+            return true;
+        }
+
+        public static ItemEquipmentSlot ItemEquipmentSlotFromString(string value)
+        {
+            if (!TryItemEquipmentSlotFromString(value, out var slot))
+                throw new DiabloApiEnumConversionException(nameof(value), value);
+            return slot;
+        }
+
+        public static ItemFollowerSlot ItemFollowerSlotFromString(string value)
+        {
+            switch (value)
+            {
+                case "neck":
+                    return ItemFollowerSlot.Neck;
+                case "leftFinger":
+                    return ItemFollowerSlot.LeftFinger;
+                case "rightFinger":
+                    return ItemFollowerSlot.RightFinger;
+                case "mainHand":
+                    return ItemFollowerSlot.Mainhand;
+                case "offHand":
+                    return ItemFollowerSlot.Offhand;
+                case "special":
+                    return ItemFollowerSlot.Special;
                 default:
                     throw new DiabloApiEnumConversionException(nameof(value), value);
             }

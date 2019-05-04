@@ -6,28 +6,42 @@ namespace DiabloSharp.Helpers
 {
     internal static class ItemIdentifierHelper
     {
-        public static ItemId FromItem(HeroItemDto input)
+        public static ItemId FromItem(ItemIdentifierDto itemIdentifier)
         {
-            return FromString(input.TooltipParams);
+            if (IsObsolete(itemIdentifier))
+                throw new Exception($"{itemIdentifier.Name} is obsolete");
+
+            return FromString(itemIdentifier.TooltipParams);
         }
 
-        public static ItemId FromItem(HeroItemDyeDto input)
+        public static ItemId FromItemOptional(ItemIdentifierDto itemIdentifier)
         {
-            return input == null ? null : FromString(input.TooltipParams);
+            return itemIdentifier == null ? null : FromString(itemIdentifier.TooltipParams);
         }
 
-        public static ItemId FromItem(HeroItemTransmogDto input)
+        public static ItemId FromItemDyeOptional(ItemIdentifierDto itemIdentifier)
         {
-            return input == null ? null : FromString(input.TooltipParams);
+            if (itemIdentifier == null)
+                return null;
+
+            /* BattleNet api returns invalid TooltipParams */
+            var tooltipParams = $"{itemIdentifier.TooltipParams}-{itemIdentifier.Id}";
+            return FromString(tooltipParams);
         }
 
         public static ItemId FromString(string value)
         {
-            var pathIndex = value.IndexOf("/", StringComparison.Ordinal);
+            var pathIndex = value.LastIndexOf("/", StringComparison.Ordinal);
             var slugIndex = value.LastIndexOf("-", StringComparison.Ordinal);
             var slug = value.Substring(pathIndex + 1, slugIndex - pathIndex - 1);
             var id = value.Substring(slugIndex + 1, value.Length - slugIndex - 1);
             return new ItemId(slug, id);
+        }
+
+        public static bool IsObsolete(ItemIdentifierDto itemIdentifier)
+        {
+            /* obsolete items have no TooltipParams (e.g. items that are not updated after the patch that must be looted again) */
+            return string.IsNullOrEmpty(itemIdentifier.TooltipParams);
         }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using DiabloSharp.DataTransferObjects;
+using DiabloSharp.Extensions;
 using DiabloSharp.Helpers;
 using DiabloSharp.Models;
 
@@ -7,7 +9,18 @@ namespace DiabloSharp.Mappers
 {
     internal class HeroMapper : Mapper<HeroDto, Hero>
     {
-        public HeroId HeroId { get; set; }
+        private readonly HeroId _heroId;
+
+        private readonly IEnumerable<DetailedItemDto> _items;
+
+        private readonly IDictionary<FollowerId, IEnumerable<DetailedItemDto>> _itemsByFollower;
+
+        public HeroMapper(HeroId heroId, DetailedHeroItemsDto items, DetailedFollowersDto followerItems)
+        {
+            _heroId = heroId;
+            _items = ExtractItemsFromHero(items);
+            _itemsByFollower = ExtractItemsFromFollowers(followerItems);
+        }
 
         protected override void Map(HeroDto input, Hero output)
         {
@@ -15,12 +28,12 @@ namespace DiabloSharp.Mappers
             var characterId = EnumConversionHelper.CharacterKindFromString(input.Class);
             var actives = MapActives(input.Class, input.Skills.Actives);
             var passives = MapPassives(input.Class, input.Skills.Passives);
-            var items = MapItems(input.Items);
-            var followerItems = MapFollowerItems(input.Followers);
+            var items = MapEquipmentItems(_items);
+            var followerItems = MapFollowerItems(_itemsByFollower);
             var cubeItems = MapCubeItems(input.LegendaryPowers);
             var stats = MapStats(input.Stats);
 
-            output.Id = HeroId;
+            output.Id = _heroId;
             output.Level = input.Level;
             output.Gender = (HeroGender)input.Gender;
             output.Character = characterId;
@@ -85,102 +98,89 @@ namespace DiabloSharp.Mappers
             return new HeroSkillPassive { Id = new CharacterSkillId(characterId, input.Skill.Slug) };
         }
 
-        private IEnumerable<HeroItemEquipment> MapItems(HeroItemsDto inputs)
+        private IEnumerable<HeroItemEquipment> MapEquipmentItems(IEnumerable<DetailedItemDto> inputs)
         {
             var outputs = new List<HeroItemEquipment>();
-
-            if (TryMapItem(ItemEquipmentSlot.Shoulders, inputs.Shoulders, out var output))
+            foreach (var input in inputs)
+            {
+                var output = MapEquipmentItem(input);
                 outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Neck, inputs.Neck, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Torso, inputs.Torso, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Hands, inputs.Hands, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Wrists, inputs.Bracers, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Waist, inputs.Waist, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Legs, inputs.Legs, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Feet, inputs.Feet, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.LeftFinger, inputs.LeftFinger, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.RightFinger, inputs.RightFinger, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Mainhand, inputs.MainHand, out output))
-                outputs.Add(output);
-            if (TryMapItem(ItemEquipmentSlot.Offhand, inputs.OffHand, out output))
-                outputs.Add(output);
+            }
 
             return outputs;
         }
 
-        private bool TryMapItem(ItemEquipmentSlot slot, HeroItemDto input, out HeroItemEquipment output)
+        private HeroItemEquipment MapEquipmentItem(DetailedItemDto input)
         {
-            output = null;
-            /* obsolete (e.g. items that are not updated after the patch that must be looted again) items have no TooltipParams */
-            if (input == null || string.IsNullOrEmpty(input.TooltipParams))
-                return false;
+            var slot = EnumConversionHelper.ItemEquipmentSlotFromString(input.Slots);
 
-            var dyeId = ItemIdentifierHelper.FromItem(input.DyeColor);
-            var transmogId = ItemIdentifierHelper.FromItem(input.TransmogItem);
-
-            output = new HeroItemEquipment { Id = ItemIdentifierHelper.FromItem(input), Slot = slot, Dye = dyeId, Transmog = transmogId };
-            return true;
+            var output = new HeroItemEquipment { Slot = slot };
+            MapCustomizableItem(input, output);
+            return output;
         }
 
-        private IEnumerable<HeroItemFollower> MapFollowerItems(HeroFollowersDto input)
+        private IEnumerable<HeroItemFollower> MapFollowerItems(IDictionary<FollowerId, IEnumerable<DetailedItemDto>> inputs)
         {
             var outputs = new List<HeroItemFollower>();
-
-            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.Neck, input.Templar.Items.Neck, out var output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.LeftFinger, input.Templar.Items.LeftFinger, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.RightFinger, input.Templar.Items.RightFinger, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.Mainhand, input.Templar.Items.MainHand, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Templar, ItemEquipmentSlot.Offhand, input.Templar.Items.OffHand, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.Neck, input.Scoundrel.Items.Neck, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.LeftFinger, input.Scoundrel.Items.LeftFinger, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.RightFinger, input.Scoundrel.Items.RightFinger, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.Mainhand, input.Scoundrel.Items.MainHand, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Scoundrel, ItemEquipmentSlot.Offhand, input.Scoundrel.Items.OffHand, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.Neck, input.Enchantress.Items.Neck, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.LeftFinger, input.Enchantress.Items.LeftFinger, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.RightFinger, input.Enchantress.Items.RightFinger, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.Mainhand, input.Enchantress.Items.MainHand, out output))
-                outputs.Add(output);
-            if (TryMapFollowerItem(FollowerId.Enchantress, ItemEquipmentSlot.Offhand, input.Enchantress.Items.OffHand, out output))
-                outputs.Add(output);
+            foreach (var pair in inputs)
+            {
+                foreach (var item in pair.Value)
+                {
+                    var output = MapFollowerItem(pair.Key, item);
+                    outputs.Add(output);
+                }
+            }
 
             return outputs;
         }
 
-        private bool TryMapFollowerItem(FollowerId follower, ItemEquipmentSlot slot, HeroItemDto input, out HeroItemFollower output)
+        private HeroItemFollower MapFollowerItem(FollowerId followerId, DetailedItemDto input)
         {
-            output = null;
-            if (input == null)
-                return false;
+            var slot = EnumConversionHelper.ItemFollowerSlotFromString(input.Slots);
+            var output = new HeroItemFollower
+            {
+                Slot = slot,
+                Follower = followerId
+            };
+            MapCustomizableItem(input, output);
+            return output;
+        }
 
-            var dyeId = ItemIdentifierHelper.FromItem(input.DyeColor);
-            var transmogId = ItemIdentifierHelper.FromItem(input.TransmogItem);
+        private void MapCustomizableItem(DetailedItemDto input, HeroItemCustomizable output)
+        {
+            var dyeId = ItemIdentifierHelper.FromItemDyeOptional(input.Dye);
+            var transmogId = ItemIdentifierHelper.FromItemOptional(input.Transmog);
+            var gems = MapGems(input.Gems);
 
-            /* use ItemEquipmentSlot for follower items, because follower-tokens are not available */
-            output = new HeroItemFollower { Follower = follower, Id = ItemIdentifierHelper.FromItem(input), Slot = slot, Dye = dyeId, Transmog = transmogId };
-            return true;
+            output.Id = ItemIdentifierHelper.FromItem(input);
+            output.Dye = dyeId;
+            output.Transmog = transmogId;
+            output.Gems = gems;
+        }
+
+        private IEnumerable<HeroItemGem> MapGems(IEnumerable<DetailedItemGemDto> inputs)
+        {
+            if (inputs == null)
+                return new List<HeroItemGem>();
+
+            var outputs = new List<HeroItemGem>();
+            foreach (var input in inputs)
+            {
+                var output = MapGem(input);
+                outputs.Add(output);
+            }
+
+            return outputs;
+        }
+
+        private HeroItemGem MapGem(DetailedItemGemDto input)
+        {
+            return new HeroItemGem
+            {
+                Id = new ItemId(input.Item.Slug, input.Item.Id),
+                IsLegendary = input.IsJewel,
+                Rank = input.JewelRank.GetValueOrDefault(-1)
+            };
         }
 
         private IEnumerable<HeroItemCube> MapCubeItems(IEnumerable<HeroItemDto> inputs)
@@ -220,6 +220,58 @@ namespace DiabloSharp.Mappers
                 Id = EnumConversionHelper.HeroStatIdentifierFromString(input.Key),
                 Value = input.Value
             };
+        }
+
+        private IEnumerable<DetailedItemDto> ExtractItemsFromHero(DetailedHeroItemsDto inputs)
+        {
+            var outputs = new[]
+            {
+                inputs.Head,
+                inputs.Shoulders,
+                inputs.Neck,
+                inputs.Torso,
+                inputs.Hands,
+                inputs.Bracers,
+                inputs.Waist,
+                inputs.Legs,
+                inputs.Feet,
+                inputs.LeftFinger,
+                inputs.RightFinger,
+                inputs.MainHand,
+                inputs.OffHand
+            };
+
+            return outputs.Where(dto => dto != null && !ItemIdentifierHelper.IsObsolete(dto));
+        }
+
+        private IDictionary<FollowerId, IEnumerable<DetailedItemDto>> ExtractItemsFromFollowers(DetailedFollowersDto inputs)
+        {
+            var templarItems = ExtractItemsFromFollower(inputs.Templar);
+            var scoundrelItems = ExtractItemsFromFollower(inputs.Scoundrel);
+            var enchantressItems = ExtractItemsFromFollower(inputs.Enchantress);
+
+            var outputs = new Dictionary<FollowerId, IEnumerable<DetailedItemDto>>
+            {
+                { FollowerId.Templar, templarItems },
+                { FollowerId.Scoundrel, scoundrelItems },
+                { FollowerId.Enchantress, enchantressItems }
+            };
+            return outputs;
+        }
+
+        private IEnumerable<DetailedItemDto> ExtractItemsFromFollower(DetailedFollowerDto input)
+        {
+            var items = new List<DetailedItemDto>();
+            if (input == null)
+                return items;
+
+            items.Add(input.Neck);
+            items.Add(input.LeftFinger);
+            items.Add(input.RightFinger);
+            items.Add(input.MainHand);
+            items.Add(input.OffHand);
+            items.Add(input.Special);
+            return items.Where(dto => dto != null && !ItemIdentifierHelper.IsObsolete(dto));
         }
     }
 }
