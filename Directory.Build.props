@@ -12,6 +12,10 @@
     <PackageIconUrl>https://raw.githubusercontent.com/leardev/DiabloSharp/master/resources/DiabloSharp.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/leardev/DiabloSharp.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/leardev/DiabloSharp</PackageProjectUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <!-- Customization -->
