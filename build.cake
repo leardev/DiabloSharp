@@ -1,4 +1,3 @@
-#addin nuget:?package=Cake.DependenciesAnalyser&version=2.0.0
 #addin nuget:?package=Cake.MiniCover&version=0.28.1
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -42,7 +41,7 @@ Task("Clean")
     };
 
     Information($"Cleaning {project}");
-    DotNetCoreClean(testProject.FullPath, cleanSettings);
+    DotNetCoreClean(project.FullPath, cleanSettings);
 
     Information($"Cleaning {testProject}");
     DotNetCoreClean(testProject.FullPath, cleanSettings);
@@ -64,17 +63,6 @@ Task("Compile")
     DotNetCoreBuild(project.FullPath, buildSettings);
     DotNetCoreBuild(testProject.FullPath, buildSettings);
     DotNetCoreBuild(sampleProject.FullPath, buildSettings);
-});
-
-Task("DependencyAnalysis")
-.Does(() =>
-{
-    var sourceDirectory = new DependenciesAnalyserSettings()
-    {
-        Folder = "./"
-    };
-
-    AnalyseDependencies(sourceDirectory);
 });
 
 Task("Coverage")
@@ -116,6 +104,7 @@ Task("Package")
         Configuration = configuration,
         NoBuild = true,
         NoRestore = true,
+        IncludeSymbols = true,
         ArgumentCustomization = args => args.Append($"/p:BuildType={buildType}"),
         MSBuildSettings = defaultMSBuildSettings,
         OutputDirectory = artifactsDirectory,
@@ -128,17 +117,20 @@ Task("NuGetPush")
 .IsDependentOn("Package")
 .Does(() =>
 {
-    var nugetFile = GetFiles(artifactsDirectory.GetFilePath("*.nupkg").FullPath).First();
-    DotNetCoreNuGetPush(nugetFile.FullPath, new DotNetCoreNuGetPushSettings
+    var pushSettings = new DotNetCoreNuGetPushSettings
     {
         Source = "nuget.org",
         ApiKey = EnvironmentVariable("DiabloSharpNuGetApiKey")
-    });
+    };
+    var nugetPackage = GetFiles(artifactsDirectory.GetFilePath("*.nupkg").FullPath).First();
+    var symbolsPackage = GetFiles(artifactsDirectory.GetFilePath("*.snupkg").FullPath).First();
+
+    DotNetCoreNuGetPush(nugetPackage.FullPath, pushSettings);
+    DotNetCoreNuGetPush(symbolsPackage.FullPath, pushSettings);
 });
 
 Task("Default")
 .IsDependentOn("Clean")
-.IsDependentOn("DependencyAnalysis")
 .IsDependentOn("Coverage")
 .IsDependentOn("Package");
 
