@@ -1,11 +1,7 @@
-﻿namespace DiabloSharp.Models
+namespace DiabloSharp.Models
 {
-    public class HeroItemEquipment : HeroItem
+    public class HeroItemEquipment : HeroItemCustomizable
     {
         public ItemEquipmentSlot Slot { get; internal set; }
-
-        public ItemId Transmog { get; internal set; }
-
-        public ItemId Dye { get; internal set; }
     }
 }

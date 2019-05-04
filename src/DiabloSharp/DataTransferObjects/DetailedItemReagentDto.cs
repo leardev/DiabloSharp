@@ -3,12 +3,12 @@ using System.Runtime.Serialization;
 namespace DiabloSharp.DataTransferObjects
 {
     [DataContract]
-    internal class DetailedHeroItemReagentDto
+    internal class DetailedItemReagentDto
     {
         [DataMember(Name = "quantity")]
         public long Quantity { get; set; }
 
         [DataMember(Name = "item")]
-        public DetailedHeroItemTypeDto Item { get; set; }
+        public DetailedItemTypeDto Item { get; set; }
     }
 }

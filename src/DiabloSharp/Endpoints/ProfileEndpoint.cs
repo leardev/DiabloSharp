@@ -27,12 +27,15 @@ namespace DiabloSharp.Endpoints
 
         public async Task<Hero> GetHeroAsync(IAuthenticationScope authenticationScope, HeroId heroId)
         {
-            var mapper = new HeroMapper { HeroId = heroId };
             var battleTag = $"{heroId.BattleTag.Name}-{heroId.BattleTag.Index}";
 
             using (var client = CreateClient(authenticationScope))
             {
                 var hero = await client.GetHeroAsync(battleTag, heroId.Id);
+                var items = await client.GetDetailedHeroItemsAsync(battleTag, heroId.Id);
+                var followerItems = await client.GetDetailedFollowerItemsAsync(battleTag, heroId.Id);
+
+                var mapper = new HeroMapper(heroId, items, followerItems);
                 return mapper.Map(hero);
             }
         }
