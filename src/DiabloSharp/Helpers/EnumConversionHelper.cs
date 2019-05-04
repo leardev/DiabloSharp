@@ -191,7 +191,7 @@ namespace DiabloSharp.Helpers
                     return CharacterSkillCategory.Reanimation;
                 case "curses":
                     return CharacterSkillCategory.Curses;
-                case "blood-Bone":
+                case "blood-bone":
                     return CharacterSkillCategory.BloodAndBone;
                 case "terror":
                     return CharacterSkillCategory.Terror;
