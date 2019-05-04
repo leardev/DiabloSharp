@@ -9,5 +9,7 @@ namespace DiabloSharp.Models
         public ItemId Dye { get; internal set; }
 
         public IEnumerable<HeroItemGem> Gems { get; internal set; }
+
+        public IEnumerable<IHeroItemAttribute> Attributes { get; set; }
     }
 }
