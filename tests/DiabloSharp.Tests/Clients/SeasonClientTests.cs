@@ -4,6 +4,7 @@ using NUnit.Framework;
 namespace DiabloSharp.Tests.Clients
 {
     [TestFixture]
+    [Ignore("https://us.battle.net/forums/en/bnet/topic/20771557003")]
     internal class SeasonClientTests : ClientTestsBase
     {
         [Test]
