@@ -14,8 +14,8 @@
     <PackageProjectUrl>https://github.com/leardev/DiabloSharp</PackageProjectUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
+    <SourceRoot>$(MSBuildThisFileDirectory)</SourceRoot>
   </PropertyGroup>
 
   <!-- Customization -->

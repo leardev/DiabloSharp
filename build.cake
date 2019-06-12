@@ -1,4 +1,5 @@
 #addin nuget:?package=Cake.MiniCover&version=0.28.1
+#addin nuget:?package=Cake.Git&version=0.19.0
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -53,6 +54,9 @@ Task("Clean")
 Task("Compile")
 .Does(() =>
 {
+    var latestSha = GitLogTip(repositoryRoot).Sha;
+    defaultMSBuildSettings.WithProperty("RevisionId", latestSha);
+
     var buildSettings = new DotNetCoreBuildSettings
     {
         Configuration = configuration,
