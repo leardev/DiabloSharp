@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <Target Name="ExtractCurrentGitHash">
-    <Exec Command="git rev-parse head" EchoOff="true" ConsoleToMSBuild="true" StandardOutputImportance="low">
+    <Exec Command="git rev-parse HEAD" EchoOff="true" ConsoleToMSBuild="true" StandardOutputImportance="low">
       <Output TaskParameter="ConsoleOutput" PropertyName="CurrentHead" />
     </Exec>
   </Target>
