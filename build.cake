@@ -53,6 +53,12 @@ Task("Clean")
 Task("Compile")
 .Does(() =>
 {
+    if (GitLabCI.IsRunningOnGitLabCI)
+    {
+        var latestSha = GitLabCI.Environment.Build.Reference;
+        defaultMSBuildSettings.WithProperty("RevisionId", latestSha);
+    }
+
     var buildSettings = new DotNetCoreBuildSettings
     {
         Configuration = configuration,
