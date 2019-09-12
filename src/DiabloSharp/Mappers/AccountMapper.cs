@@ -82,7 +82,7 @@ namespace DiabloSharp.Mappers
 
         private AccountPeriodSeason ActiveSeasonToModel(AccountDto input)
         {
-            var seasonDto = input.SeasonalProfiles.Season17;
+            var seasonDto = input.SeasonalProfiles.Season18;
             return new AccountPeriodActiveSeason
             {
                 Id = (AccountPeriodId)seasonDto.Id,
