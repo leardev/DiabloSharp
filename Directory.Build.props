@@ -9,7 +9,7 @@
     <Authors>leardev</Authors>
     <VersionPrefix>1.1.0+S20</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIconUrl>https://raw.githubusercontent.com/leardev/DiabloSharp/master/resources/DiabloSharp.png</PackageIconUrl>
+    <PackageIcon>DiabloSharp.png</PackageIcon>
     <RepositoryUrl>https://github.com/leardev/DiabloSharp.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/leardev/DiabloSharp</PackageProjectUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

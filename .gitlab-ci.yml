@@ -2,32 +2,35 @@ stages:
   - ci
   - publish
 
+default:
+  before_script:
+    - dotnet tool install --global Cake.Tool --version 0.38.1
+    - export PATH="$PATH:/root/.dotnet/tools"
+
 ci:
   stage: ci
-  image: mcr.microsoft.com/dotnet/core/sdk:2.2
-  before_script:
-    - dotnet tool install --global Cake.Tool --version 0.33.0
+  image: mcr.microsoft.com/dotnet/core/sdk:3.1
   script:
-    - $HOME/.dotnet/tools/dotnet-cake
+    - dotnet-cake --bootstrap
+    - dotnet-cake
   artifacts:
     reports:
-        junit: out/test-results/*.xml
+      junit: out/test-results/*.xml
     paths:
-        - artifacts/
+      - artifacts/
     expire_in: 60 min
 
 prerelease:
   stage: publish
-  image: mcr.microsoft.com/dotnet/core/sdk:2.2
-  before_script:
-    - dotnet tool install --global Cake.Tool --version 0.33.0
+  image: mcr.microsoft.com/dotnet/core/sdk:3.1
   script:
-    - $HOME/.dotnet/tools/dotnet-cake -Target=Publish -BuildType=prerelease
+    - dotnet-cake --bootstrap
+    - dotnet-cake -Target=Publish -BuildType=prerelease
   dependencies:
     - ci
   artifacts:
     paths:
-        - artifacts/
+      - artifacts/
     expire_in: 60 min
   when: manual
   only:
@@ -35,16 +38,15 @@ prerelease:
 
 release:
   stage: publish
-  image: mcr.microsoft.com/dotnet/core/sdk:2.2
-  before_script:
-    - dotnet tool install --global Cake.Tool --version 0.33.0
+  image: mcr.microsoft.com/dotnet/core/sdk:3.1
   script:
-    - $HOME/.dotnet/tools/dotnet-cake -Target=Publish -BuildType=release
+    - dotnet-cake --bootstrap
+    - dotnet-cake -Target=Publish -BuildType=release
   dependencies:
     - ci
   artifacts:
     paths:
-        - artifacts/
+      - artifacts/
     expire_in: 60 min
   when: manual
   only:
