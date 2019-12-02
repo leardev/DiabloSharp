@@ -36,8 +36,8 @@ Task("Clean")
     var cleanSettings = new DotNetCoreCleanSettings
     {
         Configuration = configuration,
-        MSBuildSettings = defaultMSBuildSettings,
-        Verbosity = DotNetCoreVerbosity.Minimal
+        ArgumentCustomization = args => args.Append("/v:m"),
+        MSBuildSettings = defaultMSBuildSettings
     };
 
     Information($"Cleaning {project}");
@@ -62,8 +62,8 @@ Task("Compile")
     var buildSettings = new DotNetCoreBuildSettings
     {
         Configuration = configuration,
-        MSBuildSettings = defaultMSBuildSettings,
-        Verbosity = DotNetCoreVerbosity.Minimal
+        ArgumentCustomization = args => args.Append("/v:m"),
+        MSBuildSettings = defaultMSBuildSettings
     };
 
     DotNetCoreBuild(project.FullPath, buildSettings);
@@ -85,12 +85,12 @@ Task("Coverage")
             ArgumentCustomization = args =>
             {
                 args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
+                args.Append("/v:n");
                 return args;
             },
             ResultsDirectory = testResultsDirectory,
             NoRestore = true,
-            NoBuild = true,
-            Verbosity = DotNetCoreVerbosity.Normal
+            NoBuild = true
         }),
         new MiniCoverSettings()
             .WithMiniCoverWorkingDirectory(repositoryRoot)
@@ -111,10 +111,14 @@ Task("Package")
         NoBuild = true,
         NoRestore = true,
         IncludeSymbols = true,
-        ArgumentCustomization = args => args.Append($"/p:BuildType={buildType}"),
+        ArgumentCustomization = args =>
+        {
+            args.Append($"/p:BuildType={buildType}");
+            args.Append("/v:m");
+            return args;
+        },
         MSBuildSettings = defaultMSBuildSettings,
-        OutputDirectory = artifactsDirectory,
-        Verbosity = DotNetCoreVerbosity.Minimal
+        OutputDirectory = artifactsDirectory
     });
 });
 

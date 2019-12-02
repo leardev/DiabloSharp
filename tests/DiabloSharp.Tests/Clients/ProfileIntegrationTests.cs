@@ -8,7 +8,7 @@ namespace DiabloSharp.Tests.Clients
     [TestFixture]
     internal class ProfileIntegrationTests : ClientTestsBase
     {
-        private const string BattleTag = "Shanyen-2754";
+        private const string BattleTag = "leehmanǃ-2543";
 
         [Test]
         public async Task IntegrationTest()
