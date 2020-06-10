@@ -1,4 +1,5 @@
-#addin nuget:?package=Cake.MiniCover&version=0.28.1
+#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
+#tool dotnet:?package=MiniCover&version=3.0.6
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -75,30 +76,28 @@ Task("Coverage")
 .IsDependentOn("Compile")
 .Does(() =>
 {
-    SetMiniCoverToolsProject(repositoryRoot.CombineWithFilePath("tools/MiniCover/MiniCover.csproj"));
+    var miniCoverPath = IsRunningOnUnix() ? Context.Tools.Resolve("minicover") : Context.Tools.Resolve("minicover.exe");
 
-    MiniCover(tool =>
-        tool.DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
+    StartProcess(miniCoverPath, $"instrument --workdir={repositoryRoot} --sources=src/**/*.cs --tests=tests/**/*.dll");
+    StartProcess(miniCoverPath, "reset");
+
+    DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
+    {
+        Configuration = configuration,
+        Logger = "junit",
+        ArgumentCustomization = args =>
         {
-            Configuration = configuration,
-            Logger = "junit",
-            ArgumentCustomization = args =>
-            {
-                args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
-                args.Append("/v:n");
-                return args;
-            },
-            ResultsDirectory = testResultsDirectory,
-            NoRestore = true,
-            NoBuild = true
-        }),
-        new MiniCoverSettings()
-            .WithMiniCoverWorkingDirectory(repositoryRoot)
-            .WithAssembliesMatching("tests/**/*.dll")
-            .WithSourcesMatching("src/**/*.cs")
-            .WithNonFatalThreshold()
-            .GenerateReport(ReportType.CONSOLE | ReportType.OPENCOVER)
-    );
+            args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
+            return args;
+        },
+        ResultsDirectory = testResultsDirectory,
+        NoRestore = true,
+        NoBuild = true
+    });
+
+    StartProcess(miniCoverPath, "uninstrument");
+    StartProcess(miniCoverPath, $"report --workdir={repositoryRoot} --threshold 0");
+    StartProcess(miniCoverPath, $"opencoverreport --workdir={repositoryRoot} --threshold 0");
 });
 
 Task("Package")

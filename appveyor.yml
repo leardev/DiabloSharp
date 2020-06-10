@@ -1,7 +1,7 @@
 image:
-  - Visual Studio 2017
+  - Visual Studio 2019
 build_script:
-  - ps: .\build.ps1
+  - ps: .\build.ps1 --bootstrap; .\build.ps1
 after_build:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
