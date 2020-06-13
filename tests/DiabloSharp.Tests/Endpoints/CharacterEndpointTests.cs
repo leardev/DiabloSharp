@@ -8,6 +8,20 @@ namespace DiabloSharp.Tests.Endpoints
     public class CharacterEndpointTests : EndpointTestsBase
     {
         [Test]
+        public async Task GetCharacterKindsTest()
+        {
+            var characterKinds = await DiabloApi.Character.GetCharacterKindsAsync();
+            Assert.IsNotEmpty(characterKinds);
+        }
+
+        [Test]
+        public async Task GetCharactersTest()
+        {
+            var characters = await DiabloApi.Character.GetCharactersAsync(AuthenticationScope);
+            Assert.IsNotEmpty(characters);
+        }
+
+        [Test]
         public async Task GetCharacterTest()
         {
             var character = await DiabloApi.Character.GetCharacterAsync(AuthenticationScope, CharacterKind.Barbarian);
