@@ -18,6 +18,13 @@ namespace DiabloSharp.Endpoints
         {
         }
 
+        public Task<IEnumerable<CharacterKind>> GetCharacterKindsAsync()
+        {
+            var characterKinds = Enum.GetValues(typeof(CharacterKind))
+                .Cast<CharacterKind>();
+            return Task.FromResult(characterKinds);
+        }
+
         public async Task<Character> GetCharacterAsync(IAuthenticationScope authenticationScope, CharacterKind characterKind)
         {
             var mapper = new CharacterMapper();
@@ -42,11 +49,9 @@ namespace DiabloSharp.Endpoints
 
         public async Task<IEnumerable<Character>> GetCharactersAsync(IAuthenticationScope authenticationScope)
         {
-            var characterIds = Enum.GetValues(typeof(CharacterKind))
-                .Cast<CharacterKind>()
-                .ToList();
+            var characterKinds = await GetCharacterKindsAsync();
 
-            var charactersTasks = characterIds.Select(id => GetCharacterAsync(authenticationScope, id));
+            var charactersTasks = characterKinds.Select(id => GetCharacterAsync(authenticationScope, id));
             var characters = await Task.WhenAll(charactersTasks);
             return characters;
         }
