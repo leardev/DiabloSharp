@@ -25,6 +25,7 @@ namespace DiabloSharp
             Follower = new FollowerEndpoint(tokenBucket);
             Character = new CharacterEndpoint(tokenBucket);
             Profile = new ProfileEndpoint(tokenBucket);
+            Season = new SeasonEndpoint(tokenBucket);
         }
 
         public IItemEndpoint Item { get; }
@@ -38,6 +39,8 @@ namespace DiabloSharp
         public ICharacterEndpoint Character { get; }
 
         public IProfileEndpoint Profile { get; }
+
+        public ISeasonEndpoint Season { get; }
 
         public async Task<IAuthenticationScope> CreateAuthenticationScopeAsync()
         {
