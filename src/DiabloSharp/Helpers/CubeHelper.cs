@@ -413,7 +413,11 @@ namespace DiabloSharp.Helpers
                 new ItemId("the-magistrate", "Unique_WizardHat_103_x1"),
                 new ItemId("dark-mages-shade", "Unique_WizardHat_001_x1"),
                 new ItemId("storm-crow", "Unique_WizardHat_004_x1"),
-                new ItemId("the-swami", "P3_Unique_WizardHat_003")
+                new ItemId("the-swami", "P3_Unique_WizardHat_003"),
+                new ItemId("krelms-buff-bracers", "Unique_Bracer_Set_02_x1"),
+                new ItemId("krelms-buff-belt", "Unique_Belt_Set_02_x1"),
+                new ItemId("danettas-revenge", "Unique_HandXBow_002_x1"),
+                new ItemId("danettas-spite", "Unique_HandXBow_001_x1")
             };
         }
 

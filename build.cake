@@ -1,4 +1,5 @@
-#addin nuget:?package=Cake.MiniCover&version=0.28.1
+#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
+#tool dotnet:?package=MiniCover&version=3.0.6
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -36,8 +37,8 @@ Task("Clean")
     var cleanSettings = new DotNetCoreCleanSettings
     {
         Configuration = configuration,
-        MSBuildSettings = defaultMSBuildSettings,
-        Verbosity = DotNetCoreVerbosity.Minimal
+        ArgumentCustomization = args => args.Append("/v:m"),
+        MSBuildSettings = defaultMSBuildSettings
     };
 
     Information($"Cleaning {project}");
@@ -53,11 +54,17 @@ Task("Clean")
 Task("Compile")
 .Does(() =>
 {
+    if (GitLabCI.IsRunningOnGitLabCI)
+    {
+        var latestSha = GitLabCI.Environment.Build.Reference;
+        defaultMSBuildSettings.WithProperty("RevisionId", latestSha);
+    }
+
     var buildSettings = new DotNetCoreBuildSettings
     {
         Configuration = configuration,
-        MSBuildSettings = defaultMSBuildSettings,
-        Verbosity = DotNetCoreVerbosity.Minimal
+        ArgumentCustomization = args => args.Append("/v:m"),
+        MSBuildSettings = defaultMSBuildSettings
     };
 
     DotNetCoreBuild(project.FullPath, buildSettings);
@@ -69,30 +76,28 @@ Task("Coverage")
 .IsDependentOn("Compile")
 .Does(() =>
 {
-    SetMiniCoverToolsProject(repositoryRoot.CombineWithFilePath("tools/MiniCover/MiniCover.csproj"));
+    var miniCoverPath = IsRunningOnUnix() ? Context.Tools.Resolve("minicover") : Context.Tools.Resolve("minicover.exe");
 
-    MiniCover(tool =>
-        tool.DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
+    StartProcess(miniCoverPath, $"instrument --workdir={repositoryRoot} --sources=src/**/*.cs --tests=tests/**/*.dll");
+    StartProcess(miniCoverPath, "reset");
+
+    DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings
+    {
+        Configuration = configuration,
+        Logger = "junit",
+        ArgumentCustomization = args =>
         {
-            Configuration = configuration,
-            Logger = "junit",
-            ArgumentCustomization = args =>
-            {
-                args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
-                return args;
-            },
-            ResultsDirectory = testResultsDirectory,
-            NoRestore = true,
-            NoBuild = true,
-            Verbosity = DotNetCoreVerbosity.Minimal,
-        }),
-        new MiniCoverSettings()
-            .WithMiniCoverWorkingDirectory(repositoryRoot)
-            .WithAssembliesMatching("tests/**/*.dll")
-            .WithSourcesMatching("src/**/*.cs")
-            .WithNonFatalThreshold()
-            .GenerateReport(ReportType.CONSOLE | ReportType.OPENCOVER)
-    );
+            args.AppendMSBuildSettings(defaultMSBuildSettings, Context.Environment);
+            return args;
+        },
+        ResultsDirectory = testResultsDirectory,
+        NoRestore = true,
+        NoBuild = true
+    });
+
+    StartProcess(miniCoverPath, "uninstrument");
+    StartProcess(miniCoverPath, $"report --workdir={repositoryRoot} --threshold 0");
+    StartProcess(miniCoverPath, $"opencoverreport --workdir={repositoryRoot} --threshold 0");
 });
 
 Task("Package")
@@ -105,10 +110,14 @@ Task("Package")
         NoBuild = true,
         NoRestore = true,
         IncludeSymbols = true,
-        ArgumentCustomization = args => args.Append($"/p:BuildType={buildType}"),
+        ArgumentCustomization = args =>
+        {
+            args.Append($"/p:BuildType={buildType}");
+            args.Append("/v:m");
+            return args;
+        },
         MSBuildSettings = defaultMSBuildSettings,
-        OutputDirectory = artifactsDirectory,
-        Verbosity = DotNetCoreVerbosity.Minimal
+        OutputDirectory = artifactsDirectory
     });
 });
 
@@ -123,10 +132,8 @@ Task("NuGetPush")
         ApiKey = EnvironmentVariable("DiabloSharpNuGetApiKey")
     };
     var nugetPackage = GetFiles(artifactsDirectory.GetFilePath("*.nupkg").FullPath).First();
-    var symbolsPackage = GetFiles(artifactsDirectory.GetFilePath("*.snupkg").FullPath).First();
 
     DotNetCoreNuGetPush(nugetPackage.FullPath, pushSettings);
-    DotNetCoreNuGetPush(symbolsPackage.FullPath, pushSettings);
 });
 
 Task("Default")

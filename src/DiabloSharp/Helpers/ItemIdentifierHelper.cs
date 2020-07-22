@@ -31,6 +31,10 @@ namespace DiabloSharp.Helpers
 
         public static ItemId FromString(string value)
         {
+            /* items (e.g. transmogs) from artisans return their recipes */
+            if (value.Contains("artisan"))
+                return null;
+
             var pathIndex = value.LastIndexOf("/", StringComparison.Ordinal);
             var slugIndex = value.LastIndexOf("-", StringComparison.Ordinal);
             var slug = value.Substring(pathIndex + 1, slugIndex - pathIndex - 1);

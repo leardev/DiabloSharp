@@ -4,6 +4,13 @@
   <PropertyGroup>
     <NoWarn>NU5105;$(NoWarn)</NoWarn>
   </PropertyGroup>
+
+  <Target Name="ExtractCurrentGitHash">
+    <Exec Command="git rev-parse HEAD" EchoOff="true" ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="CurrentHead" />
+    </Exec>
+  </Target>
+
   <Target Name="AttachDevVersionSuffix" Condition="'$(BuildType)' == 'dev'">
     <CreateProperty Value="$(Version)-dev-$([System.DateTime]::Now.ToString(yyyyMMdd-HHmmss))">
       <Output TaskParameter="Value" PropertyName="Version" />
@@ -12,26 +19,21 @@
   </Target>
 
   <Target Name="AttachPrereleaseVersionSuffix" Condition="'$(BuildType)' == 'prerelease'">
-    <Exec Command="git rev-parse HEAD" EchoOff="true" ConsoleToMSBuild="true" StandardOutputImportance="low">
-      <Output TaskParameter="ConsoleOutput" PropertyName="CurrentHEAD" />
-    </Exec>
-    <CreateProperty Value="$(Version)-pre-$(CurrentHEAD)">
+    <CreateProperty Value="$(Version)-pre-$(CurrentHead)">
       <Output TaskParameter="Value" PropertyName="Version" />
       <Output TaskParameter="Value" PropertyName="PackageVersion" />
     </CreateProperty>
   </Target>
 
   <Target Name="AttachReleaseVersionSuffix" Condition="'$(BuildType)' == 'release'">
-    <Exec Command="git rev-parse HEAD" EchoOff="true" ConsoleToMSBuild="true" StandardOutputImportance="low">
-      <Output TaskParameter="ConsoleOutput" PropertyName="CurrentHEAD" />
-    </Exec>
-    <CreateProperty Value="$(Version)-$(CurrentHEAD)">
+    <CreateProperty Value="$(Version)-$(CurrentHead)">
       <Output TaskParameter="Value" PropertyName="Version" />
     </CreateProperty>
   </Target>
 
   <PropertyGroup>
     <InitializeDependsOn>
+      ExtractCurrentGitHash;
       AttachDevVersionSuffix;
       AttachPrereleaseVersionSuffix;
       AttachReleaseVersionSuffix
