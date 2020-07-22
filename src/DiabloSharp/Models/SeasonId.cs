@@ -43,6 +43,8 @@ namespace DiabloSharp.Models
         [LocalizationEnUs("Season 19")]
         Season19 = 19,
         [LocalizationEnUs("Season 20")]
-        Season20 = 20
+        Season20 = 20,
+        [LocalizationEnUs("Season 21")]
+        Season21 = 21
     }
 }

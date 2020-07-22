@@ -27,7 +27,7 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetActiveSeasonIdTest()
         {
             var actualSeason = await DiabloApi.Season.GetActiveSeasonIdAsync();
-            Assert.AreEqual(SeasonId.Season20, actualSeason);
+            Assert.AreEqual(SeasonId.Season21, actualSeason);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace DiabloSharp.Tests.Endpoints
         {
             var leaderboardId = new SoloLeaderboardId
             {
-                SeasonId = SeasonId.Season20,
+                SeasonId = SeasonId.Season21,
                 CharacterId = CharacterKind.Wizard,
                 IsHardcore = false
             };

@@ -26,7 +26,7 @@ namespace DiabloSharp.Endpoints
 
         public Task<SeasonId> GetActiveSeasonIdAsync()
         {
-            return Task.FromResult(SeasonId.Season20);
+            return Task.FromResult(SeasonId.Season21);
         }
 
         public async Task<SoloLeaderboard> GetSoloLeaderboard(IAuthenticationScope authenticationScope, SoloLeaderboardId leaderboardId)
