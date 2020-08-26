@@ -7,7 +7,7 @@ namespace DiabloSharp.DataTransferObjects
     internal class EraPlayerDto
     {
         [DataMember(Name = "key")]
-        public long Key { get; set; }
+        public string Key { get; set; }
 
         [DataMember(Name = "accountId")]
         public long AccountId { get; set; }

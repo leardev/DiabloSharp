@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DiabloSharp.Formatters;
+using Utf8Json;
 
 namespace DiabloSharp.DataTransferObjects
 {
@@ -16,7 +19,8 @@ namespace DiabloSharp.DataTransferObjects
         public long EraId { get; set; }
 
         [DataMember(Name = "era_start_date")]
-        public string EraStartDate { get; set; }
+        [JsonFormatter(typeof(UnixTimestampLongDateTimeFormatter))]
+        public DateTime EraStartDate { get; set; }
 
         [DataMember(Name = "last_update_time")]
         public string LastUpdateTime { get; set; }
