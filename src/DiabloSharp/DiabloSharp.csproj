@@ -6,18 +6,18 @@
     <RevisionId>c13a9382b549f0e2e343cd1fab250f289ad8dd19</RevisionId>
   </PropertyGroup>
   <ItemGroup>
-    <SourceRoot Include="$(SourceRoot)" RepositoryUrl="$(RepositoryUrl)" SourceControl="git" RevisionId="$(RevisionId)"/>
+    <SourceRoot Include="$(SourceRoot)" RepositoryUrl="$(RepositoryUrl)" SourceControl="git" RevisionId="$(RevisionId)" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Utf8Json" Version="1.3.7" />
   </ItemGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
@@ -28,6 +28,6 @@
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\resources\DiabloSharp.png" Pack="true" PackagePath=""/>
+    <None Include="..\..\resources\DiabloSharp.png" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DiabloSharp.Exceptions;
 using DiabloSharp.RateLimiters;
-using Newtonsoft.Json;
+using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace DiabloSharp.Clients
 {
@@ -53,7 +54,7 @@ namespace DiabloSharp.Clients
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 if (response.IsSuccessStatusCode)
-                    return await DeserializeJsonFromStreamAsync<T>(stream);
+                    return await JsonSerializer.DeserializeAsync<T>(stream, StandardResolver.AllowPrivate);
 
                 var content = await StreamToStringAsync(stream);
                 throw new DiabloApiHttpException(requestUri, response.StatusCode, content);
@@ -69,7 +70,7 @@ namespace DiabloSharp.Clients
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 if (response.IsSuccessStatusCode)
-                    return await DeserializeJsonFromStreamAsync<T>(stream);
+                    return await JsonSerializer.DeserializeAsync<T>(stream, StandardResolver.AllowPrivate);
 
                 var content = await StreamToStringAsync(stream);
                 throw new DiabloApiHttpException(requestUri, response.StatusCode, content);
@@ -105,22 +106,6 @@ namespace DiabloSharp.Clients
             }
 
             return urlBuilder.ToString();
-        }
-
-        private async Task<T> DeserializeJsonFromStreamAsync<T>(Stream stream)
-        {
-            return await Task.Run(() =>
-            {
-                if (stream == null || stream.CanRead == false)
-                    return default;
-
-                using (var streamReader = new StreamReader(stream))
-                using (var textReader = new JsonTextReader(streamReader))
-                {
-                    var serializer = new JsonSerializer();
-                    return serializer.Deserialize<T>(textReader);
-                }
-            });
         }
 
         private async Task<string> StreamToStringAsync(Stream stream)
