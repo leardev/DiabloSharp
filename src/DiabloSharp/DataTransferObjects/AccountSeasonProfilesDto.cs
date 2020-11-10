@@ -5,6 +5,9 @@ namespace DiabloSharp.DataTransferObjects
     [DataContract]
     internal class AccountSeasonProfilesDto
     {
+        [DataMember(Name = "season22")]
+        public AccountSeasonProfileDto Season22 { get; set; }
+
         [DataMember(Name = "season21")]
         public AccountSeasonProfileDto Season21 { get; set; }
 
