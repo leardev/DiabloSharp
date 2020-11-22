@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DiabloSharp.Models;
 using NUnit.Framework;
@@ -27,7 +29,10 @@ namespace DiabloSharp.Tests.Endpoints
         public async Task GetActiveSeasonIdTest()
         {
             var actualSeason = await DiabloApi.Season.GetActiveSeasonIdAsync();
-            Assert.AreEqual(SeasonId.Season21, actualSeason);
+            var mostRecentSeason = Enum.GetValues(typeof(SeasonId))
+                .Cast<SeasonId>()
+                .Max();
+            Assert.AreEqual(mostRecentSeason, actualSeason);
         }
 
         [Test]
@@ -35,7 +40,7 @@ namespace DiabloSharp.Tests.Endpoints
         {
             var leaderboardId = new SoloLeaderboardId
             {
-                SeasonId = SeasonId.Season21,
+                SeasonId = await DiabloApi.Season.GetActiveSeasonIdAsync(),
                 CharacterId = CharacterKind.Wizard,
                 IsHardcore = false
             };

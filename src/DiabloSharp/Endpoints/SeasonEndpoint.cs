@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloSharp.Extensions;
 using DiabloSharp.Mappers;
 using DiabloSharp.Models;
 using DiabloSharp.RateLimiters;
@@ -26,7 +25,10 @@ namespace DiabloSharp.Endpoints
 
         public Task<SeasonId> GetActiveSeasonIdAsync()
         {
-            return Task.FromResult(SeasonId.Season21);
+            var highestSeason = Enum.GetValues(typeof(SeasonId))
+                .Cast<SeasonId>()
+                .Max();
+            return Task.FromResult(highestSeason);
         }
 
         public async Task<SoloLeaderboard> GetSoloLeaderboard(IAuthenticationScope authenticationScope, SoloLeaderboardId leaderboardId)
